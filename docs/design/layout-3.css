@@ -1,0 +1,141 @@
+body {
+    box-sizing: border-box;
+}
+div {
+    /*outline: 1px solid red;*/
+}
+.board {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.partners-tiles {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.board-middle {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    justify-content: space-evenly;
+    /*max-width: 800px;*/
+}
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.info-token {
+    min-height: 200px;
+    min-width: 200px;
+    /*min-height: 130px;*/
+    /*min-width: 130px;*/
+    /*min-height: 65px;*/
+    /*min-width: 65px;*/
+    /*margin: 5px;*/
+    border-radius: 50%;
+    border: 1px solid black;
+    background: lightblue;
+}
+.tiles-section {
+    display: flex;
+    flex-direction: row;
+    /*justify-content: center;*/
+    justify-content: space-evenly;
+    /*min-height: 550px;*/
+}
+.played-tiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*padding: 5px 5px 20px 5px;*/
+}
+.discarded-tiles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.discarded-tiles-header {
+    height: 120px;
+    width: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.info-dot {
+    height: 15px;
+    width: 15px;
+    margin-bottom: 5px;
+    background-color: rgb(50, 50, 50);
+}
+.discarded-tiles-row {
+    position: relative;
+    top: -60px;
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: center;
+    /*padding: 5px;*/
+}
+.discarded-tiles-row .tile {
+    opacity: 0.5;
+}
+.status-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.fuse-tokens {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+.fuse-token {
+    min-height: 200px;
+    min-width: 200px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: black;
+}
+.tiles-remaining {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.your-tiles {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.tile {
+    min-height: 200px;
+    min-width: 200px;
+    margin: 5px 5px 0 5px;
+    border: 1px solid black;
+    background-color: black;
+}
+.discarded-tile {
+    min-height: 200px;
+    min-width: 15px;
+    margin: 5px 10px 0 10px;
+    border: 1px solid black;
+    background-color: black;
+}
+.tile-large {
+    min-height: 200px;
+    min-width: 200px;
+    margin: 5px 5px 0 5px;
+    border: 1px solid black;
+    background-color: black;
+}
+
+

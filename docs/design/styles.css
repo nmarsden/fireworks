@@ -1,0 +1,97 @@
+body {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+div {
+    outline: 3px solid red;
+}
+.board {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.partners-tiles {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.board-middle {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-height: 700px;
+}
+.info-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.info-token {
+    min-height: 65px;
+    min-width: 65px;
+    margin: 5px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background: lightblue;
+}
+.tiles-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.played-tiles {
+    display: flex;
+    justify-content: center;
+    padding: 5px 5px 20px 5px;
+}
+.discarded-tiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.discarded-tiles-row {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background: lightgray;
+}
+.status-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.fuse-tokens {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.fuse-token {
+    min-height: 80px;
+    min-width: 80px;
+    margin: 5px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-color: black;
+}
+.tiles-remaining {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.your-tiles {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.tile {
+    min-height: 80px;
+    min-width: 80px;
+    margin: 5px 5px 0 5px;
+    border: 1px solid black;
+}
