@@ -58,23 +58,23 @@ export class AppComponent {
   ];
   playerTiles:Tile[] = [
     {
-      "colour": "red",
-      "number": 1
+      "colour": null,
+      "number": null
     },
     {
-      "colour": "blue",
+      "colour": null,
       "number": 2
     },
     {
-      "colour": "yellow",
-      "number": 3
+      "colour": "red-ish",
+      "number": null
     },
     {
-      "colour": "green",
+      "colour": "green-ish",
       "number": 4
     },
     {
-      "colour": "rainbow",
+      "colour": "white-ish",
       "number": 5
     }
   ];

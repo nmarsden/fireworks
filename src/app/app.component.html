@@ -57,6 +57,6 @@
   </div>
 
   <div class="my-tiles">
-    <app-tile *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
+    <app-tile [displayMode]="'player'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
   </div>
 </div>

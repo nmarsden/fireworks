@@ -8,6 +8,7 @@ import { Tile } from '../tile';
 })
 export class TileComponent implements OnInit {
   @Input() tile: Tile;
+  @Input() displayMode: string;
 
   constructor() { }
 

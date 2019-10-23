@@ -1,12 +1,20 @@
 <div class='tile' [ngClass]="{
-    'tile-empty':tile.colour === null,
-    'tile-red':tile.colour === 'red',
-    'tile-white':tile.colour === 'white',
-    'tile-blue':tile.colour === 'blue',
-    'tile-yellow':tile.colour === 'yellow',
-    'tile-green':tile.colour === 'green',
-    'tile-rainbow':tile.colour === 'rainbow'
+    'tile-empty':          displayMode !== 'player' && tile.colour === null,
+    'tile-unknown-colour': displayMode === 'player' && tile.colour === null,
+    'tile-unknown-number': displayMode === 'player' && tile.number === null,
+    'tile-red-ish':        tile.colour === 'red-ish',
+    'tile-white-ish':      tile.colour === 'white-ish',
+    'tile-blue-ish':       tile.colour === 'blue-ish',
+    'tile-yellow-ish':     tile.colour === 'yellow-ish',
+    'tile-green-ish':      tile.colour === 'green-ish',
+    'tile-red':            tile.colour === 'red',
+    'tile-white':          tile.colour === 'white',
+    'tile-blue':           tile.colour === 'blue',
+    'tile-yellow':         tile.colour === 'yellow',
+    'tile-green':          tile.colour === 'green',
+    'tile-rainbow':        tile.colour === 'rainbow'
   }">
+  <div *ngIf='displayMode === "player" && tile.number === null' class="question-mark"></div>
   <div *ngIf='tile.number === 1' class="explosion explosion-middle"></div>
   <div *ngIf='tile.number === 2' class="explosion explosion-top-left"></div>
   <div *ngIf='tile.number === 2' class="explosion explosion-bottom-right"></div>
