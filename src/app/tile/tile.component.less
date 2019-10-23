@@ -1,0 +1,79 @@
+:host {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  outline: 1px solid black;
+
+  .tile {
+    height: 90%;
+    width: 90%;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-auto-flow: column;
+
+    &.tile-empty {
+      background-image: linear-gradient(rgb(230, 230, 230), rgb(200, 200, 200), rgb(230, 230, 230));
+    }
+    &.tile-red {
+      background-color: rgb(230, 30, 30);
+    }
+    &.tile-white{
+      background-color: rgb(255, 255, 255);
+    }
+    &.tile-blue {
+      background-color: rgb(80, 180, 250);
+    }
+    &.tile-yellow {
+      background-color: rgb(230, 180, 0);
+    }
+    &.tile-green {
+      background-color: rgb(80, 230, 80);
+    }
+    &.tile-rainbow {
+      background-image: linear-gradient(rgb(230, 30, 30), rgb(230, 180, 0), rgb(80, 230, 80), rgb(80, 180, 250));
+    }
+
+    .explosion {
+      display: inline-block;
+      height: 90%;
+      width: 90%;
+      margin: 5%;
+      background-color: white;
+
+      &.explosion-middle {
+        grid-column-start: 2;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 2;
+      }
+      &.explosion-top-left {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+      &.explosion-top-right {
+        grid-column-start: 3;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+      &.explosion-bottom-left {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 3;
+        grid-row-end: 3;
+      }
+      &.explosion-bottom-right {
+        grid-column-start: 3;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 3;
+      }
+    }
+
+  }
+
+}

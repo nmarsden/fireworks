@@ -1,10 +1,6 @@
 <div class="page">
   <div class="partners-tiles">
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <app-tile *ngFor="let tile of partnerTiles" [tile]="tile"></app-tile>
   </div>
 
   <div class="middle-container">
@@ -14,12 +10,7 @@
     </div>
     <div class="middle-tiles">
       <div class="played-tiles">
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
+        <app-tile *ngFor="let tile of playedTiles" [tile]="tile"></app-tile>
       </div>
       <div class="discarded-tiles">
         <div class="discarded-cell"></div>
@@ -66,10 +57,6 @@
   </div>
 
   <div class="my-tiles">
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <app-tile *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
   </div>
 </div>

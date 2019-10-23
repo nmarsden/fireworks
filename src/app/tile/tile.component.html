@@ -1,0 +1,25 @@
+<div class='tile' [ngClass]="{
+    'tile-empty':tile.colour === null,
+    'tile-red':tile.colour === 'red',
+    'tile-white':tile.colour === 'white',
+    'tile-blue':tile.colour === 'blue',
+    'tile-yellow':tile.colour === 'yellow',
+    'tile-green':tile.colour === 'green',
+    'tile-rainbow':tile.colour === 'rainbow'
+  }">
+  <div *ngIf='tile.number === 1' class="explosion explosion-middle"></div>
+  <div *ngIf='tile.number === 2' class="explosion explosion-top-left"></div>
+  <div *ngIf='tile.number === 2' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='tile.number === 3' class="explosion explosion-top-left"></div>
+  <div *ngIf='tile.number === 3' class="explosion explosion-middle"></div>
+  <div *ngIf='tile.number === 3' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='tile.number === 4' class="explosion explosion-top-left"></div>
+  <div *ngIf='tile.number === 4' class="explosion explosion-top-right"></div>
+  <div *ngIf='tile.number === 4' class="explosion explosion-bottom-left"></div>
+  <div *ngIf='tile.number === 4' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='tile.number === 5' class="explosion explosion-top-left"></div>
+  <div *ngIf='tile.number === 5' class="explosion explosion-top-right"></div>
+  <div *ngIf='tile.number === 5' class="explosion explosion-middle"></div>
+  <div *ngIf='tile.number === 5' class="explosion explosion-bottom-left"></div>
+  <div *ngIf='tile.number === 5' class="explosion explosion-bottom-right"></div>
+</div>
