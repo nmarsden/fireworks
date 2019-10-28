@@ -1,7 +1,14 @@
 :host {
+
+  --colour-ish-percentage: 15%;
+  --colour-white: rgb(255, 255, 255);
+  --colour-red: rgb(246, 52, 52);
+  --colour-blue: rgb(80, 180, 250);
+  --colour-yellow: rgb(250, 248, 54);
+  --colour-green: rgb(80, 230, 80);
+
   font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
-  outline: 1px solid black;
+  outline: 1px solid rgb(255, 255, 255);
 
   .tile {
     height: calc(0.8 * var(--main-tile-width));
@@ -22,56 +29,60 @@
     }
 
     &.tile-empty {
-      background-image: linear-gradient(rgb(230, 230, 230), rgb(200, 200, 200), rgb(230, 230, 230));
     }
     &.tile-red {
-      background-color: rgb(230, 30, 30);
+      background-color: var(--colour-red);
     }
     &.tile-red-ish {
-      background-image: radial-gradient(rgb(230, 30, 30) 55%, rgb(0, 0, 0));
+      background-image: radial-gradient(var(--colour-red) var(--colour-ish-percentage), rgb(0, 0, 0));
     }
     &.tile-white {
-      background-color: rgb(255, 255, 255);
+      background-color: var(--colour-white);
 
       .explosion {
         background-color: rgb(0, 0, 0);
+        outline: 1px solid rgb(255, 255, 255);
       }
       .question-mark:after {
         color: rgb(0, 0, 0);
       }
     }
     &.tile-white-ish {
-      background-image: radial-gradient(rgb(255, 255, 255) 55%, rgb(0, 0, 0));
+      background-image: radial-gradient(var(--colour-white) var(--colour-ish-percentage), rgb(0, 0, 0));
 
       .explosion {
         background-color: rgb(0, 0, 0);
+        outline: 1px solid rgb(255, 255, 255);
       }
       .question-mark:after {
         color: rgb(0, 0, 0);
       }
     }
     &.tile-blue {
-      background-color: rgb(80, 180, 250);
+      background-color: var(--colour-blue);
     }
     &.tile-blue-ish {
-      background-image: radial-gradient(rgb(80, 180, 250) 55%, rgb(0, 0, 0));
+      background-image: radial-gradient(var(--colour-blue) var(--colour-ish-percentage), rgb(0, 0, 0));
     }
     &.tile-yellow {
-      background-color: rgb(230, 180, 0);
+      background-color: var(--colour-yellow);
     }
     &.tile-yellow-ish {
-      background-image: radial-gradient(rgb(230, 180, 0) 55%, rgb(0, 0, 0));
+      background-image: radial-gradient(var(--colour-yellow) var(--colour-ish-percentage), rgb(0, 0, 0));
     }
     &.tile-green {
-      background-color: rgb(80, 230, 80);
+      background-color: var(--colour-green);
     }
     &.tile-green-ish {
-      background-image: radial-gradient(rgb(80, 230, 80) 55%, rgb(0, 0, 0));
+      background-image: radial-gradient(var(--colour-green) var(--colour-ish-percentage), rgb(0, 0, 0));
     }
     &.tile-rainbow {
-      background-image: linear-gradient(rgb(230, 30, 30), rgb(230, 180, 0), rgb(80, 230, 80), rgb(80, 180, 250));
+      background-image: linear-gradient(var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
     }
     &.tile-unknown-number {
+      height: var(--main-tile-width);
+      width: var(--main-tile-width);
+      padding: 0;
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
     }
@@ -84,6 +95,7 @@
     .question-mark:after {
       content: '?';
       color: rgb(255, 255, 255);
+      -webkit-text-stroke: 1px rgb(0, 0, 0);
       font-size: calc(0.9 * var(--main-tile-width));
       line-height: calc(0.9 * var(--main-tile-width));
       font-weight: bold;
@@ -95,6 +107,7 @@
       width: 90%;
       margin: 5%;
       background-color: white;
+      outline: 1px solid rgb(0, 0, 0);
 
       &.explosion-middle {
         grid-column-start: 2;
