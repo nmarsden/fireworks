@@ -1,4 +1,5 @@
 <div class='tile' [ngClass]="{
+    'tile-played':         displayMode === 'played',
     'tile-empty':          displayMode !== 'player' && tile.colour === null,
     'tile-unknown-colour': displayMode === 'player' && tile.colour === null,
     'tile-unknown-number': displayMode === 'player' && tile.number === null,

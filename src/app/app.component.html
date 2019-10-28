@@ -1,7 +1,5 @@
 <div class="page">
-  <div class="partners-tiles">
-    <app-tile *ngFor="let tile of partnerTiles" [tile]="tile"></app-tile>
-  </div>
+  <app-tile-group [tiles]="partnerTiles"></app-tile-group>
 
   <div class="middle-container">
     <div class="token-container">
@@ -9,54 +7,11 @@
       <div class="fuse-tokens"></div>
     </div>
     <div class="middle-tiles">
-      <div class="played-tiles">
-        <app-tile *ngFor="let tile of playedTiles" [tile]="tile"></app-tile>
-      </div>
-      <div class="discarded-tiles">
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-      </div>
-      <div class="discarded-tiles">
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-      </div>
-      <div class="discarded-tiles">
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-      </div>
-      <div class="discarded-tiles">
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-      </div>
-      <div class="discarded-tiles">
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-        <div class="discarded-cell"></div>
-      </div>
+      <app-tile-group [displayMode]="'played'" [tiles]="playedTiles"></app-tile-group>
+      <app-discarded-tiles></app-discarded-tiles>
     </div>
     <div class="remaining-tiles"></div>
   </div>
 
-  <div class="my-tiles">
-    <app-tile [displayMode]="'player'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
-  </div>
+<app-tile-group [displayMode]="'player'"  [tiles]="playerTiles"></app-tile-group>
 </div>
