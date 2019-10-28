@@ -6,10 +6,23 @@
   width: 100vw;
   grid-gap: 0;
   justify-items: center;
-  background-color: rgb(0, 0, 0);
+}
+.page:before {
+  content: "";
+  position: fixed;
+  left: -5%;
+  top: -5%;
+  right: 0;
+  z-index: -1;
+
   background-image: url("../assets/background.jpg");
   background-size: cover;
-  background-blend-mode: luminosity;
+
+  display: block;
+  width: 110%;
+  height: 110%;
+
+  filter: blur(15px) grayscale(100%);
 }
 .middle-container {
   height: 100%;
