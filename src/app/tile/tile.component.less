@@ -1,6 +1,6 @@
 :host {
 
-  --colour-ish-percentage: 15%;
+  --colour-ish-percentage: 1%;
   --colour-white: rgb(255, 255, 255);
   --colour-red: rgb(246, 52, 52);
   --colour-blue: rgb(80, 180, 250);
@@ -18,6 +18,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-auto-flow: column;
+    opacity: 0.9;
 
     &.tile-played {
       height: calc(0.8 * var(--played-tile-width));
@@ -34,7 +35,7 @@
       background-color: var(--colour-red);
     }
     &.tile-red-ish {
-      background-image: radial-gradient(var(--colour-red) var(--colour-ish-percentage), rgb(0, 0, 0));
+      background-image: linear-gradient(var(--colour-red) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-white {
       background-color: var(--colour-white);
@@ -48,33 +49,25 @@
       }
     }
     &.tile-white-ish {
-      background-image: radial-gradient(var(--colour-white) var(--colour-ish-percentage), rgb(0, 0, 0));
-
-      .explosion {
-        background-color: rgb(0, 0, 0);
-        outline: 1px solid rgb(255, 255, 255);
-      }
-      .question-mark:after {
-        color: rgb(0, 0, 0);
-      }
+      background-image: linear-gradient(var(--colour-white) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-blue {
       background-color: var(--colour-blue);
     }
     &.tile-blue-ish {
-      background-image: radial-gradient(var(--colour-blue) var(--colour-ish-percentage), rgb(0, 0, 0));
+      background-image: linear-gradient(var(--colour-blue) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-yellow {
       background-color: var(--colour-yellow);
     }
     &.tile-yellow-ish {
-      background-image: radial-gradient(var(--colour-yellow) var(--colour-ish-percentage), rgb(0, 0, 0));
+      background-image: linear-gradient(var(--colour-yellow) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-green {
       background-color: var(--colour-green);
     }
     &.tile-green-ish {
-      background-image: radial-gradient(var(--colour-green) var(--colour-ish-percentage), rgb(0, 0, 0));
+      background-image: linear-gradient(var(--colour-green) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-rainbow {
       background-image: linear-gradient(var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
