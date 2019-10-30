@@ -8,7 +8,6 @@
   --colour-green: rgb(80, 230, 80);
 
   font-family: Arial, Helvetica, sans-serif;
-  outline: 1px solid rgb(255, 255, 255);
 
   .tile {
     height: calc(0.8 * var(--main-tile-width));
@@ -19,6 +18,7 @@
     grid-template-rows: repeat(3, 1fr);
     grid-auto-flow: column;
     opacity: 0.9;
+    outline: 1px solid rgb(255, 255, 255);
 
     &.tile-played {
       height: calc(0.8 * var(--played-tile-width));
@@ -32,6 +32,7 @@
       padding: 0;
       display: block;
       background-color: rgba(255, 255, 255, 0.2);
+      outline: 1px solid rgba(255, 255, 255, 0.4);
     }
     &.tile-discarded-one {
       width: var(--discarded-tile-one-width);
