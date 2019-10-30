@@ -40,20 +40,46 @@ export class AppComponent {
       "number": 1
     },
     {
-      "colour": "blue",
+      "colour": "yellow",
       "number": 2
     },
     {
-      "colour": "yellow",
+      "colour": "green",
       "number": 3
     },
     {
-      "colour": "green",
+      "colour": "blue",
       "number": 4
     },
     {
       "colour": "rainbow",
       "number": 5
+    }
+  ];
+  discardedTiles:Tile[] = [
+    {
+      "colour": "white",
+      "number": 1
+    },
+    {
+      "colour": "yellow",
+      "number": 1
+    },
+    {
+      "colour": "yellow",
+      "number": 1
+    },
+    {
+      "colour": "green",
+      "number": 3
+    },
+    {
+      "colour": "rainbow",
+      "number": 4
+    },
+    {
+      "colour": "rainbow",
+      "number": 2
     }
   ];
   playerTiles:Tile[] = [

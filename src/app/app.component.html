@@ -8,7 +8,7 @@
     </div>
     <div class="middle-tiles">
       <app-tile-group [displayMode]="'played'" [tiles]="playedTiles"></app-tile-group>
-      <app-discarded-tiles></app-discarded-tiles>
+      <app-discarded-tiles [tiles]="discardedTiles"></app-discarded-tiles>
     </div>
     <div class="remaining-tiles"></div>
   </div>

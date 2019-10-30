@@ -25,6 +25,24 @@
       width: calc(0.8 * var(--played-tile-width));
       padding: calc(0.1 * var(--played-tile-width));
     }
+
+    &.tile-discarded {
+      width: var(--discarded-tile-width);
+      height: var(--discarded-tile-height);
+      padding: 0;
+      display: block;
+      outline: 1px solid rgb(0, 0, 0);
+    }
+    &.tile-discarded-one {
+      width: var(--discarded-tile-one-width);
+      height: var(--discarded-tile-one-height);
+    }
+
+    &.tile-discarded-five {
+      width: var(--discarded-tile-five-width);
+      height: var(--discarded-tile-five-height);
+    }
+
     &.tile-unknown-colour {
       background-color: rgb(50, 50, 50);
     }
@@ -70,7 +88,7 @@
       background-image: linear-gradient(var(--colour-green) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-rainbow {
-      background-image: linear-gradient(var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
+      background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
     }
     &.tile-unknown-number {
       height: var(--main-tile-width);
