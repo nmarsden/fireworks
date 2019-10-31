@@ -6,18 +6,6 @@ import { TileGroupComponent } from '../app/tile-group/tile-group.component';
 import { TileComponent } from '../app/tile/tile.component';
 import { Tile } from '../app/tile';
 
-// let allTiles = [];
-// let colours = ["red", "white", "green", "yellow", "blue", "rainbow"];
-// for (let i=1; i<=5; i++) {
-//   allTiles = allTiles.concat(colours.map(colour => new Tile(colour, i)));
-//   if (i <= 4) {
-//     allTiles = allTiles.concat(colours.map(colour => new Tile(colour, i)));
-//   }
-//   if (i === 1) {
-//     allTiles = allTiles.concat(colours.map(colour => new Tile(colour, i)));
-//   }
-// }
-
 let playerTiles:Tile[] = [
   {
     "colour": null,
