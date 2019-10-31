@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TileComponent } from './tile/tile.component';
 import { TileGroupComponent } from './tile-group/tile-group.component';
 import { DiscardedTilesComponent } from './discarded-tiles/discarded-tiles.component';
+import { BoardComponent } from './board/board.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TileComponent,
     TileGroupComponent,
-    DiscardedTilesComponent
+    DiscardedTilesComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,

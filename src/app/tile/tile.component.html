@@ -3,7 +3,7 @@
     'tile-discarded':      displayMode === 'discarded',
     'tile-discarded-one':  displayMode === 'discarded' && tile.number === 1,
     'tile-discarded-five': displayMode === 'discarded' && tile.number === 5,
-    'tile-empty':          displayMode !== 'player' && tile.colour === null,
+    'tile-empty':         (displayMode === 'played' && tile.number === null) || (displayMode === 'discarded' && tile.colour === null),
     'tile-unknown-colour': displayMode === 'player' && tile.colour === null,
     'tile-unknown-number': displayMode === 'player' && tile.number === null,
     'tile-red-ish':        tile.colour === 'red-ish',

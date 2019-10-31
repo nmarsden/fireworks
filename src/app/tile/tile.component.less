@@ -24,6 +24,10 @@
       height: calc(0.8 * var(--played-tile-width));
       width: calc(0.8 * var(--played-tile-width));
       padding: calc(0.1 * var(--played-tile-width));
+
+      &.tile-empty {
+        opacity: 0.2;
+      }
     }
 
     &.tile-discarded {
@@ -48,8 +52,6 @@
       background-color: rgb(50, 50, 50);
     }
 
-    &.tile-empty {
-    }
     &.tile-red {
       background-color: var(--colour-red);
     }
