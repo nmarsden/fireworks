@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Tile } from './tile';
+import { TileHint } from './tile-hint';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,21 +9,26 @@ import { Tile } from './tile';
 export class AppComponent {
   title = 'fireworks';
 
+  playerTiles:Tile[] = [];
+  playerTileHints:TileHint[] = [];
+
   partnerTiles:Tile[] = [];
+
   playedTiles:Tile[] = [];
   discardedTiles:Tile[] = [];
-  playerTiles:Tile[] = [];
+
+  colours = ["red", "white", "green", "yellow", "blue", "rainbow"];
+  coloursWithoutRainbow = this.colours.slice(0, 5);
 
   allTiles = () => {
     let tiles = [];
-    let colours = ["red", "white", "green", "yellow", "blue", "rainbow"];
     for (let i=1; i<=5; i++) {
-      tiles = tiles.concat(colours.map(colour => new Tile(colour, i)));
+      tiles = tiles.concat(this.colours.map(colour => new Tile(colour, i)));
       if (i <= 4) {
-        tiles = tiles.concat(colours.map(colour => new Tile(colour, i)));
+        tiles = tiles.concat(this.colours.map(colour => new Tile(colour, i)));
       }
       if (i === 1) {
-        tiles = tiles.concat(colours.map(colour => new Tile(colour, i)));
+        tiles = tiles.concat(this.colours.map(colour => new Tile(colour, i)));
       }
     }
     return tiles;
@@ -51,6 +57,19 @@ export class AppComponent {
     return Math.random() > 0.5;
   };
 
+  generatePossibleHints = (tiles: Tile[]): TileHint[] => {
+      let colours = new Set(tiles.map(t => t.colour));
+      let numbers = new Set(tiles.map(t => t.number));
+      let hints:TileHint[] = [];
+      if (colours.has('rainbow')) {
+        hints = this.coloursWithoutRainbow.map(c => TileHint.colourHint(c));
+      } else {
+        colours.forEach(c => { hints.push(TileHint.colourHint(c)) });
+      }
+      numbers.forEach(n => { hints.push(TileHint.numberHint(n)) });
+      return hints;
+  };
+
   ngOnInit() {
     // Get all tiles
     let tiles = this.allTiles();
@@ -62,7 +81,33 @@ export class AppComponent {
     this.partnerTiles = shuffledTiles.splice(0, 5);
     this.playerTiles = shuffledTiles.splice(0, 5);
 
-    // Hide random player tile info
-    this.playerTiles = this.playerTiles.map(t => new Tile(this.isRandomTrue() ? t.colour : null, this.isRandomTrue() ? t.number : null));
+    // Generate possible player hints
+    let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
+
+    console.table(this.playerTiles);
+
+    // Pick 3 random hints
+    let pickedHints = this.shuffle(possiblePlayerHints).slice(0, 3);
+
+    console.table(pickedHints);
+
+    // Apply hints
+    let hintedPlayerTiles = this.playerTiles.map(t => new Tile(null, null));
+    pickedHints.forEach(hint => {
+      this.playerTiles.forEach((t, i) => {
+        if (t.colour === 'rainbow' && hint.colour) {
+          hintedPlayerTiles[i].colour = hint.colour + '-ish';
+        } else if (hint.colour === t.colour) {
+          hintedPlayerTiles[i].colour = hint.colour + '-ish';
+        }
+        if (hint.number === t.number) {
+          hintedPlayerTiles[i].number = hint.number;
+        }
+      });
+    });
+
+    this.playerTiles = hintedPlayerTiles;
+
+    console.table(this.playerTiles);
   }
 }
