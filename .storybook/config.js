@@ -4,6 +4,8 @@ import { themes } from '@storybook/theming';
 addParameters({
   options: {
     theme: themes.dark,
+    showPanel: true,
+    panelPosition: 'bottom'
   },
 });
 
