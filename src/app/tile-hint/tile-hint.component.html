@@ -1,5 +1,5 @@
 <div style="display:flex; flex-direction:column;">
-  <div class="container">
+  <div class="container" [ngClass]="{ 'colours-on-bottom': isColoursOnBottom }">
     <div class="colours">
       <div class="colour colour-white" [ngClass]="{ 'is-possible': possibleColours.includes('white') }"></div>
       <div class="colour colour-red" [ngClass]="{ 'is-possible': possibleColours.includes('red') }"></div>
@@ -8,7 +8,6 @@
       <div class="colour colour-blue" [ngClass]="{ 'is-possible': possibleColours.includes('blue') }"></div>
       <div class="colour colour-rainbow" [ngClass]="{ 'is-possible': possibleColours.includes('rainbow') }"></div>
     </div>
-    <div class="middle"></div>
     <div class="numbers">
       <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(1) }">1</div>
       <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(2) }">2</div>

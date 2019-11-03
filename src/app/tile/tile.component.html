@@ -1,3 +1,8 @@
+<app-tile-hint *ngIf='displayMode === "player"'
+               [includedColours]="tile.hints.includedColours"
+               [excludedColours]="tile.hints.excludedColours"
+               [includedNumbers]="tile.hints.includedNumbers"
+               [excludedNumbers]="tile.hints.excludedNumbers"></app-tile-hint>
 <div class='tile' [ngClass]="{
     'tile-played':         displayMode === 'played',
     'tile-discarded':      displayMode === 'discarded',
@@ -28,10 +33,10 @@
   <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-middle"></div>
   <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-left"></div>
   <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-right"></div>
-  <app-tile-hint *ngIf='displayMode === "player"'
-                 class="hint-overlay"
-                 [includedColours]="tile.hints.includedColours"
-                 [excludedColours]="tile.hints.excludedColours"
-                 [includedNumbers]="tile.hints.includedNumbers"
-                 [excludedNumbers]="tile.hints.excludedNumbers"></app-tile-hint>
 </div>
+<app-tile-hint *ngIf='displayMode === "partner"'
+               [isColoursOnBottom]="true"
+               [includedColours]="tile.hints.includedColours"
+               [excludedColours]="tile.hints.excludedColours"
+               [includedNumbers]="tile.hints.includedNumbers"
+               [excludedNumbers]="tile.hints.excludedNumbers"></app-tile-hint>
