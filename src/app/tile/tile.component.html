@@ -4,34 +4,34 @@
     'tile-discarded-one':  displayMode === 'discarded' && tile.number === 1,
     'tile-discarded-five': displayMode === 'discarded' && tile.number === 5,
     'tile-empty':         (displayMode === 'played' && tile.number === null) || (displayMode === 'discarded' && tile.colour === null),
-    'tile-unknown-colour': displayMode === 'player' && tile.colour === null,
-    'tile-unknown-number': displayMode === 'player' && tile.number === null,
-    'tile-red-ish':        tile.colour === 'red-ish',
-    'tile-white-ish':      tile.colour === 'white-ish',
-    'tile-blue-ish':       tile.colour === 'blue-ish',
-    'tile-yellow-ish':     tile.colour === 'yellow-ish',
-    'tile-green-ish':      tile.colour === 'green-ish',
-    'tile-red':            tile.colour === 'red',
-    'tile-white':          tile.colour === 'white',
-    'tile-blue':           tile.colour === 'blue',
-    'tile-yellow':         tile.colour === 'yellow',
-    'tile-green':          tile.colour === 'green',
-    'tile-rainbow':        tile.colour === 'rainbow'
+    'tile-unknown-number': displayMode === 'player' && tile.possibleNumbers.length > 1,
+    'tile-red':           (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'red',
+    'tile-white':         (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'white',
+    'tile-blue':          (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'blue',
+    'tile-yellow':        (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'yellow',
+    'tile-green':         (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'green',
+    'tile-rainbow':       (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'rainbow'
   }">
-  <div *ngIf='displayMode === "player"    && tile.number === null' class="question-mark"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 1' class="explosion explosion-middle"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 2' class="explosion explosion-top-left"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 2' class="explosion explosion-bottom-right"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 3' class="explosion explosion-top-left"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 3' class="explosion explosion-middle"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 3' class="explosion explosion-bottom-right"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 4' class="explosion explosion-top-left"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 4' class="explosion explosion-top-right"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 4' class="explosion explosion-bottom-left"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 4' class="explosion explosion-bottom-right"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 5' class="explosion explosion-top-left"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 5' class="explosion explosion-top-right"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 5' class="explosion explosion-middle"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-left"></div>
-  <div *ngIf='displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='displayMode === "player" && tile.possibleNumbers.length > 1' class="question-mark"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 1' class="explosion explosion-middle"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 2' class="explosion explosion-top-left"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 2' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 3' class="explosion explosion-top-left"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 3' class="explosion explosion-middle"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 3' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 4' class="explosion explosion-top-left"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 4' class="explosion explosion-top-right"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 4' class="explosion explosion-bottom-left"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 4' class="explosion explosion-bottom-right"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-top-left"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-top-right"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-middle"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-left"></div>
+  <div *ngIf='(displayMode !== "player" || tile.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-right"></div>
+  <app-tile-hint *ngIf='displayMode === "player"'
+                 class="hint-overlay"
+                 [includedColours]="tile.hints.includedColours"
+                 [excludedColours]="tile.hints.excludedColours"
+                 [includedNumbers]="tile.hints.includedNumbers"
+                 [excludedNumbers]="tile.hints.excludedNumbers"></app-tile-hint>
 </div>

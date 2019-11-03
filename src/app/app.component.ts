@@ -84,30 +84,14 @@ export class AppComponent {
     // Generate possible player hints
     let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
 
-    console.table(this.playerTiles);
-
     // Pick 3 random hints
     let pickedHints = this.shuffle(possiblePlayerHints).slice(0, 3);
 
-    console.table(pickedHints);
-
     // Apply hints
-    let hintedPlayerTiles = this.playerTiles.map(t => new Tile(null, null));
     pickedHints.forEach(hint => {
       this.playerTiles.forEach((t, i) => {
-        if (t.colour === 'rainbow' && hint.colour) {
-          hintedPlayerTiles[i].colour = hint.colour + '-ish';
-        } else if (hint.colour === t.colour) {
-          hintedPlayerTiles[i].colour = hint.colour + '-ish';
-        }
-        if (hint.number === t.number) {
-          hintedPlayerTiles[i].number = hint.number;
-        }
-      });
+        t.applyHint(hint);
+      })
     });
-
-    this.playerTiles = hintedPlayerTiles;
-
-    console.table(this.playerTiles);
   }
 }

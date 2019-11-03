@@ -6,10 +6,11 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
   styleUrls: ['./tile-hint.component.less']
 })
 export class TileHintComponent implements OnInit, OnChanges {
-  @Input() includedColours: string[];
-  @Input() excludedColours: string[];
-  @Input() includedNumbers: number[];
-  @Input() excludedNumbers: number[];
+  @Input() isStoryMode: boolean = false;
+  @Input() includedColours: string[] = [];
+  @Input() excludedColours: string[] = [];
+  @Input() includedNumbers: number[] = [];
+  @Input() excludedNumbers: number[] = [];
 
   standardColours: string[] = ["white", "red", "yellow", "green", "blue"];
   rainbowColour = 'rainbow';

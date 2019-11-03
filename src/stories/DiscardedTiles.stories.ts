@@ -1,6 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { TileComponent } from '../app/tile/tile.component';
+import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
 import { DiscardedTilesComponent } from '../app/discarded-tiles/discarded-tiles.component';
 import { Tile } from '../app/tile';
 
@@ -21,6 +22,7 @@ storiesOf('Discarded Tiles', module)
     moduleMetadata({
       declarations: [
         TileComponent,
+        TileHintComponent,
         DiscardedTilesComponent,
       ],
       imports: [CommonModule]

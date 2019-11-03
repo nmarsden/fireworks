@@ -1,13 +1,13 @@
 :host {
 
   --colour-ish-percentage: 1%;
-  --colour-white: rgb(255, 255, 255);
-  --colour-red: rgb(246, 52, 52);
-  --colour-blue: rgb(80, 180, 250);
-  --colour-yellow: rgb(250, 248, 54);
-  --colour-green: rgb(80, 230, 80);
 
   font-family: Arial, Helvetica, sans-serif;
+
+  .hint-overlay {
+    position: absolute;
+    top: calc(-0.4 * var(--main-tile-width))
+  }
 
   .tile {
     height: calc(0.8 * var(--main-tile-width));
@@ -19,6 +19,7 @@
     grid-auto-flow: column;
     opacity: 0.9;
     outline: 1px solid rgb(255, 255, 255);
+    position: relative;
 
     &.tile-played {
       height: calc(0.8 * var(--played-tile-width));

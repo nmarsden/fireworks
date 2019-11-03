@@ -1,6 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { TileComponent } from '../app/tile/tile.component';
+import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
 import { Tile } from '../app/tile';
 
 let standardTiles = [], discardedTiles = [], playerTilesKnownNumber = [], playerTilesUnknownNumber = [];
@@ -22,7 +23,8 @@ storiesOf('Tile', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        TileComponent
+        TileComponent,
+        TileHintComponent
       ],
       imports: [CommonModule]
     })

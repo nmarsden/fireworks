@@ -1,25 +1,47 @@
-<h1>Hints</h1>
-<h2>Colours </h2>
-<ul>
-  <li *ngIf="includedColours.length === 0">Included: none</li>
-  <li *ngIf="includedColours.length > 0">Included: {{ includedColours.join(', ') }}</li>
-  <li *ngIf="excludedColours.length === 0">Excluded: none</li>
-  <li *ngIf="excludedColours.length > 0">Excluded: {{ excludedColours.join(', ') }}</li>
-</ul>
-<h2>Numbers</h2>
-<ul>
-  <li *ngIf="includedNumbers.length === 0">Included: none</li>
-  <li *ngIf="includedNumbers.length > 0">Included: {{ includedNumbers.join(', ') }}</li>
-  <li *ngIf="excludedNumbers.length === 0">Excluded: none</li>
-  <li *ngIf="excludedNumbers.length > 0">Excluded: {{ excludedNumbers.join(', ') }}</li>
-</ul>
+<div style="display:flex; flex-direction:column;">
+  <div class="container">
+    <div class="colours">
+      <div class="colour colour-white" [ngClass]="{ 'is-possible': possibleColours.includes('white') }"></div>
+      <div class="colour colour-red" [ngClass]="{ 'is-possible': possibleColours.includes('red') }"></div>
+      <div class="colour colour-yellow" [ngClass]="{ 'is-possible': possibleColours.includes('yellow') }"></div>
+      <div class="colour colour-green" [ngClass]="{ 'is-possible': possibleColours.includes('green') }"></div>
+      <div class="colour colour-blue" [ngClass]="{ 'is-possible': possibleColours.includes('blue') }"></div>
+      <div class="colour colour-rainbow" [ngClass]="{ 'is-possible': possibleColours.includes('rainbow') }"></div>
+    </div>
+    <div class="middle"></div>
+    <div class="numbers">
+      <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(1) }">1</div>
+      <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(2) }">2</div>
+      <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(3) }">3</div>
+      <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(4) }">4</div>
+      <div class="number" [ngClass]="{ 'is-possible': possibleNumbers.includes(5) }">5</div>
+    </div>
+  </div>
+  <div *ngIf="isStoryMode">
+    <h1>Hints</h1>
+    <h2>Colours </h2>
+    <ul>
+      <li *ngIf="includedColours.length === 0">Included: none</li>
+      <li *ngIf="includedColours.length > 0">Included: {{ includedColours.join(', ') }}</li>
+      <li *ngIf="excludedColours.length === 0">Excluded: none</li>
+      <li *ngIf="excludedColours.length > 0">Excluded: {{ excludedColours.join(', ') }}</li>
+    </ul>
+    <h2>Numbers</h2>
+    <ul>
+      <li *ngIf="includedNumbers.length === 0">Included: none</li>
+      <li *ngIf="includedNumbers.length > 0">Included: {{ includedNumbers.join(', ') }}</li>
+      <li *ngIf="excludedNumbers.length === 0">Excluded: none</li>
+      <li *ngIf="excludedNumbers.length > 0">Excluded: {{ excludedNumbers.join(', ') }}</li>
+    </ul>
 
-<h1>Deductions</h1>
-<h2>Possible Colours</h2>
-<ul>
-  <li *ngFor="let colour of possibleColours">{{ colour }}</li>
-</ul>
-<h2>Possible Numbers</h2>
-<ul>
-  <li *ngFor="let number of possibleNumbers">{{ number }}</li>
-</ul>
+    <h1>Deductions</h1>
+    <h2>Possible Colours</h2>
+    <ul>
+      <li *ngFor="let colour of possibleColours">{{ colour }}</li>
+    </ul>
+    <h2>Possible Numbers</h2>
+    <ul>
+      <li *ngFor="let number of possibleNumbers">{{ number }}</li>
+    </ul>
+  </div>
+</div>
