@@ -3,7 +3,8 @@
                [excludedColours]="tile.hints.excludedColours"
                [includedNumbers]="tile.hints.includedNumbers"
                [excludedNumbers]="tile.hints.excludedNumbers"></app-tile-hint>
-<div class='tile' [ngClass]="{
+<div class='tile' (click)="onTileClicked()"
+    [ngClass]="{
     'tile-played':         displayMode === 'played',
     'tile-discarded':      displayMode === 'discarded',
     'tile-discarded-one':  displayMode === 'discarded' && tile.number === 1,

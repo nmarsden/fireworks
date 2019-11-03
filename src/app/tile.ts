@@ -1,7 +1,9 @@
 import { TileHint } from './tile-hint';
 import { TileHints } from './tile-hints';
+import { Guid } from './guid';
 
 export class Tile {
+  id: Guid;
   colour: string;
   number: number;
   hints: TileHints = new TileHints();
@@ -14,10 +16,15 @@ export class Tile {
   private allNumbers: number[] = [1, 2, 3, 4, 5];
 
   constructor(colour: string, number: number) {
+    this.id = Guid.create();
     this.colour = colour;
     this.number = number;
     this.possibleColours = [...this.standardColours, this.rainbowColour];
     this.possibleNumbers = [...this.allNumbers];
+  }
+
+  toString(): string {
+    return `colour:${this.colour}, number:${this.number}`;
   }
 
   applyHint(hint: TileHint) {

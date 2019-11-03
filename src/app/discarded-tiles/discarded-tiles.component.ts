@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Tile } from '../tile';
 
 @Component({
@@ -6,7 +6,7 @@ import { Tile } from '../tile';
   templateUrl: './discarded-tiles.component.html',
   styleUrls: ['./discarded-tiles.component.less']
 })
-export class DiscardedTilesComponent implements OnInit {
+export class DiscardedTilesComponent implements OnInit, OnChanges {
   @Input() tiles: Tile[];
 
   colours: string[] = ["white", "red", "yellow", "green", "blue", "rainbow"];
@@ -20,7 +20,10 @@ export class DiscardedTilesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.updateDisplayedTiles();
+  }
 
+  updateDisplayedTiles() {
     let countDuplicates = function(arr) {
       let counts = {"red": 0, "white": 0, "green": 0, "yellow": 0, "blue": 0, "rainbow": 0 };
       arr.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
@@ -66,4 +69,12 @@ export class DiscardedTilesComponent implements OnInit {
     this.oneTiles = [].concat(...this.colours.map(c => createThreeTiles(c, 1, duplicateColoursForOne[c])));
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // console.log('discarded-tiles: changes = ', changes);
+
+    if (typeof changes.tiles !== 'undefined' && changes.tiles.currentValue && !changes.tiles.firstChange) {
+      this.updateDisplayedTiles();
+    }
+
+  }
 }

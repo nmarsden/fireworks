@@ -2,4 +2,15 @@
            [partnerTiles]="partnerTiles"
            [playedTiles]="playedTiles"
            [discardedTiles]="discardedTiles"
-></app-board>
+           (partnerTileClicked)="onPartnerTileClicked($event)"
+           (playerTileClicked)="onPlayerTileClicked($event)">
+</app-board>
+<app-modal id="player-tile-modal" [isOpen]="false">
+  <div class="modal-body">
+    <div>Choose</div>
+    <div class="button-container">
+      <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
+      <div class="button" (click)="onDiscardTileButtonClicked()">Discard</div>
+    </div>
+  </div>
+</app-modal>

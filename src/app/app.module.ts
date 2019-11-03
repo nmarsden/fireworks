@@ -8,6 +8,7 @@ import { TileGroupComponent } from './tile-group/tile-group.component';
 import { DiscardedTilesComponent } from './discarded-tiles/discarded-tiles.component';
 import { BoardComponent } from './board/board.component';
 import { TileHintComponent } from './tile-hint/tile-hint.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TileHintComponent } from './tile-hint/tile-hint.component';
     TileGroupComponent,
     DiscardedTilesComponent,
     BoardComponent,
-    TileHintComponent
+    TileHintComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

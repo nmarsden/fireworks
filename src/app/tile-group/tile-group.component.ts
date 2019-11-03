@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tile } from '../tile';
 
 @Component({
@@ -9,10 +9,15 @@ import { Tile } from '../tile';
 export class TileGroupComponent implements OnInit {
   @Input() tiles: Tile[];
   @Input() displayMode: string;
+  @Output() tileClicked = new EventEmitter<Tile>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onTileClicked($event) {
+    this.tileClicked.emit($event);
   }
 
 }
