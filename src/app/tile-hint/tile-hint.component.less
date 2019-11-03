@@ -12,6 +12,7 @@
   .container {
     display: flex;
     flex-direction: column;
+    outline: 2px solid rgb(255, 255, 255);
 
     &.colours-on-bottom {
       flex-direction: column-reverse;
@@ -23,7 +24,6 @@
       .colour {
         height: calc(0.1 * var(--main-tile-width));
         width: calc(1/6 * var(--main-tile-width));
-        outline: 1px solid rgb(255, 255, 255);
         opacity: 0.2;
 
         &.colour-white {
@@ -62,7 +62,6 @@
       .number {
         height: calc(0.2 * var(--main-tile-width));
         width: calc(0.2 * var(--main-tile-width));
-        outline: 1px solid rgb(255, 255, 255);
 
         font-size: calc(0.2 * var(--main-tile-width));
         line-height: calc(0.2 * var(--main-tile-width));
