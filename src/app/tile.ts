@@ -21,10 +21,10 @@ export class Tile {
   }
 
   applyHint(hint: TileHint) {
-    if (hint.colour && hint.colour === this.colour) {
+    if (hint.colour && (hint.colour === this.colour || this.colour === this.rainbowColour)) {
       this.hints.includedColours.push(hint.colour);
     }
-    if (hint.colour && hint.colour !== this.colour) {
+    if (hint.colour && this.colour !== this.rainbowColour && hint.colour !== this.colour) {
       this.hints.excludedColours.push(hint.colour);
     }
     if (hint.number === this.number) {
