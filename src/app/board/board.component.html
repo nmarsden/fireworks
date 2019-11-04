@@ -3,14 +3,14 @@
 
   <div class="middle-container">
     <div class="token-container">
-      <div class="info-tokens"></div>
+      <div class="info-tokens">{{ infoTokens }}</div>
       <div class="fuse-tokens"></div>
     </div>
     <div class="middle-tiles">
       <app-tile-group [displayMode]="'played'" [tiles]="displayedPlayedTiles"></app-tile-group>
       <app-discarded-tiles [tiles]="discardedTiles"></app-discarded-tiles>
     </div>
-    <div class="remaining-tiles"></div>
+    <div class="remaining-tiles">{{ remainingTiles }}</div>
   </div>
 
   <app-tile-group [displayMode]="'player'" [tiles]="playerTiles" (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>

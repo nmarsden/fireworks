@@ -2,6 +2,8 @@
            [partnerTiles]="partnerTiles"
            [playedTiles]="playedTiles"
            [discardedTiles]="discardedTiles"
+           [remainingTiles]="remainingTiles.length"
+           [infoTokens]="infoTokens"
            (partnerTileClicked)="onPartnerTileClicked($event)"
            (playerTileClicked)="onPlayerTileClicked($event)">
 </app-board>
@@ -25,16 +27,19 @@
 <app-modal id="partner-tile-modal" [isOpen]="false">
   <div class="modal-body">
     <div class="modal-heading">Give Hint</div>
-    <div class="colour-options">
-      <div class="colour-option"
-           *ngFor="let colour of partnerHintColourOptions"
-           [ngClass]="colour"
-           (click)="onColourHintButtonClicked(colour)"></div>
-    </div>
-    <div class="number-options">
-      <div class="number-option"
-           *ngFor="let number of partnerHintNumberOptions"
-           (click)="onNumberHintButtonClicked(number)">{{number}}</div>
+    <div *ngIf="infoTokens === 0" class="info">There are no hint tokens available</div>
+    <div *ngIf="infoTokens > 0" class="options-container">
+      <div class="colour-options">
+        <div class="colour-option"
+             *ngFor="let colour of partnerHintColourOptions"
+             [ngClass]="colour"
+             (click)="onColourHintButtonClicked(colour)"></div>
+      </div>
+      <div class="number-options">
+        <div class="number-option"
+             *ngFor="let number of partnerHintNumberOptions"
+             (click)="onNumberHintButtonClicked(number)">{{number}}</div>
+      </div>
     </div>
   </div>
 </app-modal>
@@ -43,7 +48,7 @@
     <div class="modal-heading">{{ playerTileModalHeading }}</div>
     <div class="button-container">
       <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
-      <div class="button" (click)="onDiscardTileButtonClicked()">Discard</div>
+      <div class="button" (click)="onDiscardTileButtonClicked()" *ngIf="infoTokens !== 8">Discard</div>
     </div>
   </div>
 </app-modal>

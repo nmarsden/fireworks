@@ -20,6 +20,7 @@ export class AppComponent {
   partnerTiles:Tile[] = [];
   playedTiles:Tile[] = [];
   discardedTiles:Tile[] = [];
+  infoTokens: number = 8;
   chosenTile: Tile;
   partnerHintColourOptions: string[];
   partnerHintNumberOptions: number[];
@@ -185,6 +186,9 @@ export class AppComponent {
     let hint = TileHint.colourHint(colour);
     this.partnerTiles.forEach(t => t.applyHint(hint));
 
+    // Remove info token
+    this.infoTokens--;
+
     // Update turn info
     this.turnInfo = `${this.playerNames[this.currentPlayer]} hinted about ${colour}`;
 
@@ -199,6 +203,9 @@ export class AppComponent {
     // Apply number hint
     let hint = TileHint.numberHint(number);
     this.partnerTiles.forEach(t => t.applyHint(hint));
+
+    // Remove info token
+    this.infoTokens--;
 
     // Update turn info
     this.turnInfo = `${this.playerNames[this.currentPlayer]} hinted about ${number}`;
@@ -254,6 +261,9 @@ export class AppComponent {
   onDiscardTileButtonClicked() {
     // Remove chosen tile from player tiles
     this.playerTiles = this.playerTiles.filter(t => t.id !== this.chosenTile.id);
+
+    // Add info token
+    this.infoTokens++;
 
     // Update turn info
     this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded a ${this.chosenTile.colour} ${this.chosenTile.number}`;

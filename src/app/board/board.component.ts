@@ -11,6 +11,8 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() playedTiles: Tile[];
   @Input() discardedTiles: Tile[];
   @Input() playerTiles: Tile[];
+  @Input() remainingTiles: number;
+  @Input() infoTokens: number;
   @Output() partnerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileClicked = new EventEmitter<Tile>();
 
