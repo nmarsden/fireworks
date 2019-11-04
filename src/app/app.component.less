@@ -20,7 +20,6 @@
     .colour-option {
       width: calc(0.6 * var(--main-tile-width));
       height: calc(0.6 * var(--main-tile-width));
-      outline: 1px solid black;
       margin: calc(0.05 * var(--main-tile-width));
 
       &.red {
@@ -38,6 +37,10 @@
       &.blue {
         background-color: var(--colour-blue);
       }
+
+      &.white {
+        background-color: var(--colour-white);
+      }
     }
   }
 
@@ -49,7 +52,8 @@
       height: calc(0.6 * var(--main-tile-width));
       font-size: calc(0.4 * var(--main-tile-width));
       line-height: calc(0.6 * var(--main-tile-width));
-      outline: 1px solid black;
+      outline: 1px solid rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.1);
       text-align: center;
       margin: calc(0.05 * var(--main-tile-width));
     }
@@ -59,15 +63,15 @@
     display: flex;
 
     .button {
-      border: 1px solid black;
+      border: 1px solid rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.1);
       padding: calc(0.1 * var(--main-tile-width));
       margin: calc(0.1 * var(--main-tile-width));
     }
   }
 
   .turn-info {
-    color: rgb(0, 0, 0);
-    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.6);
     font-size: calc(0.4 * var(--main-tile-width));
     line-height: calc(0.5 * var(--main-tile-width));
     margin-top: calc(0.3 * var(--main-tile-width));
