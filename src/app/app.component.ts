@@ -17,9 +17,12 @@ export class AppComponent {
   playedTiles:Tile[] = [];
   discardedTiles:Tile[] = [];
   chosenTile: Tile;
+  partnerHintColourOptions: string[];
+  partnerHintNumberOptions: number[];
 
-  colours = ["red", "white", "green", "yellow", "blue", "rainbow"];
-  coloursWithoutRainbow = this.colours.slice(0, 5);
+  standardColours = ["white", "red", "yellow", "green", "blue"];
+  rainbowColour = 'rainbow';
+  colours = [...this.standardColours, this.rainbowColour];
 
   constructor(private modalService: ModalService) { }
 
@@ -65,7 +68,7 @@ export class AppComponent {
       let numbers = new Set(tiles.map(t => t.number));
       let hints:TileHint[] = [];
       if (colours.has('rainbow')) {
-        hints = this.coloursWithoutRainbow.map(c => TileHint.colourHint(c));
+        hints = this.standardColours.map(c => TileHint.colourHint(c));
       } else {
         colours.forEach(c => { hints.push(TileHint.colourHint(c)) });
       }
@@ -99,15 +102,14 @@ export class AppComponent {
   }
 
   highestPlayedTiles = (playedTiles):Tile[] => {
-    let colours: string[] = ["white", "red", "yellow", "green", "blue", "rainbow"];
     let highestColourNumber = {};
-    colours.forEach(c => highestColourNumber[c] = null);
+    this.colours.forEach(c => highestColourNumber[c] = null);
     playedTiles.forEach(t => {
       if (t.number > highestColourNumber[t.colour]) {
         highestColourNumber[t.colour] = t.number;
       }
     });
-    return colours.map(c => new Tile(c, highestColourNumber[c]));
+    return this.colours.map(c => new Tile(c, highestColourNumber[c]));
   };
 
   private isTilePlayable(tile: Tile) {
@@ -131,9 +133,37 @@ export class AppComponent {
   }
 
   onPartnerTileClicked($event) {
-    let tileClicked = $event;
+    this.chosenTile = $event;
 
-    console.log("Partner Tile clicked - ", tileClicked.colour, tileClicked.number);
+    // Determine available colour hints
+    if (this.partnerTiles.some(t => t.colour === this.rainbowColour)) {
+      this.partnerHintColourOptions = [...this.standardColours];
+    } else {
+      this.partnerHintColourOptions = [...new Set(this.partnerTiles.map(t => t.colour))];
+    }
+    this.partnerHintColourOptions.sort((c1, c2) => { return this.standardColours.indexOf(c1) > this.standardColours.indexOf(c2) ? 1 : -1 });
+    // Determine available number hints
+    this.partnerHintNumberOptions = [...new Set(this.partnerTiles.map(t => t.number))].sort();
+
+    this.openModal('partner-tile-modal');
+  }
+
+  onColourHintButtonClicked(colour: string) {
+    // Apply colour hint
+    let hint = TileHint.colourHint(colour);
+    this.partnerTiles.forEach(t => t.applyHint(hint));
+
+    // Close partner tile modal
+    this.closeModal('partner-tile-modal');
+  }
+
+  onNumberHintButtonClicked(number: number) {
+    // Apply number hint
+    let hint = TileHint.numberHint(number);
+    this.partnerTiles.forEach(t => t.applyHint(hint));
+
+    // Close partner tile modal
+    this.closeModal('partner-tile-modal');
   }
 
   onPlayerTileClicked($event) {

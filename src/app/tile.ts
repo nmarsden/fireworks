@@ -29,16 +29,16 @@ export class Tile {
 
   applyHint(hint: TileHint) {
     if (hint.colour && (hint.colour === this.colour || this.colour === this.rainbowColour)) {
-      this.hints.includedColours.push(hint.colour);
+      this.hints.includedColours = [...new Set(this.hints.includedColours.concat(hint.colour))];
     }
     if (hint.colour && this.colour !== this.rainbowColour && hint.colour !== this.colour) {
-      this.hints.excludedColours.push(hint.colour);
+      this.hints.excludedColours = [...new Set(this.hints.excludedColours.concat(hint.colour))];
     }
     if (hint.number === this.number) {
-      this.hints.includedNumbers.push(hint.number);
+      this.hints.includedNumbers = [...new Set(this.hints.includedNumbers.concat(hint.number))];
     }
     if (hint.number && hint.number !== this.number) {
-      this.hints.excludedNumbers.push(hint.number);
+      this.hints.excludedNumbers = [...new Set(this.hints.excludedNumbers.concat(hint.number))];
     }
     this.updatePossibilities();
   }

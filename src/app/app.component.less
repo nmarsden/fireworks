@@ -10,6 +10,51 @@
   justify-content: center;
   align-items: center;
 
+  .modal-heading {
+    margin-bottom: calc(0.1 * var(--main-tile-width));
+  }
+
+  .colour-options {
+    display: flex;
+
+    .colour-option {
+      width: calc(0.6 * var(--main-tile-width));
+      height: calc(0.6 * var(--main-tile-width));
+      outline: 1px solid black;
+      margin: calc(0.05 * var(--main-tile-width));
+
+      &.red {
+        background-color: var(--colour-red);
+      }
+
+      &.yellow {
+        background-color: var(--colour-yellow);
+      }
+
+      &.green {
+        background-color: var(--colour-green);
+      }
+
+      &.blue {
+        background-color: var(--colour-blue);
+      }
+    }
+  }
+
+  .number-options {
+    display: flex;
+
+    .number-option {
+      width: calc(0.6 * var(--main-tile-width));
+      height: calc(0.6 * var(--main-tile-width));
+      font-size: calc(0.4 * var(--main-tile-width));
+      line-height: calc(0.6 * var(--main-tile-width));
+      outline: 1px solid black;
+      text-align: center;
+      margin: calc(0.05 * var(--main-tile-width));
+    }
+  }
+
   .button-container {
     display: flex;
 
