@@ -1,5 +1,5 @@
 <div class="app-modal">
-  <div class="app-modal-body">
+  <div class="app-modal-body" [ngClass]="{'is-full-screen' : isFullScreen}">
     <ng-content></ng-content>
   </div>
 </div>

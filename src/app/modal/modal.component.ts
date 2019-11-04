@@ -19,6 +19,7 @@ import { ModalService } from '../modal.service';
 export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
   @Input() isOpen: boolean = false;
+  @Input() isFullScreen: boolean = false;
   private element: any;
   private isInitialized: boolean = false;
 

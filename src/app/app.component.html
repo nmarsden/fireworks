@@ -5,6 +5,23 @@
            (partnerTileClicked)="onPartnerTileClicked($event)"
            (playerTileClicked)="onPlayerTileClicked($event)">
 </app-board>
+<app-modal id="player-ready-modal" [isFullScreen]="true" [isOpen]="true">
+  <div class="modal-body">
+    <div class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
+    <div class="button-container">
+      <div class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
+    </div>
+    <div class="turn-info">{{ turnInfo }}</div>
+  </div>
+</app-modal>
+<app-modal id="end-of-turn-modal">
+  <div class="modal-body">
+    <div class="modal-heading">Move Taken</div>
+    <div class="button-container">
+      <div class="button" (click)="onEndOfTurnButtonClicked()">OK</div>
+    </div>
+  </div>
+</app-modal>
 <app-modal id="partner-tile-modal" [isOpen]="false">
   <div class="modal-body">
     <div class="modal-heading">Give Hint</div>

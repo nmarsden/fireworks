@@ -11,6 +11,10 @@ import { ModalService } from './modal.service';
 export class AppComponent {
   title = 'fireworks';
 
+  currentPlayer: number = 0;
+  waitingPlayer: number = 1;
+  playerNames: string[] = ['P1', "P2"];
+  turnInfo: string = '';
   remainingTiles:Tile[] = [];
   playerTiles:Tile[] = [];
   partnerTiles:Tile[] = [];
@@ -90,17 +94,20 @@ export class AppComponent {
     this.playerTiles = this.remainingTiles.splice(0, 5);
 
     // Generate possible player hints
-    let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
+    // let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
+    //
+    // // Pick 3 random hints
+    // let pickedHints = this.shuffle(possiblePlayerHints).slice(0, 3);
+    //
+    // // Apply hints
+    // pickedHints.forEach(hint => {
+    //   this.playerTiles.forEach((t, i) => {
+    //     t.applyHint(hint);
+    //   })
+    // });
 
-    // Pick 3 random hints
-    let pickedHints = this.shuffle(possiblePlayerHints).slice(0, 3);
-
-    // Apply hints
-    pickedHints.forEach(hint => {
-      this.playerTiles.forEach((t, i) => {
-        t.applyHint(hint);
-      })
-    });
+    // Show player ready modal
+    // this.openModal('player-ready-modal');
   }
 
   highestPlayedTiles = (playedTiles):Tile[] => {
@@ -134,6 +141,29 @@ export class AppComponent {
     this.modalService.close(id);
   }
 
+  onPlayerReadyButtonClicked() {
+
+    // Close player ready modal
+    this.closeModal('player-ready-modal');
+  }
+
+  onEndOfTurnButtonClicked() {
+    // Prepare for next player's turn
+    // -- set current player & waiting player
+    this.currentPlayer = (this.currentPlayer+1) % 2;
+    this.waitingPlayer = (this.waitingPlayer+1) % 2;
+    // -- swap player & partner tiles
+    let temp = this.playerTiles;
+    this.playerTiles = this.partnerTiles.reverse();
+    this.partnerTiles = temp.reverse();
+
+    // Close end of turn modal
+    this.closeModal('end-of-turn-modal');
+
+    // Show player ready modal
+    this.openModal('player-ready-modal');
+  }
+
   onPartnerTileClicked($event) {
     this.chosenTile = $event;
 
@@ -155,8 +185,14 @@ export class AppComponent {
     let hint = TileHint.colourHint(colour);
     this.partnerTiles.forEach(t => t.applyHint(hint));
 
+    // Update turn info
+    this.turnInfo = `${this.playerNames[this.currentPlayer]} hinted about ${colour}`;
+
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
+
+    // Show end of turn modal
+    this.openModal('end-of-turn-modal');
   }
 
   onNumberHintButtonClicked(number: number) {
@@ -164,8 +200,14 @@ export class AppComponent {
     let hint = TileHint.numberHint(number);
     this.partnerTiles.forEach(t => t.applyHint(hint));
 
+    // Update turn info
+    this.turnInfo = `${this.playerNames[this.currentPlayer]} hinted about ${number}`;
+
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
+
+    // Show end of turn modal
+    this.openModal('end-of-turn-modal');
   }
 
   onPlayerTileClicked($event) {
@@ -181,6 +223,9 @@ export class AppComponent {
   onPlayTileButtonClicked() {
     // Remove chosen tile from player tiles
     this.playerTiles = this.playerTiles.filter(t => t.id !== this.chosenTile.id);
+
+    // Update turn info
+    this.turnInfo = `${this.playerNames[this.currentPlayer]} played a ${this.chosenTile.colour} ${this.chosenTile.number}`;
 
     // Tile is playable?
     if (this.isTilePlayable(this.chosenTile)) {
@@ -201,11 +246,17 @@ export class AppComponent {
 
     // Close player tile modal
     this.closeModal('player-tile-modal');
+
+    // Show end of turn modal
+    this.openModal('end-of-turn-modal');
   }
 
   onDiscardTileButtonClicked() {
     // Remove chosen tile from player tiles
     this.playerTiles = this.playerTiles.filter(t => t.id !== this.chosenTile.id);
+
+    // Update turn info
+    this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded a ${this.chosenTile.colour} ${this.chosenTile.number}`;
 
     // Add chosen tile to discarded tiles
     this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
@@ -215,5 +266,8 @@ export class AppComponent {
 
     // Close player tile modal
     this.closeModal('player-tile-modal');
+
+    // Show end of turn modal
+    this.openModal('end-of-turn-modal');
   }
 }
