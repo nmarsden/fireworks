@@ -1,6 +1,9 @@
 app-modal {
   /* modals are hidden by default */
-  display: none;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease 0.2s;
 
   .app-modal {
     /* modal container fixed across whole screen */
@@ -20,7 +23,6 @@ app-modal {
     overflow: auto;
 
     .app-modal-body {
-      //padding: 20px;
       background: #fff;
 
       &.is-full-screen {
@@ -33,9 +35,6 @@ app-modal {
         justify-content: center;
         align-items: center;
       }
-
-      /* margin exposes part of the modal background */
-      //margin: 40px;
     }
   }
 
@@ -60,3 +59,8 @@ app-modal {
 //  /* body overflow is hidden to hide main scrollbar when modal window is open */
 //  overflow: hidden;
 //}
+
+.app-modal-open {
+  opacity: 1;
+  pointer-events: auto;
+}

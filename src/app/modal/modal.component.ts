@@ -70,13 +70,13 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
 
   // open modal
   open(): void {
-    this.element.style.display = 'block';
-    document.body.classList.add('app-modal-open');
+    this.element.classList.add('app-modal-open');
+    // document.body.classList.add('app-modal-open');
   }
 
   // close modal
   close(): void {
-    this.element.style.display = 'none';
-    document.body.classList.remove('app-modal-open');
+    this.element.classList.remove('app-modal-open');
+    // document.body.classList.remove('app-modal-open');
   }
 }
