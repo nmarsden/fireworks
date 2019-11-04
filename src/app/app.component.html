@@ -4,14 +4,19 @@
            [discardedTiles]="discardedTiles"
            [remainingTiles]="remainingTiles.length"
            [infoTokens]="infoTokens"
+           [fuseTokens]="fuseTokens"
            (partnerTileClicked)="onPartnerTileClicked($event)"
            (playerTileClicked)="onPlayerTileClicked($event)">
 </app-board>
 <app-modal id="player-ready-modal" [isFullScreen]="true" [isOpen]="true">
   <div class="modal-body">
-    <div class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
-    <div class="button-container">
+    <div *ngIf="!isGameOver" class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
+    <div *ngIf="!isGameOver" class="button-container">
       <div class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
+    </div>
+    <div *ngIf="isGameOver" class="modal-heading">GAME OVER</div>
+    <div *ngIf="isGameOver" class="button-container">
+      <div class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
     </div>
     <div class="turn-info">{{ turnInfo }}</div>
   </div>

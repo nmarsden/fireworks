@@ -10,26 +10,27 @@ import { ModalService } from './modal.service';
 })
 export class AppComponent {
   title = 'fireworks';
-
-  currentPlayer: number = 0;
-  waitingPlayer: number = 1;
   playerNames: string[] = ['P1', "P2"];
-  turnInfo: string = '';
-  remainingTiles:Tile[] = [];
-  playerTiles:Tile[] = [];
-  partnerTiles:Tile[] = [];
-  playedTiles:Tile[] = [];
-  discardedTiles:Tile[] = [];
-  infoTokens: number = 8;
-  chosenTile: Tile;
-  partnerHintColourOptions: string[];
-  partnerHintNumberOptions: number[];
-  playerTileModalHeading: string = '';
-
   standardColours = ["white", "red", "yellow", "green", "blue"];
   rainbowColour = 'rainbow';
   colours = [...this.standardColours, this.rainbowColour];
   cardPositions = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+
+  currentPlayer: number;
+  waitingPlayer: number;
+  turnInfo: string;
+  remainingTiles: Tile[];
+  playerTiles: Tile[];
+  partnerTiles: Tile[];
+  playedTiles: Tile[];
+  discardedTiles: Tile[];
+  infoTokens: number;
+  fuseTokens: number;
+  chosenTile: Tile;
+  partnerHintColourOptions: string[];
+  partnerHintNumberOptions: number[];
+  playerTileModalHeading: string;
+  isGameOver: boolean;
 
   constructor(private modalService: ModalService) { }
 
@@ -84,6 +85,22 @@ export class AppComponent {
   };
 
   ngOnInit() {
+    this.newGame();
+  }
+
+  newGame() {
+    this.currentPlayer = 0;
+    this.waitingPlayer = 1;
+    this.turnInfo = "Starting a new game";
+    this.remainingTiles = [];
+    this.playerTiles = [];
+    this.partnerTiles = [];
+    this.playedTiles = [];
+    this.discardedTiles = [];
+    this.infoTokens = 8;
+    this.fuseTokens = 3;
+    this.isGameOver = false;
+
     // Get all tiles
     let tiles = this.allTiles();
 
@@ -108,7 +125,7 @@ export class AppComponent {
     // });
 
     // Show player ready modal
-    // this.openModal('player-ready-modal');
+    this.openModal('player-ready-modal');
   }
 
   highestPlayedTiles = (playedTiles):Tile[] => {
@@ -143,9 +160,14 @@ export class AppComponent {
   }
 
   onPlayerReadyButtonClicked() {
-
     // Close player ready modal
     this.closeModal('player-ready-modal');
+
+    // Is game over?
+    if (this.isGameOver) {
+      // Start new game
+      this.newGame();
+    }
   }
 
   onEndOfTurnButtonClicked() {
@@ -244,12 +266,25 @@ export class AppComponent {
       // - Add chosen tile to discarded tiles
       this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
       // console.log('discardedTiles = ', this.discardedTiles.map(t => t.toString()));
-      // - TODO Perform BOOM!
-      console.log('BOOM! Chosen tile is not playable. ', this.chosenTile.toString());
+      // - Remove fuse token
+      this.fuseTokens--;
+      // - Is Game Over?
+      if (this.fuseTokens === 0) {
+        // - Game Over
+        this.isGameOver = true;
+        // - Update turn info
+        this.turnInfo = this.turnInfo + ` which is unplayable. Last fuse token used.`;
+      } else {
+        // - Continue Game
+        // - Update turn info
+        this.turnInfo = this.turnInfo + ` which is unplayable. Fuse tokens reduced.`;
+      }
     }
 
     // Add new tile to player tiles from remainingTiles
-    this.playerTiles.push(...this.remainingTiles.splice(0, 1));
+    if (this.remainingTiles.length > 0) {
+      this.playerTiles.push(...this.remainingTiles.splice(0, 1));
+    }
 
     // Close player tile modal
     this.closeModal('player-tile-modal');
@@ -272,7 +307,9 @@ export class AppComponent {
     this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
 
     // Add new tile to player tiles from remainingTiles
-    this.playerTiles.push(...this.remainingTiles.splice(0, 1));
+    if (this.remainingTiles.length > 0) {
+      this.playerTiles.push(...this.remainingTiles.splice(0, 1));
+    }
 
     // Close player tile modal
     this.closeModal('player-tile-modal');
