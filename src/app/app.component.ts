@@ -19,10 +19,12 @@ export class AppComponent {
   chosenTile: Tile;
   partnerHintColourOptions: string[];
   partnerHintNumberOptions: number[];
+  playerTileModalHeading: string = '';
 
   standardColours = ["white", "red", "yellow", "green", "blue"];
   rainbowColour = 'rainbow';
   colours = [...this.standardColours, this.rainbowColour];
+  cardPositions = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
 
   constructor(private modalService: ModalService) { }
 
@@ -168,6 +170,11 @@ export class AppComponent {
 
   onPlayerTileClicked($event) {
     this.chosenTile = $event;
+
+    // Set player tile modal heading
+    let cardIndex = this.playerTiles.indexOf(this.chosenTile);
+    this.playerTileModalHeading = `${this.cardPositions[cardIndex]} Card`;
+
     this.openModal('player-tile-modal');
   }
 

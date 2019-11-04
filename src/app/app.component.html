@@ -23,7 +23,7 @@
 </app-modal>
 <app-modal id="player-tile-modal" [isOpen]="false">
   <div class="modal-body">
-    <div class="modal-heading">Choose</div>
+    <div class="modal-heading">{{ playerTileModalHeading }}</div>
     <div class="button-container">
       <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
       <div class="button" (click)="onDiscardTileButtonClicked()">Discard</div>
