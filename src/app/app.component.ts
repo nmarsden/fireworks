@@ -31,6 +31,7 @@ export class AppComponent {
   partnerHintNumberOptions: number[];
   playerTileModalHeading: string;
   isGameOver: boolean;
+  gameOverHeading: string;
 
   constructor(private modalService: ModalService) { }
 
@@ -159,6 +160,10 @@ export class AppComponent {
            (matchingTiles.length === 1 && lastDiscardTile.number === 5);
   }
 
+  areAllPlayedStacksComplete(): boolean {
+    return this.highestPlayedTiles(this.playedTiles).filter(t => t.number === 5).length === 6;
+  }
+
   openModal(id: string) {
     this.modalService.open(id);
   }
@@ -268,29 +273,46 @@ export class AppComponent {
     if (this.isTilePlayable(this.chosenTile)) {
       // - Add chosen tile to played tiles
       this.playedTiles = this.playedTiles.concat(this.chosenTile);
-      // console.log('playedTiles = ', this.playedTiles.map(t => t.toString()));
+      // - Is five played?
+      if (this.chosenTile.number === 5) {
+        this.turnInfo = `${this.playerNames[this.currentPlayer]} completed the ${this.chosenTile.colour} stack`;
+        // - Is game won
+        if (this.areAllPlayedStacksComplete()) {
+          // Game won
+          this.isGameOver = true;
+          this.gameOverHeading = "GAME WON!";
+          this.turnInfo = this.turnInfo + '. All stacks complete'
+        } else {
+          // Add info token
+          if (this.infoTokens < 8) {
+            this.infoTokens++;
+            this.turnInfo = this.turnInfo + '. Hint token earned'
+          }
+        }
+      }
     } else {
       // Tile is not playable?
       // - Add chosen tile to discarded tiles
       this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
-      // console.log('discardedTiles = ', this.discardedTiles.map(t => t.toString()));
       // - Remove fuse token
       this.fuseTokens--;
       // - Is game over due to no more fuse tokens?
       if (this.fuseTokens === 0) {
         // - Game Over
         this.isGameOver = true;
+        this.gameOverHeading = "GAME OVER";
         // - Update turn info
-        this.turnInfo = this.turnInfo + ` which is unplayable. Last fuse token used.`;
+        this.turnInfo = this.turnInfo + ` which is unplayable. Last fuse token used`;
       // Is game over due to all matching tiles discarded?
       } else if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
-          this.isGameOver = true;
-          // Update turn info
-          this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
+        this.isGameOver = true;
+        this.gameOverHeading = "GAME OVER";
+        // Update turn info
+        this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
       } else {
         // - Continue Game
         // - Update turn info
-        this.turnInfo = this.turnInfo + ` which is unplayable. Fuse tokens reduced.`;
+        this.turnInfo = this.turnInfo + ` which is unplayable. Fuse tokens reduced`;
       }
     }
 
@@ -322,6 +344,7 @@ export class AppComponent {
     // Is game over?
     if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
       this.isGameOver = true;
+      this.gameOverHeading = "GAME OVER";
       // Update turn info
       this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
     }

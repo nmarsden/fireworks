@@ -14,7 +14,7 @@
     <div *ngIf="!isGameOver" class="button-container">
       <div class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
     </div>
-    <div *ngIf="isGameOver" class="modal-heading">GAME OVER</div>
+    <div *ngIf="isGameOver" class="modal-heading">{{ gameOverHeading }}</div>
     <div *ngIf="isGameOver" class="button-container">
       <div class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
     </div>
