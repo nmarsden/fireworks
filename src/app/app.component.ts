@@ -151,6 +151,14 @@ export class AppComponent {
     return (tile.number === playableNumber);
   }
 
+  areAllMatchingTilesDiscarded(lastDiscardTile: Tile): boolean {
+    // Does discarded tiles now include ALL the tiles matching the last discarded tile?
+    let matchingTiles = this.discardedTiles.filter(t => (t.colour === lastDiscardTile.colour && t.number === lastDiscardTile.number));
+    return (matchingTiles.length === 3 && lastDiscardTile.number === 1) ||
+           (matchingTiles.length === 2 && (lastDiscardTile.number === 2 || lastDiscardTile.number === 3 || lastDiscardTile.number === 4)) ||
+           (matchingTiles.length === 1 && lastDiscardTile.number === 5);
+  }
+
   openModal(id: string) {
     this.modalService.open(id);
   }
@@ -268,12 +276,17 @@ export class AppComponent {
       // console.log('discardedTiles = ', this.discardedTiles.map(t => t.toString()));
       // - Remove fuse token
       this.fuseTokens--;
-      // - Is Game Over?
+      // - Is game over due to no more fuse tokens?
       if (this.fuseTokens === 0) {
         // - Game Over
         this.isGameOver = true;
         // - Update turn info
         this.turnInfo = this.turnInfo + ` which is unplayable. Last fuse token used.`;
+      // Is game over due to all matching tiles discarded?
+      } else if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
+          this.isGameOver = true;
+          // Update turn info
+          this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
       } else {
         // - Continue Game
         // - Update turn info
@@ -305,6 +318,13 @@ export class AppComponent {
 
     // Add chosen tile to discarded tiles
     this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
+
+    // Is game over?
+    if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
+      this.isGameOver = true;
+      // Update turn info
+      this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
+    }
 
     // Add new tile to player tiles from remainingTiles
     if (this.remainingTiles.length > 0) {
