@@ -9,6 +9,7 @@ import { Tile } from '../tile';
 export class TileComponent implements OnInit {
   @Input() tile: Tile;
   @Input() displayMode: string;
+  @Input() isChosen: boolean;
   @Output() tileClicked = new EventEmitter<Tile>();
 
   constructor() { }

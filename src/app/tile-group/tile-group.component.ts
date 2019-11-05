@@ -8,6 +8,8 @@ import { Tile } from '../tile';
 })
 export class TileGroupComponent implements OnInit {
   @Input() tiles: Tile[];
+  @Input() chosenTile: Tile;
+  @Input() isGroupChosen: boolean;
   @Input() displayMode: string;
   @Output() tileClicked = new EventEmitter<Tile>();
 

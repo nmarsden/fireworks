@@ -2,9 +2,25 @@
 
   .tile-group {
     display: flex;
+    position: relative;
 
     &.is-played-tiles {
         flex-direction: var(--played-tiles-flex-direction);
     }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.4);
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+
+      &.is-overlay-shown {
+        animation: pulsate 2s linear infinite;
+      }
+    }
+
   }
 }

@@ -1,5 +1,8 @@
 <div class="page">
-  <app-tile-group [displayMode]="'partner'" [tiles]="partnerTiles" (tileClicked)="onPartnerTileClicked($event)"></app-tile-group>
+  <app-tile-group [displayMode]="'partner'"
+                  [tiles]="partnerTiles"
+                  [isGroupChosen]="isPartnerTilesChosen"
+                  (tileClicked)="onPartnerTileClicked($event)"></app-tile-group>
 
   <div class="middle-container">
     <div class="token-container">
@@ -13,5 +16,8 @@
     <div class="remaining-tiles">{{ remainingTiles }}</div>
   </div>
 
-  <app-tile-group [displayMode]="'player'" [tiles]="playerTiles" (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>
+  <app-tile-group [displayMode]="'player'"
+                  [tiles]="playerTiles"
+                  [chosenTile]="chosenTile"
+                  (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>
 </div>

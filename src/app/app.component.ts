@@ -14,7 +14,7 @@ export class AppComponent {
   standardColours = ["white", "red", "yellow", "green", "blue"];
   rainbowColour = 'rainbow';
   colours = [...this.standardColours, this.rainbowColour];
-  cardPositions = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+  isOnInitAlreadyCalled = false;
 
   currentPlayer: number;
   waitingPlayer: number;
@@ -27,9 +27,9 @@ export class AppComponent {
   infoTokens: number;
   fuseTokens: number;
   chosenTile: Tile;
+  isPartnerTilesChosen: boolean;
   partnerHintColourOptions: string[];
   partnerHintNumberOptions: number[];
-  playerTileModalHeading: string;
   isGameOver: boolean;
   gameOverHeading: string;
 
@@ -87,6 +87,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.newGame();
+    this.isOnInitAlreadyCalled = true;
   }
 
   newGame() {
@@ -126,7 +127,10 @@ export class AppComponent {
     // });
 
     // Show player ready modal
-    this.openModal('player-ready-modal');
+    // Note: checking isOnInitCalled to workaround an issue with openModal(..) failing during ngOnInit() call
+    if (this.isOnInitAlreadyCalled) {
+      this.openModal('player-ready-modal');
+    }
   }
 
   highestPlayedTiles = (playedTiles):Tile[] => {
@@ -172,6 +176,15 @@ export class AppComponent {
     this.modalService.close(id);
   }
 
+  showEndOfTurnModal() {
+    // Unset chosen stuff
+    this.chosenTile = null;
+    this.isPartnerTilesChosen = false;
+
+    // Show end of turn modal
+    this.openModal('end-of-turn-modal');
+  }
+
   onPlayerReadyButtonClicked() {
     // Prepare for next player's turn
     // -- swap player & partner tiles
@@ -203,7 +216,7 @@ export class AppComponent {
   }
 
   onPartnerTileClicked($event) {
-    this.chosenTile = $event;
+    this.isPartnerTilesChosen = true;
 
     // Determine available colour hints
     if (this.partnerTiles.some(t => t.colour === this.rainbowColour)) {
@@ -233,7 +246,7 @@ export class AppComponent {
     this.closeModal('partner-tile-modal');
 
     // Show end of turn modal
-    this.openModal('end-of-turn-modal');
+    this.showEndOfTurnModal();
   }
 
   onNumberHintButtonClicked(number: number) {
@@ -251,15 +264,16 @@ export class AppComponent {
     this.closeModal('partner-tile-modal');
 
     // Show end of turn modal
-    this.openModal('end-of-turn-modal');
+    this.showEndOfTurnModal();
+  }
+
+  onPartnerTileModalCancelled() {
+    // Unset partner chosen tiles
+    this.isPartnerTilesChosen = false;
   }
 
   onPlayerTileClicked($event) {
     this.chosenTile = $event;
-
-    // Set player tile modal heading
-    let cardIndex = this.playerTiles.indexOf(this.chosenTile);
-    this.playerTileModalHeading = `${this.cardPositions[cardIndex]} Card`;
 
     this.openModal('player-tile-modal');
   }
@@ -327,7 +341,12 @@ export class AppComponent {
     this.closeModal('player-tile-modal');
 
     // Show end of turn modal
-    this.openModal('end-of-turn-modal');
+    this.showEndOfTurnModal();
+  }
+
+  onPlayerTileModalCancelled() {
+    // Unset chosen tile
+    this.chosenTile = null;
   }
 
   onDiscardTileButtonClicked() {
@@ -360,6 +379,6 @@ export class AppComponent {
     this.closeModal('player-tile-modal');
 
     // Show end of turn modal
-    this.openModal('end-of-turn-modal');
+    this.showEndOfTurnModal();
   }
 }

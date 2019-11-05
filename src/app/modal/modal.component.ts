@@ -6,7 +6,9 @@ import {
   OnInit,
   OnChanges,
   OnDestroy,
-  SimpleChanges
+  SimpleChanges,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { ModalService } from '../modal.service';
 
@@ -20,6 +22,8 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
   @Input() isOpen: boolean = false;
   @Input() isFullScreen: boolean = false;
+  @Output() cancelled = new EventEmitter<string>();
+
   private element: any;
   private isInitialized: boolean = false;
 
@@ -37,10 +41,10 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
     // move element to bottom of page (just before </body>) so it can be displayed above everything else
     document.body.appendChild(this.element);
 
-    // close modal on background click
+    // cancel modal on background click
     this.element.addEventListener('click', el => {
       if (el.target.className === 'app-modal') {
-        this.close();
+        this.cancel();
       }
     });
 
@@ -78,5 +82,12 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   close(): void {
     this.element.classList.remove('app-modal-open');
     // document.body.classList.remove('app-modal-open');
+  }
+
+  // cancel modal
+  cancel(): void {
+    this.cancelled && this.cancelled.emit(this.id);
+
+    this.close();
   }
 }

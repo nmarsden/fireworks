@@ -5,16 +5,16 @@ import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
 import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
 
-let standardTiles: Tile[] = [], discardedTiles: Tile[] = [], playerTiles: Tile[] = [];
+let standardTiles: Tile[] = [], discardedTiles: Tile[] = [], standardTilesFullyHinted: Tile[] = [];
 let standardColours = ["red", "white", "green", "yellow", "blue"];
 let rainbowColour = "rainbow";
 let colours = [...standardColours, rainbowColour];
 for (let i=1; i<=5; i++) {
   standardTiles = standardTiles.concat(colours.map(colour => new Tile(colour, i)));
-  playerTiles = playerTiles.concat(colours.map(colour => new Tile(colour, i)));
+  standardTilesFullyHinted = standardTilesFullyHinted.concat(colours.map(colour => new Tile(colour, i)));
 }
 
-playerTiles.forEach(t => {
+standardTilesFullyHinted.forEach(t => {
   standardColours.forEach(c => t.applyHint(TileHint.colourHint(c)));
   t.applyHint(TileHint.numberHint(t.number));
 });
@@ -54,6 +54,7 @@ storiesOf('Tile', module)
     };
   })
   .add('player', () => {
+    let playerTiles = [...standardTilesFullyHinted, new Tile("red", 1)];
     return {
       template: `<div style="display:flex; flex-wrap: wrap">
                     <app-tile style="--main-tile-width:150px;" [displayMode]="'player'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
@@ -66,10 +67,23 @@ storiesOf('Tile', module)
   .add('partner', () => {
     return {
       template: `<div style="display:flex; flex-wrap: wrap;">
-                    <app-tile style="--main-tile-width:150px;" [displayMode]="'partner'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
+                    <app-tile style="--main-tile-width:150px;" [displayMode]="'partner'" *ngFor="let tile of standardTilesFullyHinted" [tile]="tile"></app-tile>
                  </div>`,
       props: {
-        playerTiles
+        standardTilesFullyHinted
+      }
+    };
+  })
+  .add('chosen', () => {
+    return {
+      template: `<div style="display:flex; width:100%; height:100vh; justify-content: center; align-items: center;">
+                   <app-tile style="--main-tile-width:150px;"
+                             [isChosen]="true"    
+                             [displayMode]="'player'" 
+                             [tile]="tile"></app-tile>
+                 </div>`,
+      props: {
+        tile: new Tile("red", 1)
       }
     };
   });
