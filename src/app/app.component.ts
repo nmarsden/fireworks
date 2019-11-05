@@ -215,6 +215,10 @@ export class AppComponent {
     this.openModal('player-ready-modal');
   }
 
+  onEndOfTurnModalCancelled() {
+    this.onEndOfTurnButtonClicked();
+  }
+
   onPartnerTileClicked($event) {
     this.isPartnerTilesChosen = true;
 

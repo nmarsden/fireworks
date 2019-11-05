@@ -23,7 +23,7 @@
     <div class="turn-info">{{ turnInfo }}</div>
   </div>
 </app-modal>
-<app-modal id="end-of-turn-modal">
+<app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
   <div class="modal-body">
     <div class="button-container">
       <div class="button" (click)="onEndOfTurnButtonClicked()">Done</div>
