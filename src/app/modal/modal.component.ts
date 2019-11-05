@@ -22,6 +22,7 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
   @Input() isOpen: boolean = false;
   @Input() isFullScreen: boolean = false;
+  @Input() position: string;
   @Output() cancelled = new EventEmitter<string>();
 
   private element: any;
@@ -43,7 +44,7 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
 
     // cancel modal on background click
     this.element.addEventListener('click', el => {
-      if (el.target.className === 'app-modal') {
+      if (el.target.classList.contains('app-modal')) {
         this.cancel();
       }
     });

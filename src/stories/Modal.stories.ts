@@ -19,18 +19,53 @@ storiesOf('Modal', module)
   )
   .add('initially closed', () => {
     return {
-      template: `<app-modal id="story-modal-1" [isOpen]="isOpen">
-                    <h1>Story Modal</h1>
+      template: `<div style="width:100%; height:100vh; background-color: rgba(255, 255, 255, 0.2);"></div>
+                 <app-modal id="story-modal-closed" [isOpen]="isOpen">
+                     <h1 style="background-color: rgba(255, 255, 255, 0.2); padding: 50px;">Story Modal</h1>
                  </app-modal>`,
       props: {
         isOpen: boolean('isOpen', false)
       }
     };
   })
-  .add('initially open', () => {
+  .add('position center', () => {
     return {
-      template: `<app-modal id="story-modal-2" [isOpen]="isOpen">
-                    <h1>Story Modal</h1>
+      template: `<div style="width:100%; height:100vh; background-color: rgba(255, 255, 255, 0.2);"></div>
+                 <app-modal id="story-modal-center" [isOpen]="isOpen">
+                    <h1 style="background-color: rgba(255, 255, 255, 0.2); padding: 50px;">Story Modal</h1>
+                 </app-modal>`,
+      props: {
+        isOpen: boolean('isOpen', true)
+      }
+    };
+  })
+  .add('position bottom', () => {
+    return {
+      template: `<div style="width:100%; height:100vh; background-color: rgba(255, 255, 255, 0.2);"></div>
+                 <app-modal id="story-modal-bottom" [isOpen]="isOpen" [position]="'bottom'">
+                    <h1 style="background-color: rgba(255, 255, 255, 0.2); padding: 50px;">Story Modal</h1>
+                 </app-modal>`,
+      props: {
+        isOpen: boolean('isOpen', true)
+      }
+    };
+  })
+  .add('position top', () => {
+    return {
+      template: `<div style="width:100%; height:100vh; background-color: rgba(255, 255, 255, 0.2);"></div>
+                 <app-modal id="story-modal-top" [isOpen]="isOpen" [position]="'top'">
+                    <h1 style="background-color: rgba(255, 255, 255, 0.2); padding: 50px;">Story Modal</h1>
+                 </app-modal>`,
+      props: {
+        isOpen: boolean('isOpen', true)
+      }
+    };
+  })
+  .add('fullscreen', () => {
+    return {
+      template: `<div style="width:100%; height:100vh; background-color: rgba(255, 255, 255, 0.2);"></div>
+                 <app-modal id="story-modal-fullscreen" [isOpen]="isOpen" [isFullScreen]="true">
+                    <h1 style="background-color: rgba(255, 255, 255, 0.2); padding: 50px;">Story Modal</h1>
                  </app-modal>`,
       props: {
         isOpen: boolean('isOpen', true)

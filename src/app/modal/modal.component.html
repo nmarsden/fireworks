@@ -1,5 +1,14 @@
-<div class="app-modal">
-  <div class="app-modal-body" [ngClass]="{'is-full-screen' : isFullScreen}">
+<div class="app-modal"
+     [ngClass]="{
+       'is-bottom' : position === 'bottom',
+       'is-top' : position === 'top'
+     }">
+  <div class="app-modal-body"
+       [ngClass]="{
+         'is-bottom' : position === 'bottom',
+         'is-top' : position === 'top',
+         'is-full-screen' : isFullScreen
+       }">
     <ng-content></ng-content>
   </div>
 </div>

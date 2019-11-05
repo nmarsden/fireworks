@@ -3,7 +3,7 @@ app-modal {
   display: block;
   opacity: 0;
   pointer-events: none;
-  transition: opacity ease 0.2s;
+  transition: opacity ease 0.4s;
 
   .app-modal {
     /* modal container fixed across whole screen */
@@ -22,13 +22,28 @@ app-modal {
     /* enables scrolling for tall modals */
     overflow: auto;
 
+    &.is-bottom {
+      align-items: flex-end;
+    }
+
+    &.is-top {
+      align-items: flex-start;
+    }
+
     .app-modal-body {
-      background: var(--background-colour);
       color: rgb(255, 255, 255);
-      outline: 1px solid rgb(255, 255, 255);
       margin: 0 40px;
 
+      &.is-bottom {
+        margin-bottom: var(--main-tile-width);
+      }
+
+      &.is-top {
+        margin-top: var(--main-tile-width);
+      }
+
       &.is-full-screen {
+        background: var(--background-colour);
         margin: 0;
         position: absolute;
         top: 0;

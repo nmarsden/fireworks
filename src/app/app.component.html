@@ -31,8 +31,10 @@
     </div>
   </div>
 </app-modal>
-<app-modal id="partner-tile-modal" [isOpen]="false" (cancelled)="onPartnerTileModalCancelled()">
-  <div class="modal-body">
+<app-modal id="partner-tile-modal"
+           [position]="'top'"
+           (cancelled)="onPartnerTileModalCancelled()">
+  <div class="modal-body top-margin">
     <div class="modal-heading">Give Hint</div>
     <div *ngIf="infoTokens === 0" class="info">There are no hint tokens available</div>
     <div *ngIf="infoTokens > 0" class="options-container">
@@ -50,8 +52,10 @@
     </div>
   </div>
 </app-modal>
-<app-modal id="player-tile-modal" [isOpen]="false" (cancelled)="onPlayerTileModalCancelled()">
-  <div class="modal-body">
+<app-modal id="player-tile-modal"
+           [position]="'bottom'"
+           (cancelled)="onPlayerTileModalCancelled()">
+  <div class="modal-body bottom-margin">
     <div class="button-container">
       <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
       <div class="button" (click)="onDiscardTileButtonClicked()" *ngIf="infoTokens !== 8">Discard</div>
