@@ -173,6 +173,12 @@ export class AppComponent {
   }
 
   onPlayerReadyButtonClicked() {
+    // Prepare for next player's turn
+    // -- swap player & partner tiles
+    let temp = this.playerTiles;
+    this.playerTiles = this.partnerTiles.reverse();
+    this.partnerTiles = temp.reverse();
+
     // Close player ready modal
     this.closeModal('player-ready-modal');
 
@@ -188,10 +194,6 @@ export class AppComponent {
     // -- set current player & waiting player
     this.currentPlayer = (this.currentPlayer+1) % 2;
     this.waitingPlayer = (this.waitingPlayer+1) % 2;
-    // -- swap player & partner tiles
-    let temp = this.playerTiles;
-    this.playerTiles = this.partnerTiles.reverse();
-    this.partnerTiles = temp.reverse();
 
     // Close end of turn modal
     this.closeModal('end-of-turn-modal');
