@@ -34,6 +34,13 @@ body {
   --discarded-tile-one-width: 3.33vw;
   --discarded-tile-info-dot-width: 1vw;
   --discarded-tile-info-dot-margin: 0 0.25vw 0 0.25vw;
+
+  @keyframes pulsate {
+    from { opacity: 0.5; }
+    50% { opacity: 1; }
+    to { opacity: 0.5; }
+  }
+
 }
 
 @media (min-height:150vw) and (orientation: portrait) {
@@ -76,8 +83,3 @@ body {
   }
 }
 
-@keyframes pulsate {
-  from { opacity: 0.5; }
-  50% { opacity: 1; }
-  to { opacity: 0.5; }
-}
