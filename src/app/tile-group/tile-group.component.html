@@ -4,5 +4,6 @@
   <app-tile [displayMode]="displayMode"
             *ngFor="let tile of tiles" [tile]="tile"
             [isChosen]="chosenTile && chosenTile.id === tile.id"
+            [isClickable]="displayMode === 'partner' || displayMode === 'player'"
             (tileClicked)="onTileClicked($event)"></app-tile>
 </div>
