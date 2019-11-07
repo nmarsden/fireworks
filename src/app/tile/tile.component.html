@@ -13,6 +13,7 @@
     'tile-discarded-five': displayMode === 'discarded' && tile.number === 5,
     'tile-empty':         (displayMode === 'played' && tile.number === null) || (displayMode === 'discarded' && tile.colour === null),
     'tile-unknown-number': displayMode === 'player' && tile.possibleNumbers.length > 1,
+    'tile-unknown-colour': displayMode === 'player' && tile.possibleColours.length > 1,
     'tile-red':           (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'red',
     'tile-white':         (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'white',
     'tile-blue':          (displayMode !== 'player' || tile.possibleColours.length === 1) && tile.colour === 'blue',
