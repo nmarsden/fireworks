@@ -27,7 +27,7 @@ storiesOf('Tile Group', module)
   )
   .add('chosen tile', () => {
     return {
-      template: `<div style="display:flex; width:100%; height:100vh; justify-content: center; align-items: center;">
+      template: `<div style="display:flex; flex-direction: column; width:100%; height:100vh; justify-content: space-around; align-items: center;">
                    <app-tile-group [displayMode]="'player'" 
                                    [tiles]="tiles" 
                                    (tileClicked)="chosenTile = $event"
