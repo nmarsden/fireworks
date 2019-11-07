@@ -1,29 +1,22 @@
 :host {
   color: white;
 
-  h1 {
-    font-size: 20px;
-  }
-  h2 {
-    font-size: 15px;
-  }
-
-  .container {
+  .tile-hint {
     display: flex;
     flex-direction: column;
-    outline: 2px solid var(--background-colour);
 
     &.colours-on-bottom {
       flex-direction: column-reverse;
     }
 
-    .colours {
+    .tile-hint-colours {
       display: flex;
 
-      .colour {
-        height: calc(0.1 * var(--main-tile-width));
+      .tile-hint-colour {
+        height: calc(1/6 * var(--main-tile-width));
         width: calc(1/6 * var(--main-tile-width));
         opacity: 0.2;
+        border: 4px solid var(--background-colour);
 
         &.colour-white {
           background-color: var(--colour-white);
@@ -55,15 +48,15 @@
       }
     }
 
-    .numbers {
+    .tile-hint-numbers {
       display: flex;
 
-      .number {
-        height: calc(0.2 * var(--main-tile-width));
+      .tile-hint-number {
+        height: calc(0.25 * var(--main-tile-width));
         width: calc(0.2 * var(--main-tile-width));
 
-        font-size: calc(0.2 * var(--main-tile-width));
-        line-height: calc(0.2 * var(--main-tile-width));
+        font-size: calc(0.15 * var(--main-tile-width));
+        line-height: calc(0.25 * var(--main-tile-width));
         text-align: center;
         opacity: 0.2;
 

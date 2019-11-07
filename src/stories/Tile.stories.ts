@@ -40,7 +40,7 @@ storiesOf('Tile', module)
   .add('played', () => {
     return {
       template: `<div style="display:flex; flex-wrap: wrap">
-                    <app-tile style="--main-tile-width:150px;" [displayMode]="'played'" *ngFor="let tile of standardTiles" [tile]="tile"></app-tile>
+                    <app-tile style="--main-tile-width:120px;" [displayMode]="'played'" *ngFor="let tile of standardTiles" [tile]="tile"></app-tile>
                  </div>`,
       props: {
         standardTiles
@@ -59,7 +59,7 @@ storiesOf('Tile', module)
     let playerTiles = [...standardTilesFullyHinted, new Tile("red", 1)];
     return {
       template: `<div style="display:flex; flex-wrap: wrap">
-                    <app-tile style="--main-tile-width:150px;" [displayMode]="'player'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
+                    <app-tile style="--main-tile-width:120px;" [displayMode]="'player'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>
                  </div>`,
       props: {
         playerTiles
@@ -69,7 +69,7 @@ storiesOf('Tile', module)
   .add('partner', () => {
     return {
       template: `<div style="display:flex; flex-wrap: wrap;">
-                    <app-tile style="--main-tile-width:150px;" [displayMode]="'partner'" *ngFor="let tile of standardTilesFullyHinted" [tile]="tile"></app-tile>
+                    <app-tile style="--main-tile-width:120px;" [displayMode]="'partner'" *ngFor="let tile of standardTilesFullyHinted" [tile]="tile"></app-tile>
                  </div>`,
       props: {
         standardTilesFullyHinted
@@ -82,7 +82,7 @@ storiesOf('Tile', module)
                     <div *ngFor="let displayMode of displayModes"
                          style="display:flex;">
                         <app-tile *ngFor="let tile of tiles"
-                                  style="--main-tile-width:150px;"
+                                  style="--main-tile-width:120px;"
                                   [isChosen]="isChosen"    
                                   [displayMode]="displayMode" 
                                   [tile]="tile"></app-tile>
