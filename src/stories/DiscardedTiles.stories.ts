@@ -36,11 +36,32 @@ storiesOf('Discarded Tiles', module)
       }
     };
   })
+  .add('partial', () => {
+    let partialTiles = [...allTiles].filter((t, i) => Math.floor(3 * Math.random()) === 1);
+    return {
+      template: `<app-discarded-tiles [tiles]="partialTiles"></app-discarded-tiles>`,
+      props: {
+        partialTiles
+      }
+    };
+  })
   .add('full', () => {
     return {
       template: `<app-discarded-tiles [tiles]="allTiles"></app-discarded-tiles>`,
       props: {
         allTiles
+      }
+    };
+  })
+  .add('chosen', () => {
+    let partialTiles = [...allTiles].filter((t, i) => Math.floor(3 * Math.random()) === 1);
+    let chosenTile = partialTiles[Math.floor(partialTiles.length * Math.random())];
+    return {
+      template: `<app-discarded-tiles [tiles]="partialTiles"
+                                      [chosenTile]="chosenTile"></app-discarded-tiles>`,
+      props: {
+        partialTiles,
+        chosenTile
       }
     };
   });

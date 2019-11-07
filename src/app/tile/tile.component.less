@@ -2,41 +2,57 @@
 
   --colour-ish-percentage: 1%;
 
-  font-family: Arial, Helvetica, sans-serif;
-  position: relative;
-
-  .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.4);
-    z-index: 10;
-    opacity: 0;
-    pointer-events: none;
-
-    &.is-overlay-shown {
-      animation: pulsate 2s linear infinite;
-    }
-  }
-
   .tile {
-    height: calc(0.6 * var(--main-tile-width));
-    width: calc(0.8 * var(--main-tile-width));
+    height: calc(0.7 * var(--main-tile-width));
+    width: calc(1 * var(--main-tile-width));
     padding: calc(0.05 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-auto-flow: column;
     opacity: 0.9;
-    outline: 2px solid var(--background-colour);
+    border: 4px solid var(--background-colour);
+    position: relative;
+    overflow: hidden;
+
+    &.is-overlay-shown {
+      border: 4px solid white;
+    }
+
+    &.is-overlay-shown:after {
+      content: '';
+      top: 0;
+      will-change: transform;
+      transform: translateY(-100%);
+      width: 100%;
+      height: calc(0.7 * var(--main-tile-width));
+      position: absolute;
+      z-index: 50;
+      animation: slide 1.6s infinite;
+      background-image: linear-gradient(to top,
+                          rgba(255, 255, 255, 0) 0%,
+                          rgba(255, 255, 255, 0.5) 45%,
+                          rgba(255, 255, 255, 1) 50%,
+                          rgba(255, 255, 255, 0.5) 55%,
+                          rgba(4, 5, 41, 0) 100%);
+    }
+    &.is-overlay-shown.tile-played:after {
+      height: var(--main-tile-width);
+    }
+
+    @keyframes slide {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
 
     &.is-clickable {
-      cursor: pointer;
+      // TODO workout why this causes the tile to flash when clicked
+      //cursor: pointer;
     }
 
     &.tile-played {
-      height: calc(0.8 * var(--played-tile-width));
-      width: calc(0.8 * var(--played-tile-width));
+      height: calc(1 * var(--played-tile-width));
+      width: calc(1 * var(--played-tile-width));
       padding: calc(0.1 * var(--played-tile-width));
 
       &.tile-empty {
@@ -50,7 +66,11 @@
       padding: 0;
       display: block;
       background-color: rgba(255, 255, 255, 0.2);
-      outline: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+
+      &.is-overlay-shown {
+        box-shadow: 0 0 5px 5px white;
+      }
     }
     &.tile-discarded-one {
       width: var(--discarded-tile-one-width);
@@ -77,7 +97,7 @@
 
       .explosion {
         background-color: rgb(0, 0, 0);
-        outline: 1px solid rgb(255, 255, 255);
+        border: 1px solid rgb(255, 255, 255);
       }
       .question-mark:after {
         color: rgb(0, 0, 0);
@@ -135,7 +155,7 @@
       width: 90%;
       margin: 5%;
       background-color: white;
-      outline: 1px solid rgb(0, 0, 0);
+      border: 1px solid rgb(0, 0, 0);
 
       &.explosion-middle {
         grid-column-start: 2;

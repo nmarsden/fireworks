@@ -1,4 +1,3 @@
-<div class="overlay" [ngClass]='{"is-overlay-shown": isChosen}'></div>
 <app-tile-hint *ngIf='displayMode === "player"'
                [includedColours]="tile.hints.includedColours"
                [excludedColours]="tile.hints.excludedColours"
@@ -6,6 +5,7 @@
                [excludedNumbers]="tile.hints.excludedNumbers"></app-tile-hint>
 <div class='tile' (click)="onTileClicked()"
     [ngClass]="{
+    'is-overlay-shown':    isChosen,
     'is-clickable':        isClickable,
     'tile-played':         displayMode === 'played',
     'tile-discarded':      displayMode === 'discarded',

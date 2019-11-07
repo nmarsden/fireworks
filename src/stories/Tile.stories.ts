@@ -4,6 +4,7 @@ import { TileComponent } from '../app/tile/tile.component';
 import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
 import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
+import { withKnobs, boolean } from '@storybook/addon-knobs'
 
 let standardTiles: Tile[] = [], discardedTiles: Tile[] = [], standardTilesFullyHinted: Tile[] = [];
 let standardColours = ["red", "white", "green", "yellow", "blue"];
@@ -26,6 +27,7 @@ discardedTiles.push(new Tile('blue', 4));
 discardedTiles.push(new Tile('rainbow', 5));
 
 storiesOf('Tile', module)
+  .addDecorator(withKnobs)
   .addDecorator(
     moduleMetadata({
       declarations: [
@@ -76,14 +78,20 @@ storiesOf('Tile', module)
   })
   .add('chosen', () => {
     return {
-      template: `<div style="display:flex; width:100%; height:100vh; justify-content: center; align-items: center;">
-                   <app-tile style="--main-tile-width:150px;"
-                             [isChosen]="true"    
-                             [displayMode]="'player'" 
-                             [tile]="tile"></app-tile>
+      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: center; align-items: center;">
+                    <div *ngFor="let displayMode of displayModes"
+                         style="display:flex;">
+                        <app-tile *ngFor="let tile of tiles"
+                                  style="--main-tile-width:150px;"
+                                  [isChosen]="isChosen"    
+                                  [displayMode]="displayMode" 
+                                  [tile]="tile"></app-tile>
+                    </div>
                  </div>`,
       props: {
-        tile: new Tile("red", 1)
+        tiles: [new Tile("white", 1), new Tile("red", 2), new Tile("yellow", 3), new Tile("green", 4), new Tile("blue", 5), new Tile("rainbow", 1)],
+        displayModes: ['played', 'player'],
+        isChosen: boolean('isChosen', true)
       }
     };
   });

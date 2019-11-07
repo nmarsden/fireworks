@@ -8,72 +8,65 @@ import { Tile } from '../tile';
 })
 export class DiscardedTilesComponent implements OnInit, OnChanges {
   @Input() tiles: Tile[];
+  @Input() chosenTile: Tile;
 
   colours: string[] = ["white", "red", "yellow", "green", "blue", "rainbow"];
 
-  fiveTiles:Tile[];
-  fourTiles:Tile[];
-  threeTiles:Tile[];
-  twoTiles:Tile[];
-  oneTiles:Tile[];
+  displayedTiles: Tile[][];
 
   constructor() { }
 
   ngOnInit() {
-    this.updateDisplayedTiles();
+    this.updateDisplayedTiles(this.tiles);
   }
 
-  updateDisplayedTiles() {
-    let countDuplicates = function(arr) {
-      let counts = {"red": 0, "white": 0, "green": 0, "yellow": 0, "blue": 0, "rainbow": 0 };
-      arr.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
-      return counts;
-    };
+  updateDisplayedTiles(tiles: Tile[]) {
+    this.displayedTiles = [[], [], [], [], []];
 
-    let countDuplicateColoursForNumber = function(tiles: Tile[], number: number) {
-      let coloursForNumber = tiles.filter(t => t.number === number).map(t => t.colour);
-      return countDuplicates(coloursForNumber);
-    };
-
-    let createTwoTiles = function(colour: string, number: number, count: number) {
-        if (count === 0) {
-          return [ new Tile(null, number), new Tile(null, number) ];
-        } else if (count === 1) {
-          return [ new Tile(colour, number), new Tile(null, number) ];
-        } else {
-          return [ new Tile(colour, number), new Tile(colour, number) ];
+    // group tiles by number and colour
+    let groupedByNumberAndColour: Map<string, Tile[]>[] = [];
+    for (let i=0; i<5; i++) {
+      let groupedByColour: Map<string, Tile[]> = new Map();
+      this.colours.forEach(c => groupedByColour.set(c, []));
+      tiles.forEach(t => {
+        if (t.number === (i+1)) {
+          groupedByColour.get(t.colour).push(t);
         }
+      });
+      groupedByNumberAndColour.push(groupedByColour);
+    }
+    console.log(groupedByNumberAndColour);
+
+    // populate displayed tiles
+    // -- add tiles
+    let addFillerTiles = (tileRow: Tile[], colour: string, number: number, requiredTotal: number) => {
+      for (let n=0; n < (requiredTotal - groupedByNumberAndColour[number-1].get(colour).length); n++) {
+        tileRow.push(new Tile(null, number));
+      }
     };
-    let createThreeTiles = function(colour: string, number: number, count: number) {
-        if (count === 0) {
-          return [ new Tile(null, number), new Tile(null, number), new Tile(null, number) ];
-        } else if (count === 1) {
-          return [ new Tile(colour, number), new Tile(null, number), new Tile(null, number) ];
-        } else if (count === 2) {
-          return [ new Tile(colour, number), new Tile(colour, number), new Tile(null, number) ];
-        } else {
-          return [ new Tile(colour, number), new Tile(colour, number), new Tile(colour, number) ];
+    // -- add filler tiles
+    this.displayedTiles.forEach((tileRow: Tile[], i:number) => {
+      this.colours.forEach(c => {
+        tileRow.push(...groupedByNumberAndColour[i].get(c));
+        if (i === 0) {
+          addFillerTiles(tileRow, c, 1, 3);
         }
-    };
-
-    let fiveColours = this.tiles.filter(t => t.number === 5).map(t => t.colour);
-    let duplicateColoursForFour = countDuplicateColoursForNumber(this.tiles, 4);
-    let duplicateColoursForThree = countDuplicateColoursForNumber(this.tiles, 3);
-    let duplicateColoursForTwo = countDuplicateColoursForNumber(this.tiles, 2);
-    let duplicateColoursForOne = countDuplicateColoursForNumber(this.tiles, 1);
-
-    this.fiveTiles = this.colours.map(c => fiveColours.includes(c) ? new Tile(c, 5) : new Tile(null, 5));
-    this.fourTiles = [].concat(...this.colours.map(c => createTwoTiles(c, 4, duplicateColoursForFour[c])));
-    this.threeTiles = [].concat(...this.colours.map(c => createTwoTiles(c, 3, duplicateColoursForThree[c])));
-    this.twoTiles = [].concat(...this.colours.map(c => createTwoTiles(c, 2, duplicateColoursForTwo[c])));
-    this.oneTiles = [].concat(...this.colours.map(c => createThreeTiles(c, 1, duplicateColoursForOne[c])));
+        else if (i === 1 || i === 2 || i === 3) {
+          addFillerTiles(tileRow, c, i+1, 2);
+        }
+        else if (i === 4) {
+          addFillerTiles(tileRow, c, 5, 1);
+        }
+      });
+    });
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
     // console.log('discarded-tiles: changes = ', changes);
 
     if (typeof changes.tiles !== 'undefined' && changes.tiles.currentValue && !changes.tiles.firstChange) {
-      this.updateDisplayedTiles();
+      this.updateDisplayedTiles(this.tiles);
     }
 
   }

@@ -26,21 +26,12 @@
   </div>
 </div>
 <div class="discarded-tiles-container">
-  <div class="discarded-tiles">
-    <app-tile [displayMode]="'discarded'" [isClickable]="false" *ngFor="let tile of fiveTiles" [tile]="tile"></app-tile>
-  </div>
-  <div class="discarded-tiles">
-    <app-tile [displayMode]="'discarded'" [isClickable]="false" *ngFor="let tile of fourTiles" [tile]="tile"></app-tile>
-  </div>
-  <div class="discarded-tiles">
-    <app-tile [displayMode]="'discarded'" [isClickable]="false" *ngFor="let tile of threeTiles" [tile]="tile"></app-tile>
-  </div>
-  <div class="discarded-tiles">
-    <app-tile [displayMode]="'discarded'" [isClickable]="false" *ngFor="let tile of twoTiles" [tile]="tile"></app-tile>
-  </div>
-  <div class="discarded-tiles">
-    <app-tile [displayMode]="'discarded'" [isClickable]="false" *ngFor="let tile of oneTiles" [tile]="tile"></app-tile>
-  </div>
+    <div class="discarded-tiles" *ngFor="let index of [4, 3, 2, 1, 0]">
+      <app-tile [displayMode]="'discarded'"
+                [isChosen]="chosenTile && chosenTile.id === tile.id"
+                [isClickable]="false"
+                *ngFor="let tile of displayedTiles[index]" [tile]="tile"></app-tile>
+    </div>
 </div>
 <div class="discarded-tiles-headings">
   <div class="discarded-tiles-heading reverse">

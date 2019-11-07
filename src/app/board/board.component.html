@@ -10,8 +10,11 @@
       <div class="fuse-tokens">{{ fuseTokens }}</div>
     </div>
     <div class="middle-tiles">
-      <app-tile-group [displayMode]="'played'" [tiles]="displayedPlayedTiles"></app-tile-group>
-      <app-discarded-tiles [tiles]="discardedTiles"></app-discarded-tiles>
+      <app-tile-group [displayMode]="'played'"
+                      [chosenTile]="chosenTile"
+                      [tiles]="displayedPlayedTiles"></app-tile-group>
+      <app-discarded-tiles [tiles]="discardedTiles"
+                           [chosenTile]="chosenTile"></app-discarded-tiles>
     </div>
     <div class="remaining-tiles">{{ remainingTiles }}</div>
   </div>

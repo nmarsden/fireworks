@@ -178,7 +178,6 @@ export class AppComponent {
 
   showEndOfTurnModal() {
     // Unset chosen stuff
-    this.chosenTile = null;
     this.isPartnerTilesChosen = false;
 
     // Show end of turn modal
@@ -220,6 +219,7 @@ export class AppComponent {
   }
 
   onPartnerTileClicked($event) {
+    this.chosenTile = null;
     this.isPartnerTilesChosen = true;
 
     // Determine available colour hints

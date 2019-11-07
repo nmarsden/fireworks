@@ -1,9 +1,8 @@
 <div class="tile-group"
      [ngClass]='{"is-played-tiles": displayMode === "played"}'>
-  <div class="overlay" [ngClass]='{"is-overlay-shown": isGroupChosen}'></div>
   <app-tile [displayMode]="displayMode"
             *ngFor="let tile of tiles" [tile]="tile"
-            [isChosen]="chosenTile && chosenTile.id === tile.id"
+            [isChosen]="isGroupChosen || (chosenTile && chosenTile.id === tile.id)"
             [isClickable]="displayMode === 'partner' || displayMode === 'player'"
             (tileClicked)="onTileClicked($event)"></app-tile>
 </div>

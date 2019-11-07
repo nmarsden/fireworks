@@ -23,14 +23,15 @@ export class BoardComponent implements OnInit, OnChanges {
 
   highestPlayedTiles = (playedTiles):Tile[] => {
     let colours: string[] = ["white", "red", "yellow", "green", "blue", "rainbow"];
-    let highestColourNumber = {};
-    colours.forEach(c => highestColourNumber[c] = null);
+    let highestColourNumber: Map<string, Tile> = new Map();
+
+    colours.forEach(c => highestColourNumber.set(c, new Tile(c, null)));
     playedTiles.forEach(t => {
-      if (t.number > highestColourNumber[t.colour]) {
-        highestColourNumber[t.colour] = t.number;
+      if (highestColourNumber.get(t.colour).number === null || (t.number > highestColourNumber.get(t.colour).number)) {
+        highestColourNumber.set(t.colour, t);
       }
     });
-    return colours.map(c => new Tile(c, highestColourNumber[c]));
+    return Array.from(highestColourNumber.values());
   };
 
   constructor() { }
