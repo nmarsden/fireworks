@@ -48,7 +48,8 @@
         }
 
         &.is-chosen {
-          border: 3px solid white;
+          border: 3px solid rgba(255, 255, 255, 1);
+          animation: border-pulsate 1.6s infinite;
         }
 
         &.is-possible {
@@ -72,7 +73,8 @@
         border-radius: 50%;
 
         &.is-chosen {
-          border: 3px solid white;
+          border: 3px solid rgba(255, 255, 255, 1);
+          animation: border-pulsate 1.6s infinite;
         }
 
         &.is-possible {
@@ -81,5 +83,11 @@
       }
 
     }
+  }
+
+  @keyframes border-pulsate {
+    0%   { border-color: rgba(255, 255, 255, 1); }
+    50%  { border-color: rgba(255, 255, 255, 0); }
+    100% { border-color: rgba(255, 255, 255, 1); }
   }
 }
