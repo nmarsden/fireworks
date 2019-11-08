@@ -2,10 +2,12 @@
   color: white;
 
   .tile-hint {
+    width: var(--main-tile-width);
     display: flex;
     flex-direction: column;
-    border-right: 4px solid var(--background-colour);
-    border-left: 4px solid var(--background-colour);
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    outline: 1px solid var(--background-colour);
 
     &.colours-on-bottom {
       flex-direction: column-reverse;
@@ -44,6 +46,10 @@
           background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
         }
 
+        &.is-chosen {
+          border: 4px solid white;
+        }
+
         &.is-possible {
           opacity: 1;
         }
@@ -58,9 +64,14 @@
         width: 100%;
 
         font-size: calc(0.15 * var(--main-tile-width));
-        line-height: calc(0.25 * var(--main-tile-width));
+        line-height: calc(0.2 * var(--main-tile-width));
         text-align: center;
         opacity: 0.2;
+        border: 4px solid var(--background-colour);
+
+        &.is-chosen {
+          border: 4px solid white;
+        }
 
         &.is-possible {
           opacity: 1;

@@ -1,4 +1,6 @@
 <app-tile-hint *ngIf='displayMode === "player"'
+               [chosenColour]="chosenColour === tile.colour ? chosenColour:null"
+               [chosenNumber]="chosenNumber === tile.number ? chosenNumber:null"
                [includedColours]="tile.hints.includedColours"
                [excludedColours]="tile.hints.excludedColours"
                [includedNumbers]="tile.hints.includedNumbers"
@@ -40,6 +42,8 @@
 </div>
 <app-tile-hint *ngIf='displayMode === "partner"'
                [isColoursOnBottom]="true"
+               [chosenColour]="chosenColour === tile.colour ? chosenColour:null"
+               [chosenNumber]="chosenNumber === tile.number ? chosenNumber:null"
                [includedColours]="tile.hints.includedColours"
                [excludedColours]="tile.hints.excludedColours"
                [includedNumbers]="tile.hints.includedNumbers"

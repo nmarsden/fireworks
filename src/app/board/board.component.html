@@ -2,6 +2,8 @@
   <app-tile-group [displayMode]="'partner'"
                   [tiles]="partnerTiles"
                   [isGroupChosen]="isPartnerTilesChosen"
+                  [chosenColour]="partnerTileHintChosen.colour"
+                  [chosenNumber]="partnerTileHintChosen.number"
                   (tileClicked)="onPartnerTileClicked($event)"></app-tile-group>
 
   <div class="middle-container">
@@ -22,5 +24,7 @@
   <app-tile-group [displayMode]="'player'"
                   [tiles]="playerTiles"
                   [chosenTile]="chosenTile"
+                  [chosenColour]="playerTileHintChosen.colour"
+                  [chosenNumber]="playerTileHintChosen.number"
                   (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>
 </div>

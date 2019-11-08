@@ -11,6 +11,8 @@ export class TileComponent implements OnInit {
   @Input() displayMode: string;
   @Input() isChosen: boolean;
   @Input() isClickable: boolean = true;
+  @Input() chosenColour: string;
+  @Input() chosenNumber: number;
   @Output() tileClicked = new EventEmitter<Tile>();
 
   constructor() { }

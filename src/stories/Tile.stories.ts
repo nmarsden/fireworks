@@ -84,6 +84,8 @@ storiesOf('Tile', module)
                         <app-tile *ngFor="let tile of tiles"
                                   style="--main-tile-width:120px;"
                                   [isChosen]="isChosen"    
+                                  [chosenColour]="chosenColour"    
+                                  [chosenNumber]="chosenNumber"    
                                   [displayMode]="displayMode" 
                                   [tile]="tile"></app-tile>
                     </div>
@@ -91,7 +93,9 @@ storiesOf('Tile', module)
       props: {
         tiles: [new Tile("white", 1), new Tile("red", 2), new Tile("yellow", 3), new Tile("green", 4), new Tile("blue", 5), new Tile("rainbow", 1)],
         displayModes: ['played', 'player'],
-        isChosen: boolean('isChosen', true)
+        isChosen: boolean('isChosen', true),
+        chosenColour: 'red',
+        chosenNumber: 3
       }
     };
   });

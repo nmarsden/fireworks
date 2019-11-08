@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Tile } from '../tile';
+import { TileHint } from '../tile-hint';
 
 @Component({
   selector: 'app-board',
@@ -13,6 +14,8 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() playerTiles: Tile[];
   @Input() chosenTile: Tile;
   @Input() isPartnerTilesChosen: boolean;
+  @Input() partnerTileHintChosen: TileHint;
+  @Input() playerTileHintChosen: TileHint;
   @Input() remainingTiles: number;
   @Input() infoTokens: number;
   @Input() fuseTokens: number;

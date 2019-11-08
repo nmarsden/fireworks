@@ -38,16 +38,29 @@ storiesOf('Tile Hint', module)
     const groupId = 'GROUP-ID1';
 
     return {
-      template: `<app-tile-hint style="--main-tile-width:100px;"
-                                [isStoryMode]="isStoryMode"
-                                [includedColours]="includedColours"
-                                [excludedColours]="excludedColours"
-                                [includedNumbers]="includedNumbers"
-                                [excludedNumbers]="excludedNumbers"></app-tile-hint>`,
+      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: space-around; align-items: center; background-color: rgba(255, 255, 255, 0.2);">
+                   <app-tile-hint style="--main-tile-width:200px;"
+                                  [chosenColour]="chosenColour"
+                                  [chosenNumber]="chosenNumber"
+                                  [includedColours]="includedColours"
+                                  [excludedColours]="excludedColours"
+                                  [includedNumbers]="includedNumbers"
+                                  [excludedNumbers]="excludedNumbers"></app-tile-hint>
+                   <app-tile-hint style="--main-tile-width:200px;"
+                                  [chosenColour]="chosenColour"
+                                  [chosenNumber]="chosenNumber"
+                                  [isColoursOnBottom]="true"  
+                                  [includedColours]="includedColours"
+                                  [excludedColours]="excludedColours"
+                                  [includedNumbers]="includedNumbers"
+                                  [excludedNumbers]="excludedNumbers"></app-tile-hint>
+                 </div>`,
       props: {
+        chosenColour: 'red',
+        chosenNumber: 3,
         includedColours: options('includedColours', colourOptions, ['red'], optionsObj, groupId),
         excludedColours: options('excludedColours', colourOptions, [], optionsObj, groupId),
-        includedNumbers: options('includedNumbers', numberOptions, [], optionsObj, groupId),
+        includedNumbers: options('includedNumbers', numberOptions, ['3'], optionsObj, groupId),
         excludedNumbers: options('excludedNumbers', numberOptions, [], optionsObj, groupId),
         isStoryMode: boolean('isStoryMode', true, groupId)
       }

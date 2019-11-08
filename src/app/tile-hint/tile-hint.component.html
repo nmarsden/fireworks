@@ -1,17 +1,60 @@
 <div class="tile-hint" [ngClass]="{ 'colours-on-bottom': isColoursOnBottom }">
   <div class="tile-hint-colours">
-    <div class="tile-hint-colour colour-white" [ngClass]="{ 'is-possible': possibleColours.includes('white') }"></div>
-    <div class="tile-hint-colour colour-red" [ngClass]="{ 'is-possible': possibleColours.includes('red') }"></div>
-    <div class="tile-hint-colour colour-yellow" [ngClass]="{ 'is-possible': possibleColours.includes('yellow') }"></div>
-    <div class="tile-hint-colour colour-green" [ngClass]="{ 'is-possible': possibleColours.includes('green') }"></div>
-    <div class="tile-hint-colour colour-blue" [ngClass]="{ 'is-possible': possibleColours.includes('blue') }"></div>
-    <div class="tile-hint-colour colour-rainbow" [ngClass]="{ 'is-possible': possibleColours.includes('rainbow') }"></div>
+    <div class="tile-hint-colour colour-white"
+         [ngClass]="{
+                      'is-chosen': chosenColour === 'white',
+                      'is-possible': possibleColours.includes('white')
+                    }"></div>
+    <div class="tile-hint-colour colour-red"
+         [ngClass]="{
+                      'is-chosen': chosenColour === 'red',
+                      'is-possible': possibleColours.includes('red')
+                    }"></div>
+    <div class="tile-hint-colour colour-yellow"
+         [ngClass]="{
+                      'is-chosen': chosenColour === 'yellow',
+                      'is-possible': possibleColours.includes('yellow')
+                    }"></div>
+    <div class="tile-hint-colour colour-green"
+         [ngClass]="{
+                      'is-chosen': chosenColour === 'green',
+                      'is-possible': possibleColours.includes('green')
+                    }"></div>
+    <div class="tile-hint-colour colour-blue"
+         [ngClass]="{
+                      'is-chosen': chosenColour === 'blue',
+                      'is-possible': possibleColours.includes('blue')
+                    }"></div>
+    <div class="tile-hint-colour colour-rainbow"
+         [ngClass]="{
+                      'is-possible': possibleColours.includes('rainbow')
+                    }"></div>
   </div>
   <div class="tile-hint-numbers">
-    <div class="tile-hint-number" [ngClass]="{ 'is-possible': possibleNumbers.includes(1) }">1</div>
-    <div class="tile-hint-number" [ngClass]="{ 'is-possible': possibleNumbers.includes(2) }">2</div>
-    <div class="tile-hint-number" [ngClass]="{ 'is-possible': possibleNumbers.includes(3) }">3</div>
-    <div class="tile-hint-number" [ngClass]="{ 'is-possible': possibleNumbers.includes(4) }">4</div>
-    <div class="tile-hint-number" [ngClass]="{ 'is-possible': possibleNumbers.includes(5) }">5</div>
+    <div class="tile-hint-number"
+         [ngClass]="{
+                      'is-chosen': chosenNumber === 1,
+                      'is-possible': possibleNumbers.includes(1)
+                    }">1</div>
+    <div class="tile-hint-number"
+         [ngClass]="{
+                      'is-chosen': chosenNumber === 2,
+                      'is-possible': possibleNumbers.includes(2)
+                    }">2</div>
+    <div class="tile-hint-number"
+         [ngClass]="{
+                      'is-chosen': chosenNumber === 3,
+                      'is-possible': possibleNumbers.includes(3)
+                    }">3</div>
+    <div class="tile-hint-number"
+         [ngClass]="{
+                      'is-chosen': chosenNumber === 4,
+                      'is-possible': possibleNumbers.includes(4)
+                    }">4</div>
+    <div class="tile-hint-number"
+         [ngClass]="{
+                      'is-chosen': chosenNumber === 5,
+                      'is-possible': possibleNumbers.includes(5)
+                    }">5</div>
   </div>
 </div>

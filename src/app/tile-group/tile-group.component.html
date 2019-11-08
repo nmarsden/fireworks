@@ -3,6 +3,8 @@
   <app-tile [displayMode]="displayMode"
             *ngFor="let tile of tiles" [tile]="tile"
             [isChosen]="isGroupChosen || (chosenTile && chosenTile.id === tile.id)"
+            [chosenColour]="chosenColour"
+            [chosenNumber]="chosenNumber"
             [isClickable]="displayMode === 'partner' || displayMode === 'player'"
             (tileClicked)="onTileClicked($event)"></app-tile>
 </div>

@@ -8,6 +8,8 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 export class TileHintComponent implements OnInit, OnChanges {
   @Input() isStoryMode: boolean = false;
   @Input() isColoursOnBottom: boolean = false;
+  @Input() chosenColour: string;
+  @Input() chosenNumber: number;
   @Input() includedColours: string[] = [];
   @Input() excludedColours: string[] = [];
   @Input() includedNumbers: number[] = [];

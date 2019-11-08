@@ -28,6 +28,8 @@ export class AppComponent {
   fuseTokens: number;
   chosenTile: Tile;
   isPartnerTilesChosen: boolean;
+  partnerTileHintChosen: TileHint = TileHint.noHint();
+  playerTileHintChosen: TileHint = TileHint.noHint();
   partnerHintColourOptions: string[];
   partnerHintNumberOptions: number[];
   isGameOver: boolean;
@@ -187,9 +189,13 @@ export class AppComponent {
   onPlayerReadyButtonClicked() {
     // Prepare for next player's turn
     // -- swap player & partner tiles
-    let temp = this.playerTiles;
+    let tempTiles = this.playerTiles;
     this.playerTiles = this.partnerTiles.reverse();
-    this.partnerTiles = temp.reverse();
+    this.partnerTiles = tempTiles.reverse();
+    // -- swap player & partner tile hint
+    let tempTileHint = this.playerTileHintChosen;
+    this.playerTileHintChosen = this.partnerTileHintChosen;
+    this.partnerTileHintChosen = tempTileHint;
 
     // Close player ready modal
     this.closeModal('player-ready-modal');
@@ -219,8 +225,11 @@ export class AppComponent {
   }
 
   onPartnerTileClicked($event) {
-    this.chosenTile = null;
     this.isPartnerTilesChosen = true;
+
+    // Clear chosen tile & hint
+    this.chosenTile = null;
+    this.playerTileHintChosen = TileHint.noHint();
 
     // Determine available colour hints
     if (this.partnerTiles.some(t => t.colour === this.rainbowColour)) {
@@ -237,8 +246,8 @@ export class AppComponent {
 
   onColourHintButtonClicked(colour: string) {
     // Apply colour hint
-    let hint = TileHint.colourHint(colour);
-    this.partnerTiles.forEach(t => t.applyHint(hint));
+    this.partnerTileHintChosen = TileHint.colourHint(colour);
+    this.partnerTiles.forEach(t => t.applyHint(this.partnerTileHintChosen));
 
     // Remove info token
     this.infoTokens--;
@@ -255,8 +264,8 @@ export class AppComponent {
 
   onNumberHintButtonClicked(number: number) {
     // Apply number hint
-    let hint = TileHint.numberHint(number);
-    this.partnerTiles.forEach(t => t.applyHint(hint));
+    this.partnerTileHintChosen = TileHint.numberHint(number);
+    this.partnerTiles.forEach(t => t.applyHint(this.partnerTileHintChosen));
 
     // Remove info token
     this.infoTokens--;
@@ -278,6 +287,9 @@ export class AppComponent {
 
   onPlayerTileClicked($event) {
     this.chosenTile = $event;
+
+    // Clear chosen hint
+    this.playerTileHintChosen = TileHint.noHint();
 
     this.openModal('player-tile-modal');
   }

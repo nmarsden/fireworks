@@ -53,4 +53,30 @@ storiesOf('Tile Group', module)
         chosenTile
       }
     };
+  })
+  .add('chosen colour', () => {
+    return {
+      template: `<div style="display:flex; flex-direction: column; width:100%; height:100vh; justify-content: space-around; align-items: center;">
+                     <app-tile-group [displayMode]="'player'" 
+                                     [tiles]="tiles" 
+                                     [chosenColour]="chosenColour"></app-tile-group>
+                   </div>`,
+      props: {
+        tiles: tiles,
+        chosenColour: 'red'
+      }
+    };
+  })
+  .add('chosen number', () => {
+    return {
+      template: `<div style="display:flex; flex-direction: column; width:100%; height:100vh; justify-content: space-around; align-items: center;">
+                     <app-tile-group [displayMode]="'player'" 
+                                     [tiles]="tiles" 
+                                     [chosenNumber]="chosenNumber"></app-tile-group>
+                   </div>`,
+      props: {
+        tiles: tiles,
+        chosenNumber: 3
+      }
+    };
   });

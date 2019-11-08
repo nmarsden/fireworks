@@ -10,6 +10,8 @@ export class TileGroupComponent implements OnInit {
   @Input() tiles: Tile[];
   @Input() chosenTile: Tile;
   @Input() isGroupChosen: boolean;
+  @Input() chosenColour: string;
+  @Input() chosenNumber: number;
   @Input() displayMode: string;
   @Output() tileClicked = new EventEmitter<Tile>();
 

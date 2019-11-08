@@ -7,6 +7,10 @@ export class TileHint {
     this.number = number;
   }
 
+  static noHint(): TileHint {
+    return new TileHint(null, null);
+  }
+
   static colourHint(colour: string): TileHint {
     return new TileHint(colour, null);
   }
