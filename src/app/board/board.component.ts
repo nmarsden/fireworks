@@ -14,8 +14,8 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() playerTiles: Tile[];
   @Input() chosenTile: Tile;
   @Input() isPartnerTilesChosen: boolean;
-  @Input() partnerTileHintChosen: TileHint;
-  @Input() playerTileHintChosen: TileHint;
+  @Input() partnerTileHintChosen: TileHint = TileHint.noHint();
+  @Input() playerTileHintChosen: TileHint = TileHint.noHint();
   @Input() remainingTiles: number;
   @Input() infoTokens: number;
   @Input() fuseTokens: number;
