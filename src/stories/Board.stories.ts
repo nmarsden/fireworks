@@ -88,11 +88,13 @@ storiesOf('Board', module)
 
     return {
       template: `<app-board [playerTiles]="playerTiles"
+                            [playerTileHintChosen]="playerTileHintChosen"
                             [partnerTiles]="partnerTiles"
                             [playedTiles]="playedTiles"
                             [discardedTiles]="discardedTiles"></app-board>`,
       props: {
         playerTiles: playerTilesWithHints,
+        playerTileHintChosen: TileHint.numberHint(2),
         partnerTiles,
         playedTiles,
         discardedTiles

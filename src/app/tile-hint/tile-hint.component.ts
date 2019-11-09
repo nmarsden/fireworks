@@ -79,6 +79,7 @@ export class TileHintComponent implements OnInit, OnChanges {
     // Handle includedNumbers & excludedNumbers containing strings by converting to numbers
     this.includedNumbers = this.includedNumbers.map(Number);
     this.excludedNumbers = this.excludedNumbers.map(Number);
+    this.chosenNumber = Number(this.chosenNumber);
 
     this.possibleColours = this.calcPossibleColours(this.includedColours, this.excludedColours);
     this.possibleNumbers = this.calcPossibleNumbers(this.includedNumbers, this.excludedNumbers);

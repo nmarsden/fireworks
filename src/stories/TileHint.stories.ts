@@ -31,14 +31,13 @@ storiesOf('Tile Hint', module)
       '4' : '4',
       '5' : '5'
     };
-
-    const optionsObj:OptionsKnobOptions = {
-      display: 'inline-check'
-    };
+    const chosenNumberOptions = {'0' : '0', ...numberOptions};
+    const inlineCheck: OptionsKnobOptions = { display: 'inline-check' };
+    const inlineRadio: OptionsKnobOptions = { display: 'inline-radio' };
     const groupId = 'GROUP-ID1';
 
     return {
-      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: space-around; align-items: center; background-color: rgba(255, 255, 255, 0.2);">
+      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: space-around; align-items: center;">
                    <app-tile-hint style="--main-tile-width:200px;"
                                   [chosenColour]="chosenColour"
                                   [chosenNumber]="chosenNumber"
@@ -56,12 +55,12 @@ storiesOf('Tile Hint', module)
                                   [excludedNumbers]="excludedNumbers"></app-tile-hint>
                  </div>`,
       props: {
-        chosenColour: 'red',
-        chosenNumber: 3,
-        includedColours: options('includedColours', colourOptions, ['red'], optionsObj, groupId),
-        excludedColours: options('excludedColours', colourOptions, [], optionsObj, groupId),
-        includedNumbers: options('includedNumbers', numberOptions, ['3'], optionsObj, groupId),
-        excludedNumbers: options('excludedNumbers', numberOptions, [], optionsObj, groupId),
+        chosenColour: options('chosenColour', colourOptions, 'red', inlineRadio, groupId),
+        chosenNumber: options('chosenNumber', chosenNumberOptions, null, inlineRadio, groupId),
+        includedColours: options('includedColours', colourOptions, ['red'], inlineCheck, groupId),
+        excludedColours: options('excludedColours', colourOptions, [], inlineCheck, groupId),
+        includedNumbers: options('includedNumbers', numberOptions, ['3'], inlineCheck, groupId),
+        excludedNumbers: options('excludedNumbers', numberOptions, [], inlineCheck, groupId),
         isStoryMode: boolean('isStoryMode', true, groupId)
       }
     };

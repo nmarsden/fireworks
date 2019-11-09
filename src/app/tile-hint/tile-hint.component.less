@@ -19,41 +19,75 @@
       .tile-hint-colour {
         height: calc(1/6 * var(--main-tile-width));
         width: 100%;
-        opacity: 0.2;
         border: 3px solid var(--background-colour);
         border-radius: 50%;
 
         &.colour-white {
-          background-color: var(--colour-white);
+          background-color: var(--colour-white-faded);
+
+          &.is-chosen {
+            animation: border-pulsate-white 1.6s infinite;
+          }
+
+          &.is-possible {
+            background-color: var(--colour-white);
+          }
         }
 
         &.colour-red {
-          background-color: var(--colour-red);
+          background-color: var(--colour-red-faded);
+
+          &.is-chosen {
+            animation: border-pulsate-red 1.6s infinite;
+          }
+
+          &.is-possible {
+            background-color: var(--colour-red);
+          }
         }
 
         &.colour-yellow {
-          background-color: var(--colour-yellow);
+          background-color: var(--colour-yellow-faded);
+
+          &.is-chosen {
+            animation: border-pulsate-yellow 1.6s infinite;
+          }
+
+          &.is-possible {
+            background-color: var(--colour-yellow);
+          }
         }
 
         &.colour-green {
-          background-color: var(--colour-green);
+          background-color: var(--colour-green-faded);
+
+          &.is-chosen {
+            animation: border-pulsate-green 1.6s infinite;
+          }
+
+          &.is-possible {
+            background-color: var(--colour-green);
+          }
         }
 
         &.colour-blue {
-          background-color: var(--colour-blue);
+          background-color: var(--colour-blue-faded);
+
+          &.is-chosen {
+            animation: border-pulsate-blue 1.6s infinite;
+          }
+
+          &.is-possible {
+            background-color: var(--colour-blue);
+          }
         }
 
         &.colour-rainbow {
-          background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
-        }
+          background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red-faded), var(--colour-yellow-faded), var(--colour-green-faded), var(--colour-blue-faded));
 
-        &.is-chosen {
-          border: 3px solid rgba(255, 255, 255, 1);
-          animation: border-pulsate 1.6s infinite;
-        }
-
-        &.is-possible {
-          opacity: 1;
+          &.is-possible {
+            background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
+          }
         }
       }
     }
@@ -85,9 +119,29 @@
     }
   }
 
-  @keyframes border-pulsate {
+  @keyframes border-pulsate-white {
     0%   { border-color: rgba(255, 255, 255, 1); }
-    50%  { border-color: rgba(255, 255, 255, 0); }
+    50%  { border-color: var(--colour-white); }
+    100% { border-color: rgba(255, 255, 255, 1); }
+  }
+  @keyframes border-pulsate-red {
+    0%   { border-color: rgba(255, 255, 255, 1); }
+    50%  { border-color: var(--colour-red); }
+    100% { border-color: rgba(255, 255, 255, 1); }
+  }
+  @keyframes border-pulsate-yellow {
+    0%   { border-color: rgba(255, 255, 255, 1); }
+    50%  { border-color: var(--colour-yellow); }
+    100% { border-color: rgba(255, 255, 255, 1); }
+  }
+  @keyframes border-pulsate-green {
+    0%   { border-color: rgba(255, 255, 255, 1); }
+    50%  { border-color: var(--colour-green); }
+    100% { border-color: rgba(255, 255, 255, 1); }
+  }
+  @keyframes border-pulsate-blue {
+    0%   { border-color: rgba(255, 255, 255, 1); }
+    50%  { border-color: var(--colour-blue); }
     100% { border-color: rgba(255, 255, 255, 1); }
   }
 }
