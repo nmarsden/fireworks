@@ -1,4 +1,5 @@
-<app-board [playerTiles]="playerTiles"
+<app-board *ngIf="!isHideBoard"
+           [playerTiles]="playerTiles"
            [partnerTiles]="partnerTiles"
            [playedTiles]="playedTiles"
            [chosenTile]="chosenTile"
@@ -13,7 +14,20 @@
            (playerTileClicked)="onPlayerTileClicked($event)"
            (deckClicked)="onDeckClicked()">
 </app-board>
-<app-modal id="player-ready-modal" [isFullScreen]="true" [isOpen]="true">
+<app-modal id="main-menu-modal"
+           [position]="'bottom'"
+           [isFullScreen]="false"
+           [isOpen]="true">
+  <div class="fireworks-splash">
+    <div class="fireworks-text">Fireworks</div>
+  </div>
+  <div class="modal-body">
+    <div class="button-container">
+      <div class="button" (click)="onStartButtonClicked()">Start</div>
+    </div>
+  </div>
+</app-modal>
+<app-modal id="player-ready-modal" [isFullScreen]="true">
   <div class="modal-body">
     <div *ngIf="!isGameOver" class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
     <div *ngIf="!isGameOver" class="button-container">

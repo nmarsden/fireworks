@@ -33,6 +33,7 @@ export class AppComponent {
   partnerHintColourOptions: string[];
   partnerHintNumberOptions: number[];
   isGameOver: boolean;
+  isHideBoard: boolean = true;
   gameOverHeading: string;
 
   constructor(private modalService: ModalService) { }
@@ -104,6 +105,7 @@ export class AppComponent {
     this.infoTokens = 8;
     this.fuseTokens = 3;
     this.isGameOver = false;
+    this.isHideBoard = true;
 
     // Get all tiles
     let tiles = this.allTiles();
@@ -128,10 +130,10 @@ export class AppComponent {
     //   })
     // });
 
-    // Show player ready modal
+    // Show main menu modal
     // Note: checking isOnInitCalled to workaround an issue with openModal(..) failing during ngOnInit() call
     if (this.isOnInitAlreadyCalled) {
-      this.openModal('player-ready-modal');
+      this.openModal('main-menu-modal');
     }
   }
 
@@ -178,6 +180,14 @@ export class AppComponent {
     this.modalService.close(id);
   }
 
+  onStartButtonClicked() {
+    // Close main menu modal
+    this.closeModal('main-menu-modal');
+
+    // Show player ready modal
+    this.openModal('player-ready-modal');
+  }
+
   showEndOfTurnModal() {
     // Unset chosen stuff
     this.isPartnerTilesChosen = false;
@@ -204,6 +214,8 @@ export class AppComponent {
     if (this.isGameOver) {
       // Start new game
       this.newGame();
+    } else {
+      this.isHideBoard = false;
     }
   }
 
