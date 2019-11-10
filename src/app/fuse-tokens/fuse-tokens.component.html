@@ -1,0 +1,9 @@
+<div class="fuse-tokens">
+  <div class="fuse-token"
+       *ngFor="let num of [1, 2, 3]"
+       [ngClass]="{
+                    'is-available': (num <= tokensRemaining)
+                  }" >
+    <div class="bomb">B</div>
+  </div>
+</div>

@@ -8,8 +8,8 @@
 
   <div class="middle-container">
     <div class="token-container">
-      <div class="info-tokens">{{ infoTokens }}</div>
-      <div class="fuse-tokens">{{ fuseTokens }}</div>
+      <app-info-tokens [tokensRemaining]="infoTokens"></app-info-tokens>
+      <app-fuse-tokens [tokensRemaining]="fuseTokens"></app-fuse-tokens>
     </div>
     <div class="middle-tiles">
       <app-tile-group [displayMode]="'played'"
@@ -18,7 +18,7 @@
       <app-discarded-tiles [tiles]="discardedTiles"
                            [chosenTile]="chosenTile"></app-discarded-tiles>
     </div>
-    <div class="remaining-tiles">{{ remainingTiles }}</div>
+    <app-deck [remainingTiles]="remainingTiles"></app-deck>
   </div>
 
   <app-tile-group [displayMode]="'player'"

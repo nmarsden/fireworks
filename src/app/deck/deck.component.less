@@ -1,0 +1,30 @@
+.deck {
+  height: var(--played-tile-width);
+  width: var(--played-tile-width);
+  position: relative;
+}
+
+.deck-layer {
+  position: absolute;
+  height: var(--played-tile-width);
+  width: var(--played-tile-width);
+  border: 2px solid rgb(255, 255, 255);
+  background-color: var(--background-colour);
+
+  &.layer-number {
+    font-size: calc(0.6 * var(--played-tile-width));
+    line-height: calc(var(--played-tile-width));
+    text-align: center;
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  &.layer-1 {
+    top: -40px;
+    left: -40px;
+  }
+
+  &.layer-2 {
+    top: -20px;
+    left: -20px;
+  }
+}

@@ -9,6 +9,9 @@ import { DiscardedTilesComponent } from './discarded-tiles/discarded-tiles.compo
 import { BoardComponent } from './board/board.component';
 import { TileHintComponent } from './tile-hint/tile-hint.component';
 import { ModalComponent } from './modal/modal.component';
+import { InfoTokensComponent } from './info-tokens/info-tokens.component';
+import { FuseTokensComponent } from './fuse-tokens/fuse-tokens.component';
+import { DeckComponent } from './deck/deck.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { ModalComponent } from './modal/modal.component';
     DiscardedTilesComponent,
     BoardComponent,
     TileHintComponent,
-    ModalComponent
+    ModalComponent,
+    InfoTokensComponent,
+    FuseTokensComponent,
+    DeckComponent
   ],
   imports: [
     BrowserModule,

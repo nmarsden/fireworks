@@ -1,0 +1,9 @@
+<div class="info-tokens">
+  <div class="info-token"
+       *ngFor="let num of [1, 2, 3, 4, 5, 6, 7, 8]"
+       [ngClass]="{
+                    'is-available': (num <= tokensRemaining)
+                  }" >
+    <div class="lightning"></div>
+  </div>
+</div>

@@ -5,6 +5,9 @@ import { DiscardedTilesComponent } from '../app/discarded-tiles/discarded-tiles.
 import { TileGroupComponent } from '../app/tile-group/tile-group.component';
 import { TileComponent } from '../app/tile/tile.component';
 import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
+import { InfoTokensComponent } from '../app/info-tokens/info-tokens.component';
+import { FuseTokensComponent } from '../app/fuse-tokens/fuse-tokens.component';
+import { DeckComponent } from '../app/deck/deck.component';
 import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
 
@@ -50,7 +53,10 @@ storiesOf('Board', module)
         DiscardedTilesComponent,
         TileGroupComponent,
         TileComponent,
-        TileHintComponent
+        TileHintComponent,
+        InfoTokensComponent,
+        FuseTokensComponent,
+        DeckComponent
       ],
       imports: [CommonModule]
     })

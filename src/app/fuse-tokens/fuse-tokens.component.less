@@ -1,0 +1,30 @@
+.fuse-tokens {
+  display: flex;
+
+  .fuse-token {
+    height: calc(0.375 * var(--played-tile-width));
+    width: calc(0.375 * var(--played-tile-width));
+    border: 4px solid var(--background-colour);
+    border-radius: 50%;
+    opacity: 0.2;
+    background-color: rgba(80, 180, 250, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.is-available {
+      opacity: 1;
+    }
+
+    .bomb {
+      height: 100%;
+      width: 100%;
+      font-size: calc(0.3 * var(--played-tile-width));
+      line-height: calc(0.35 * var(--played-tile-width));
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      padding-left: calc(0.02 * var(--played-tile-width));
+    }
+  }
+
+}

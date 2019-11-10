@@ -36,37 +36,14 @@
 .token-container {
   display: flex;
   flex-direction: column;
-}
-.info-tokens {
-  height: var(--played-tile-width);
-  width: var(--played-tile-width);
-  outline: 1px solid rgb(255, 255, 255);
-  font-size: calc(0.6 * var(--played-tile-width));
-  line-height: calc(var(--played-tile-width));
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-}
-.fuse-tokens {
-  height: var(--played-tile-width);
-  width: var(--played-tile-width);
-  outline: 1px solid rgb(255, 255, 255);
-  font-size: calc(0.6 * var(--played-tile-width));
-  line-height: calc(var(--played-tile-width));
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
+  height: calc(2.5 * var(--played-tile-width));
+  width: calc(1.5 * var(--played-tile-width));
+  justify-content: space-evenly;
+  align-items: center;
 }
 .middle-tiles {
   display: flex;
   flex-direction: var(--middle-tiles-flex-direction);
   justify-content: center;
   align-items: center;
-}
-.remaining-tiles {
-  height: var(--played-tile-width);
-  width: var(--played-tile-width);
-  outline: 1px solid rgb(255, 255, 255);
-  font-size: calc(0.6 * var(--played-tile-width));
-  line-height: calc(var(--played-tile-width));
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
 }
