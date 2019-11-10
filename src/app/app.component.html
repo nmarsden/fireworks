@@ -15,11 +15,18 @@
            (deckClicked)="onDeckClicked()">
 </app-board>
 <app-modal id="main-menu-modal"
-           [position]="'bottom'"
+           [position]="'rock-bottom'"
            [isFullScreen]="false"
            [isOpen]="true">
-  <div class="fireworks-splash">
-    <div class="fireworks-text">Fireworks</div>
+  <div class="fireworks-splash" [ngClass]="{ 'is-shown': isHideBoard }">
+    <div class="fireworks-text text-1">FIREWORKS</div>
+    <div class="fireworks-text text-2">FIREWORKS</div>
+    <div class="fireworks-text text-3">FIREWORKS</div>
+    <div class="fireworks-text text-4">FIREWORKS</div>
+    <div class="pyro">
+      <div class="before"></div>
+      <div class="after"></div>
+    </div>
   </div>
   <div class="modal-body">
     <div class="button-container">
@@ -71,7 +78,7 @@
 <app-modal id="player-tile-modal"
            [position]="'bottom'"
            (cancelled)="onPlayerTileModalCancelled()">
-  <div class="modal-body bottom-margin">
+  <div class="modal-body">
     <div class="button-container">
       <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
       <div class="button" (click)="onDiscardTileButtonClicked()" *ngIf="infoTokens !== 8">Discard</div>

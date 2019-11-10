@@ -1,12 +1,13 @@
 <div class="app-modal"
      [ngClass]="{
-       'is-bottom' : position === 'bottom',
-       'is-top' : position === 'top'
+       'is-bottom'      : (position === 'bottom' || position === 'rock-bottom'),
+       'is-top'         : position === 'top'
      }">
   <div class="app-modal-body"
        [ngClass]="{
-         'is-bottom' : position === 'bottom',
-         'is-top' : position === 'top',
+         'is-rock-bottom' : position === 'rock-bottom',
+         'is-bottom'      : position === 'bottom',
+         'is-top'         : position === 'top',
          'is-full-screen' : isFullScreen
        }">
     <ng-content></ng-content>

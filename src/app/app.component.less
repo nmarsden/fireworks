@@ -1,19 +1,117 @@
 .fireworks-splash {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: -1;
 
   .fireworks-text {
-    font-size: calc(1 * var(--main-tile-width));
-    line-height: calc(1 * var(--main-tile-width));
-    margin-bottom: calc(2.5 * var(--main-tile-width));
-    color: var(--colour-white-faded);
+    height: 100%;
+    font-size: calc(1/8 * 100vw);
+    line-height: calc(1/8 * 100vw);
+    font-weight: bold;
+    position: absolute;
+    top: 20vh;
+    opacity: 0;
+  }
+
+  &.is-shown {
+    .fireworks-text {
+
+      &.text-1 {
+        color: rgba(255, 255, 255, 1);
+        opacity: 1;
+      }
+      &.text-2 {
+        color: var(--colour-red-faded);
+        animation: slide-in ease-out 1.8s infinite;
+        animation-delay: 0.2s;
+      }
+      &.text-3 {
+        color: var(--colour-yellow-faded);
+        animation: slide-in ease-out 1.8s infinite;
+        animation-delay: 0.4s;
+      }
+      &.text-4 {
+        color: var(--colour-green-faded);
+        animation: slide-in ease-out 1.8s infinite;
+        animation-delay: 0.6s;
+      }
+    }
+  }
+
+  @keyframes slide-in {
+    0% { transform: translateY(600%) scale(0.5); opacity: 0 }
+    50% { transform: translateY(0) scale(1); opacity: 1 }
+    100% { transform: translateY(0) scale(1); opacity: 1 }
+  }
+
+  .pyro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pyro > .before,
+  .pyro > .after {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff;
+    animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+  }
+
+  .pyro > .after {
+    animation-delay: 1.25s, 1.25s, 1.25s;
+    animation-duration: 1.25s, 1.25s, 6.25s;
+  }
+
+  @keyframes bang {
+    to {
+      box-shadow: 41vw 10.66667vh #6fff00, -49vw -41.33333vh #ff00e1, 49vw -2.33333vh #00aeff, -34vw -19.33333vh #ff000d, -39vw -34.33333vh #ff0044, -28vw -35.33333vh #00ff1a, -18vw -68.33333vh #ff0040, 28vw -38.33333vh #00b7ff, 38vw -78.33333vh #77ff00, 33vw -10.33333vh #09ff00, 2vw 6.66667vh #ff00a6, -16vw -82.33333vh #ff9100, 21vw -35.33333vh darkorange, 21vw -68.33333vh yellow, -19vw -74.33333vh #00ff37, 36vw 9.66667vh #bb00ff, 49vw -69.33333vh #ff5500, -7vw 12.66667vh #00ff51, 35vw -80.33333vh #3700ff, 35vw -58.33333vh #a6ff00, 44vw -7.33333vh #ff00b3, -5vw -58.33333vh #4400ff, 12vw -30.33333vh #0044ff, 49vw -79.33333vh #00ff59, 41vw -10.33333vh #ffb300, -40vw -69.33333vh #0077ff, 7vw -60.33333vh #ff4400, -25vw -41.33333vh #f700ff, -44vw -30.33333vh #008cff, -19vw -27.33333vh #fffb00, 35vw 16.66667vh #00ff80, 42vw -48.33333vh #009dff, 1vw -41.33333vh #ff0033, -43vw -24.33333vh #00ff26, -37vw 5.66667vh #00ff80, -28vw -14.33333vh #00ffb3, 6vw -25.33333vh #ffd500, -15vw -32.33333vh #0077ff, -28vw -52.33333vh lime, -43vw -38.33333vh #009dff, -13vw -76.33333vh #6fff00, 19vw -75.33333vh #0048ff, -38vw -70.33333vh #00ffbf, 43vw -72.33333vh #00d9ff, -10vw -3.33333vh #6a00ff, -5vw -69.33333vh #51ff00, -6vw -12.33333vh #cc00ff, -41vw -10.33333vh #4000ff, 17vw -48.33333vh #00ff55, 25vw 8.66667vh #f7ff00, 14vw -3.33333vh #d9ff00;
+    }
+  }
+
+  @keyframes gravity {
+    to {
+      transform: translateY(200px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes position {
+    0%,
+    19.9% {
+      margin-top: 10%;
+      margin-left: 40%;
+    }
+    20%,
+    39.9% {
+      margin-top: 40%;
+      margin-left: 30%;
+    }
+    40%,
+    59.9% {
+      margin-top: 20%;
+      margin-left: 70%;
+    }
+    60%,
+    79.9% {
+      margin-top: 30%;
+      margin-left: 20%;
+    }
+    80%,
+    99.9% {
+      margin-top: 30%;
+      margin-left: 80%;
+    }
   }
 }
 
