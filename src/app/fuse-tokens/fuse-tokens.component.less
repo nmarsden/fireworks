@@ -19,11 +19,30 @@
     .bomb {
       height: 100%;
       width: 100%;
-      font-size: calc(0.3 * var(--played-tile-width));
-      line-height: calc(0.35 * var(--played-tile-width));
-      color: rgba(255, 255, 255, 0.7);
-      text-align: center;
-      padding-left: calc(0.02 * var(--played-tile-width));
+      position: relative;
+      transform: rotate(35deg);
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        box-shadow: inset calc(0.03 * var(--played-tile-width)) calc(-0.03 * var(--played-tile-width)) calc(0.06 * var(--played-tile-width)) 0 rgb(163, 203, 247);
+        border-radius: 50% 50%;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        height: 30%;
+        width: 0;
+        top: -20%;
+        left: 45%;
+        border: calc(0.01 * var(--played-tile-width)) solid white;
+        border-radius: 20%;
+      }
     }
   }
 
