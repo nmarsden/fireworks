@@ -6,25 +6,85 @@ import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
 import { withKnobs, boolean } from '@storybook/addon-knobs'
 
-let standardTiles: Tile[] = [], discardedTiles: Tile[] = [], standardTilesFullyHinted: Tile[] = [];
 let standardColours = ["red", "white", "green", "yellow", "blue"];
 let rainbowColour = "rainbow";
 let colours = [...standardColours, rainbowColour];
-for (let i=1; i<=5; i++) {
-  standardTiles = standardTiles.concat(colours.map(colour => new Tile(colour, i)));
-  standardTilesFullyHinted = standardTilesFullyHinted.concat(colours.map(colour => new Tile(colour, i)));
-}
 
-standardTilesFullyHinted.forEach(t => {
-  standardColours.forEach(c => t.applyHint(TileHint.colourHint(c)));
-  t.applyHint(TileHint.numberHint(t.number));
-});
+let initStandardTiles = (): Tile[] => {
+  let tiles = [];
+  for (let i=1; i<=5; i++) {
+    tiles = tiles.concat(colours.map(colour => new Tile(colour, i)));
+  }
+  return tiles;
 
-discardedTiles.push(new Tile('yellow', 1));
-discardedTiles.push(new Tile('red', 2));
-discardedTiles.push(new Tile('green', 3));
-discardedTiles.push(new Tile('blue', 4));
-discardedTiles.push(new Tile('rainbow', 5));
+};
+
+let initDiscardedTiles = (): Tile[] => {
+  let tiles = [];
+  tiles.push(new Tile('yellow', 1));
+  tiles.push(new Tile('red', 2));
+  tiles.push(new Tile('green', 3));
+  tiles.push(new Tile('blue', 4));
+  tiles.push(new Tile('rainbow', 5));
+  return tiles;
+};
+
+let initStandardTilesFullyHinted = (): Tile[] => {
+  let tiles = [];
+  for (let i=1; i<=5; i++) {
+    tiles = tiles.concat(colours.map(colour => new Tile(colour, i)));
+  }
+  tiles.forEach(t => {
+    standardColours.forEach(c => t.applyHint(TileHint.colourHint(c)));
+    t.applyHint(TileHint.numberHint(t.number));
+  });
+  return tiles;
+};
+
+let initStandardTilesPartiallyHinted = (): Tile[] => {
+  let tiles = [];
+  for (let i=0; i<=5; i++) {
+    tiles = tiles.concat(standardColours.map(colour => {
+      let tile = new Tile(colour, i);
+      if (i > 0) {
+        tile.applyHint(TileHint.numberHint(i));
+      }
+      tile.applyHint(TileHint.colourHint(colour));
+      return tile;
+    }));
+  }
+  return tiles;
+};
+
+let initPlayerTiles = (standardTilesFullyHinted: Tile[], standardTilesPartiallyHinted: Tile[]): Tile[] => {
+  let playerTiles = [];
+
+  // unknown numbers & known colours
+  colours.forEach((c) => {
+    let tile = new Tile(c, 1);
+    standardColours.forEach(c => tile.applyHint(TileHint.colourHint(c)));
+    playerTiles.push(tile);
+  });
+  // known numbers & known colours
+  playerTiles.push(...standardTilesFullyHinted);
+  // unknown number & unknown colour
+  playerTiles.push(new Tile("red", 1));
+  // known number & unknown colours
+  for (let i=1; i<=5; i++) {
+    let tile = new Tile('red', i);
+    tile.applyHint(TileHint.numberHint(i));
+    playerTiles.push(tile);
+  }
+  // known numbers & partial known colours
+  playerTiles.push(...standardTilesPartiallyHinted);
+  return playerTiles;
+};
+
+let standardTiles = initStandardTiles();
+let discardedTiles = initDiscardedTiles();
+let standardTilesFullyHinted = initStandardTilesFullyHinted();
+let standardTilesPartiallyHinted = initStandardTilesPartiallyHinted();
+let playerTiles = initPlayerTiles(standardTilesFullyHinted, standardTilesPartiallyHinted);
 
 storiesOf('Tile', module)
   .addDecorator(withKnobs)
@@ -56,7 +116,6 @@ storiesOf('Tile', module)
     };
   })
   .add('player', () => {
-    let playerTiles = [...standardTilesFullyHinted, new Tile("red", 1)];
     return {
       template: `<div style="display:flex; flex-wrap: wrap">
                     <app-tile style="--main-tile-width:120px;" [displayMode]="'player'" *ngFor="let tile of playerTiles" [tile]="tile"></app-tile>

@@ -2,6 +2,40 @@
 
   --colour-ish-percentage: 1%;
 
+  .tile-half-overlay {
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: calc(0.64 * var(--main-tile-width)) calc(0.95 * var(--main-tile-width)) 0 0;
+    }
+
+    &.tile-half-red:before {
+      border-color: var(--colour-red) transparent transparent transparent;
+    }
+
+    &.tile-half-white:before {
+      border-color: var(--colour-white) transparent transparent transparent;
+    }
+
+    &.tile-half-green:before {
+      border-color: var(--colour-green) transparent transparent transparent;
+    }
+
+    &.tile-half-blue:before {
+      border-color: var(--colour-blue) transparent transparent transparent;
+    }
+
+    &.tile-half-yellow:before {
+      border-color: var(--colour-yellow) transparent transparent transparent;
+    }
+  }
+
   .tile {
     height: calc(0.7 * var(--main-tile-width));
     width: calc(1 * var(--main-tile-width));
@@ -22,6 +56,7 @@
     &.is-overlay-shown:after {
       content: '';
       top: 0;
+      left: 0;
       will-change: transform;
       transform: translateY(-100%);
       width: 100%;
@@ -83,7 +118,11 @@
     }
 
     &.tile-unknown-colour {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.3);
+
+      .explosion {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
     }
 
     &.tile-red {
@@ -94,14 +133,6 @@
     }
     &.tile-white {
       background-color: var(--colour-white);
-
-      .explosion {
-        background-color: rgb(0, 0, 0);
-        border: 1px solid rgb(255, 255, 255);
-      }
-      .question-mark:after {
-        color: rgb(0, 0, 0);
-      }
     }
     &.tile-white-ish {
       background-image: linear-gradient(var(--colour-white) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
@@ -127,6 +158,9 @@
     &.tile-rainbow {
       background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
     }
+    &.tile-half-rainbow {
+      background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
+    }
     &.tile-unknown-number {
       height: calc(0.7 * var(--main-tile-width));
       width: var(--main-tile-width);
@@ -139,10 +173,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: absolute;
+      width: 100%;
     }
     .question-mark:after {
       content: '?';
-      color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.1);
       -webkit-text-stroke: 1px rgb(0, 0, 0);
       font-size: calc(0.6 * var(--main-tile-width));
       line-height: calc(0.6 * var(--main-tile-width));
@@ -154,7 +190,8 @@
       height: 90%;
       width: 90%;
       margin: 5%;
-      background-color: white;
+      z-index: 100;
+      background-color: rgba(100, 100, 100, 0.2);
       border: 1px solid rgb(0, 0, 0);
 
       &.explosion-middle {
