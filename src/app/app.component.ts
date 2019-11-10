@@ -397,4 +397,18 @@ export class AppComponent {
     // Show end of turn modal
     this.showEndOfTurnModal();
   }
+
+  onDeckClicked() {
+    this.openModal('quit-game-modal');
+  }
+
+  onQuitGameYesButtonClicked() {
+    this.closeModal('quit-game-modal');
+
+    this.newGame();
+  }
+
+  onQuitGameNoButtonClicked() {
+    this.closeModal('quit-game-modal');
+  }
 }

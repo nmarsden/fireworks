@@ -21,6 +21,7 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() fuseTokens: number;
   @Output() partnerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileClicked = new EventEmitter<Tile>();
+  @Output() deckClicked = new EventEmitter<string>();
 
   displayedPlayedTiles:Tile[];
 
@@ -57,5 +58,9 @@ export class BoardComponent implements OnInit, OnChanges {
 
   onPartnerTileClicked($event) {
     this.partnerTileClicked.emit($event);
+  }
+
+  onDeckClicked($event) {
+    this.deckClicked.emit($event);
   }
 }

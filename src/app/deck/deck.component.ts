@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-deck',
@@ -7,10 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DeckComponent implements OnInit {
   @Input() remainingTiles;
+  @Output() clicked = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onClicked() {
+    this.clicked.emit('');
+  }
 }

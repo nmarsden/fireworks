@@ -10,7 +10,8 @@
            [infoTokens]="infoTokens"
            [fuseTokens]="fuseTokens"
            (partnerTileClicked)="onPartnerTileClicked($event)"
-           (playerTileClicked)="onPlayerTileClicked($event)">
+           (playerTileClicked)="onPlayerTileClicked($event)"
+           (deckClicked)="onDeckClicked()">
 </app-board>
 <app-modal id="player-ready-modal" [isFullScreen]="true" [isOpen]="true">
   <div class="modal-body">
@@ -60,6 +61,15 @@
     <div class="button-container">
       <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
       <div class="button" (click)="onDiscardTileButtonClicked()" *ngIf="infoTokens !== 8">Discard</div>
+    </div>
+  </div>
+</app-modal>
+<app-modal id="quit-game-modal">
+  <div class="modal-body">
+    <div class="modal-heading">Quit?</div>
+    <div class="button-container">
+      <div class="button" (click)="onQuitGameYesButtonClicked()">Yes</div>
+      <div class="button" (click)="onQuitGameNoButtonClicked()">No</div>
     </div>
   </div>
 </app-modal>
