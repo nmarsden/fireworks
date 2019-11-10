@@ -1,14 +1,24 @@
+.deck-container {
+  height: calc(1.5 * var(--played-tile-width));
+  width: calc(1.5 * var(--played-tile-width));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .deck {
   height: var(--played-tile-width);
   width: var(--played-tile-width);
   position: relative;
+  top: calc(0.2 * var(--played-tile-width));
+  left: calc(0.2 * var(--played-tile-width));
 }
 
 .deck-layer {
   position: absolute;
   height: var(--played-tile-width);
   width: var(--played-tile-width);
-  border: 2px solid rgb(255, 255, 255);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   background-color: var(--background-colour);
 
   &.layer-number {
@@ -19,12 +29,12 @@
   }
 
   &.layer-1 {
-    top: -40px;
-    left: -40px;
+    top: calc(-0.2 * var(--played-tile-width));
+    left: calc(-0.2 * var(--played-tile-width));
   }
 
   &.layer-2 {
-    top: -20px;
-    left: -20px;
+    top: calc(-0.1 * var(--played-tile-width));
+    left: calc(-0.1 * var(--played-tile-width));
   }
 }
