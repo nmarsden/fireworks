@@ -23,12 +23,12 @@ let partnerTiles:Tile[] = [
   new Tile("red", 3),
   new Tile("blue", 2),
   new Tile("yellow", 1),
-  new Tile("white", 5),
+  new Tile("white", 4),
   new Tile("rainbow", 1)
 ];
 
 let playedTiles:Tile[] = [
-  new Tile(null, null),
+  new Tile("white", null),
   new Tile("red", 1),
   new Tile("yellow", 2),
   new Tile("green", 3),
@@ -66,7 +66,10 @@ storiesOf('Board', module)
       template: `<app-board [playerTiles]="noTiles"
                             [partnerTiles]="noTiles"
                             [playedTiles]="noTiles"
-                            [discardedTiles]="noTiles"></app-board>`,
+                            [discardedTiles]="noTiles"
+                            [remainingTiles]="60"
+                            [infoTokens]="8"
+                            [fuseTokens]="3"></app-board>`,
       props: {
         noTiles: []
       }
@@ -77,7 +80,10 @@ storiesOf('Board', module)
       template: `<app-board [playerTiles]="playerTiles"
                             [partnerTiles]="partnerTiles"
                             [playedTiles]="noTiles"
-                            [discardedTiles]="noTiles"></app-board>`,
+                            [discardedTiles]="noTiles"
+                            [remainingTiles]="50"
+                            [infoTokens]="8"
+                            [fuseTokens]="3"></app-board>`,
       props: {
         noTiles: [],
         playerTiles,
@@ -92,16 +98,25 @@ storiesOf('Board', module)
     playerTilesWithHints.forEach(t => t.applyHint(TileHint.numberHint(2)));
     playerTilesWithHints.forEach(t => t.applyHint(TileHint.numberHint(5)));
 
+    let partnerTilesWithHints = partnerTiles.map(t => new Tile(t.colour, t.number));
+    partnerTilesWithHints.forEach(t => t.applyHint(TileHint.numberHint(1)));
+    partnerTilesWithHints.forEach(t => t.applyHint(TileHint.numberHint(2)));
+    partnerTilesWithHints.forEach(t => t.applyHint(TileHint.colourHint('yellow')));
+    partnerTilesWithHints.forEach(t => t.applyHint(TileHint.colourHint('blue')));
+
     return {
       template: `<app-board [playerTiles]="playerTiles"
                             [playerTileHintChosen]="playerTileHintChosen"
                             [partnerTiles]="partnerTiles"
                             [playedTiles]="playedTiles"
-                            [discardedTiles]="discardedTiles"></app-board>`,
+                            [discardedTiles]="discardedTiles"
+                            [remainingTiles]="38"
+                            [infoTokens]="5"
+                            [fuseTokens]="2"></app-board>`,
       props: {
         playerTiles: playerTilesWithHints,
         playerTileHintChosen: TileHint.numberHint(2),
-        partnerTiles,
+        partnerTiles: partnerTilesWithHints,
         playedTiles,
         discardedTiles
       }
