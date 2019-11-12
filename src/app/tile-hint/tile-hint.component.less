@@ -107,8 +107,7 @@
         border-radius: 50%;
 
         &.is-chosen {
-          border: 3px solid rgba(255, 255, 255, 1);
-          animation: border-pulsate 1.6s infinite;
+          animation: border-pulsate-white 1.6s infinite;
         }
 
         &.is-possible {
@@ -121,7 +120,7 @@
 
   @keyframes border-pulsate-white {
     0%   { border-color: rgba(255, 255, 255, 1); }
-    50%  { border-color: var(--colour-white); }
+    50%  { border-color: var(--background-colour); }
     100% { border-color: rgba(255, 255, 255, 1); }
   }
   @keyframes border-pulsate-red {
