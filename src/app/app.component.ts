@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Tile } from './tile';
 import { TileHint } from './tile-hint';
 import { ModalService } from './modal.service';
@@ -91,8 +91,18 @@ export class AppComponent {
   };
 
   ngOnInit() {
+    this.setVhAccordingToWindowInnerHeight();
+
     this.newGame();
     this.isOnInitAlreadyCalled = true;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  setVhAccordingToWindowInnerHeight() {
+    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 
   newGame() {
