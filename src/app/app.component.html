@@ -23,14 +23,23 @@
            [isFullScreen]="false"
            [isOpen]="true">
   <div class="fireworks-splash" [ngClass]="{ 'is-shown': isHideBoard }">
-    <div class="fireworks-text text-1">FIREWORKS</div>
-    <div class="fireworks-text text-2">FIREWORKS</div>
-    <div class="fireworks-text text-3">FIREWORKS</div>
-    <div class="fireworks-text text-4">FIREWORKS</div>
-    <div class="pyro">
-      <div class="before"></div>
-      <div class="after"></div>
+    <!-- ★ ☆ -->
+    <div class="star-background">
+      <div class="star"
+           [ngClass]="{ 'star-sparkle': (j % 3 === 0) }"
+           *ngFor="let i of [].constructor(80); index as j">☆</div>
     </div>
+    <div class="star-background background-2">
+      <div class="star"
+           [ngClass]="{ 'star-sparkle': (j % 6 === 0) }"
+           *ngFor="let i of [].constructor(80); index as j">☆</div>
+    </div>
+    <div class="star-background background-3">
+      <div class="star"
+           [ngClass]="{ 'star-sparkle': (j % 10 === 0) }"
+           *ngFor="let i of [].constructor(80); index as j">☆</div>
+    </div>
+    <div class="fireworks-rainbow-text">FIREWORKS</div>
   </div>
   <div class="modal-body">
     <div class="button-container">
