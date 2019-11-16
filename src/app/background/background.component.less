@@ -1,0 +1,70 @@
+.background-container {
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: -1;
+
+  .star-background {
+    width: 110%;
+    height: calc(var(--vh, 1vh) * 100);
+    position: fixed;
+    top: calc(-0.25 * var(--main-tile-width));
+    left: calc(-0.25 * var(--main-tile-width));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    animation: side-to-side ease-in-out 3s alternate-reverse infinite;
+
+    animation-delay: -2s;
+
+    .star {
+      color: white;
+      font-size: calc(0.5 * var(--main-tile-width));
+      line-height: calc(1 * var(--main-tile-width));
+      font-weight: bold;
+      text-align: center;
+      width: calc(1 * var(--main-tile-width));
+
+      opacity: 0.05;
+
+      &.star-sparkle {
+        animation: sparkle ease-in-out 4s alternate infinite;
+      }
+    }
+
+    &.background-2 {
+      animation-delay: -1s;
+
+      .star {
+        font-size: calc(0.75 * var(--main-tile-width));
+        line-height: calc(1.25 * var(--main-tile-width));
+        width: calc(1.25 * var(--main-tile-width));
+      }
+    }
+
+    &.background-3 {
+      animation-delay: 0s;
+      .star {
+        font-size: calc(1.3 * var(--main-tile-width));
+        line-height: calc(1.5 * var(--main-tile-width));
+        width: calc(1.5 * var(--main-tile-width));
+      }
+    }
+  }
+
+  @keyframes side-to-side {
+    0%   { transform: translateX(calc(-0.25 * var(--main-tile-width))) }
+    100% { transform: translateX(calc(0.25 * var(--main-tile-width))) }
+  }
+
+  @keyframes sparkle {
+    0%   { opacity: 0 }
+    100% { opacity: 0.5 }
+  }
+}

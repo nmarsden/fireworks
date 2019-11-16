@@ -1,84 +1,16 @@
-.fireworks-splash {
-  width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
-  position: fixed;
-  top: 0;
+.fireworks-rainbow-text {
+  width: 100%;
+  font-size: calc(1/8 * 100vw);
+  line-height: calc(1/8 * 100vw);
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 20vh;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  z-index: -1;
 
-  .fireworks-rainbow-text {
-    height: 100%;
-    font-size: calc(1/8 * 100vw);
-    line-height: calc(1/8 * 100vw);
-    font-weight: bold;
-    position: absolute;
-    top: 20vh;
-
-    background-image: linear-gradient(to right, var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-
-  .star-background {
-    width: 110%;
-    height: calc(var(--vh, 1vh) * 100);
-    position: fixed;
-    top: calc(-0.25 * var(--main-tile-width));
-    left: calc(-0.25 * var(--main-tile-width));
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-    animation: side-to-side ease-in-out 3s alternate-reverse infinite;
-
-    animation-delay: -2s;
-
-    .star {
-      font-size: calc(0.5 * var(--main-tile-width));
-      line-height: calc(1 * var(--main-tile-width));
-      font-weight: bold;
-      text-align: center;
-      width: calc(1 * var(--main-tile-width));
-
-      opacity: 0.05;
-
-      &.star-sparkle {
-        animation: sparkle ease-in-out 4s alternate infinite;
-      }
-    }
-
-    &.background-2 {
-      animation-delay: -1s;
-
-      .star {
-        font-size: calc(0.75 * var(--main-tile-width));
-        line-height: calc(1.25 * var(--main-tile-width));
-        width: calc(1.25 * var(--main-tile-width));
-      }
-    }
-
-    &.background-3 {
-      animation-delay: 0s;
-      .star {
-        font-size: calc(1.3 * var(--main-tile-width));
-        line-height: calc(1.5 * var(--main-tile-width));
-        width: calc(1.5 * var(--main-tile-width));
-      }
-    }
-  }
-
-  @keyframes side-to-side {
-    0%   { transform: translateX(calc(-0.25 * var(--main-tile-width))) }
-    100% { transform: translateX(calc(0.25 * var(--main-tile-width))) }
-  }
-
-  @keyframes sparkle {
-    0%   { opacity: 0 }
-    100% { opacity: 0.5 }
-  }
+  background-image: linear-gradient(to right, var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .modal-body {

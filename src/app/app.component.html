@@ -1,4 +1,4 @@
-<app-board *ngIf="!isHideBoard"
+<app-board [isHidden]="isHideBoard"
            [playerTiles]="playerTiles"
            [partnerTiles]="partnerTiles"
            [playedTiles]="playedTiles"
@@ -22,32 +22,15 @@
            [position]="'rock-bottom'"
            [isFullScreen]="false"
            [isOpen]="true">
-  <div class="fireworks-splash" [ngClass]="{ 'is-shown': isHideBoard }">
-    <!-- ★ ☆ -->
-    <div class="star-background">
-      <div class="star"
-           [ngClass]="{ 'star-sparkle': (j % 3 === 0) }"
-           *ngFor="let i of [].constructor(80); index as j">☆</div>
-    </div>
-    <div class="star-background background-2">
-      <div class="star"
-           [ngClass]="{ 'star-sparkle': (j % 6 === 0) }"
-           *ngFor="let i of [].constructor(80); index as j">☆</div>
-    </div>
-    <div class="star-background background-3">
-      <div class="star"
-           [ngClass]="{ 'star-sparkle': (j % 10 === 0) }"
-           *ngFor="let i of [].constructor(80); index as j">☆</div>
-    </div>
-    <div class="fireworks-rainbow-text">FIREWORKS</div>
-  </div>
+  <div class="fireworks-rainbow-text">FIREWORKS</div>
   <div class="modal-body">
     <div class="button-container">
       <div class="button" (click)="onStartButtonClicked()">Start</div>
     </div>
   </div>
+  <app-background></app-background>
 </app-modal>
-<app-modal id="player-ready-modal" [isFullScreen]="true">
+<app-modal id="player-ready-modal" [isFullScreen]="false">
   <div class="modal-body">
     <div *ngIf="!isGameOver" class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
     <div *ngIf="!isGameOver" class="button-container">
@@ -59,6 +42,7 @@
     </div>
     <div class="turn-info">{{ turnInfo }}</div>
   </div>
+  <app-background></app-background>
 </app-modal>
 <app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
   <div class="modal-body">

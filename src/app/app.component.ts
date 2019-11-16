@@ -237,6 +237,9 @@ export class AppComponent {
     this.currentPlayer = (this.currentPlayer+1) % 2;
     this.waitingPlayer = (this.waitingPlayer+1) % 2;
 
+    // Hide board
+    this.isHideBoard = true;
+
     // Close end of turn modal
     this.closeModal('end-of-turn-modal');
 

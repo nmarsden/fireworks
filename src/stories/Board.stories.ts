@@ -1,4 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { withKnobs, boolean } from '@storybook/addon-knobs'
 import { CommonModule } from '@angular/common';
 import { BoardComponent } from '../app/board/board.component';
 import { DiscardedTilesComponent } from '../app/discarded-tiles/discarded-tiles.component';
@@ -8,6 +9,7 @@ import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
 import { InfoTokensComponent } from '../app/info-tokens/info-tokens.component';
 import { FuseTokensComponent } from '../app/fuse-tokens/fuse-tokens.component';
 import { DeckComponent } from '../app/deck/deck.component';
+import { BackgroundComponent } from '../app/background/background.component';
 import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
 
@@ -46,6 +48,7 @@ let discardedTiles:Tile[] = [
 ];
 
 storiesOf('Board', module)
+  .addDecorator(withKnobs)
   .addDecorator(
     moduleMetadata({
       declarations: [
@@ -56,7 +59,8 @@ storiesOf('Board', module)
         TileHintComponent,
         InfoTokensComponent,
         FuseTokensComponent,
-        DeckComponent
+        DeckComponent,
+        BackgroundComponent
       ],
       imports: [CommonModule]
     })
@@ -119,6 +123,24 @@ storiesOf('Board', module)
         partnerTiles: partnerTilesWithHints,
         playedTiles,
         discardedTiles
+      }
+    };
+  })
+  .add('hide/show', () => {
+    return {
+      template: `<app-board [isHidden]="isHidden" 
+                            [playerTiles]="playerTiles"
+                            [partnerTiles]="partnerTiles"
+                            [playedTiles]="noTiles"
+                            [discardedTiles]="noTiles"
+                            [remainingTiles]="50"
+                            [infoTokens]="8"
+                            [fuseTokens]="3"></app-board>`,
+      props: {
+        isHidden: boolean('isHidden', false),
+        noTiles: [],
+        playerTiles,
+        partnerTiles,
       }
     };
   });

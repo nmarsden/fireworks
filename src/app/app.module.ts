@@ -12,6 +12,7 @@ import { ModalComponent } from './modal/modal.component';
 import { InfoTokensComponent } from './info-tokens/info-tokens.component';
 import { FuseTokensComponent } from './fuse-tokens/fuse-tokens.component';
 import { DeckComponent } from './deck/deck.component';
+import { BackgroundComponent } from './background/background.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DeckComponent } from './deck/deck.component';
     ModalComponent,
     InfoTokensComponent,
     FuseTokensComponent,
-    DeckComponent
+    DeckComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,

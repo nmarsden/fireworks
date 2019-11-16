@@ -21,6 +21,7 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() fuseTokens: number;
   @Input() isShowPartnerHints: boolean = true;
   @Input() isShowPlayerHints: boolean = true;
+  @Input() isHidden: boolean = false;
   @Output() partnerTileHintClicked = new EventEmitter();
   @Output() playerTileHintClicked = new EventEmitter();
   @Output() partnerTileClicked = new EventEmitter<Tile>();

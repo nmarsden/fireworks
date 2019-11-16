@@ -6,6 +6,12 @@
   width: 100vw;
   grid-gap: 0;
   justify-items: center;
+  opacity: 0;
+
+  &.is-show-page {
+    opacity: 1;
+    transition: opacity ease 0.4s;
+  }
 }
 .page:before {
   content: "";
@@ -46,4 +52,19 @@
   flex-direction: var(--middle-tiles-flex-direction);
   justify-content: center;
   align-items: center;
+}
+.board-hidden-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-colour);
+  opacity: 0;
+  pointer-events: none;
+
+  &.is-show-hidden-overlay {
+    opacity: 1;
+    transition: opacity ease 0.4s;
+  }
 }

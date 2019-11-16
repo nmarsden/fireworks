@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" [ngClass]="{ 'is-show-page': !isHidden }">
   <app-tile-group [displayMode]="'partner'"
                   [tiles]="partnerTiles"
                   [isGroupChosen]="isPartnerTilesChosen"
@@ -32,4 +32,7 @@
                   [isShowHints]="isShowPlayerHints"
                   (tileHintClicked)="onPlayerTileHintClicked($event)"
                   (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>
+
+  <app-background [isSparkling]="false"></app-background>
 </div>
+<div class='board-hidden-overlay' [ngClass]="{ 'is-show-hidden-overlay': isHidden }"></div>
