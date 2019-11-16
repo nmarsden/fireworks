@@ -26,8 +26,12 @@
 
   background-color: rgba(64, 59, 92, 0.76);
 
+  &.no-padding {
+    padding: unset;
+  }
+
   .modal-heading {
-    margin-bottom: calc(0.1 * var(--main-tile-width));
+    margin-bottom: calc(0.3 * var(--main-tile-width));
   }
 
   .info {
@@ -96,13 +100,16 @@
   .button-container {
     display: flex;
 
-    .button {
-      border: 1px solid rgb(255, 255, 255);
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: calc(0.1 * var(--main-tile-width));
-      margin: calc(0.1 * var(--main-tile-width));
-      cursor: pointer;
+    .button+.button{
+      margin-left: calc(0.1 * var(--main-tile-width));
     }
+  }
+
+  .button {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: calc(0.1 * var(--main-tile-width));
+    cursor: pointer;
   }
 
   .turn-info {
