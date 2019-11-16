@@ -54,32 +54,35 @@
     &:before {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: calc(0.64 * var(--main-tile-width)) calc(0.95 * var(--main-tile-width)) 0 0;
+      border: 2px solid var(--background-colour);
+
+      height: calc(0.7 * var(--main-tile-width));
+      width: calc(2 * var(--main-tile-width));
+
+      transform-origin: bottom left;
+      transform: rotate(-34deg);
     }
 
     &.tile-half-red:before {
-      border-color: var(--colour-red) transparent transparent transparent;
+      background-color: var(--colour-red);
     }
 
     &.tile-half-white:before {
-      border-color: var(--colour-white) transparent transparent transparent;
+      background-color: var(--colour-white);
     }
 
     &.tile-half-green:before {
-      border-color: var(--colour-green) transparent transparent transparent;
+      background-color: var(--colour-green);
     }
 
     &.tile-half-blue:before {
-      border-color: var(--colour-blue) transparent transparent transparent;
+      background-color: var(--colour-blue);
     }
 
     &.tile-half-yellow:before {
-      border-color: var(--colour-yellow) transparent transparent transparent;
+      background-color: var(--colour-yellow);
     }
   }
 
