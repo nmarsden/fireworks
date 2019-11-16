@@ -27,6 +27,8 @@ export class AppComponent {
   infoTokens: number;
   fuseTokens: number;
   chosenTile: Tile;
+  isShowPartnerHints: boolean = false;
+  isShowPlayerHints: boolean = false;
   isPartnerTilesChosen: boolean;
   partnerTileHintChosen: TileHint = TileHint.noHint();
   playerTileHintChosen: TileHint = TileHint.noHint();
@@ -234,6 +236,14 @@ export class AppComponent {
 
   onEndOfTurnModalCancelled() {
     this.onEndOfTurnButtonClicked();
+  }
+
+  onPartnerTileHintClicked($event) {
+    this.isShowPartnerHints = !this.isShowPartnerHints;
+  }
+
+  onPlayerTileHintClicked($event) {
+    this.isShowPlayerHints = !this.isShowPlayerHints;
   }
 
   onPartnerTileClicked($event) {

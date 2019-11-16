@@ -19,6 +19,10 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() remainingTiles: number;
   @Input() infoTokens: number;
   @Input() fuseTokens: number;
+  @Input() isShowPartnerHints: boolean = true;
+  @Input() isShowPlayerHints: boolean = true;
+  @Output() partnerTileHintClicked = new EventEmitter();
+  @Output() playerTileHintClicked = new EventEmitter();
   @Output() partnerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileClicked = new EventEmitter<Tile>();
   @Output() deckClicked = new EventEmitter<string>();
@@ -50,6 +54,14 @@ export class BoardComponent implements OnInit, OnChanges {
     if (typeof changes.playedTiles !== 'undefined' && changes.playedTiles.currentValue && !changes.playedTiles.firstChange) {
       this.displayedPlayedTiles = this.highestPlayedTiles(this.playedTiles);
     }
+  }
+
+  onPlayerTileHintClicked($event) {
+    this.playerTileHintClicked.emit($event);
+  }
+
+  onPartnerTileHintClicked($event) {
+    this.partnerTileHintClicked.emit($event);
   }
 
   onPlayerTileClicked($event) {

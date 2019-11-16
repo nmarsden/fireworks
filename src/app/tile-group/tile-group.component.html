@@ -1,10 +1,28 @@
 <div class="tile-group"
      [ngClass]='{"is-played-tiles": displayMode === "played"}'>
-  <app-tile [displayMode]="displayMode"
-            *ngFor="let tile of tiles" [tile]="tile"
+  <app-tile *ngFor="let tile of tiles"
+            [displayMode]="displayMode"
+            [tile]="tile"
             [isChosen]="isGroupChosen || (chosenTile && chosenTile.id === tile.id)"
             [chosenColour]="chosenColour"
             [chosenNumber]="chosenNumber"
             [isClickable]="displayMode === 'partner' || displayMode === 'player'"
+            [isShowHints]="isShowHints"
+            (tileHintClicked)="onTileHintClicked($event)"
             (tileClicked)="onTileClicked($event)"></app-tile>
+  <div class="tile-hint-handle-container"
+       *ngIf="displayMode === 'partner' || displayMode === 'player'"
+       [ngClass]="{
+                    'is-hints-shown' : isShowHints,
+                    'is-hints-at-bottom': displayMode === 'partner'
+                  }">
+    <div class="tile-hint-handle"
+         [ngClass]="{ 'is-handle-at-bottom': displayMode === 'partner'}"
+         (click)="onTileHintClicked($event)">
+      <div class="handle-icon is-red"></div>
+      <div class="handle-icon is-yellow"></div>
+      <div class="handle-icon is-green"></div>
+      <div class="handle-icon is-blue"></div>
+    </div>
+  </div>
 </div>

@@ -35,7 +35,6 @@ export class DiscardedTilesComponent implements OnInit, OnChanges {
       });
       groupedByNumberAndColour.push(groupedByColour);
     }
-    console.log(groupedByNumberAndColour);
 
     // populate displayed tiles
     // -- add tiles
@@ -61,9 +60,7 @@ export class DiscardedTilesComponent implements OnInit, OnChanges {
     });
   }
 
-
   ngOnChanges(changes: SimpleChanges) {
-    // console.log('discarded-tiles: changes = ', changes);
 
     if (typeof changes.tiles !== 'undefined' && changes.tiles.currentValue && !changes.tiles.firstChange) {
       this.updateDisplayedTiles(this.tiles);

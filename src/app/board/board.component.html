@@ -4,6 +4,8 @@
                   [isGroupChosen]="isPartnerTilesChosen"
                   [chosenColour]="partnerTileHintChosen.colour"
                   [chosenNumber]="partnerTileHintChosen.number"
+                  [isShowHints]="isShowPartnerHints"
+                  (tileHintClicked)="onPartnerTileHintClicked($event)"
                   (tileClicked)="onPartnerTileClicked($event)"></app-tile-group>
 
   <div class="middle-container">
@@ -27,5 +29,7 @@
                   [chosenTile]="chosenTile"
                   [chosenColour]="playerTileHintChosen.colour"
                   [chosenNumber]="playerTileHintChosen.number"
+                  [isShowHints]="isShowPlayerHints"
+                  (tileHintClicked)="onPlayerTileHintClicked($event)"
                   (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>
 </div>

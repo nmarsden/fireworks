@@ -1,6 +1,53 @@
 :host {
 
-  --colour-ish-percentage: 1%;
+  .main-container {
+    position: relative;
+    height: calc(1.067 * var(--main-tile-width));
+
+    .tile-hint-container {
+      top: calc(0.7 * var(--main-tile-width));
+    }
+
+    &.is-tile-hint-top {
+      .tile-hint-container {
+        top: 0;
+      }
+      .tile-container {
+        top: calc(0.367 * var(--main-tile-width));
+      }
+    }
+
+    &.main-container-played {
+      height: calc(1 * var(--played-tile-width));
+    }
+
+    &.main-container-discarded {
+      height: var(--discarded-tile-height);
+    }
+
+    &.tile-discarded-one {
+      height: var(--discarded-tile-one-height);
+    }
+
+    &.tile-discarded-five {
+      height: var(--discarded-tile-five-height);
+    }
+  }
+
+  .tile-hint-container {
+    position: absolute;
+
+    transform: translateY(-101%) translateZ(-2px);
+    transition: transform linear 0.25s;
+
+    &.is-tile-hint-top {
+      transform: translateY(101%) translateZ(-2px);
+    }
+
+    &.is-tile-hint-shown {
+      transform: translateY(0) translateZ(-2px);
+    }
+  }
 
   .tile-half-overlay {
 
@@ -34,6 +81,12 @@
     &.tile-half-yellow:before {
       border-color: var(--colour-yellow) transparent transparent transparent;
     }
+  }
+
+  .tile-container {
+    background-color: var(--background-colour);
+    position: relative;
+    top: 0;
   }
 
   .tile {
@@ -118,7 +171,7 @@
     }
 
     &.tile-unknown-colour {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: var(--colour-tile-back);
 
       .explosion {
         background-color: rgba(255, 255, 255, 0.5);
@@ -128,32 +181,17 @@
     &.tile-red {
       background-color: var(--colour-red);
     }
-    &.tile-red-ish {
-      background-image: linear-gradient(var(--colour-red) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
-    }
     &.tile-white {
       background-color: var(--colour-white);
-    }
-    &.tile-white-ish {
-      background-image: linear-gradient(var(--colour-white) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-blue {
       background-color: var(--colour-blue);
     }
-    &.tile-blue-ish {
-      background-image: linear-gradient(var(--colour-blue) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
-    }
     &.tile-yellow {
       background-color: var(--colour-yellow);
     }
-    &.tile-yellow-ish {
-      background-image: linear-gradient(var(--colour-yellow) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
-    }
     &.tile-green {
       background-color: var(--colour-green);
-    }
-    &.tile-green-ish {
-      background-image: linear-gradient(var(--colour-green) var(--colour-ish-percentage), rgb(0, 0, 0), rgb(0, 0, 0));
     }
     &.tile-rainbow {
       background-image: linear-gradient(var(--tile-rainbow-angle), var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));

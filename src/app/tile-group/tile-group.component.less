@@ -1,11 +1,80 @@
 :host {
 
+  --tile-handle-height-factor: 0.4;
+  --tile-handle-colour: var(--colour-tile-back);
+
   .tile-group {
     display: flex;
     position: relative;
 
     &.is-played-tiles {
         flex-direction: var(--played-tiles-flex-direction);
+    }
+
+    .tile-hint-handle-container {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      transition: transform linear 0.25s;
+
+      top: calc(-1.2 * (var(--tile-handle-height-factor)) * var(--main-tile-width));
+      height: calc(var(--tile-handle-height-factor) * var(--main-tile-width));
+      transform: translateY(calc(0.40 * var(--main-tile-width)));
+
+      &.is-hints-at-bottom {
+        justify-content: flex-end;
+        top: calc((0.7 + 0.4) * var(--main-tile-width));
+        transform: translateY(calc(-0.40 * var(--main-tile-width)));
+      }
+
+      &.is-hints-shown {
+        transform: translateY(0);
+      }
+
+      .tile-hint-handle {
+        height: calc(var(--tile-handle-height-factor) * var(--main-tile-width));
+        width: calc(2 * var(--main-tile-width));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-image: linear-gradient(var(--tile-handle-colour), var(--background-colour));
+        border-radius: calc(var(--tile-handle-height-factor) * var(--main-tile-width)) calc(var(--tile-handle-height-factor) * var(--main-tile-width)) 0 0;
+
+        &.is-handle-at-bottom {
+          border-radius: 0 0 calc(var(--tile-handle-height-factor) * var(--main-tile-width)) calc(var(--tile-handle-height-factor) * var(--main-tile-width));
+          background-image: linear-gradient(var(--background-colour), var(--tile-handle-colour));
+        }
+
+        .handle-icon {
+          width: calc(0.1 * var(--main-tile-width));
+          height: calc(0.1 * var(--main-tile-width));
+
+          border: 2px solid var(--background-colour);
+          border-radius: 50%;
+          margin: 2px;
+          opacity: 0.5;
+
+          &.is-red {
+            background-color: var(--colour-red);
+          }
+
+          &.is-yellow {
+            background-color: var(--colour-yellow);
+          }
+
+          &.is-green {
+            background-color: var(--colour-green);
+          }
+
+          &.is-blue {
+            background-color: var(--colour-blue);
+          }
+        }
+      }
     }
   }
 }

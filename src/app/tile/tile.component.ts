@@ -13,11 +13,17 @@ export class TileComponent implements OnInit {
   @Input() isClickable: boolean = true;
   @Input() chosenColour: string;
   @Input() chosenNumber: number;
+  @Input() isShowHints: boolean = true;
+  @Output() tileHintClicked = new EventEmitter();
   @Output() tileClicked = new EventEmitter<Tile>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onTileHintClicked() {
+    this.tileHintClicked.emit();
   }
 
   onTileClicked() {

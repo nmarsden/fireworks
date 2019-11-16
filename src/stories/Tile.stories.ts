@@ -137,7 +137,7 @@ storiesOf('Tile', module)
   })
   .add('chosen', () => {
     return {
-      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: center; align-items: center;">
+      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: space-between; align-items: center;">
                     <div *ngFor="let displayMode of displayModes"
                          style="display:flex;">
                         <app-tile *ngFor="let tile of tiles"
@@ -155,6 +155,25 @@ storiesOf('Tile', module)
         isChosen: boolean('isChosen', true),
         chosenColour: 'red',
         chosenNumber: 3
+      }
+    };
+  })
+  .add('hide hints', () => {
+    return {
+      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: space-between; align-items: center;">
+                    <div *ngFor="let displayMode of displayModes"
+                         style="display:flex;">
+                        <app-tile *ngFor="let tile of tiles"
+                                  style="--main-tile-width:120px;"
+                                  [displayMode]="displayMode"
+                                  [isShowHints]="isShowHints" 
+                                  [tile]="tile"></app-tile>
+                    </div>
+                 </div>`,
+      props: {
+        tiles: [new Tile("white", 1), new Tile("red", 2), new Tile("yellow", 3), new Tile("green", 4), new Tile("blue", 5), new Tile("rainbow", 1)],
+        displayModes: ['partner', 'player'],
+        isShowHints: boolean('isShowHints', false),
       }
     };
   });

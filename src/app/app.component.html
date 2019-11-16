@@ -10,6 +10,10 @@
            [remainingTiles]="remainingTiles.length"
            [infoTokens]="infoTokens"
            [fuseTokens]="fuseTokens"
+           [isShowPartnerHints]="isShowPartnerHints"
+           [isShowPlayerHints]="isShowPlayerHints"
+           (partnerTileHintClicked)="onPartnerTileHintClicked($event)"
+           (playerTileHintClicked)="onPlayerTileHintClicked($event)"
            (partnerTileClicked)="onPartnerTileClicked($event)"
            (playerTileClicked)="onPlayerTileClicked($event)"
            (deckClicked)="onDeckClicked()">

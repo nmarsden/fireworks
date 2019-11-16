@@ -13,11 +13,18 @@ export class TileGroupComponent implements OnInit {
   @Input() chosenColour: string;
   @Input() chosenNumber: number;
   @Input() displayMode: string;
+  @Input() isShowHints: boolean = true;
+  @Output() tileHintClicked = new EventEmitter();
   @Output() tileClicked = new EventEmitter<Tile>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onTileHintClicked($event) {
+    this.isShowHints = !this.isShowHints;
+    this.tileHintClicked.emit($event);
   }
 
   onTileClicked($event) {
