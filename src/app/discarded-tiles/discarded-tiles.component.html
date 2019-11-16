@@ -1,29 +1,5 @@
 <div class="discarded-tiles-headings">
-  <div class="discarded-tiles-heading">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading">
-    <div class="info-dot"></div>
-  </div>
+  <div class="discarded-tiles-heading" *ngFor="let index of [5, 4, 3, 2, 1]">{{ index }}</div>
 </div>
 <div class="discarded-tiles-container">
     <div class="discarded-tiles" *ngFor="let index of [4, 3, 2, 1, 0]">
@@ -34,29 +10,5 @@
     </div>
 </div>
 <div class="discarded-tiles-headings">
-  <div class="discarded-tiles-heading reverse">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading reverse">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading reverse">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading reverse">
-    <div class="info-dot"></div>
-    <div class="info-dot"></div>
-  </div>
-  <div class="discarded-tiles-heading reverse">
-    <div class="info-dot"></div>
-  </div>
+  <div class="discarded-tiles-heading" *ngFor="let index of [5, 4, 3, 2, 1]">{{ index }}</div>
 </div>

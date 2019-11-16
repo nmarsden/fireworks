@@ -15,18 +15,11 @@
       justify-content: flex-end;
       align-items: center;
 
-      &.reverse {
-        justify-content: flex-start;
-      }
-
-      .info-dot {
-        height: var(--discarded-tile-info-dot-width);
-        width: var(--discarded-tile-info-dot-width);
-        margin: var(--discarded-tile-info-dot-margin);
-        background-color: rgb(255, 255, 255);
-        opacity: 0.2;
-      }
-
+      color: rgba(255, 255, 255, 0.5);
+      font-size: calc(1.5 * var(--discarded-tile-info-dot-width));
+      line-height: var(--discarded-tile-info-dot-width);
+      width: var(--discarded-tile-info-dot-width);
+      text-align: center;
     }
   }
 
