@@ -11,6 +11,13 @@ storiesOf('Info Tokens', module)
       imports: [CommonModule]
     })
   )
+  .add('single', () => {
+    return {
+      template: `<div style="display:flex; width:100%; height:100vh; justify-content:center; align-items:center;"> 
+                   <app-info-tokens style="--played-tile-width:300px;" [isShowSingleToken]="true"></app-info-tokens>
+                 </div>`,
+    };
+  })
   .add('all', () => {
     return {
       template: `<div style="display:flex; width:100%; height:100vh; justify-content:center; align-items:center;"> 

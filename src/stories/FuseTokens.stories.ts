@@ -11,6 +11,13 @@ storiesOf('Fuse Tokens', module)
       imports: [CommonModule]
     })
   )
+  .add('single', () => {
+    return {
+      template: `<div style="display:flex; width:100%; height:100vh; justify-content:center; align-items:center;"> 
+                   <app-fuse-tokens style="--played-tile-width:300px;" [isShowSingleToken]="true"></app-fuse-tokens>
+                 </div>`,
+    };
+  })
   .add('all', () => {
     return {
       template: `<div style="display:flex; width:100%; height:100vh; justify-content:center; align-items:center;"> 

@@ -34,12 +34,19 @@
     <div *ngIf="!isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
     <div *ngIf="isGameOver" class="modal-heading">{{ gameOverHeading }}</div>
     <div *ngIf="isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
-    <div class="turn-info">{{ turnInfo }}</div>
+    <div *ngIf="turnInfoText !== ''" class="turn-info">{{ turnInfoText }}</div>
   </div>
   <app-background></app-background>
 </app-modal>
+<app-modal id="start-of-turn-modal" (cancelled)="onStartOfTurnModalCancelled()">
+  <div class="modal-body">
+    <div class="modal-heading">{{ playerNames[waitingPlayer] }}</div>
+    <app-turn-info [turnInfo]="turnInfo"></app-turn-info>
+  </div>
+</app-modal>
 <app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
   <div class="modal-body">
+    <app-turn-info [turnInfo]="turnInfo"></app-turn-info>
     <div class="button" (click)="onEndOfTurnButtonClicked()">Done</div>
   </div>
 </app-modal>

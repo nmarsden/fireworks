@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Tile } from './tile';
 import { TileHint } from './tile-hint';
 import { ModalService } from './modal.service';
+import { TurnInfo } from './turn-info';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent {
 
   currentPlayer: number;
   waitingPlayer: number;
-  turnInfo: string;
+  turnInfoText: string;
+  turnInfo: TurnInfo = TurnInfo.empty();
   remainingTiles: Tile[];
   playerTiles: Tile[];
   partnerTiles: Tile[];
@@ -108,7 +110,8 @@ export class AppComponent {
   newGame() {
     this.currentPlayer = 0;
     this.waitingPlayer = 1;
-    this.turnInfo = "Starting a new game";
+    this.turnInfoText = "Starting a new game";
+    this.turnInfo = TurnInfo.empty();
     this.remainingTiles = [];
     this.playerTiles = [];
     this.partnerTiles = [];
@@ -228,6 +231,9 @@ export class AppComponent {
       this.newGame();
     } else {
       this.isHideBoard = false;
+      if (this.turnInfo.isNotEmpty()) {
+        this.openModal('start-of-turn-modal');
+      }
     }
   }
 
@@ -245,6 +251,11 @@ export class AppComponent {
 
     // Show player ready modal
     this.openModal('player-ready-modal');
+  }
+
+  onStartOfTurnModalCancelled() {
+    // Prepare to start turn
+    this.closeModal('start-of-turn-modal');
   }
 
   onEndOfTurnModalCancelled() {
@@ -288,7 +299,8 @@ export class AppComponent {
     this.infoTokens--;
 
     // Update turn info
-    this.turnInfo = `${this.playerNames[this.currentPlayer]} hinted about ${colour}`;
+    this.turnInfo = TurnInfo.hint(TileHint.colourHint(colour));
+    this.turnInfoText = "";
 
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
@@ -306,7 +318,8 @@ export class AppComponent {
     this.infoTokens--;
 
     // Update turn info
-    this.turnInfo = `${this.playerNames[this.currentPlayer]} hinted about ${number}`;
+    this.turnInfo = TurnInfo.hint(TileHint.numberHint(number));
+    this.turnInfoText = "";
 
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
@@ -334,7 +347,8 @@ export class AppComponent {
     this.playerTiles = this.playerTiles.filter(t => t.id !== this.chosenTile.id);
 
     // Update turn info
-    this.turnInfo = `${this.playerNames[this.currentPlayer]} played a ${this.chosenTile.colour} ${this.chosenTile.number}`;
+    this.turnInfo = TurnInfo.played(this.chosenTile);
+    this.turnInfoText = "";
 
     // Tile is playable?
     if (this.isTilePlayable(this.chosenTile)) {
@@ -342,18 +356,17 @@ export class AppComponent {
       this.playedTiles = this.playedTiles.concat(this.chosenTile);
       // - Is five played?
       if (this.chosenTile.number === 5) {
-        this.turnInfo = `${this.playerNames[this.currentPlayer]} completed the ${this.chosenTile.colour} stack`;
         // - Is game won
         if (this.areAllPlayedStacksComplete()) {
           // Game won
           this.isGameOver = true;
           this.gameOverHeading = "GAME WON!";
-          this.turnInfo = this.turnInfo + '. All stacks complete'
+          this.turnInfoText = 'All stacks complete';
         } else {
           // Add info token
           if (this.infoTokens < 8) {
             this.infoTokens++;
-            this.turnInfo = this.turnInfo + '. Hint token earned'
+            this.turnInfo = TurnInfo.playedAndEarnedInfoToken(this.chosenTile);
           }
         }
       }
@@ -363,23 +376,20 @@ export class AppComponent {
       this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
       // - Remove fuse token
       this.fuseTokens--;
+      this.turnInfo = TurnInfo.playedAndLostFuseToken(this.chosenTile);
       // - Is game over due to no more fuse tokens?
       if (this.fuseTokens === 0) {
         // - Game Over
         this.isGameOver = true;
         this.gameOverHeading = "GAME OVER";
         // - Update turn info
-        this.turnInfo = this.turnInfo + ` which is unplayable. Last fuse token used`;
+        this.turnInfoText = 'All fuse tokens lost';
       // Is game over due to all matching tiles discarded?
       } else if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
         this.isGameOver = true;
         this.gameOverHeading = "GAME OVER";
         // Update turn info
-        this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
-      } else {
-        // - Continue Game
-        // - Update turn info
-        this.turnInfo = this.turnInfo + ` which is unplayable. Fuse tokens reduced`;
+        this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
       }
     }
 
@@ -408,7 +418,8 @@ export class AppComponent {
     this.infoTokens++;
 
     // Update turn info
-    this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded a ${this.chosenTile.colour} ${this.chosenTile.number}`;
+    this.turnInfo = TurnInfo.discarded(this.chosenTile);
+    this.turnInfoText = "";
 
     // Add chosen tile to discarded tiles
     this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
@@ -418,7 +429,7 @@ export class AppComponent {
       this.isGameOver = true;
       this.gameOverHeading = "GAME OVER";
       // Update turn info
-      this.turnInfo = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
+      this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
     }
 
     // Add new tile to player tiles from remainingTiles

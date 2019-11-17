@@ -1,0 +1,42 @@
+<div class="turn-info-container" *ngIf="turnInfo.tileHint != null">
+  <div class="turn-info-column">
+    <div class="turn-info-text">Hinted</div>
+    <div class="turn-info-hint-number" *ngIf="turnInfo.tileHint.number !== null">{{ turnInfo.tileHint.number }}</div>
+    <div class="turn-info-hint-colour" *ngIf="turnInfo.tileHint.colour !== null"
+         [ngClass]="{
+                      'colour-white':  turnInfo.tileHint.colour === 'white',
+                      'colour-red':    turnInfo.tileHint.colour === 'red',
+                      'colour-yellow': turnInfo.tileHint.colour === 'yellow',
+                      'colour-green':  turnInfo.tileHint.colour === 'green',
+                      'colour-blue':   turnInfo.tileHint.colour === 'blue'
+                    }"></div>
+  </div>
+  <div class="turn-info-column">
+    <div class="turn-info-text">Spent</div>
+    <app-info-tokens class="turn-info-info-token" [isShowSingleToken]="true"></app-info-tokens>
+  </div>
+</div>
+<div class="turn-info-container" *ngIf="turnInfo.playedTile != null">
+  <div class="turn-info-column">
+    <div class="turn-info-text">Played</div>
+    <app-tile class="turn-info-tile" [tile]="turnInfo.playedTile" [displayMode]="'played'"></app-tile>
+  </div>
+  <div class="turn-info-column" *ngIf="turnInfo.isEarnedInfoToken">
+    <div class="turn-info-text">Earned</div>
+    <app-info-tokens class="turn-info-info-token" [isShowSingleToken]="true"></app-info-tokens>
+  </div>
+  <div class="turn-info-column" *ngIf="turnInfo.isLostFuseToken">
+    <div class="turn-info-text">Lost</div>
+    <app-fuse-tokens class="turn-info-fuse-token" [isShowSingleToken]="true"></app-fuse-tokens>
+  </div>
+</div>
+<div class="turn-info-container" *ngIf="turnInfo.discardedTile != null">
+  <div class="turn-info-column">
+    <div class="turn-info-text">Discarded</div>
+    <app-tile class="turn-info-tile" [tile]="turnInfo.discardedTile" [displayMode]="'played'"></app-tile>
+  </div>
+  <div class="turn-info-column" *ngIf="turnInfo.isEarnedInfoToken">
+    <div class="turn-info-text">Earned</div>
+    <app-info-tokens class="turn-info-info-token" [isShowSingleToken]="true"></app-info-tokens>
+  </div>
+</div>

@@ -18,4 +18,8 @@ export class TileHint {
   static numberHint(number: number): TileHint {
     return new TileHint(null, number);
   }
+
+  public toString(): string {
+    return this.colour !== null ? this.colour : this.number.toString(10);
+  }
 }

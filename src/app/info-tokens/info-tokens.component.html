@@ -1,9 +1,14 @@
-<div class="info-tokens">
+<div *ngIf="!isShowSingleToken" class="info-tokens">
   <div class="info-token"
        *ngFor="let num of [1, 2, 3, 4, 5, 6, 7, 8]"
        [ngClass]="{
                     'is-available': (num <= tokensRemaining)
                   }" >
+    <div class="lightning"></div>
+  </div>
+</div>
+<div *ngIf="isShowSingleToken" class="single-info-token">
+  <div class="info-token is-available">
     <div class="lightning"></div>
   </div>
 </div>

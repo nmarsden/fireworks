@@ -13,6 +13,7 @@ import { InfoTokensComponent } from './info-tokens/info-tokens.component';
 import { FuseTokensComponent } from './fuse-tokens/fuse-tokens.component';
 import { DeckComponent } from './deck/deck.component';
 import { BackgroundComponent } from './background/background.component';
+import { TurnInfoComponent } from './turn-info/turn-info.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BackgroundComponent } from './background/background.component';
     InfoTokensComponent,
     FuseTokensComponent,
     DeckComponent,
-    BackgroundComponent
+    BackgroundComponent,
+    TurnInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InfoTokensComponent implements OnInit {
   @Input() tokensRemaining: number;
+  @Input() isShowSingleToken: boolean = false;
 
   constructor() { }
 
