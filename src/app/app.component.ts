@@ -37,6 +37,7 @@ export class AppComponent {
   partnerHintColourOptions: string[];
   partnerHintNumberOptions: number[];
   isGameOver: boolean;
+  isGameWon: boolean;
   isHideBoard: boolean = true;
   gameOverHeading: string;
 
@@ -120,6 +121,7 @@ export class AppComponent {
     this.infoTokens = 8;
     this.fuseTokens = 3;
     this.isGameOver = false;
+    this.isGameWon = false;
     this.isHideBoard = true;
 
     // Get all tiles
@@ -360,6 +362,7 @@ export class AppComponent {
         if (this.areAllPlayedStacksComplete()) {
           // Game won
           this.isGameOver = true;
+          this.isGameWon = true;
           this.gameOverHeading = "GAME WON!";
           this.turnInfoText = 'All stacks complete';
         } else {

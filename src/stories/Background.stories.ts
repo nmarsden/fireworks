@@ -20,4 +20,9 @@ storiesOf('Background', module)
     return {
       template: `<app-background [isSparkling]="false"></app-background>`
     };
+  })
+  .add('lost theme', () => {
+    return {
+      template: `<app-background [theme]="'lost'"></app-background>`
+    };
   });

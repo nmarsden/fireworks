@@ -23,20 +23,20 @@
            [isFullScreen]="false"
            [isOpen]="true">
   <div class="fireworks-rainbow-text">FIREWORKS</div>
-  <div class="modal-body no-padding">
+  <div class="modal-body no-background">
     <div class="button" (click)="onStartButtonClicked()">Start</div>
   </div>
   <app-background></app-background>
 </app-modal>
 <app-modal id="player-ready-modal" [isFullScreen]="false">
-  <div class="modal-body">
+  <div class="modal-body no-background">
     <div *ngIf="!isGameOver" class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
     <div *ngIf="!isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
     <div *ngIf="isGameOver" class="modal-heading">{{ gameOverHeading }}</div>
     <div *ngIf="isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
     <div *ngIf="turnInfoText !== ''" class="turn-info">{{ turnInfoText }}</div>
   </div>
-  <app-background></app-background>
+  <app-background [theme]="isGameOver && !isGameWon ? 'lost':'standard'"></app-background>
 </app-modal>
 <app-modal id="start-of-turn-modal" (cancelled)="onStartOfTurnModalCancelled()">
   <div class="modal-body">
