@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DiscardedTilesComponent } from './discarded-tiles.component';
+import { CoreModule } from '../core.module';
+import { Tile } from '../../tile';
 
 describe('DiscardedTilesComponent', () => {
   let component: DiscardedTilesComponent;
@@ -8,14 +10,18 @@ describe('DiscardedTilesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DiscardedTilesComponent ]
+      imports: [ CoreModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    let noTiles: Tile[] = [];
+
     fixture = TestBed.createComponent(DiscardedTilesComponent);
     component = fixture.componentInstance;
+    component.tiles = noTiles;
+
     fixture.detectChanges();
   });
 

@@ -1,15 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, boolean } from '@storybook/addon-knobs'
 import { CommonModule } from '@angular/common';
-import { BoardComponent } from '../app/board/board.component';
-import { DiscardedTilesComponent } from '../app/discarded-tiles/discarded-tiles.component';
-import { TileGroupComponent } from '../app/tile-group/tile-group.component';
-import { TileComponent } from '../app/tile/tile.component';
-import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
-import { InfoTokensComponent } from '../app/info-tokens/info-tokens.component';
-import { FuseTokensComponent } from '../app/fuse-tokens/fuse-tokens.component';
-import { DeckComponent } from '../app/deck/deck.component';
-import { BackgroundComponent } from '../app/background/background.component';
+import { CoreModule } from '../app/core/core.module';
 import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
 
@@ -52,17 +44,11 @@ storiesOf('Board', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        BoardComponent,
-        DiscardedTilesComponent,
-        TileGroupComponent,
-        TileComponent,
-        TileHintComponent,
-        InfoTokensComponent,
-        FuseTokensComponent,
-        DeckComponent,
-        BackgroundComponent
       ],
-      imports: [CommonModule]
+      imports: [
+        CommonModule,
+        CoreModule
+      ]
     })
   )
   .add('empty', () => {

@@ -1,8 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { TileGroupComponent } from '../app/tile-group/tile-group.component';
-import { TileComponent } from '../app/tile/tile.component';
-import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
+import { CoreModule } from '../app/core/core.module';
 import { Tile } from '../app/tile';
 import { withKnobs, boolean } from '@storybook/addon-knobs'
 
@@ -20,11 +18,11 @@ storiesOf('Tile Group', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        TileGroupComponent,
-        TileComponent,
-        TileHintComponent
       ],
-      imports: [CommonModule]
+      imports: [
+        CommonModule,
+        CoreModule
+      ]
     })
   )
   .add('chosen tile', () => {

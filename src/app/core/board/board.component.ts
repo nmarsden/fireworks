@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Tile } from '../tile';
-import { TileHint } from '../tile-hint';
+import { Tile } from '../../tile';
+import { TileHint } from '../../tile-hint';
 
 @Component({
   selector: 'app-board',

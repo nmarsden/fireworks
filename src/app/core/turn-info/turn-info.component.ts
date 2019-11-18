@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TurnInfo } from '../turn-info';
+import { TurnInfo } from '../../turn-info';
 
 @Component({
   selector: 'app-turn-info',

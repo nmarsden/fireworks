@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
+import { TileHintComponent } from '../app/core/tile-hint/tile-hint.component';
 import { optionsKnob as options, withKnobs, boolean } from '@storybook/addon-knobs'
 import { OptionsKnobOptions } from '@storybook/addon-knobs/dist/components/types';
 

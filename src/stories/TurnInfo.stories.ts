@@ -1,10 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { TurnInfoComponent } from '../app/turn-info/turn-info.component';
-import { TileComponent } from '../app/tile/tile.component';
-import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
-import { InfoTokensComponent } from '../app/info-tokens/info-tokens.component';
-import { FuseTokensComponent } from '../app/fuse-tokens/fuse-tokens.component';
+import { CoreModule } from '../app/core/core.module';
 import { TileHint } from '../app/tile-hint';
 import { TurnInfo } from '../app/turn-info';
 import { Tile } from '../app/tile';
@@ -13,13 +9,11 @@ storiesOf('Turn Info', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        TurnInfoComponent,
-        TileComponent,
-        TileHintComponent,
-        InfoTokensComponent,
-        FuseTokensComponent
       ],
-      imports: [CommonModule]
+      imports: [
+        CommonModule,
+        CoreModule
+      ]
     })
   )
   .add('hinted colour', () => {

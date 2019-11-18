@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { FuseTokensComponent } from '../app/fuse-tokens/fuse-tokens.component';
+import { FuseTokensComponent } from '../app/core/fuse-tokens/fuse-tokens.component';
 
 storiesOf('Fuse Tokens', module)
   .addDecorator(

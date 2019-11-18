@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Tile } from '../tile';
+import { Tile } from '../../tile';
 
 @Component({
   selector: 'app-tile',

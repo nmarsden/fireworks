@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { DeckComponent } from '../app/deck/deck.component';
+import { DeckComponent } from '../app/core/deck/deck.component';
 
 storiesOf('Deck', module)
   .addDecorator(

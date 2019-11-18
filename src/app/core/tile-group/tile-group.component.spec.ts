@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TileGroupComponent } from './tile-group.component';
+import { CoreModule } from '../core.module';
 
 describe('TileGroupComponent', () => {
   let component: TileGroupComponent;
@@ -8,7 +9,7 @@ describe('TileGroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TileGroupComponent ]
+      imports: [ CoreModule ]
     })
     .compileComponents();
   }));

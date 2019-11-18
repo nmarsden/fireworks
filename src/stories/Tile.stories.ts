@@ -1,7 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { TileComponent } from '../app/tile/tile.component';
-import { TileHintComponent } from '../app/tile-hint/tile-hint.component';
+import { CoreModule } from '../app/core/core.module';
 import { Tile } from '../app/tile';
 import { TileHint } from '../app/tile-hint';
 import { withKnobs, boolean } from '@storybook/addon-knobs'
@@ -91,10 +90,11 @@ storiesOf('Tile', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        TileComponent,
-        TileHintComponent
       ],
-      imports: [CommonModule]
+      imports: [
+        CommonModule,
+        CoreModule
+      ]
     })
   )
   .add('played', () => {

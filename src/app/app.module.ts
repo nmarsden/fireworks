@@ -3,36 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TileComponent } from './tile/tile.component';
-import { TileGroupComponent } from './tile-group/tile-group.component';
-import { DiscardedTilesComponent } from './discarded-tiles/discarded-tiles.component';
-import { BoardComponent } from './board/board.component';
-import { TileHintComponent } from './tile-hint/tile-hint.component';
-import { ModalComponent } from './modal/modal.component';
-import { InfoTokensComponent } from './info-tokens/info-tokens.component';
-import { FuseTokensComponent } from './fuse-tokens/fuse-tokens.component';
-import { DeckComponent } from './deck/deck.component';
-import { BackgroundComponent } from './background/background.component';
-import { TurnInfoComponent } from './turn-info/turn-info.component';
+
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TileComponent,
-    TileGroupComponent,
-    DiscardedTilesComponent,
-    BoardComponent,
-    TileHintComponent,
-    ModalComponent,
-    InfoTokensComponent,
-    FuseTokensComponent,
-    DeckComponent,
-    BackgroundComponent,
-    TurnInfoComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
