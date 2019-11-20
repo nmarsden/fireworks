@@ -16,9 +16,9 @@ storiesOf('Background', module)
       template: `<app-background></app-background>`
     };
   })
-  .add('not sparkling', () => {
+  .add('small stars & not sparkling', () => {
     return {
-      template: `<app-background [isSparkling]="false"></app-background>`
+      template: `<app-background [isSmallStars]="true" [isSparkling]="false"></app-background>`
     };
   })
   .add('lost theme', () => {

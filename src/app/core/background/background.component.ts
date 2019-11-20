@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BackgroundComponent implements OnInit {
   @Input() isSparkling: boolean = true;
+  @Input() isSmallStars: boolean = false;
   @Input() theme: string = 'standard';
 
   constructor() { }

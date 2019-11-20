@@ -3,17 +3,26 @@
   <!-- ★ ☆ -->
   <div class="star-background">
     <div class="star"
-         [ngClass]="{ 'star-sparkle': (isSparkling && j % 3 === 0) }"
+         [ngClass]="{
+                      'star-small': isSmallStars,
+                      'star-sparkle': (isSparkling && j % 3 === 0)
+                    }"
          *ngFor="let i of [].constructor(80); index as j">☆</div>
   </div>
   <div class="star-background background-2">
     <div class="star"
-         [ngClass]="{ 'star-sparkle': (isSparkling && j % 6 === 0) }"
+         [ngClass]="{
+                      'star-small': isSmallStars,
+                      'star-sparkle': (isSparkling && j % 6 === 0)
+                    }"
          *ngFor="let i of [].constructor(80); index as j">☆</div>
   </div>
   <div class="star-background background-3">
     <div class="star"
-         [ngClass]="{ 'star-sparkle': (isSparkling && j % 10 === 0) }"
+         [ngClass]="{
+                      'star-small': isSmallStars,
+                      'star-sparkle': (isSparkling && j % 10 === 0)
+                    }"
          *ngFor="let i of [].constructor(80); index as j">☆</div>
   </div>
 </div>
