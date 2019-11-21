@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Tile } from './tile';
 import { TileHint } from './tile-hint';
 import { ModalService } from './modal.service';
@@ -9,10 +9,10 @@ import { TurnInfo } from './turn-info';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'fireworks';
-  playerNames: string[] = ['P1', "P2"];
-  standardColours = ["white", "red", "yellow", "green", "blue"];
+  playerNames: string[] = ['P1', 'P2'];
+  standardColours = ['white', 'red', 'yellow', 'green', 'blue'];
   rainbowColour = 'rainbow';
   colours = [...this.standardColours, this.rainbowColour];
   isOnInitAlreadyCalled = false;
@@ -29,8 +29,8 @@ export class AppComponent {
   infoTokens: number;
   fuseTokens: number;
   chosenTile: Tile;
-  isShowPartnerHints: boolean = false;
-  isShowPlayerHints: boolean = false;
+  isShowPartnerHints = false;
+  isShowPlayerHints = false;
   isPartnerTilesChosen: boolean;
   partnerTileHintChosen: TileHint = TileHint.noHint();
   playerTileHintChosen: TileHint = TileHint.noHint();
@@ -38,14 +38,14 @@ export class AppComponent {
   partnerHintNumberOptions: number[];
   isGameOver: boolean;
   isGameWon: boolean;
-  isHideBoard: boolean = true;
+  isHideBoard = true;
   gameOverHeading: string;
 
   constructor(private modalService: ModalService) { }
 
   allTiles = () => {
     let tiles = [];
-    for (let i=1; i<=5; i++) {
+    for (let i = 1; i <= 5; i++) {
       tiles = tiles.concat(this.colours.map(colour => new Tile(colour, i)));
       if (i <= 4) {
         tiles = tiles.concat(this.colours.map(colour => new Tile(colour, i)));
@@ -55,10 +55,12 @@ export class AppComponent {
       }
     }
     return tiles;
-  };
+  }
 
   shuffle = (array) => {
-    let currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length;
+    let temporaryValue;
+    let randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -74,24 +76,24 @@ export class AppComponent {
     }
 
     return array;
-  };
+  }
 
   isRandomTrue = () => {
     return Math.random() > 0.5;
-  };
+  }
 
   generatePossibleHints = (tiles: Tile[]): TileHint[] => {
-      let colours = new Set(tiles.map(t => t.colour));
-      let numbers = new Set(tiles.map(t => t.number));
-      let hints:TileHint[] = [];
+      const colours = new Set(tiles.map(t => t.colour));
+      const numbers = new Set(tiles.map(t => t.number));
+      let hints: TileHint[] = [];
       if (colours.has('rainbow')) {
         hints = this.standardColours.map(c => TileHint.colourHint(c));
       } else {
-        colours.forEach(c => { hints.push(TileHint.colourHint(c)) });
+        colours.forEach(c => { hints.push(TileHint.colourHint(c)); });
       }
-      numbers.forEach(n => { hints.push(TileHint.numberHint(n)) });
+      numbers.forEach(n => { hints.push(TileHint.numberHint(n)); });
       return hints;
-  };
+  }
 
   ngOnInit() {
     this.setVhAccordingToWindowInnerHeight();
@@ -103,7 +105,7 @@ export class AppComponent {
   @HostListener('window:resize', [])
   setVhAccordingToWindowInnerHeight() {
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-    let vh = window.innerHeight * 0.01;
+    const vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
@@ -111,7 +113,7 @@ export class AppComponent {
   newGame() {
     this.currentPlayer = 0;
     this.waitingPlayer = 1;
-    this.turnInfoText = "Starting a new game";
+    this.turnInfoText = 'Starting a new game';
     this.turnInfo = TurnInfo.empty();
     this.remainingTiles = [];
     this.playerTiles = [];
@@ -125,7 +127,7 @@ export class AppComponent {
     this.isHideBoard = true;
 
     // Get all tiles
-    let tiles = this.allTiles();
+    const tiles = this.allTiles();
 
     // Shuffle tiles
     this.remainingTiles = this.shuffle(tiles);
@@ -154,8 +156,8 @@ export class AppComponent {
     }
   }
 
-  highestPlayedTiles = (playedTiles):Tile[] => {
-    let highestColourNumber = {};
+  highestPlayedTiles = (playedTiles): Tile[] => {
+    const highestColourNumber = {};
     this.colours.forEach(c => highestColourNumber[c] = null);
     playedTiles.forEach(t => {
       if (t.number > highestColourNumber[t.colour]) {
@@ -163,11 +165,11 @@ export class AppComponent {
       }
     });
     return this.colours.map(c => new Tile(c, highestColourNumber[c]));
-  };
+  }
 
   private isTilePlayable(tile: Tile) {
-    let highestPlayed = this.highestPlayedTiles(this.playedTiles);
-    let highestPlayedForColour = highestPlayed.filter(t => t.colour === tile.colour);
+    const highestPlayed = this.highestPlayedTiles(this.playedTiles);
+    const highestPlayedForColour = highestPlayed.filter(t => t.colour === tile.colour);
     let playableNumber;
     if (highestPlayedForColour.length === 0) {
       playableNumber = 1;
@@ -179,7 +181,7 @@ export class AppComponent {
 
   areAllMatchingTilesDiscarded(lastDiscardTile: Tile): boolean {
     // Does discarded tiles now include ALL the tiles matching the last discarded tile?
-    let matchingTiles = this.discardedTiles.filter(t => (t.colour === lastDiscardTile.colour && t.number === lastDiscardTile.number));
+    const matchingTiles = this.discardedTiles.filter(t => (t.colour === lastDiscardTile.colour && t.number === lastDiscardTile.number));
     return (matchingTiles.length === 3 && lastDiscardTile.number === 1) ||
            (matchingTiles.length === 2 && (lastDiscardTile.number === 2 || lastDiscardTile.number === 3 || lastDiscardTile.number === 4)) ||
            (matchingTiles.length === 1 && lastDiscardTile.number === 5);
@@ -216,11 +218,11 @@ export class AppComponent {
   onPlayerReadyButtonClicked() {
     // Prepare for next player's turn
     // -- swap player & partner tiles
-    let tempTiles = this.playerTiles;
+    const tempTiles = this.playerTiles;
     this.playerTiles = this.partnerTiles.reverse();
     this.partnerTiles = tempTiles.reverse();
     // -- swap player & partner tile hint
-    let tempTileHint = this.playerTileHintChosen;
+    const tempTileHint = this.playerTileHintChosen;
     this.playerTileHintChosen = this.partnerTileHintChosen;
     this.partnerTileHintChosen = tempTileHint;
 
@@ -242,8 +244,8 @@ export class AppComponent {
   onEndOfTurnButtonClicked() {
     // Prepare for next player's turn
     // -- set current player & waiting player
-    this.currentPlayer = (this.currentPlayer+1) % 2;
-    this.waitingPlayer = (this.waitingPlayer+1) % 2;
+    this.currentPlayer = (this.currentPlayer + 1) % 2;
+    this.waitingPlayer = (this.waitingPlayer + 1) % 2;
 
     // Hide board
     this.isHideBoard = true;
@@ -285,7 +287,7 @@ export class AppComponent {
     } else {
       this.partnerHintColourOptions = [...new Set(this.partnerTiles.map(t => t.colour))];
     }
-    this.partnerHintColourOptions.sort((c1, c2) => { return this.standardColours.indexOf(c1) > this.standardColours.indexOf(c2) ? 1 : -1 });
+    this.partnerHintColourOptions.sort((c1, c2) => this.standardColours.indexOf(c1) > this.standardColours.indexOf(c2) ? 1 : -1);
     // Determine available number hints
     this.partnerHintNumberOptions = [...new Set(this.partnerTiles.map(t => t.number))].sort();
 
@@ -302,7 +304,7 @@ export class AppComponent {
 
     // Update turn info
     this.turnInfo = TurnInfo.hint(TileHint.colourHint(colour));
-    this.turnInfoText = "";
+    this.turnInfoText = '';
 
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
@@ -311,17 +313,17 @@ export class AppComponent {
     this.showEndOfTurnModal();
   }
 
-  onNumberHintButtonClicked(number: number) {
+  onNumberHintButtonClicked(chosenNumber: number) {
     // Apply number hint
-    this.partnerTileHintChosen = TileHint.numberHint(number);
+    this.partnerTileHintChosen = TileHint.numberHint(chosenNumber);
     this.partnerTiles.forEach(t => t.applyHint(this.partnerTileHintChosen));
 
     // Remove info token
     this.infoTokens--;
 
     // Update turn info
-    this.turnInfo = TurnInfo.hint(TileHint.numberHint(number));
-    this.turnInfoText = "";
+    this.turnInfo = TurnInfo.hint(TileHint.numberHint(chosenNumber));
+    this.turnInfoText = '';
 
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
@@ -350,7 +352,7 @@ export class AppComponent {
 
     // Update turn info
     this.turnInfo = TurnInfo.played(this.chosenTile);
-    this.turnInfoText = "";
+    this.turnInfoText = '';
 
     // Tile is playable?
     if (this.isTilePlayable(this.chosenTile)) {
@@ -363,7 +365,7 @@ export class AppComponent {
           // Game won
           this.isGameOver = true;
           this.isGameWon = true;
-          this.gameOverHeading = "GAME WON!";
+          this.gameOverHeading = 'GAME WON!';
           this.turnInfoText = 'All stacks complete';
         } else {
           // Add info token
@@ -384,15 +386,16 @@ export class AppComponent {
       if (this.fuseTokens === 0) {
         // - Game Over
         this.isGameOver = true;
-        this.gameOverHeading = "GAME OVER";
+        this.gameOverHeading = 'GAME OVER';
         // - Update turn info
         this.turnInfoText = 'All fuse tokens lost';
       // Is game over due to all matching tiles discarded?
       } else if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
         this.isGameOver = true;
-        this.gameOverHeading = "GAME OVER";
+        this.gameOverHeading = 'GAME OVER';
         // Update turn info
-        this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
+        this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ` +
+                            `${this.chosenTile.colour} ${this.chosenTile.number}`;
       }
     }
 
@@ -422,7 +425,7 @@ export class AppComponent {
 
     // Update turn info
     this.turnInfo = TurnInfo.discarded(this.chosenTile);
-    this.turnInfoText = "";
+    this.turnInfoText = '';
 
     // Add chosen tile to discarded tiles
     this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
@@ -430,7 +433,7 @@ export class AppComponent {
     // Is game over?
     if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
       this.isGameOver = true;
-      this.gameOverHeading = "GAME OVER";
+      this.gameOverHeading = 'GAME OVER';
       // Update turn info
       this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
     }

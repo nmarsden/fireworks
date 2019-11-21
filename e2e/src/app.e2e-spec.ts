@@ -43,8 +43,8 @@ describe('Fireworks App', () => {
       mainMenuModalPO.getStartButton().click();
     });
 
-    it("should display P1's Turn title", () => {
-      expect(playerReadyModalPO.getHeadingText()).toEqual("P1's Turn");
+    it('should display P1\'s Turn title', () => {
+      expect(playerReadyModalPO.getHeadingText()).toEqual('P1\'s Turn');
     });
 
     it('should display ready button', () => {

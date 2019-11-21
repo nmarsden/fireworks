@@ -6,8 +6,8 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
   styleUrls: ['./tile-hint.component.less']
 })
 export class TileHintComponent implements OnInit, OnChanges {
-  @Input() isStoryMode: boolean = false;
-  @Input() isColoursOnBottom: boolean = false;
+  @Input() isStoryMode = false;
+  @Input() isColoursOnBottom = false;
   @Input() chosenColour: string;
   @Input() chosenNumber: number;
   @Input() includedColours: string[] = [];
@@ -15,12 +15,12 @@ export class TileHintComponent implements OnInit, OnChanges {
   @Input() includedNumbers: number[] = [];
   @Input() excludedNumbers: number[] = [];
 
-  standardColours: string[] = ["white", "red", "yellow", "green", "blue"];
+  standardColours: string[] = ['white', 'red', 'yellow', 'green', 'blue'];
   rainbowColour = 'rainbow';
   allColours: string[] = [...this.standardColours, this.rainbowColour];
   allNumbers: number[] = [1, 2, 3, 4, 5];
-  possibleColours:string[] = [];
-  possibleNumbers:number[] = [];
+  possibleColours: string[] = [];
+  possibleNumbers: number[] = [];
 
   calcExcludedColours = (includedColourHints: string[], excludedColourHints: string[]) => {
     let excluded: string[] = [];
@@ -29,7 +29,7 @@ export class TileHintComponent implements OnInit, OnChanges {
     // - if single included: add to excluded all 'other' colours except rainbow
     // - if multiple included: add to excluded all colours except rainbow
     if (includedColourHints.length === 1) {
-      excluded = this.standardColours.filter(c => c != includedColourHints[0]);
+      excluded = this.standardColours.filter(c => c !== includedColourHints[0]);
     }
     if (includedColourHints.length > 1) {
       excluded.push(...this.standardColours);
@@ -44,7 +44,7 @@ export class TileHintComponent implements OnInit, OnChanges {
     excluded = [...new Set(excluded)];
 
     return excluded;
-  };
+  }
 
   calcExcludedNumbers = (includedNumberHints: number[], excludedNumberHints: number[]) => {
     let excluded: number[] = [];
@@ -52,7 +52,7 @@ export class TileHintComponent implements OnInit, OnChanges {
     // When included number hint
     // - add to excluded all other numbers
     if (includedNumberHints.length === 1) {
-      excluded = this.allNumbers.filter(c => c != includedNumberHints[0]);
+      excluded = this.allNumbers.filter(c => c !== includedNumberHints[0]);
     }
     // When excluded number hint
     // - add to excluded
@@ -63,17 +63,17 @@ export class TileHintComponent implements OnInit, OnChanges {
     excluded = [...new Set(excluded)];
 
     return excluded;
-  };
+  }
 
   calcPossibleColours = (includedColours: string[], excludedColours: string[]) => {
-    let excluded = this.calcExcludedColours(includedColours, excludedColours);
+    const excluded = this.calcExcludedColours(includedColours, excludedColours);
     return this.allColours.filter(item => excluded.indexOf(item) < 0);
-  };
+  }
 
   calcPossibleNumbers = (includedNumbers: number[], excludedNumbers: number[]) => {
-    let excluded = this.calcExcludedNumbers(includedNumbers, excludedNumbers);
+    const excluded = this.calcExcludedNumbers(includedNumbers, excludedNumbers);
     return this.allNumbers.filter(item => excluded.indexOf(item) < 0);
-  };
+  }
 
   updatePossibilities = () => {
     // Handle includedNumbers & excludedNumbers containing strings by converting to numbers
@@ -83,7 +83,7 @@ export class TileHintComponent implements OnInit, OnChanges {
 
     this.possibleColours = this.calcPossibleColours(this.includedColours, this.excludedColours);
     this.possibleNumbers = this.calcPossibleNumbers(this.includedNumbers, this.excludedNumbers);
-  };
+  }
 
   constructor() { }
 

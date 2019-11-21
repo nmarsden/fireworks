@@ -20,13 +20,13 @@ import { ModalService } from '../../modal.service';
 })
 export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
-  @Input() isOpen: boolean = false;
-  @Input() isFullScreen: boolean = false;
+  @Input() isOpen = false;
+  @Input() isFullScreen = false;
   @Input() position: string;
   @Output() cancelled = new EventEmitter<string>();
 
   private element: any;
-  private isInitialized: boolean = false;
+  private isInitialized = false;
 
   constructor(private modalService: ModalService, private el: ElementRef) {
     this.element = el.nativeElement;
@@ -61,8 +61,7 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if (typeof changes.isOpen !== 'undefined' && changes.isOpen.currentValue && this.isInitialized) {
       this.modalService.open(this.id);
-    }
-    else if (typeof changes.isOpen !== 'undefined' && !changes.isOpen.currentValue && this.isInitialized) {
+    } else if (typeof changes.isOpen !== 'undefined' && !changes.isOpen.currentValue && this.isInitialized) {
       this.modalService.close(this.id);
     }
   }
@@ -87,7 +86,7 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
 
   // cancel modal
   cancel(): void {
-    this.cancelled && this.cancelled.emit(this.id);
+    this.cancelled.emit(this.id);
 
     this.close();
   }

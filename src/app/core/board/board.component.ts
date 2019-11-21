@@ -19,20 +19,20 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() remainingTiles: number;
   @Input() infoTokens: number;
   @Input() fuseTokens: number;
-  @Input() isShowPartnerHints: boolean = true;
-  @Input() isShowPlayerHints: boolean = true;
-  @Input() isHidden: boolean = false;
+  @Input() isShowPartnerHints = true;
+  @Input() isShowPlayerHints = true;
+  @Input() isHidden = false;
   @Output() partnerTileHintClicked = new EventEmitter();
   @Output() playerTileHintClicked = new EventEmitter();
   @Output() partnerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileClicked = new EventEmitter<Tile>();
   @Output() deckClicked = new EventEmitter<string>();
 
-  displayedPlayedTiles:Tile[];
+  displayedPlayedTiles: Tile[];
 
-  highestPlayedTiles = (playedTiles):Tile[] => {
-    let colours: string[] = ["white", "red", "yellow", "green", "blue", "rainbow"];
-    let highestColourNumber: Map<string, Tile> = new Map();
+  highestPlayedTiles = (playedTiles): Tile[] => {
+    const colours: string[] = ['white', 'red', 'yellow', 'green', 'blue', 'rainbow'];
+    const highestColourNumber: Map<string, Tile> = new Map();
 
     colours.forEach(c => highestColourNumber.set(c, new Tile(c, null)));
     playedTiles.forEach(t => {
@@ -41,7 +41,7 @@ export class BoardComponent implements OnInit, OnChanges {
       }
     });
     return Array.from(highestColourNumber.values());
-  };
+  }
 
   constructor() { }
 

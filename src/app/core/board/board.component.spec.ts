@@ -16,7 +16,7 @@ describe('BoardComponent', () => {
   }));
 
   beforeEach(() => {
-    let noTiles: Tile[] = [];
+    const noTiles: Tile[] = [];
     fixture = TestBed.createComponent(BoardComponent);
     component = fixture.componentInstance;
     component.playerTiles = noTiles;

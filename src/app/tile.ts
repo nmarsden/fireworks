@@ -10,15 +10,15 @@ export class Tile {
   possibleColours: string[];
   possibleNumbers: number[];
 
-  private standardColours: string[] = ["white", "red", "yellow", "green", "blue"];
+  private standardColours: string[] = ['white', 'red', 'yellow', 'green', 'blue'];
   private rainbowColour = 'rainbow';
   private allColours: string[] = [...this.standardColours, this.rainbowColour];
   private allNumbers: number[] = [1, 2, 3, 4, 5];
 
-  constructor(colour: string, number: number) {
+  constructor(colour: string, aNumber: number) {
     this.id = Guid.create();
     this.colour = colour;
-    this.number = number;
+    this.number = aNumber;
     this.possibleColours = [...this.standardColours, this.rainbowColour];
     this.possibleNumbers = [...this.allNumbers];
   }
@@ -50,7 +50,7 @@ export class Tile {
     // - if single included: add to excluded all 'other' colours except rainbow
     // - if multiple included: add to excluded all colours except rainbow
     if (includedColourHints.length === 1) {
-      excluded = this.standardColours.filter(c => c != includedColourHints[0]);
+      excluded = this.standardColours.filter(c => c !== includedColourHints[0]);
     }
     if (includedColourHints.length > 1) {
       excluded.push(...this.standardColours);
@@ -65,7 +65,7 @@ export class Tile {
     excluded = [...new Set(excluded)];
 
     return excluded;
-  };
+  }
 
   private calcExcludedNumbers = (includedNumberHints: number[], excludedNumberHints: number[]) => {
     let excluded: number[] = [];
@@ -73,7 +73,7 @@ export class Tile {
     // When included number hint
     // - add to excluded all other numbers
     if (includedNumberHints.length === 1) {
-      excluded = this.allNumbers.filter(c => c != includedNumberHints[0]);
+      excluded = this.allNumbers.filter(c => c !== includedNumberHints[0]);
     }
     // When excluded number hint
     // - add to excluded
@@ -84,17 +84,17 @@ export class Tile {
     excluded = [...new Set(excluded)];
 
     return excluded;
-  };
+  }
 
   private calcPossibleColours = (includedColours: string[], excludedColours: string[]) => {
-    let excluded = this.calcExcludedColours(includedColours, excludedColours);
+    const excluded = this.calcExcludedColours(includedColours, excludedColours);
     return this.allColours.filter(item => excluded.indexOf(item) < 0);
-  };
+  }
 
   private calcPossibleNumbers = (includedNumbers: number[], excludedNumbers: number[]) => {
-    let excluded = this.calcExcludedNumbers(includedNumbers, excludedNumbers);
+    const excluded = this.calcExcludedNumbers(includedNumbers, excludedNumbers);
     return this.allNumbers.filter(item => excluded.indexOf(item) < 0);
-  };
+  }
 
   private updatePossibilities = () => {
     // Handle includedNumbers & excludedNumbers containing strings by converting to numbers
@@ -103,6 +103,6 @@ export class Tile {
 
     this.possibleColours = this.calcPossibleColours(this.hints.includedColours, this.hints.excludedColours);
     this.possibleNumbers = this.calcPossibleNumbers(this.hints.includedNumbers, this.hints.excludedNumbers);
-  };
+  }
 
 }

@@ -13,7 +13,7 @@ export class TileGroupComponent implements OnInit {
   @Input() chosenColour: string;
   @Input() chosenNumber: number;
   @Input() displayMode: string;
-  @Input() isShowHints: boolean = true;
+  @Input() isShowHints = true;
   @Output() tileHintClicked = new EventEmitter();
   @Output() tileClicked = new EventEmitter<Tile>();
 

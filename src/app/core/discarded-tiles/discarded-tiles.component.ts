@@ -10,7 +10,7 @@ export class DiscardedTilesComponent implements OnInit, OnChanges {
   @Input() tiles: Tile[];
   @Input() chosenTile: Tile;
 
-  colours: string[] = ["white", "red", "yellow", "green", "blue", "rainbow"];
+  colours: string[] = ['white', 'red', 'yellow', 'green', 'blue', 'rainbow'];
 
   displayedTiles: Tile[][];
 
@@ -24,12 +24,12 @@ export class DiscardedTilesComponent implements OnInit, OnChanges {
     this.displayedTiles = [[], [], [], [], []];
 
     // group tiles by number and colour
-    let groupedByNumberAndColour: Map<string, Tile[]>[] = [];
-    for (let i=0; i<5; i++) {
-      let groupedByColour: Map<string, Tile[]> = new Map();
+    const groupedByNumberAndColour: Map<string, Tile[]>[] = [];
+    for (let i = 0; i < 5; i++) {
+      const groupedByColour: Map<string, Tile[]> = new Map();
       this.colours.forEach(c => groupedByColour.set(c, []));
       tiles.forEach(t => {
-        if (t.number === (i+1)) {
+        if (t.number === (i + 1)) {
           groupedByColour.get(t.colour).push(t);
         }
       });
@@ -38,22 +38,20 @@ export class DiscardedTilesComponent implements OnInit, OnChanges {
 
     // populate displayed tiles
     // -- add tiles
-    let addFillerTiles = (tileRow: Tile[], colour: string, number: number, requiredTotal: number) => {
-      for (let n=0; n < (requiredTotal - groupedByNumberAndColour[number-1].get(colour).length); n++) {
-        tileRow.push(new Tile(null, number));
+    const addFillerTiles = (tileRow: Tile[], colour: string, aNumber: number, requiredTotal: number) => {
+      for (let n = 0; n < (requiredTotal - groupedByNumberAndColour[aNumber - 1].get(colour).length); n++) {
+        tileRow.push(new Tile(null, aNumber));
       }
     };
     // -- add filler tiles
-    this.displayedTiles.forEach((tileRow: Tile[], i:number) => {
+    this.displayedTiles.forEach((tileRow: Tile[], i: number) => {
       this.colours.forEach(c => {
         tileRow.push(...groupedByNumberAndColour[i].get(c));
         if (i === 0) {
           addFillerTiles(tileRow, c, 1, 3);
-        }
-        else if (i === 1 || i === 2 || i === 3) {
-          addFillerTiles(tileRow, c, i+1, 2);
-        }
-        else if (i === 4) {
+        } else if (i === 1 || i === 2 || i === 3) {
+          addFillerTiles(tileRow, c, i + 1, 2);
+        } else if (i === 4) {
           addFillerTiles(tileRow, c, 5, 1);
         }
       });

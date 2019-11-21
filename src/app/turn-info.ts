@@ -2,12 +2,6 @@ import { TileHint } from './tile-hint';
 import { Tile } from './tile';
 
 export class TurnInfo {
-  tileHint: TileHint;
-  playedTile: Tile;
-  discardedTile: Tile;
-  isEarnedInfoToken: boolean;
-  isLostFuseToken: boolean;
-  isEmptyInfo: boolean;
 
   private constructor(tileHint: TileHint,
                       playedTile: Tile,
@@ -21,10 +15,12 @@ export class TurnInfo {
     this.isLostFuseToken = isLostFuseToken;
     this.isEmptyInfo = (tileHint === null && playedTile === null && discardedTile === null);
   }
-
-  isNotEmpty(): boolean {
-    return !this.isEmptyInfo;
-  }
+  tileHint: TileHint;
+  playedTile: Tile;
+  discardedTile: Tile;
+  isEarnedInfoToken: boolean;
+  isLostFuseToken: boolean;
+  isEmptyInfo: boolean;
 
   static empty(): TurnInfo {
     return new TurnInfo(null, null, null, false, false);
@@ -48,5 +44,9 @@ export class TurnInfo {
 
   static discarded(discardedTile: Tile): TurnInfo {
     return new TurnInfo(null, null, discardedTile, true, false);
+  }
+
+  isNotEmpty(): boolean {
+    return !this.isEmptyInfo;
   }
 }

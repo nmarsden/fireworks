@@ -16,7 +16,7 @@ describe('DiscardedTilesComponent', () => {
   }));
 
   beforeEach(() => {
-    let noTiles: Tile[] = [];
+    const noTiles: Tile[] = [];
 
     fixture = TestBed.createComponent(DiscardedTilesComponent);
     component = fixture.componentInstance;

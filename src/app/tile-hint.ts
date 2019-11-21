@@ -2,9 +2,9 @@ export class TileHint {
   colour: string;
   number: number;
 
-  private constructor(colour: string, number: number) {
+  private constructor(colour: string, aNumber: number) {
     this.colour = colour;
-    this.number = number;
+    this.number = aNumber;
   }
 
   static noHint(): TileHint {
@@ -15,8 +15,8 @@ export class TileHint {
     return new TileHint(colour, null);
   }
 
-  static numberHint(number: number): TileHint {
-    return new TileHint(null, number);
+  static numberHint(aNumber: number): TileHint {
+    return new TileHint(null, aNumber);
   }
 
   public toString(): string {

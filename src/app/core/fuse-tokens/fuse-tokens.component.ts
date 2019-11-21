@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FuseTokensComponent implements OnInit {
   @Input() tokensRemaining: number;
-  @Input() isShowSingleToken: boolean = false;
+  @Input() isShowSingleToken = false;
 
   constructor() { }
 
