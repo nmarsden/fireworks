@@ -48,7 +48,7 @@ describe('Fireworks App', () => {
     });
 
     it('should display ready button', () => {
-      expect(playerReadyModalPO.getReadyButton().getText()).toEqual('Ready');
+      expect(playerReadyModalPO.getReadyButton().getAttribute('innerText')).toEqual('Ready');
     });
 
     it('should display board when ready button clicked', () => {
@@ -67,8 +67,11 @@ describe('Fireworks App', () => {
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // Get browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+    // Print browser logs
+    logs.forEach( log => console.log(log.message) );
+    // Assert that there are no errors emitted from the browser
     expect(logs).not.toContain(jasmine.objectContaining({
       level: logging.Level.SEVERE,
     } as logging.Entry));

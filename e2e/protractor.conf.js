@@ -13,6 +13,14 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
+    loggingPrefs: {
+      driver: 'WARNING',
+      server: 'WARNING',
+      browser: 'WARNING'
+    },
+    chromeOptions: {
+      args: [ '--headless', '--window-size=1920,1080' ]
+    },
     browserName: 'chrome'
   },
   directConnect: true,
