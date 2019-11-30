@@ -1,7 +1,6 @@
 import { TileHint } from './tile-hint';
 import { TileHints } from './tile-hints';
 import { Guid } from './guid';
-import { SerializableTile } from './core/state/serializable/serializable-tile';
 import { ArrayUtils } from './array-utils';
 
 export class Tile {
@@ -23,23 +22,6 @@ export class Tile {
     this.number = aNumber;
     this.possibleColours = [...this.standardColours, this.rainbowColour];
     this.possibleNumbers = [...this.allNumbers];
-  }
-
-  static fromSerializableTile(serializableTile: SerializableTile): Tile {
-    if (serializableTile.colour === undefined && serializableTile.aNumber === undefined) {
-      return null;
-    }
-    const tile = new Tile(
-      serializableTile.colour,
-      serializableTile.aNumber
-    );
-    tile.possibleNumbers = Object.assign([], serializableTile.possibleNumbers);
-    tile.possibleColours = Object.assign([], serializableTile.possibleColours);
-    tile.hints.includedNumbers = Object.assign([], serializableTile.hints.includedNumbers);
-    tile.hints.excludedNumbers = Object.assign([], serializableTile.hints.excludedNumbers);
-    tile.hints.includedColours = Object.assign([], serializableTile.hints.includedColours);
-    tile.hints.excludedColours = Object.assign([], serializableTile.hints.excludedColours);
-    return tile;
   }
 
   isSame(tile: Tile): boolean {

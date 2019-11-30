@@ -1,6 +1,5 @@
 import { TileHint } from './tile-hint';
 import { Tile } from './tile';
-import { SerializableTurnInfo } from './core/state/serializable/serializable-turn-info';
 
 export class TurnInfo {
 
@@ -45,49 +44,6 @@ export class TurnInfo {
 
   static discarded(discardedTile: Tile): TurnInfo {
     return new TurnInfo(null, null, discardedTile, true, false);
-  }
-
-  static fromSerializableTurnInfo(serializableTurnInfo: SerializableTurnInfo): TurnInfo {
-    if (serializableTurnInfo.isEmptyInfo) {
-      return TurnInfo.empty();
-    }
-    if (serializableTurnInfo.tileHint.isDefined()) {
-      return TurnInfo.hint(TileHint.fromSerializableTileHint(serializableTurnInfo.tileHint));
-    }
-    if (serializableTurnInfo.playedTile.isDefined() && serializableTurnInfo.isEarnedInfoToken) {
-      return TurnInfo.playedAndEarnedInfoToken(Tile.fromSerializableTile(serializableTurnInfo.playedTile));
-    }
-    if (serializableTurnInfo.playedTile.isDefined() && serializableTurnInfo.isLostFuseToken) {
-      return TurnInfo.playedAndLostFuseToken(Tile.fromSerializableTile(serializableTurnInfo.playedTile));
-    }
-    if (serializableTurnInfo.playedTile.isDefined()) {
-      return TurnInfo.played(Tile.fromSerializableTile(serializableTurnInfo.playedTile));
-    }
-    if (serializableTurnInfo.discardedTile.isDefined()) {
-      return TurnInfo.discarded(Tile.fromSerializableTile(serializableTurnInfo.discardedTile));
-    }
-
-
-
-    // if (serializableTurnInfo.isEmptyInfo) {
-    //   return TurnInfo.empty();
-    // }
-    // if (serializableTurnInfo.tileHint != null) {
-    //   return TurnInfo.hint(TileHint.fromSerializableTileHint(serializableTurnInfo.tileHint));
-    // }
-    // if (serializableTurnInfo.playedTile != null && serializableTurnInfo.isEarnedInfoToken) {
-    //   return TurnInfo.playedAndEarnedInfoToken(Tile.fromSerializableTile(serializableTurnInfo.playedTile));
-    // }
-    // if (serializableTurnInfo.playedTile != null && serializableTurnInfo.isLostFuseToken) {
-    //   return TurnInfo.playedAndLostFuseToken(Tile.fromSerializableTile(serializableTurnInfo.playedTile));
-    // }
-    // if (serializableTurnInfo.playedTile != null) {
-    //   return TurnInfo.played(Tile.fromSerializableTile(serializableTurnInfo.playedTile));
-    // }
-    // if (serializableTurnInfo.discardedTile != null) {
-    //   return TurnInfo.discarded(Tile.fromSerializableTile(serializableTurnInfo.discardedTile));
-    // }
-    throw new Error('Unable to convert from SerializableTurnInfo to TurnInfo');
   }
 
   isNotEmpty(): boolean {

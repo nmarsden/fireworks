@@ -3,6 +3,9 @@ import { SerializableTile } from './serializable-tile';
 import { GameState } from '../../../game-state';
 import { SerializableTileHint } from './serializable-tile-hint';
 import { SerializableTurnInfo } from './serializable-turn-info';
+import { TurnInfo } from '../../../turn-info';
+import { Tile } from '../../../tile';
+import { TileHint } from '../../../tile-hint';
 
 @Serializable()
 export class SerializableGameState {
@@ -69,38 +72,51 @@ export class SerializableGameState {
     );
   }
 
+  static toGameState(serializableGameState: SerializableGameState): GameState {
+    const turnInfo: TurnInfo = SerializableTurnInfo.toTurnInfo(serializableGameState.turnInfo);
+    const remainingTiles: Tile[] = serializableGameState.remainingTiles.map( st => SerializableTile.toTile(st) );
+    const playerTiles: Tile[] = serializableGameState.playerTiles.map( st => SerializableTile.toTile(st) );
+    const partnerTiles: Tile[] = serializableGameState.partnerTiles.map( st => SerializableTile.toTile(st) );
+    const playedTiles: Tile[] = [];
+    const disacardedTiles: Tile[] = [];
+    const chosenTile: Tile = SerializableTile.toTile(serializableGameState.chosenTile);
+    const partnerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.partnerTileHintChosen);
+    const playerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.playerTileHintChosen);
+
+    return new GameState(
+      serializableGameState.isOnInitAlreadyCalled,
+      serializableGameState.currentPlayer,
+      serializableGameState.waitingPlayer,
+      serializableGameState.turnInfoText,
+      turnInfo,
+      remainingTiles,
+      playerTiles,
+      partnerTiles,
+      playedTiles,
+      disacardedTiles,
+      serializableGameState.infoTokens,
+      serializableGameState.fuseTokens,
+      chosenTile,
+      serializableGameState.isShowPartnerHints,
+      serializableGameState.isShowPlayerHints,
+      serializableGameState.isPartnerTilesChosen,
+      partnerTileHintChosen,
+      playerTileHintChosen,
+      serializableGameState.isGameOver,
+      serializableGameState.isGameWon,
+      serializableGameState.isHideBoard,
+      serializableGameState.gameOverHeading
+    );
+  }
+
   static deserialize(serializedGameState: string): SerializableGameState {
     const base64Decoded = atob(serializedGameState);
-
-    console.warn('--- deserialize ---');
-    console.warn('base 64 decoded', base64Decoded);
-
     const json = JSON.parse(base64Decoded);
-
-    console.warn('json', JSON.stringify(json));
-
-    const serializableGameState = deserialize(json, SerializableGameState);
-
-    console.warn('serializableGameState', serializableGameState);
-
-    return serializableGameState;
-
+    return deserialize(json, SerializableGameState);
   }
 
   serialize(): string {
-    console.warn('--- serialize ---');
-
     const json = serialize(this, true);
-    // const json = serialize(this, false);
-    console.warn('json', JSON.stringify(json));
-
-    const base64Encoded = btoa(JSON.stringify(json));
-    console.warn('base 64 encoded json', base64Encoded);
-
-    return base64Encoded;
-  }
-
-  asString(): string {
-    return JSON.stringify(serialize(this));
+    return btoa(JSON.stringify(json));
   }
 }

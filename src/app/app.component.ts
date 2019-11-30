@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
     if (serializedGameState) {
 
       const serializableGameState = SerializableGameState.deserialize(serializedGameState);
-      const gameState = GameState.fromSerializableGameState(serializableGameState);
+      const gameState = SerializableGameState.toGameState(serializableGameState);
       // console.warn(`gameState ${gameState.asString()}`);
     }
 

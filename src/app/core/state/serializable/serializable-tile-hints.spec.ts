@@ -3,20 +3,19 @@ import { SerializableTileHints } from './serializable-tile-hints';
 
 describe('SerializableTileHints', () => {
 
-  describe('fromTileHints', () => {
+  describe('fromTileHints and toTileHints', () => {
 
-    it('should populate colour and number', () => {
-      const tileHints = new TileHints();
-      tileHints.includedNumbers = [1];
-      tileHints.excludedNumbers = [2];
-      tileHints.includedColours = ['red'];
-      tileHints.excludedColours = ['white'];
-      const serializableTileHints = SerializableTileHints.fromTileHints(tileHints);
+    it('all properties', () => {
+      const tileHints1 = new TileHints();
+      tileHints1.includedNumbers = [1];
+      tileHints1.excludedNumbers = [2];
+      tileHints1.includedColours = ['red'];
+      tileHints1.excludedColours = ['white'];
 
-      expect(serializableTileHints.includedColours).toEqual(tileHints.includedColours);
-      expect(serializableTileHints.excludedColours).toEqual(tileHints.excludedColours);
-      expect(serializableTileHints.includedNumbers).toEqual(tileHints.includedNumbers);
-      expect(serializableTileHints.excludedNumbers).toEqual(tileHints.excludedNumbers);
+      const serializableTileHints = SerializableTileHints.fromTileHints(tileHints1);
+      const tileHints2 = SerializableTileHints.toTileHints(serializableTileHints);
+
+      expect(tileHints2.isSame(tileHints1)).toBeTruthy();
     });
   });
 

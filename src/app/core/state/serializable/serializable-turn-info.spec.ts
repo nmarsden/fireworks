@@ -5,13 +5,13 @@ import { Tile } from '../../../tile';
 
 describe('SerializableTurnInfo', () => {
 
-  describe('fromTurnInfo', () => {
+  describe('fromTurnInfo and toTurnInfo', () => {
 
     it('empty', () => {
       const turnInfo1 = TurnInfo.empty();
       const serializableTurnInfo = SerializableTurnInfo.fromTurnInfo(turnInfo1);
 
-      const turnInfo2 = TurnInfo.fromSerializableTurnInfo(serializableTurnInfo);
+      const turnInfo2 = SerializableTurnInfo.toTurnInfo(serializableTurnInfo);
       expect(turnInfo2.isSame(turnInfo1)).toBeTruthy();
     });
 
@@ -19,7 +19,7 @@ describe('SerializableTurnInfo', () => {
       const turnInfo1 = TurnInfo.hint(TileHint.colourHint('white'));
       const serializableTurnInfo = SerializableTurnInfo.fromTurnInfo(turnInfo1);
 
-      const turnInfo2 = TurnInfo.fromSerializableTurnInfo(serializableTurnInfo);
+      const turnInfo2 = SerializableTurnInfo.toTurnInfo(serializableTurnInfo);
       expect(turnInfo2.isSame(turnInfo1)).toBeTruthy();
     });
 
@@ -27,7 +27,7 @@ describe('SerializableTurnInfo', () => {
       const turnInfo1 = TurnInfo.played(new Tile('red', 2));
       const serializableTurnInfo = SerializableTurnInfo.fromTurnInfo(turnInfo1);
 
-      const turnInfo2 = TurnInfo.fromSerializableTurnInfo(serializableTurnInfo);
+      const turnInfo2 = SerializableTurnInfo.toTurnInfo(serializableTurnInfo);
       expect(turnInfo2.isSame(turnInfo1)).toBeTruthy();
     });
 
@@ -35,7 +35,7 @@ describe('SerializableTurnInfo', () => {
       const turnInfo1 = TurnInfo.playedAndEarnedInfoToken(new Tile('red', 2));
       const serializableTurnInfo = SerializableTurnInfo.fromTurnInfo(turnInfo1);
 
-      const turnInfo2 = TurnInfo.fromSerializableTurnInfo(serializableTurnInfo);
+      const turnInfo2 = SerializableTurnInfo.toTurnInfo(serializableTurnInfo);
       expect(turnInfo2.isSame(turnInfo1)).toBeTruthy();
     });
 
@@ -43,7 +43,7 @@ describe('SerializableTurnInfo', () => {
       const turnInfo1 = TurnInfo.playedAndLostFuseToken(new Tile('red', 2));
       const serializableTurnInfo = SerializableTurnInfo.fromTurnInfo(turnInfo1);
 
-      const turnInfo2 = TurnInfo.fromSerializableTurnInfo(serializableTurnInfo);
+      const turnInfo2 = SerializableTurnInfo.toTurnInfo(serializableTurnInfo);
       expect(turnInfo2.isSame(turnInfo1)).toBeTruthy();
     });
 
@@ -51,7 +51,7 @@ describe('SerializableTurnInfo', () => {
       const turnInfo1 = TurnInfo.discarded(new Tile('white', 3));
       const serializableTurnInfo = SerializableTurnInfo.fromTurnInfo(turnInfo1);
 
-      const turnInfo2 = TurnInfo.fromSerializableTurnInfo(serializableTurnInfo);
+      const turnInfo2 = SerializableTurnInfo.toTurnInfo(serializableTurnInfo);
       expect(turnInfo2.isSame(turnInfo1)).toBeTruthy();
     });
   });

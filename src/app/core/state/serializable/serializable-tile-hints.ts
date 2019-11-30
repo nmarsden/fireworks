@@ -36,7 +36,6 @@ export class SerializableTileHints {
 
   static fromTileHints(tileHints: TileHints): SerializableTileHints {
     if (tileHints === null) {
-      // return undefined;
       return new SerializableTileHints(undefined, undefined, undefined, undefined);
     }
     return new SerializableTileHints(
@@ -45,6 +44,15 @@ export class SerializableTileHints {
       tileHints.includedNumbers.length === 0 ? undefined : Object.assign([], tileHints.includedNumbers),
       tileHints.excludedNumbers.length === 0 ? undefined : Object.assign([], tileHints.excludedNumbers)
     );
+  }
+
+  static toTileHints(serializableTileHints: SerializableTileHints): TileHints {
+    const tileHints = new TileHints();
+    tileHints.includedNumbers = Object.assign([], serializableTileHints.includedNumbers);
+    tileHints.excludedNumbers = Object.assign([], serializableTileHints.excludedNumbers);
+    tileHints.includedColours = Object.assign([], serializableTileHints.includedColours);
+    tileHints.excludedColours = Object.assign([], serializableTileHints.excludedColours);
+    return tileHints;
   }
 
   isDefined() {

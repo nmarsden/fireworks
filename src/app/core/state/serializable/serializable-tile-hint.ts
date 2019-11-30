@@ -26,6 +26,10 @@ export class SerializableTileHint {
     return new SerializableTileHint(c, n);
   }
 
+  static toTileHint(serializableTileHint: SerializableTileHint): TileHint {
+    return new TileHint(serializableTileHint.colour || null, serializableTileHint.aNumber || null);
+  }
+
   isDefined() {
     return (this.colour !== undefined || this.aNumber !== undefined);
   }

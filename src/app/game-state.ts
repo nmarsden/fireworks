@@ -1,5 +1,4 @@
 import { Tile } from './tile';
-import { SerializableGameState } from './core/state/serializable/serializable-game-state';
 import { TileHint } from './tile-hint';
 import { TurnInfo } from './turn-info';
 
@@ -61,43 +60,6 @@ export class GameState {
     );
   }
 
-  static fromSerializableGameState(serializableGameState: SerializableGameState) {
-    const turnInfo: TurnInfo = TurnInfo.fromSerializableTurnInfo(serializableGameState.turnInfo);
-    const remainingTiles: Tile[] = serializableGameState.remainingTiles.map( st => Tile.fromSerializableTile(st) );
-    const playerTiles: Tile[] = serializableGameState.playerTiles.map( st => Tile.fromSerializableTile(st) );
-    const partnerTiles: Tile[] = serializableGameState.partnerTiles.map( st => Tile.fromSerializableTile(st) );
-    const playedTiles: Tile[] = [];
-    const disacardedTiles: Tile[] = [];
-    const chosenTile: Tile = Tile.fromSerializableTile(serializableGameState.chosenTile);
-    const partnerTileHintChosen: TileHint = TileHint.fromSerializableTileHint(serializableGameState.partnerTileHintChosen);
-    const playerTileHintChosen: TileHint = TileHint.fromSerializableTileHint(serializableGameState.playerTileHintChosen);
-
-    return new GameState(
-      serializableGameState.isOnInitAlreadyCalled,
-      serializableGameState.currentPlayer,
-      serializableGameState.waitingPlayer,
-      serializableGameState.turnInfoText,
-      turnInfo,
-      remainingTiles,
-      playerTiles,
-      partnerTiles,
-      playedTiles,
-      disacardedTiles,
-      serializableGameState.infoTokens,
-      serializableGameState.fuseTokens,
-      chosenTile,
-      serializableGameState.isShowPartnerHints,
-      serializableGameState.isShowPlayerHints,
-      serializableGameState.isPartnerTilesChosen,
-      partnerTileHintChosen,
-      playerTileHintChosen,
-      serializableGameState.isGameOver,
-      serializableGameState.isGameWon,
-      serializableGameState.isHideBoard,
-      serializableGameState.gameOverHeading
-    );
-  }
-
   compareTileArrays(arr1: Tile[], arr2: Tile[]) {
     if (arr1.length !== arr2.length) {
       return false;
@@ -112,30 +74,6 @@ export class GameState {
   }
 
   isSame(gameState: GameState): boolean {
-    // console.warn('-- isSame --');
-    // console.warn(gameState.isOnInitAlreadyCalled === this.isOnInitAlreadyCalled);
-    // console.warn(gameState.currentPlayer === this.currentPlayer);
-    // console.warn(gameState.waitingPlayer === this.waitingPlayer);
-    // console.warn(gameState.turnInfoText === this.turnInfoText);
-    // // TurnInfo.empty(), // turnInfo: TurnInfo = TurnInfo.empty);
-    // console.warn(this.compareTileArrays(gameState.remainingTiles, this.remainingTiles));
-    // console.warn(this.compareTileArrays(gameState.playerTiles, this.playerTiles));
-    // console.warn(this.compareTileArrays(gameState.partnerTiles, this.partnerTiles));
-    // console.warn(this.compareTileArrays(gameState.playedTiles, this.playedTiles));
-    // console.warn(this.compareTileArrays(gameState.discardedTiles, this.discardedTiles));
-    // console.warn(gameState.infoTokens === this.infoTokens);
-    // console.warn(gameState.fuseTokens === this.fuseTokens);
-    // console.warn(gameState.chosenTile.isSame(this.chosenTile));
-    // console.warn(gameState.isShowPartnerHints === this.isShowPartnerHints);
-    // console.warn(gameState.isShowPlayerHints === this.isShowPlayerHints);
-    // console.warn(gameState.isPartnerTilesChosen === this.isPartnerTilesChosen);
-    // // TileHint.noHint(), // partnerTileHintChosen: TileHint = TileHint.noHint);
-    // // TileHint.noHint(), // playerTileHintChosen: TileHint = TileHint.noHint);
-    // console.warn(gameState.isGameOver === this.isGameOver);
-    // console.warn(gameState.isGameWon === this.isGameWon);
-    // console.warn(gameState.isHideBoard === this.isHideBoard);
-    // console.warn(gameState.gameOverHeading === this.gameOverHeading);
-
     return (
       gameState.isOnInitAlreadyCalled === this.isOnInitAlreadyCalled &&
       gameState.currentPlayer === this.currentPlayer &&

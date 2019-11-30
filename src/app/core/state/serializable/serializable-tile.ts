@@ -60,6 +60,20 @@ export class SerializableTile {
     );
   }
 
+  static toTile(serializableTile: SerializableTile): Tile {
+    if (serializableTile.colour === undefined && serializableTile.aNumber === undefined) {
+      return null;
+    }
+    const tile = new Tile(
+      serializableTile.colour,
+      serializableTile.aNumber
+    );
+    tile.hints = SerializableTileHints.toTileHints(serializableTile.hints);
+    tile.possibleNumbers = Object.assign([], serializableTile.possibleNumbers);
+    tile.possibleColours = Object.assign([], serializableTile.possibleColours);
+    return tile;
+  }
+
   isDefined() {
     return this.colour !== undefined ||
            this.aNumber !== undefined ||

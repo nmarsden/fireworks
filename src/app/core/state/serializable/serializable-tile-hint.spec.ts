@@ -3,30 +3,30 @@ import { SerializableTileHint } from './serializable-tile-hint';
 
 describe('SerializableTileHint', () => {
 
-  describe('fromTileHint', () => {
+  describe('fromTileHint and toTileHint', () => {
 
     it('no hint', () => {
-      const tileHint = TileHint.noHint();
-      const serializableTileHint = SerializableTileHint.fromTileHint(tileHint);
+      const tileHint1 = TileHint.noHint();
+      const serializableTileHint = SerializableTileHint.fromTileHint(tileHint1);
+      const tileHint2 = SerializableTileHint.toTileHint(serializableTileHint);
 
-      expect(serializableTileHint.colour).toBeUndefined();
-      expect(serializableTileHint.aNumber).toBeUndefined();
+      expect(tileHint2.isSame(tileHint1)).toBeTruthy();
     });
 
     it('colour hint', () => {
-      const tileHint = TileHint.colourHint('red');
-      const serializableTileHint = SerializableTileHint.fromTileHint(tileHint);
+      const tileHint1 = TileHint.colourHint('red');
+      const serializableTileHint = SerializableTileHint.fromTileHint(tileHint1);
+      const tileHint2 = SerializableTileHint.toTileHint(serializableTileHint);
 
-      expect(serializableTileHint.colour).toEqual('red');
-      expect(serializableTileHint.aNumber).toBeUndefined();
+      expect(tileHint2.isSame(tileHint1)).toBeTruthy();
     });
 
     it('number hint', () => {
-      const tileHint = TileHint.numberHint(2);
-      const serializableTileHint = SerializableTileHint.fromTileHint(tileHint);
+      const tileHint1 = TileHint.numberHint(2);
+      const serializableTileHint = SerializableTileHint.fromTileHint(tileHint1);
+      const tileHint2 = SerializableTileHint.toTileHint(serializableTileHint);
 
-      expect(serializableTileHint.colour).toBeUndefined();
-      expect(serializableTileHint.aNumber).toEqual(2);
+      expect(tileHint2.isSame(tileHint1)).toBeTruthy();
     });
   });
 

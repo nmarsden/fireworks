@@ -1,10 +1,9 @@
-import { SerializableTileHint } from './core/state/serializable/serializable-tile-hint';
 
 export class TileHint {
   colour: string;
   number: number;
 
-  private constructor(colour: string, aNumber: number) {
+  constructor(colour: string, aNumber: number) {
     this.colour = colour;
     this.number = aNumber;
   }
@@ -18,10 +17,6 @@ export class TileHint {
 
   static numberHint(aNumber: number): TileHint {
     return new TileHint(null, aNumber);
-  }
-
-  static fromSerializableTileHint(serializableTileHint: SerializableTileHint): TileHint {
-    return new TileHint(serializableTileHint.colour || null, serializableTileHint.aNumber || null);
   }
 
   isSame(tileHint: TileHint): boolean {
