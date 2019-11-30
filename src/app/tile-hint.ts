@@ -1,3 +1,5 @@
+import { SerializableTileHint } from './core/state/serializable/serializable-tile-hint';
+
 export class TileHint {
   colour: string;
   number: number;
@@ -6,7 +8,6 @@ export class TileHint {
     this.colour = colour;
     this.number = aNumber;
   }
-
   static noHint(): TileHint {
     return new TileHint(null, null);
   }
@@ -17,6 +18,14 @@ export class TileHint {
 
   static numberHint(aNumber: number): TileHint {
     return new TileHint(null, aNumber);
+  }
+
+  static fromSerializableTileHint(serializableTileHint: SerializableTileHint): TileHint {
+    return new TileHint(serializableTileHint.colour || null, serializableTileHint.aNumber || null);
+  }
+
+  isSame(tileHint: TileHint): boolean {
+    return tileHint.colour === this.colour && tileHint.number === this.number;
   }
 
   public toString(): string {

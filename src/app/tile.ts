@@ -1,6 +1,8 @@
 import { TileHint } from './tile-hint';
 import { TileHints } from './tile-hints';
 import { Guid } from './guid';
+import { SerializableTile } from './core/state/serializable/serializable-tile';
+import { ArrayUtils } from './array-utils';
 
 export class Tile {
   id: Guid;
@@ -23,6 +25,36 @@ export class Tile {
     this.possibleNumbers = [...this.allNumbers];
   }
 
+  static fromSerializableTile(serializableTile: SerializableTile): Tile {
+    if (serializableTile.colour === undefined && serializableTile.aNumber === undefined) {
+      return null;
+    }
+    const tile = new Tile(
+      serializableTile.colour,
+      serializableTile.aNumber
+    );
+    tile.possibleNumbers = Object.assign([], serializableTile.possibleNumbers);
+    tile.possibleColours = Object.assign([], serializableTile.possibleColours);
+    tile.hints.includedNumbers = Object.assign([], serializableTile.hints.includedNumbers);
+    tile.hints.excludedNumbers = Object.assign([], serializableTile.hints.excludedNumbers);
+    tile.hints.includedColours = Object.assign([], serializableTile.hints.includedColours);
+    tile.hints.excludedColours = Object.assign([], serializableTile.hints.excludedColours);
+    return tile;
+  }
+
+  isSame(tile: Tile): boolean {
+    return tile !== null &&
+           tile.colour === this.colour &&
+           tile.number === this.number &&
+           ArrayUtils.compareArrays(tile.possibleColours, this.possibleColours) &&
+           ArrayUtils.compareArrays(tile.possibleNumbers, this.possibleNumbers) &&
+           tile.hints.isSame(this.hints);
+  }
+
+  isEmpty(): boolean {
+    return (this.colour === null && this.number === null);
+  }
+
   toString(): string {
     return `colour:${this.colour}, number:${this.number}`;
   }
@@ -43,7 +75,7 @@ export class Tile {
     this.updatePossibilities();
   }
 
-  private calcExcludedColours = (includedColourHints: string[], excludedColourHints: string[]) => {
+  calcExcludedColours(includedColourHints: string[], excludedColourHints: string[]) {
     let excluded: string[] = [];
 
     // When included colour hint
@@ -67,7 +99,7 @@ export class Tile {
     return excluded;
   }
 
-  private calcExcludedNumbers = (includedNumberHints: number[], excludedNumberHints: number[]) => {
+  calcExcludedNumbers(includedNumberHints: number[], excludedNumberHints: number[]) {
     let excluded: number[] = [];
 
     // When included number hint
@@ -86,17 +118,17 @@ export class Tile {
     return excluded;
   }
 
-  private calcPossibleColours = (includedColours: string[], excludedColours: string[]) => {
+  calcPossibleColours(includedColours: string[], excludedColours: string[]) {
     const excluded = this.calcExcludedColours(includedColours, excludedColours);
     return this.allColours.filter(item => excluded.indexOf(item) < 0);
   }
 
-  private calcPossibleNumbers = (includedNumbers: number[], excludedNumbers: number[]) => {
+  calcPossibleNumbers(includedNumbers: number[], excludedNumbers: number[]) {
     const excluded = this.calcExcludedNumbers(includedNumbers, excludedNumbers);
     return this.allNumbers.filter(item => excluded.indexOf(item) < 0);
   }
 
-  private updatePossibilities = () => {
+  updatePossibilities() {
     // Handle includedNumbers & excludedNumbers containing strings by converting to numbers
     // this.includedNumbers = this.includedNumbers.map(Number);
     // this.excludedNumbers = this.excludedNumbers.map(Number);

@@ -3,6 +3,9 @@ import { Tile } from './tile';
 import { TileHint } from './tile-hint';
 import { ModalService } from './modal.service';
 import { TurnInfo } from './turn-info';
+import { HttpParams } from '@angular/common/http';
+import { GameState } from './game-state';
+import { SerializableGameState } from './core/state/serializable/serializable-game-state';
 
 @Component({
   selector: 'app-root',
@@ -95,8 +98,27 @@ export class AppComponent implements OnInit {
       return hints;
   }
 
+  getParamValueQueryString = ( paramName ) => {
+    const url = window.location.href;
+    let paramValue;
+    if (url.includes('?')) {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      paramValue = httpParams.get(paramName);
+    }
+    return paramValue;
+  }
+
   ngOnInit() {
     this.setVhAccordingToWindowInnerHeight();
+
+    // TODO check if loading a given state
+    const serializedGameState = this.getParamValueQueryString('s');
+    if (serializedGameState) {
+
+      const serializableGameState = SerializableGameState.deserialize(serializedGameState);
+      const gameState = GameState.fromSerializableGameState(serializableGameState);
+      // console.warn(`gameState ${gameState.asString()}`);
+    }
 
     this.newGame();
     this.isOnInitAlreadyCalled = true;

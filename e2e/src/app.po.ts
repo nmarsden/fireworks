@@ -1,7 +1,8 @@
-import { browser, by, element } from 'protractor';
+import { browser } from 'protractor';
 
 export class AppPO {
-  navigateTo() {
-    return browser.get(browser.baseUrl) as Promise<any>;
+  navigateTo(initialState?) {
+    const url = initialState ? `${browser.baseUrl}?s=${initialState}` : `${browser.baseUrl}`;
+    return browser.get(url) as Promise<any>;
   }
 }
