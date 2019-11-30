@@ -7,7 +7,7 @@ export class Tile {
   id: Guid;
   colour: string;
   number: number;
-  hints: TileHints = new TileHints();
+  hints: TileHints;
   possibleColours: string[];
   possibleNumbers: number[];
 
@@ -20,8 +20,9 @@ export class Tile {
     this.id = Guid.create();
     this.colour = colour;
     this.number = aNumber;
-    this.possibleColours = [...this.standardColours, this.rainbowColour];
-    this.possibleNumbers = [...this.allNumbers];
+    this.hints = new TileHints();
+    this.possibleColours = null;
+    this.possibleNumbers = null;
   }
 
   isSame(tile: Tile): boolean {

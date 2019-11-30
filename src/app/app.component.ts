@@ -158,6 +158,10 @@ export class AppComponent implements OnInit {
     this.partnerTiles = this.remainingTiles.splice(0, 5);
     this.playerTiles = this.remainingTiles.splice(0, 5);
 
+    // Update possibilities for partner & player tiles
+    this.partnerTiles.forEach(t => t.updatePossibilities());
+    this.playerTiles.forEach(t => t.updatePossibilities());
+
     // Generate possible player hints
     // let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
     //
@@ -423,7 +427,9 @@ export class AppComponent implements OnInit {
 
     // Add new tile to player tiles from remainingTiles
     if (this.remainingTiles.length > 0) {
-      this.playerTiles.push(...this.remainingTiles.splice(0, 1));
+      const newTile: Tile = this.remainingTiles.splice(0, 1)[0];
+      newTile.updatePossibilities();
+      this.playerTiles.push(newTile);
     }
 
     // Close player tile modal
@@ -462,7 +468,9 @@ export class AppComponent implements OnInit {
 
     // Add new tile to player tiles from remainingTiles
     if (this.remainingTiles.length > 0) {
-      this.playerTiles.push(...this.remainingTiles.splice(0, 1));
+      const newTile: Tile = this.remainingTiles.splice(0, 1)[0];
+      newTile.updatePossibilities();
+      this.playerTiles.push(newTile);
     }
 
     // Close player tile modal

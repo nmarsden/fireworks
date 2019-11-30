@@ -68,7 +68,7 @@ describe('SerializableGameState', () => {
       const serializableGameState1 = SerializableGameState.fromGameState(gameState1);
       const serializedGameState = serializableGameState1.serialize();
 
-      expect(serializedGameState.length).toEqual(4712);
+      expect(serializedGameState.length).toEqual(2552);
     });
   });
 });

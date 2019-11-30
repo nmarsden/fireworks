@@ -95,7 +95,7 @@ describe('SerializableTurnInfo', () => {
         f: false,
         i: false,
         d: { h: {  } },
-        p: { pn: '12345', pc: 'wrygbx', h: {  }, n: 2, c: 'r' },
+        p: { h: {  }, n: 2, c: 'r' },
         h: {  }
       }) );
     });
@@ -109,7 +109,7 @@ describe('SerializableTurnInfo', () => {
         f: false,
         i: true,
         d: { h: {  } },
-        p: { pn: '12345', pc: 'wrygbx', h: {  }, n: 2, c: 'r' },
+        p: { h: {  }, n: 2, c: 'r' },
         h: {  }
       }) );
     });
@@ -123,7 +123,7 @@ describe('SerializableTurnInfo', () => {
         f: true,
         i: false,
         d: { h: {  } },
-        p: { pn: '12345', pc: 'wrygbx', h: {  }, n: 2, c: 'r' },
+        p: { h: {  }, n: 2, c: 'r' },
         h: {  }
       }) );
     });
@@ -137,7 +137,7 @@ describe('SerializableTurnInfo', () => {
         f: false,
         i: false,
         d: { h: {  } },
-        p: { pn: '12345', pc: 'wrygbx', h: {  }, n: 3, c: 'w' },
+        p: { h: {  }, n: 3, c: 'w' },
         h: {  }
       }) );
     });

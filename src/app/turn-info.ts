@@ -52,11 +52,11 @@ export class TurnInfo {
 
   isSame(turnInfo: TurnInfo): boolean {
     return ((this.tileHint === null && turnInfo.tileHint === null) ||
-            (this.tileHint != null && turnInfo.tileHint != null && this.tileHint.isSame(turnInfo.tileHint))) &&
+            (this.tileHint !== null && turnInfo.tileHint != null && this.tileHint.isSame(turnInfo.tileHint))) &&
            ((this.playedTile === null && turnInfo.playedTile === null) ||
-            (this.playedTile != null && turnInfo.playedTile != null && this.playedTile.isSame(turnInfo.playedTile))) &&
+            (this.playedTile !== null && turnInfo.playedTile !== null && this.playedTile.isSame(turnInfo.playedTile))) &&
            ((this.discardedTile === null && turnInfo.discardedTile === null) ||
-            (this.discardedTile != null && turnInfo.discardedTile != null && this.discardedTile.isSame(turnInfo.discardedTile))) &&
+            (this.discardedTile !== null && turnInfo.discardedTile !== null && this.discardedTile.isSame(turnInfo.discardedTile))) &&
            this.isEarnedInfoToken === turnInfo.isEarnedInfoToken &&
            this.isLostFuseToken === turnInfo.isLostFuseToken &&
            this.isEmptyInfo === turnInfo.isEmptyInfo;

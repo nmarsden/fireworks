@@ -20,8 +20,7 @@ export class SerializableTile {
     public aNumber: number,
 
     @JsonProperty({
-      name: 'h',
-      type: SerializableTileHints
+      name: 'h'
     })
     public hints: SerializableTileHints,
 
@@ -55,8 +54,8 @@ export class SerializableTile {
       tile.colour === null ? undefined : tile.colour,
       tile.number === null ? undefined : tile.number,
       SerializableTileHints.fromTileHints(tile.hints),
-      tile.possibleColours,
-      tile.possibleNumbers
+      tile.possibleColours === null ? undefined : tile.possibleColours,
+      tile.possibleNumbers === null ? undefined : tile.possibleNumbers
     );
   }
 
@@ -69,8 +68,8 @@ export class SerializableTile {
       serializableTile.aNumber
     );
     tile.hints = SerializableTileHints.toTileHints(serializableTile.hints);
-    tile.possibleNumbers = Object.assign([], serializableTile.possibleNumbers);
-    tile.possibleColours = Object.assign([], serializableTile.possibleColours);
+    tile.possibleNumbers = serializableTile.possibleNumbers === undefined ? null : Object.assign([], serializableTile.possibleNumbers);
+    tile.possibleColours = serializableTile.possibleColours === undefined ? null : Object.assign([], serializableTile.possibleColours);
     return tile;
   }
 

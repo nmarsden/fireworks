@@ -73,12 +73,14 @@ export class SerializableGameState {
   }
 
   static toGameState(serializableGameState: SerializableGameState): GameState {
+    // TODO do not include possibilities/hints for played & discarded tiles in order to reduce serialized size
+
     const turnInfo: TurnInfo = SerializableTurnInfo.toTurnInfo(serializableGameState.turnInfo);
     const remainingTiles: Tile[] = serializableGameState.remainingTiles.map( st => SerializableTile.toTile(st) );
     const playerTiles: Tile[] = serializableGameState.playerTiles.map( st => SerializableTile.toTile(st) );
     const partnerTiles: Tile[] = serializableGameState.partnerTiles.map( st => SerializableTile.toTile(st) );
     const playedTiles: Tile[] = [];
-    const disacardedTiles: Tile[] = [];
+    const discardedTiles: Tile[] = [];
     const chosenTile: Tile = SerializableTile.toTile(serializableGameState.chosenTile);
     const partnerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.partnerTileHintChosen);
     const playerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.playerTileHintChosen);
@@ -93,7 +95,7 @@ export class SerializableGameState {
       playerTiles,
       partnerTiles,
       playedTiles,
-      disacardedTiles,
+      discardedTiles,
       serializableGameState.infoTokens,
       serializableGameState.fuseTokens,
       chosenTile,

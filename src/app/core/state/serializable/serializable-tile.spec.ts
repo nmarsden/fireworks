@@ -29,7 +29,32 @@ describe('SerializableTile', () => {
 
   describe('toJson', () => {
 
-    it('all properties', () => {
+    it('initial', () => {
+      const tile = new Tile('red', 1);
+      const serializableTile = SerializableTile.fromTile(tile);
+
+      expect(serializableTile.toJson()).toEqual( Object({
+        h: { },
+        n: 1,
+        c: 'r'
+      }) );
+    });
+
+    it('with updated possibilities', () => {
+      const tile = new Tile('red', 1);
+      tile.updatePossibilities();
+      const serializableTile = SerializableTile.fromTile(tile);
+
+      expect(serializableTile.toJson()).toEqual( Object({
+        pn: '12345',
+        pc: 'wrygbx',
+        h: { },
+        n: 1,
+        c: 'r'
+      }) );
+    });
+
+    it('with hints applied', () => {
       const tile1 = new Tile('red', 1);
       tile1.applyHint(TileHint.colourHint('blue'));
       tile1.applyHint(TileHint.numberHint(1));
@@ -49,8 +74,6 @@ describe('SerializableTile', () => {
       const serializableTile = SerializableTile.fromTile(tile1);
 
       expect(serializableTile.toJson()).toEqual( Object({
-        pn: '12345',
-        pc: 'wrygbx',
         h: {}
       }) );
     });
