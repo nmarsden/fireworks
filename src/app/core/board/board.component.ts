@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Tile } from '../../tile';
 import { TileHint } from '../../tile-hint';
+import { Hands } from '../../hands';
 
 @Component({
   selector: 'app-board',
@@ -8,10 +9,9 @@ import { TileHint } from '../../tile-hint';
   styleUrls: ['./board.component.less']
 })
 export class BoardComponent implements OnInit, OnChanges {
-  @Input() partnerTiles: Tile[];
   @Input() playedTiles: Tile[];
+  @Input() hands: Hands;
   @Input() discardedTiles: Tile[];
-  @Input() playerTiles: Tile[];
   @Input() chosenTile: Tile;
   @Input() isPartnerTilesChosen: boolean;
   @Input() partnerTileHintChosen: TileHint = TileHint.noHint();

@@ -1,6 +1,7 @@
 import { Tile } from './tile';
 import { TileHint } from './tile-hint';
 import { TurnInfo } from './turn-info';
+import { Hands } from './hands';
 
 export class GameState {
 
@@ -13,6 +14,7 @@ export class GameState {
     public remainingTiles: Tile[],
     public playerTiles: Tile[],
     public partnerTiles: Tile[],
+    public hands: Hands,
     public playedTiles: Tile[],
     public discardedTiles: Tile[],
     public infoTokens: number,
@@ -34,6 +36,8 @@ export class GameState {
     const playerTiles = remainingTiles.splice(0, 5);
     const partnerTiles = remainingTiles.splice(0, 5);
 
+    const hands = new Hands(playerTiles, partnerTiles);
+
     return new GameState(
       false, // isOnInitAlreadyCalled
       0, // currentPlayer: number,
@@ -43,6 +47,7 @@ export class GameState {
       remainingTiles, // remainingTiles: Tile[],
       playerTiles, // playerTiles: Tile[],
       partnerTiles, // partnerTiles: Tile[],
+      hands,
       [], // playedTiles: Tile[],
       [], // discardedTiles: Tile[],
       8, // infoTokens: number,

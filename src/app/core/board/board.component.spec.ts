@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoreModule } from '../core.module';
 import { BoardComponent } from './board.component';
 import { Tile } from '../../tile';
+import { Hands } from '../../hands';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -19,8 +20,7 @@ describe('BoardComponent', () => {
     const noTiles: Tile[] = [];
     fixture = TestBed.createComponent(BoardComponent);
     component = fixture.componentInstance;
-    component.playerTiles = noTiles;
-    component.partnerTiles = noTiles;
+    component.hands = new Hands(noTiles, noTiles);
     component.playedTiles = noTiles;
     component.discardedTiles = noTiles;
     component.remainingTiles = 60;

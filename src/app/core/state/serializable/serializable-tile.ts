@@ -18,25 +18,6 @@ export class SerializableTile {
       name: 'n'
     })
     public aNumber: number,
-
-    @JsonProperty({
-      name: 'h'
-    })
-    public hints: SerializableTileHints,
-
-    @JsonProperty({
-      name: 'pc',
-      onDeserialize: SerializableHelpers.onDeserializeColours,
-      onSerialize: SerializableHelpers.onSerializeColours
-    })
-    public possibleColours: string[],
-
-    @JsonProperty({
-      name: 'pn',
-      onDeserialize: SerializableHelpers.onDeserializeNumbers,
-      onSerialize: SerializableHelpers.onSerializeNumbers
-    })
-    public possibleNumbers: number[],
   ) {
   }
 
@@ -44,18 +25,12 @@ export class SerializableTile {
     if (tile === null) {
       return new SerializableTile(
         undefined,
-        undefined,
-        SerializableTileHints.fromTileHints(null),
-        undefined,
         undefined
       );
     }
     return new SerializableTile(
       tile.colour === null ? undefined : tile.colour,
-      tile.number === null ? undefined : tile.number,
-      SerializableTileHints.fromTileHints(tile.hints),
-      tile.possibleColours === null ? undefined : tile.possibleColours,
-      tile.possibleNumbers === null ? undefined : tile.possibleNumbers
+      tile.number === null ? undefined : tile.number
     );
   }
 
@@ -67,18 +42,12 @@ export class SerializableTile {
       serializableTile.colour,
       serializableTile.aNumber
     );
-    tile.hints = SerializableTileHints.toTileHints(serializableTile.hints);
-    tile.possibleNumbers = serializableTile.possibleNumbers === undefined ? null : Object.assign([], serializableTile.possibleNumbers);
-    tile.possibleColours = serializableTile.possibleColours === undefined ? null : Object.assign([], serializableTile.possibleColours);
     return tile;
   }
 
   isDefined() {
     return this.colour !== undefined ||
-           this.aNumber !== undefined ||
-           this.hints.isDefined() ||
-           this.possibleColours !== undefined ||
-           this.possibleNumbers !== undefined;
+           this.aNumber !== undefined;
   }
 
   toJson(): string {

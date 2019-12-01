@@ -66,8 +66,8 @@ describe('SerializableTurnInfo', () => {
         e: true,
         f: false,
         i: false,
-        d: { h: {  } },
-        p: { h: {  } },
+        d: { },
+        p: { },
         h: {  }
       }) );
     });
@@ -80,8 +80,8 @@ describe('SerializableTurnInfo', () => {
         e: false,
         f: false,
         i: false,
-        d: { h: {  } },
-        p: { h: {  } },
+        d: { },
+        p: { },
         h: { c: 'w' }
       }) );
     });
@@ -94,8 +94,8 @@ describe('SerializableTurnInfo', () => {
         e: false,
         f: false,
         i: false,
-        d: { h: {  } },
-        p: { h: {  }, n: 2, c: 'r' },
+        d: { },
+        p: { n: 2, c: 'r' },
         h: {  }
       }) );
     });
@@ -108,8 +108,8 @@ describe('SerializableTurnInfo', () => {
         e: false,
         f: false,
         i: true,
-        d: { h: {  } },
-        p: { h: {  }, n: 2, c: 'r' },
+        d: { },
+        p: { n: 2, c: 'r' },
         h: {  }
       }) );
     });
@@ -122,8 +122,8 @@ describe('SerializableTurnInfo', () => {
         e: false,
         f: true,
         i: false,
-        d: { h: {  } },
-        p: { h: {  }, n: 2, c: 'r' },
+        d: { },
+        p: { n: 2, c: 'r' },
         h: {  }
       }) );
     });
@@ -136,8 +136,8 @@ describe('SerializableTurnInfo', () => {
         e: false,
         f: false,
         i: false,
-        d: { h: {  } },
-        p: { h: {  }, n: 3, c: 'w' },
+        d: { },
+        p: { n: 3, c: 'w' },
         h: {  }
       }) );
     });

@@ -85,7 +85,8 @@ describe('GameState', () => {
     it('should be false when different', () => {
       const gameState1 = GameState.newGame(allTiles());
       const gameState2 = GameState.newGame(allTiles());
-      gameState2.partnerTiles[1].applyHint( TileHint.numberHint(gameState2.partnerTiles[1].number));
+
+      gameState2.isShowPlayerHints = true;
 
       expect(gameState2.isSame(gameState1)).toBeFalsy();
     });

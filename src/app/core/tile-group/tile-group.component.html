@@ -3,6 +3,7 @@
   <app-tile *ngFor="let tile of tiles"
             [displayMode]="displayMode"
             [tile]="tile"
+            [tileFact]="tileFacts.get(tile.id)"
             [isChosen]="isGroupChosen || (chosenTile && chosenTile.id === tile.id)"
             [chosenColour]="chosenColour"
             [chosenNumber]="chosenNumber"

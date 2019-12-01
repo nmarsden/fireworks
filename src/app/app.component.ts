@@ -6,6 +6,7 @@ import { TurnInfo } from './turn-info';
 import { HttpParams } from '@angular/common/http';
 import { GameState } from './game-state';
 import { SerializableGameState } from './core/state/serializable/serializable-game-state';
+import { Hands } from './hands';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +26,7 @@ export class AppComponent implements OnInit {
   turnInfoText: string;
   turnInfo: TurnInfo = TurnInfo.empty();
   remainingTiles: Tile[];
-  playerTiles: Tile[];
-  partnerTiles: Tile[];
+  hands: Hands;
   playedTiles: Tile[];
   discardedTiles: Tile[];
   infoTokens: number;
@@ -138,8 +138,6 @@ export class AppComponent implements OnInit {
     this.turnInfoText = 'Starting a new game';
     this.turnInfo = TurnInfo.empty();
     this.remainingTiles = [];
-    this.playerTiles = [];
-    this.partnerTiles = [];
     this.playedTiles = [];
     this.discardedTiles = [];
     this.infoTokens = 8;
@@ -155,12 +153,9 @@ export class AppComponent implements OnInit {
     this.remainingTiles = this.shuffle(tiles);
 
     // Deal
-    this.partnerTiles = this.remainingTiles.splice(0, 5);
-    this.playerTiles = this.remainingTiles.splice(0, 5);
-
-    // Update possibilities for partner & player tiles
-    this.partnerTiles.forEach(t => t.updatePossibilities());
-    this.playerTiles.forEach(t => t.updatePossibilities());
+    const partnerTiles = this.remainingTiles.splice(0, 5);
+    const playerTiles = this.remainingTiles.splice(0, 5);
+    this.hands = new Hands(playerTiles, partnerTiles);
 
     // Generate possible player hints
     // let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
@@ -244,9 +239,8 @@ export class AppComponent implements OnInit {
   onPlayerReadyButtonClicked() {
     // Prepare for next player's turn
     // -- swap player & partner tiles
-    const tempTiles = this.playerTiles;
-    this.playerTiles = this.partnerTiles.reverse();
-    this.partnerTiles = tempTiles.reverse();
+    this.hands.switchPlayer();
+
     // -- swap player & partner tile hint
     const tempTileHint = this.playerTileHintChosen;
     this.playerTileHintChosen = this.partnerTileHintChosen;
@@ -308,14 +302,10 @@ export class AppComponent implements OnInit {
     this.playerTileHintChosen = TileHint.noHint();
 
     // Determine available colour hints
-    if (this.partnerTiles.some(t => t.colour === this.rainbowColour)) {
-      this.partnerHintColourOptions = [...this.standardColours];
-    } else {
-      this.partnerHintColourOptions = [...new Set(this.partnerTiles.map(t => t.colour))];
-    }
-    this.partnerHintColourOptions.sort((c1, c2) => this.standardColours.indexOf(c1) > this.standardColours.indexOf(c2) ? 1 : -1);
+    this.partnerHintColourOptions = this.hands.getPartnerHintColourOptions();
+
     // Determine available number hints
-    this.partnerHintNumberOptions = [...new Set(this.partnerTiles.map(t => t.number))].sort();
+    this.partnerHintNumberOptions = this.hands.getPartnerHintNumberOptions();
 
     this.openModal('partner-tile-modal');
   }
@@ -323,7 +313,7 @@ export class AppComponent implements OnInit {
   onColourHintButtonClicked(colour: string) {
     // Apply colour hint
     this.partnerTileHintChosen = TileHint.colourHint(colour);
-    this.partnerTiles.forEach(t => t.applyHint(this.partnerTileHintChosen));
+    this.hands.applyPartnerHint(this.partnerTileHintChosen);
 
     // Remove info token
     this.infoTokens--;
@@ -342,7 +332,7 @@ export class AppComponent implements OnInit {
   onNumberHintButtonClicked(chosenNumber: number) {
     // Apply number hint
     this.partnerTileHintChosen = TileHint.numberHint(chosenNumber);
-    this.partnerTiles.forEach(t => t.applyHint(this.partnerTileHintChosen));
+    this.hands.applyPartnerHint(this.partnerTileHintChosen);
 
     // Remove info token
     this.infoTokens--;
@@ -374,7 +364,7 @@ export class AppComponent implements OnInit {
 
   onPlayTileButtonClicked() {
     // Remove chosen tile from player tiles
-    this.playerTiles = this.playerTiles.filter(t => t.id !== this.chosenTile.id);
+    this.hands.removePlayerTile(this.chosenTile);
 
     // Update turn info
     this.turnInfo = TurnInfo.played(this.chosenTile);
@@ -428,8 +418,7 @@ export class AppComponent implements OnInit {
     // Add new tile to player tiles from remainingTiles
     if (this.remainingTiles.length > 0) {
       const newTile: Tile = this.remainingTiles.splice(0, 1)[0];
-      newTile.updatePossibilities();
-      this.playerTiles.push(newTile);
+      this.hands.addPlayerTile(newTile);
     }
 
     // Close player tile modal
@@ -446,7 +435,7 @@ export class AppComponent implements OnInit {
 
   onDiscardTileButtonClicked() {
     // Remove chosen tile from player tiles
-    this.playerTiles = this.playerTiles.filter(t => t.id !== this.chosenTile.id);
+    this.hands.removePlayerTile(this.chosenTile);
 
     // Add info token
     this.infoTokens++;
@@ -469,8 +458,7 @@ export class AppComponent implements OnInit {
     // Add new tile to player tiles from remainingTiles
     if (this.remainingTiles.length > 0) {
       const newTile: Tile = this.remainingTiles.splice(0, 1)[0];
-      newTile.updatePossibilities();
-      this.playerTiles.push(newTile);
+      this.hands.addPlayerTile(newTile);
     }
 
     // Close player tile modal

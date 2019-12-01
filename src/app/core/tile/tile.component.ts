@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tile } from '../../tile';
+import { TileFact } from '../../tile-fact';
 
 @Component({
   selector: 'app-tile',
@@ -8,6 +9,7 @@ import { Tile } from '../../tile';
 })
 export class TileComponent implements OnInit {
   @Input() tile: Tile;
+  @Input() tileFact: TileFact;
   @Input() displayMode: string;
   @Input() isChosen: boolean;
   @Input() isClickable = true;

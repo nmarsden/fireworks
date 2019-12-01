@@ -6,6 +6,7 @@ import { SerializableTurnInfo } from './serializable-turn-info';
 import { TurnInfo } from '../../../turn-info';
 import { Tile } from '../../../tile';
 import { TileHint } from '../../../tile-hint';
+import { Hands } from '../../../hands';
 
 @Serializable()
 export class SerializableGameState {
@@ -79,6 +80,7 @@ export class SerializableGameState {
     const remainingTiles: Tile[] = serializableGameState.remainingTiles.map( st => SerializableTile.toTile(st) );
     const playerTiles: Tile[] = serializableGameState.playerTiles.map( st => SerializableTile.toTile(st) );
     const partnerTiles: Tile[] = serializableGameState.partnerTiles.map( st => SerializableTile.toTile(st) );
+    const hands = new Hands(playerTiles, partnerTiles);
     const playedTiles: Tile[] = [];
     const discardedTiles: Tile[] = [];
     const chosenTile: Tile = SerializableTile.toTile(serializableGameState.chosenTile);
@@ -94,6 +96,7 @@ export class SerializableGameState {
       remainingTiles,
       playerTiles,
       partnerTiles,
+      hands,
       playedTiles,
       discardedTiles,
       serializableGameState.infoTokens,
