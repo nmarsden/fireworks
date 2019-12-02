@@ -47,6 +47,61 @@ describe('SerializableGameState', () => {
     });
   });
 
+  describe('toJson', () => {
+
+    it('new game', () => {
+      const tiles = allTiles();
+      const gameState1 = GameState.newGame(tiles);
+
+      const serializableGameState = SerializableGameState.fromGameState(gameState1);
+
+      expect(serializableGameState.toJson()).toEqual(Object({
+        gameOverHeading: '',
+        isHideBoard: true,
+        isGameWon: false,
+        isGameOver: false,
+        playerTileHintChosen: {},
+        partnerTileHintChosen: {},
+        isPartnerTilesChosen: false,
+        isShowPlayerHints: false,
+        isShowPartnerHints: false,
+        chosenTile: {},
+        fuseTokens: 3,
+        infoTokens: 8,
+        discardedTiles: [],
+        playedTiles: [],
+        hands: [{
+          t: ['w1', 'r1', 'y1', 'g1', 'b1'],
+          f: [
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'w' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'r' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'y' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'g' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'b' }
+          ]
+        }, {
+          t: ['x1', 'w1', 'r1', 'y1', 'g1'],
+          f: [
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'x' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'w' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'r' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'y' },
+            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'g' }
+          ]
+        }],
+        remainingTiles: [
+          'b1', 'x1', 'w1', 'r1', 'y1', 'g1', 'b1', 'x1', 'w2', 'r2', 'y2', 'g2', 'b2', 'x2', 'w2', 'r2', 'y2',
+          'g2', 'b2', 'x2', 'w3', 'r3', 'y3', 'g3', 'b3', 'x3', 'w3', 'r3', 'y3', 'g3', 'b3', 'x3', 'w4', 'r4',
+          'y4', 'g4', 'b4', 'x4', 'w4', 'r4', 'y4', 'g4', 'b4', 'x4', 'w5', 'r5', 'y5', 'g5', 'b5', 'x5'],
+        turnInfo: { e: true, f: false, i: false, d: {}, p: {}, h: {} },
+        turnInfoText: 'Starting a new game',
+        waitingPlayer: 1,
+        currentPlayer: 0,
+        isOnInitAlreadyCalled: false
+      }));
+    });
+  });
+
   describe('serialize and deserialize', () => {
 
     it('new game', () => {
@@ -68,7 +123,7 @@ describe('SerializableGameState', () => {
       const serializableGameState1 = SerializableGameState.fromGameState(gameState1);
       const serializedGameState = serializableGameState1.serialize();
 
-      expect(serializedGameState.length).toEqual(2640);
+      expect(serializedGameState.length).toEqual(1760);
     });
   });
 });

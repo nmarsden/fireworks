@@ -1,4 +1,5 @@
 import { Guid } from './guid';
+import { SerializableHelpers } from './core/state/serializable/serializable-helpers';
 
 export class Tile {
   id: Guid;
@@ -9,6 +10,14 @@ export class Tile {
     this.id = Guid.create();
     this.colour = colour;
     this.number = aNumber;
+  }
+
+  static deserialize(tile: string) {
+    return new Tile(SerializableHelpers.onDeserializeColour(tile[0]), Number.parseInt(tile[1], 10));
+  }
+
+  serialize() {
+    return SerializableHelpers.onSerializeColour(this.colour) + this.number;
   }
 
   isSame(tile: Tile): boolean {
@@ -24,5 +33,4 @@ export class Tile {
   toString(): string {
     return `colour:${this.colour}, number:${this.number}`;
   }
-
 }

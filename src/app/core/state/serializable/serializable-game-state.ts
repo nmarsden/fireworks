@@ -18,10 +18,10 @@ export class SerializableGameState {
     @JsonProperty() public waitingPlayer: number,
     @JsonProperty() public turnInfoText: string,
     @JsonProperty() public turnInfo: SerializableTurnInfo,
-    @JsonProperty({ type: SerializableTile }) public remainingTiles: SerializableTile[],
+    @JsonProperty() public remainingTiles: string[],
     @JsonProperty({ type: SerializableHand }) public hands: SerializableHand[],
-    @JsonProperty({ type: SerializableTile }) public playedTiles: SerializableTile[],
-    @JsonProperty({ type: SerializableTile }) public discardedTiles: SerializableTile[],
+    @JsonProperty() public playedTiles: string[],
+    @JsonProperty() public discardedTiles: string[],
     @JsonProperty() public infoTokens: number,
     @JsonProperty() public fuseTokens: number,
     @JsonProperty() public chosenTile: SerializableTile,
@@ -38,13 +38,13 @@ export class SerializableGameState {
 
   static fromGameState(gameState: GameState) {
     const turnInfo: SerializableTurnInfo = SerializableTurnInfo.fromTurnInfo(gameState.turnInfo);
-    const remainingTiles: SerializableTile[] = gameState.remainingTiles.map(st => SerializableTile.fromTile(st));
+    const remainingTiles: string[] = gameState.remainingTiles.map(t => t.serialize());
     const hands: SerializableHand[] = [
       SerializableHand.fromHand(gameState.hands.playerHand),
       SerializableHand.fromHand(gameState.hands.partnerHand)
     ];
-    const playedTiles: SerializableTile[] = gameState.playedTiles.map(st => SerializableTile.fromTile(st));
-    const discardedTiles: SerializableTile[] = gameState.discardedTiles.map(st => SerializableTile.fromTile(st));
+    const playedTiles: string[] = gameState.playedTiles.map(t => t.serialize());
+    const discardedTiles: string[] = gameState.discardedTiles.map(t => t.serialize());
     const chosenTile: SerializableTile = SerializableTile.fromTile(gameState.chosenTile);
     const partnerTileHintChosen: SerializableTileHint = SerializableTileHint.fromTileHint(gameState.partnerTileHintChosen);
     const playerTileHintChosen: SerializableTileHint = SerializableTileHint.fromTileHint(gameState.playerTileHintChosen);
@@ -76,12 +76,12 @@ export class SerializableGameState {
 
   static toGameState(serializableGameState: SerializableGameState): GameState {
     const turnInfo: TurnInfo = SerializableTurnInfo.toTurnInfo(serializableGameState.turnInfo);
-    const remainingTiles: Tile[] = serializableGameState.remainingTiles.map(st => SerializableTile.toTile(st));
+    const remainingTiles: Tile[] = serializableGameState.remainingTiles.map(t => Tile.deserialize(t));
     const hands = new Hands([], []);
     hands.playerHand = SerializableHand.toHand(serializableGameState.hands[0]);
     hands.partnerHand = SerializableHand.toHand(serializableGameState.hands[1]);
-    const playedTiles: Tile[] = [];
-    const discardedTiles: Tile[] = [];
+    const playedTiles: Tile[] = serializableGameState.playedTiles.map(t => Tile.deserialize(t));
+    const discardedTiles: Tile[] = serializableGameState.discardedTiles.map(t => Tile.deserialize(t));
     const chosenTile: Tile = SerializableTile.toTile(serializableGameState.chosenTile);
     const partnerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.partnerTileHintChosen);
     const playerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.playerTileHintChosen);
@@ -120,5 +120,9 @@ export class SerializableGameState {
   serialize(): string {
     const json = serialize(this, true);
     return btoa(JSON.stringify(json));
+  }
+
+  toJson(): string {
+    return serialize(this, true);
   }
 }

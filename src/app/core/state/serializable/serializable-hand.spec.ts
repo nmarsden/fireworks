@@ -68,8 +68,9 @@ describe('SerializableHand', () => {
       hand.addTile(new Tile('white', 2));
       const serializableHand = SerializableHand.fromHand(hand);
 
+      // TODO do not serialize colour & number in tileFacts, as the tile already has this information
       expect(serializableHand.toJson()).toEqual(Object({
-        t: [{ c: 'w', n: 2 }],
+        t: ['w2'],
         f: [{ c: 'w', n: 2, h: {}, pc: 'wrygbx', pn: '12345' }]
       }));
     });
@@ -81,10 +82,7 @@ describe('SerializableHand', () => {
       const serializableHand = SerializableHand.fromHand(hand);
 
       expect(serializableHand.toJson()).toEqual(Object({
-        t: [
-          { c: 'w', n: 2 },
-          { c: 'b', n: 5 }
-        ],
+        t: ['w2', 'b5'],
         f: [
           { c: 'w', n: 2, h: {}, pc: 'wrygbx', pn: '12345' },
           { c: 'b', n: 5, h: {}, pc: 'wrygbx', pn: '12345' }
@@ -100,7 +98,7 @@ describe('SerializableHand', () => {
       const serializableHand = SerializableHand.fromHand(hand);
 
       expect(serializableHand.toJson()).toEqual(Object({
-        t: [{ c: 'w', n: 2 }],
+        t: ['w2'],
         f: [{ c: 'w', n: 2, h: { ec: 'r', en: '3' }, pc: 'wygb', pn: '1245' }]
       }));
     });

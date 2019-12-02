@@ -2,16 +2,16 @@ import { JsonProperty, Serializable, serialize } from 'typescript-json-serialize
 import { Hand } from '../../../hand';
 import { SerializableTile } from './serializable-tile';
 import { SerializableTileFact } from './serializable-tile-fact';
+import { Tile } from '../../../tile';
 
 @Serializable()
 export class SerializableHand {
 
   constructor(
     @JsonProperty({
-      name: 't',
-      type: SerializableTile
+      name: 't'
     })
-    public tiles: SerializableTile[],
+    public tiles: string[],
 
     @JsonProperty({
       name: 'f',
@@ -22,7 +22,7 @@ export class SerializableHand {
   }
 
   static fromHand(hand: Hand): SerializableHand {
-    const serializableTiles: SerializableTile[] = hand.tiles.map(t => SerializableTile.fromTile(t));
+    const serializableTiles: string[] = hand.tiles.map(t => t.serialize());
     const serializableFacts: SerializableTileFact[] = [];
     hand.tiles.forEach(t => {
       serializableFacts.push(SerializableTileFact.fromTileFact(hand.tileFacts.get(t.id)));
@@ -33,7 +33,7 @@ export class SerializableHand {
   static toHand(serializableHand: SerializableHand): Hand {
     const hand = new Hand();
     serializableHand.tiles.forEach((serializableTile, index) => {
-      const tile = SerializableTile.toTile(serializableTile);
+      const tile = Tile.deserialize(serializableTile);
       hand.addTile(tile);
       hand.tileFacts.set(tile.id, SerializableTileFact.toTileFact(serializableHand.tileFacts[index]));
     });
