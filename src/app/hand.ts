@@ -59,4 +59,18 @@ export class Hand {
     hand.tileFacts = new Map(this.tileFacts);
     return hand;
   }
+
+  isSame(hand: Hand): boolean {
+    return this.tiles.length === hand.tiles.length &&
+           this.tiles.every((t, i) => t.isSame(hand.tiles[i])) &&
+           this.compareTileFacts(hand);
+  }
+
+  private compareTileFacts(hand: Hand) {
+    const sortedTileFacts1 = this.tiles.map(t => this.tileFacts.get(t.id));
+    const sortedTileFacts2 = hand.tiles.map(t => hand.tileFacts.get(t.id));
+
+    return sortedTileFacts1.length === sortedTileFacts2.length &&
+           sortedTileFacts1.every((tf, i) => tf.isSame(sortedTileFacts2[i]));
+  }
 }

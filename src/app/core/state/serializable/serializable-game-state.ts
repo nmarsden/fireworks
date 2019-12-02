@@ -7,6 +7,7 @@ import { TurnInfo } from '../../../turn-info';
 import { Tile } from '../../../tile';
 import { TileHint } from '../../../tile-hint';
 import { Hands } from '../../../hands';
+import { SerializableHand } from './serializable-hand';
 
 @Serializable()
 export class SerializableGameState {
@@ -18,8 +19,7 @@ export class SerializableGameState {
     @JsonProperty() public turnInfoText: string,
     @JsonProperty() public turnInfo: SerializableTurnInfo,
     @JsonProperty({ type: SerializableTile }) public remainingTiles: SerializableTile[],
-    @JsonProperty({ type: SerializableTile }) public playerTiles: SerializableTile[],
-    @JsonProperty({ type: SerializableTile }) public partnerTiles: SerializableTile[],
+    @JsonProperty({ type: SerializableHand }) public hands: SerializableHand[],
     @JsonProperty({ type: SerializableTile }) public playedTiles: SerializableTile[],
     @JsonProperty({ type: SerializableTile }) public discardedTiles: SerializableTile[],
     @JsonProperty() public infoTokens: number,
@@ -38,11 +38,13 @@ export class SerializableGameState {
 
   static fromGameState(gameState: GameState) {
     const turnInfo: SerializableTurnInfo = SerializableTurnInfo.fromTurnInfo(gameState.turnInfo);
-    const remainingTiles: SerializableTile[] = gameState.remainingTiles.map( st => SerializableTile.fromTile(st) );
-    const playerTiles: SerializableTile[] = gameState.playerTiles.map( st => SerializableTile.fromTile(st) );
-    const partnerTiles: SerializableTile[] = gameState.partnerTiles.map( st => SerializableTile.fromTile(st) );
-    const playedTiles: SerializableTile[] = gameState.playedTiles.map( st => SerializableTile.fromTile(st) );
-    const discardedTiles: SerializableTile[] = gameState.discardedTiles.map( st => SerializableTile.fromTile(st) );
+    const remainingTiles: SerializableTile[] = gameState.remainingTiles.map(st => SerializableTile.fromTile(st));
+    const hands: SerializableHand[] = [
+      SerializableHand.fromHand(gameState.hands.playerHand),
+      SerializableHand.fromHand(gameState.hands.partnerHand)
+    ];
+    const playedTiles: SerializableTile[] = gameState.playedTiles.map(st => SerializableTile.fromTile(st));
+    const discardedTiles: SerializableTile[] = gameState.discardedTiles.map(st => SerializableTile.fromTile(st));
     const chosenTile: SerializableTile = SerializableTile.fromTile(gameState.chosenTile);
     const partnerTileHintChosen: SerializableTileHint = SerializableTileHint.fromTileHint(gameState.partnerTileHintChosen);
     const playerTileHintChosen: SerializableTileHint = SerializableTileHint.fromTileHint(gameState.playerTileHintChosen);
@@ -54,8 +56,7 @@ export class SerializableGameState {
       gameState.turnInfoText,
       turnInfo,
       remainingTiles,
-      playerTiles,
-      partnerTiles,
+      hands,
       playedTiles,
       discardedTiles,
       gameState.infoTokens,
@@ -74,13 +75,11 @@ export class SerializableGameState {
   }
 
   static toGameState(serializableGameState: SerializableGameState): GameState {
-    // TODO do not include possibilities/hints for played & discarded tiles in order to reduce serialized size
-
     const turnInfo: TurnInfo = SerializableTurnInfo.toTurnInfo(serializableGameState.turnInfo);
-    const remainingTiles: Tile[] = serializableGameState.remainingTiles.map( st => SerializableTile.toTile(st) );
-    const playerTiles: Tile[] = serializableGameState.playerTiles.map( st => SerializableTile.toTile(st) );
-    const partnerTiles: Tile[] = serializableGameState.partnerTiles.map( st => SerializableTile.toTile(st) );
-    const hands = new Hands(playerTiles, partnerTiles);
+    const remainingTiles: Tile[] = serializableGameState.remainingTiles.map(st => SerializableTile.toTile(st));
+    const hands = new Hands([], []);
+    hands.playerHand = SerializableHand.toHand(serializableGameState.hands[0]);
+    hands.partnerHand = SerializableHand.toHand(serializableGameState.hands[1]);
     const playedTiles: Tile[] = [];
     const discardedTiles: Tile[] = [];
     const chosenTile: Tile = SerializableTile.toTile(serializableGameState.chosenTile);
@@ -94,8 +93,6 @@ export class SerializableGameState {
       serializableGameState.turnInfoText,
       turnInfo,
       remainingTiles,
-      playerTiles,
-      partnerTiles,
       hands,
       playedTiles,
       discardedTiles,

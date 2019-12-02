@@ -1,5 +1,6 @@
 import { TileHints } from './tile-hints';
 import { TileHint } from './tile-hint';
+import { ArrayUtils } from './array-utils';
 
 const standardColours: string[] = ['white', 'red', 'yellow', 'green', 'blue'];
 const rainbowColour = 'rainbow';
@@ -100,4 +101,12 @@ export class TileFact {
     this.possibleNumbers = calcPossibleNumbers(this.hints.includedNumbers, this.hints.excludedNumbers);
   }
 
+  isSame(tileFact: TileFact): boolean {
+    return tileFact !== null &&
+           tileFact.colour === this.colour &&
+           tileFact.number === this.number &&
+           ArrayUtils.compareArrays(tileFact.possibleColours, this.possibleColours) &&
+           ArrayUtils.compareArrays(tileFact.possibleNumbers, this.possibleNumbers) &&
+           tileFact.hints.isSame(this.hints);
+  }
 }

@@ -12,8 +12,6 @@ export class GameState {
     public turnInfoText: string,
     public turnInfo: TurnInfo = TurnInfo.empty(),
     public remainingTiles: Tile[],
-    public playerTiles: Tile[],
-    public partnerTiles: Tile[],
     public hands: Hands,
     public playedTiles: Tile[],
     public discardedTiles: Tile[],
@@ -45,8 +43,6 @@ export class GameState {
       'Starting a new game', // turnInfoText: string,
       TurnInfo.empty(), // turnInfo: TurnInfo = TurnInfo.empty(),
       remainingTiles, // remainingTiles: Tile[],
-      playerTiles, // playerTiles: Tile[],
-      partnerTiles, // partnerTiles: Tile[],
       hands,
       [], // playedTiles: Tile[],
       [], // discardedTiles: Tile[],
@@ -86,8 +82,7 @@ export class GameState {
       gameState.turnInfoText === this.turnInfoText &&
       gameState.turnInfo.isSame(this.turnInfo) &&
       this.compareTileArrays(gameState.remainingTiles, this.remainingTiles) &&
-      this.compareTileArrays(gameState.playerTiles, this.playerTiles) &&
-      this.compareTileArrays(gameState.partnerTiles, this.partnerTiles) &&
+      gameState.hands.isSame(this.hands) &&
       this.compareTileArrays(gameState.playedTiles, this.playedTiles) &&
       this.compareTileArrays(gameState.discardedTiles, this.discardedTiles) &&
       gameState.infoTokens === this.infoTokens &&

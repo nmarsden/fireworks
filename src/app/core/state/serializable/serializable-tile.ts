@@ -1,5 +1,4 @@
 import { JsonProperty, Serializable, serialize } from 'typescript-json-serializer';
-import { SerializableTileHints } from './serializable-tile-hints';
 import { Tile } from '../../../tile';
 import { SerializableHelpers } from './serializable-helpers';
 

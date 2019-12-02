@@ -47,8 +47,8 @@ describe('GameState', () => {
     expect(gameState.turnInfoText).toBe('Starting a new game');
     expect(gameState.turnInfo).toEqual(TurnInfo.empty());
     expect(compareTileArrays(gameState.remainingTiles, remainingTiles)).toBeTruthy();
-    expect(compareTileArrays(gameState.playerTiles, playerTiles)).toBeTruthy();
-    expect(compareTileArrays(gameState.partnerTiles, partnerTiles)).toBeTruthy();
+    expect(compareTileArrays(gameState.hands.playerHand.tiles, playerTiles)).toBeTruthy();
+    expect(compareTileArrays(gameState.hands.partnerHand.tiles, partnerTiles)).toBeTruthy();
     expect(compareTileArrays(gameState.playedTiles, [])).toBeTruthy();
     expect(compareTileArrays(gameState.discardedTiles, [])).toBeTruthy();
     expect(gameState.infoTokens).toBe(8);

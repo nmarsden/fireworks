@@ -1,6 +1,5 @@
 import { Tile } from '../../../tile';
 import { SerializableTile } from './serializable-tile';
-import { TileHint } from '../../../tile-hint';
 
 describe('SerializableTile', () => {
 

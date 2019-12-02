@@ -50,4 +50,9 @@ export class Hands {
     hands.partnerHand = this.partnerHand.clone();
     return hands;
   }
+
+  isSame(hands: Hands): boolean {
+    return hands.playerHand.isSame(this.playerHand) &&
+           hands.partnerHand.isSame(this.partnerHand);
+  }
 }
