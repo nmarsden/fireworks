@@ -2,23 +2,12 @@ import { JsonProperty, Serializable, serialize } from 'typescript-json-serialize
 import { SerializableHelpers } from './serializable-helpers';
 import { TileFact } from '../../../tile-fact';
 import { SerializableTileHints } from './serializable-tile-hints';
+import { Tile } from '../../../tile';
 
 @Serializable()
 export class SerializableTileFact {
 
   constructor(
-    @JsonProperty({
-      name: 'c',
-      onDeserialize: SerializableHelpers.onDeserializeColour,
-      onSerialize: SerializableHelpers.onSerializeColour
-    })
-    public colour: string,
-
-    @JsonProperty({
-      name: 'n'
-    })
-    public aNumber: number,
-
     @JsonProperty({
       name: 'h'
     })
@@ -43,29 +32,22 @@ export class SerializableTileFact {
   static fromTileFact(tileFact: TileFact): SerializableTileFact {
     if (tileFact === null) {
       return new SerializableTileFact(
-        undefined,
-        undefined,
         SerializableTileHints.fromTileHints(null),
         undefined,
         undefined
       );
     }
     return new SerializableTileFact(
-      tileFact.colour === null ? undefined : tileFact.colour,
-      tileFact.number === null ? undefined : tileFact.number,
       SerializableTileHints.fromTileHints(tileFact.hints),
       tileFact.possibleColours === null ? undefined : tileFact.possibleColours,
       tileFact.possibleNumbers === null ? undefined : tileFact.possibleNumbers
     );
   }
 
-  static toTileFact(serializableTileFact: SerializableTileFact): TileFact {
-    if (serializableTileFact.colour === undefined && serializableTileFact.aNumber === undefined) {
-      return null;
-    }
+  static toTileFact(tile: Tile, serializableTileFact: SerializableTileFact): TileFact {
     const tileFact = new TileFact(
-      serializableTileFact.colour,
-      serializableTileFact.aNumber,
+      tile.colour,
+      tile.number,
       SerializableTileHints.toTileHints(serializableTileFact.hints)
     );
     tileFact.possibleNumbers = serializableTileFact.possibleNumbers === undefined ?
@@ -73,11 +55,6 @@ export class SerializableTileFact {
     tileFact.possibleColours = serializableTileFact.possibleColours === undefined ?
       null : Object.assign([], serializableTileFact.possibleColours);
     return tileFact;
-  }
-
-  isDefined() {
-    return this.colour !== undefined ||
-           this.aNumber !== undefined;
   }
 
   toJson(): string {

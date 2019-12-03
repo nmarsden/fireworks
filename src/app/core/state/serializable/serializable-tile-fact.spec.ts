@@ -2,6 +2,7 @@ import { TileHint } from '../../../tile-hint';
 import { TileHints } from '../../../tile-hints';
 import { TileFact } from '../../../tile-fact';
 import { SerializableTileFact } from './serializable-tile-fact';
+import { Tile } from '../../../tile';
 
 describe('SerializableTileFact', () => {
 
@@ -11,7 +12,7 @@ describe('SerializableTileFact', () => {
       const tileFact1 = new TileFact('red', 1, new TileHints());
       const serializableTileFact = SerializableTileFact.fromTileFact(tileFact1);
 
-      const tileFact2 = SerializableTileFact.toTileFact(serializableTileFact);
+      const tileFact2 = SerializableTileFact.toTileFact(new Tile('red', 1), serializableTileFact);
 
       expect(tileFact2.isSame(tileFact1)).toBeTruthy();
     });
@@ -24,8 +25,6 @@ describe('SerializableTileFact', () => {
       const serializableTileFact = SerializableTileFact.fromTileFact(tileFact);
 
       expect(serializableTileFact.toJson()).toEqual(Object({
-        n: 1,
-        c: 'r',
         h: {},
         pc: 'wrygbx',
         pn: '12345'
@@ -39,8 +38,6 @@ describe('SerializableTileFact', () => {
       const serializableTileFact = SerializableTileFact.fromTileFact(tileFact);
 
       expect(serializableTileFact.toJson()).toEqual(Object({
-        n: 1,
-        c: 'r',
         h: { en: '2', ec: 'w' },
         pc: 'rygb',
         pn: '1345'

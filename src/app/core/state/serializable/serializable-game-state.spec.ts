@@ -73,20 +73,20 @@ describe('SerializableGameState', () => {
         hands: [{
           t: ['w1', 'r1', 'y1', 'g1', 'b1'],
           f: [
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'w' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'r' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'y' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'g' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'b' }
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} }
           ]
         }, {
           t: ['x1', 'w1', 'r1', 'y1', 'g1'],
           f: [
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'x' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'w' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'r' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'y' },
-            { pn: '12345', pc: 'wrygbx', h: {}, n: 1, c: 'g' }
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} },
+            { pn: '12345', pc: 'wrygbx', h: {} }
           ]
         }],
         remainingTiles: [
@@ -123,7 +123,7 @@ describe('SerializableGameState', () => {
       const serializableGameState1 = SerializableGameState.fromGameState(gameState1);
       const serializedGameState = serializableGameState1.serialize();
 
-      expect(serializedGameState.length).toEqual(1760);
+      expect(serializedGameState.length).toEqual(1572);
     });
   });
 });

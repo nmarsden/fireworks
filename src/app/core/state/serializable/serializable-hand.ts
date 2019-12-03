@@ -35,7 +35,7 @@ export class SerializableHand {
     serializableHand.tiles.forEach((serializableTile, index) => {
       const tile = Tile.deserialize(serializableTile);
       hand.addTile(tile);
-      hand.tileFacts.set(tile.id, SerializableTileFact.toTileFact(serializableHand.tileFacts[index]));
+      hand.tileFacts.set(tile.id, SerializableTileFact.toTileFact(tile, serializableHand.tileFacts[index]));
     });
     return hand;
   }
