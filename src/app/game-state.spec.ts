@@ -41,7 +41,6 @@ describe('GameState', () => {
     const partnerTiles = remainingTiles.splice(0, 5);
 
     expect(gameState).toBeDefined();
-    expect(gameState.isOnInitAlreadyCalled).toBeFalsy();
     expect(gameState.currentPlayer).toBe(0);
     expect(gameState.waitingPlayer).toBe(1);
     expect(gameState.turnInfoText).toBe('Starting a new game');

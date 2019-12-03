@@ -1,16 +1,16 @@
-<app-board [isHidden]="isHideBoard"
-           [hands]="hands"
-           [playedTiles]="playedTiles"
-           [chosenTile]="chosenTile"
-           [isPartnerTilesChosen]="isPartnerTilesChosen"
-           [partnerTileHintChosen]="partnerTileHintChosen"
-           [playerTileHintChosen]="playerTileHintChosen"
-           [discardedTiles]="discardedTiles"
-           [remainingTiles]="remainingTiles.length"
-           [infoTokens]="infoTokens"
-           [fuseTokens]="fuseTokens"
-           [isShowPartnerHints]="isShowPartnerHints"
-           [isShowPlayerHints]="isShowPlayerHints"
+<app-board [isHidden]="gameState.isHideBoard"
+           [hands]="gameState.hands"
+           [playedTiles]="gameState.playedTiles"
+           [chosenTile]="gameState.chosenTile"
+           [isPartnerTilesChosen]="gameState.isPartnerTilesChosen"
+           [partnerTileHintChosen]="gameState.partnerTileHintChosen"
+           [playerTileHintChosen]="gameState.playerTileHintChosen"
+           [discardedTiles]="gameState.discardedTiles"
+           [remainingTiles]="gameState.remainingTiles.length"
+           [infoTokens]="gameState.infoTokens"
+           [fuseTokens]="gameState.fuseTokens"
+           [isShowPartnerHints]="gameState.isShowPartnerHints"
+           [isShowPlayerHints]="gameState.isShowPlayerHints"
            (partnerTileHintClicked)="onPartnerTileHintClicked($event)"
            (playerTileHintClicked)="onPlayerTileHintClicked($event)"
            (partnerTileClicked)="onPartnerTileClicked($event)"
@@ -19,8 +19,7 @@
 </app-board>
 <app-modal id="main-menu-modal"
            [position]="'rock-bottom'"
-           [isFullScreen]="false"
-           [isOpen]="true">
+           [isFullScreen]="false">
   <div class="fireworks-rainbow-text">FIREWORKS</div>
   <div class="modal-body no-background">
     <div class="button" (click)="onStartButtonClicked()">Start</div>
@@ -29,23 +28,23 @@
 </app-modal>
 <app-modal id="player-ready-modal" [isFullScreen]="false">
   <div class="modal-body no-background">
-    <div *ngIf="!isGameOver" class="modal-heading">{{ playerNames[currentPlayer] }}'s Turn</div>
-    <div *ngIf="!isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
-    <div *ngIf="isGameOver" class="modal-heading">{{ gameOverHeading }}</div>
-    <div *ngIf="isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
-    <div *ngIf="turnInfoText !== ''" class="turn-info">{{ turnInfoText }}</div>
+    <div *ngIf="!gameState.isGameOver" class="modal-heading">{{ playerNames[gameState.currentPlayer] }}'s Turn</div>
+    <div *ngIf="!gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
+    <div *ngIf="gameState.isGameOver" class="modal-heading">{{ gameState.gameOverHeading }}</div>
+    <div *ngIf="gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
+    <div *ngIf="gameState.turnInfoText !== ''" class="turn-info">{{ gameState.turnInfoText }}</div>
   </div>
-  <app-background [theme]="isGameOver && !isGameWon ? 'lost':'standard'"></app-background>
+  <app-background [theme]="gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"></app-background>
 </app-modal>
 <app-modal id="start-of-turn-modal" (cancelled)="onStartOfTurnModalCancelled()">
   <div class="modal-body">
-    <div class="modal-heading">{{ playerNames[waitingPlayer] }}</div>
-    <app-turn-info [turnInfo]="turnInfo"></app-turn-info>
+    <div class="modal-heading">{{ playerNames[gameState.waitingPlayer] }}</div>
+    <app-turn-info [turnInfo]="gameState.turnInfo"></app-turn-info>
   </div>
 </app-modal>
 <app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
   <div class="modal-body">
-    <app-turn-info [turnInfo]="turnInfo"></app-turn-info>
+    <app-turn-info [turnInfo]="gameState.turnInfo"></app-turn-info>
     <div class="button" (click)="onEndOfTurnButtonClicked()">Done</div>
   </div>
 </app-modal>
@@ -54,8 +53,8 @@
            (cancelled)="onPartnerTileModalCancelled()">
   <div class="modal-body top-margin">
     <div class="modal-heading">Give Hint</div>
-    <div *ngIf="infoTokens === 0" class="info">There are no hint tokens available</div>
-    <div *ngIf="infoTokens > 0" class="options-container">
+    <div *ngIf="gameState.infoTokens === 0" class="info">There are no hint tokens available</div>
+    <div *ngIf="gameState.infoTokens > 0" class="options-container">
       <div class="colour-options">
         <div class="colour-option"
              *ngFor="let colour of partnerHintColourOptions"
@@ -74,8 +73,8 @@
            [position]="'bottom'"
            (cancelled)="onPlayerTileModalCancelled()">
   <div class="modal-body">
-    <div *ngIf="infoTokens === 8" class="button" (click)="onPlayTileButtonClicked()">Play</div>
-    <div class="button-container" *ngIf="infoTokens !== 8">
+    <div *ngIf="gameState.infoTokens === 8" class="button" (click)="onPlayTileButtonClicked()">Play</div>
+    <div class="button-container" *ngIf="gameState.infoTokens !== 8">
       <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
       <div class="button" (click)="onDiscardTileButtonClicked()">Discard</div>
     </div>

@@ -19,30 +19,10 @@ export class AppComponent implements OnInit {
   standardColours = ['white', 'red', 'yellow', 'green', 'blue'];
   rainbowColour = 'rainbow';
   colours = [...this.standardColours, this.rainbowColour];
-  isOnInitAlreadyCalled = false;
 
-  currentPlayer: number;
-  waitingPlayer: number;
-  turnInfoText: string;
-  turnInfo: TurnInfo = TurnInfo.empty();
-  remainingTiles: Tile[];
-  hands: Hands;
-  playedTiles: Tile[];
-  discardedTiles: Tile[];
-  infoTokens: number;
-  fuseTokens: number;
-  chosenTile: Tile;
-  isShowPartnerHints = false;
-  isShowPlayerHints = false;
-  isPartnerTilesChosen: boolean;
-  partnerTileHintChosen: TileHint = TileHint.noHint();
-  playerTileHintChosen: TileHint = TileHint.noHint();
-  partnerHintColourOptions: string[];
-  partnerHintNumberOptions: number[];
-  isGameOver: boolean;
-  isGameWon: boolean;
-  isHideBoard = true;
-  gameOverHeading: string;
+  partnerHintNumberOptions;
+  partnerHintColourOptions;
+  gameState: GameState;
 
   constructor(private modalService: ModalService) { }
 
@@ -111,17 +91,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.setVhAccordingToWindowInnerHeight();
 
-    // TODO check if loading a given state
+    // check if there is a serialized game state
     const serializedGameState = this.getParamValueQueryString('s');
-    if (serializedGameState) {
 
-      const serializableGameState = SerializableGameState.deserialize(serializedGameState);
-      const gameState = SerializableGameState.toGameState(serializableGameState);
-      // console.warn(`gameState ${gameState.asString()}`);
-    }
-
-    this.newGame();
-    this.isOnInitAlreadyCalled = true;
+    this.initGame(serializedGameState);
   }
 
   @HostListener('window:resize', [])
@@ -132,49 +105,29 @@ export class AppComponent implements OnInit {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 
-  newGame() {
-    this.currentPlayer = 0;
-    this.waitingPlayer = 1;
-    this.turnInfoText = 'Starting a new game';
-    this.turnInfo = TurnInfo.empty();
-    this.remainingTiles = [];
-    this.playedTiles = [];
-    this.discardedTiles = [];
-    this.infoTokens = 8;
-    this.fuseTokens = 3;
-    this.isGameOver = false;
-    this.isGameWon = false;
-    this.isHideBoard = true;
+  initGame(serializedGameState) {
+    if (serializedGameState) {
+      // Initialize from serialized game state
+      const serializableGameState = SerializableGameState.deserialize(serializedGameState);
+      this.gameState = SerializableGameState.toGameState(serializableGameState);
 
-    // Get all tiles
-    const tiles = this.allTiles();
+      this.logSerializedGameState();
+    } else {
+      // Initialize new game
+      this.gameState = GameState.newGame(this.shuffle(this.allTiles()));
 
-    // Shuffle tiles
-    this.remainingTiles = this.shuffle(tiles);
-
-    // Deal
-    const partnerTiles = this.remainingTiles.splice(0, 5);
-    const playerTiles = this.remainingTiles.splice(0, 5);
-    this.hands = new Hands(playerTiles, partnerTiles);
-
-    // Generate possible player hints
-    // let possiblePlayerHints = this.generatePossibleHints(this.playerTiles);
-    //
-    // // Pick 3 random hints
-    // let pickedHints = this.shuffle(possiblePlayerHints).slice(0, 3);
-    //
-    // // Apply hints
-    // pickedHints.forEach(hint => {
-    //   this.playerTiles.forEach((t, i) => {
-    //     t.applyHint(hint);
-    //   })
-    // });
-
-    // Show main menu modal
-    // Note: checking isOnInitCalled to workaround an issue with openModal(..) failing during ngOnInit() call
-    if (this.isOnInitAlreadyCalled) {
-      this.openModal('main-menu-modal');
+      // Show main menu modal
+      // Note: using setTimeout() to workaround an issue with openModal(..) failing during ngOnInit() call
+      setTimeout(() => this.openModal('main-menu-modal'), 500);
     }
+  }
+
+  // Note: To call this method in the browser console: ng.probe($0).componentInstance.logSerializedGameState()
+  logSerializedGameState() {
+    // TODO log serialized game state
+    console.log('--- serialized gameState START ---');
+    console.log(SerializableGameState.fromGameState(this.gameState).serialize());
+    console.log('--- serialized gameState END ---');
   }
 
   highestPlayedTiles = (playedTiles): Tile[] => {
@@ -189,7 +142,7 @@ export class AppComponent implements OnInit {
   }
 
   private isTilePlayable(tile: Tile) {
-    const highestPlayed = this.highestPlayedTiles(this.playedTiles);
+    const highestPlayed = this.highestPlayedTiles(this.gameState.playedTiles);
     const highestPlayedForColour = highestPlayed.filter(t => t.colour === tile.colour);
     let playableNumber;
     if (highestPlayedForColour.length === 0) {
@@ -202,17 +155,20 @@ export class AppComponent implements OnInit {
 
   areAllMatchingTilesDiscarded(lastDiscardTile: Tile): boolean {
     // Does discarded tiles now include ALL the tiles matching the last discarded tile?
-    const matchingTiles = this.discardedTiles.filter(t => (t.colour === lastDiscardTile.colour && t.number === lastDiscardTile.number));
+    const matchingTiles = this.gameState.discardedTiles.filter(t => {
+      return (t.colour === lastDiscardTile.colour && t.number === lastDiscardTile.number);
+    });
     return (matchingTiles.length === 3 && lastDiscardTile.number === 1) ||
            (matchingTiles.length === 2 && (lastDiscardTile.number === 2 || lastDiscardTile.number === 3 || lastDiscardTile.number === 4)) ||
            (matchingTiles.length === 1 && lastDiscardTile.number === 5);
   }
 
   areAllPlayedStacksComplete(): boolean {
-    return this.highestPlayedTiles(this.playedTiles).filter(t => t.number === 5).length === 6;
+    return this.highestPlayedTiles(this.gameState.playedTiles).filter(t => t.number === 5).length === 6;
   }
 
   openModal(id: string) {
+    console.log('openModal called!', id);
     this.modalService.open(id);
   }
 
@@ -230,7 +186,7 @@ export class AppComponent implements OnInit {
 
   showEndOfTurnModal() {
     // Unset chosen stuff
-    this.isPartnerTilesChosen = false;
+    this.gameState.isPartnerTilesChosen = false;
 
     // Show end of turn modal
     this.openModal('end-of-turn-modal');
@@ -239,23 +195,23 @@ export class AppComponent implements OnInit {
   onPlayerReadyButtonClicked() {
     // Prepare for next player's turn
     // -- swap player & partner tiles
-    this.hands.switchPlayer();
+    this.gameState.hands.switchPlayer();
 
     // -- swap player & partner tile hint
-    const tempTileHint = this.playerTileHintChosen;
-    this.playerTileHintChosen = this.partnerTileHintChosen;
-    this.partnerTileHintChosen = tempTileHint;
+    const tempTileHint = this.gameState.playerTileHintChosen;
+    this.gameState.playerTileHintChosen = this.gameState.partnerTileHintChosen;
+    this.gameState.partnerTileHintChosen = tempTileHint;
 
     // Close player ready modal
     this.closeModal('player-ready-modal');
 
     // Is game over?
-    if (this.isGameOver) {
+    if (this.gameState.isGameOver) {
       // Start new game
-      this.newGame();
+      this.initGame(null);
     } else {
-      this.isHideBoard = false;
-      if (this.turnInfo.isNotEmpty()) {
+      this.gameState.isHideBoard = false;
+      if (this.gameState.turnInfo.isNotEmpty()) {
         this.openModal('start-of-turn-modal');
       }
     }
@@ -264,11 +220,11 @@ export class AppComponent implements OnInit {
   onEndOfTurnButtonClicked() {
     // Prepare for next player's turn
     // -- set current player & waiting player
-    this.currentPlayer = (this.currentPlayer + 1) % 2;
-    this.waitingPlayer = (this.waitingPlayer + 1) % 2;
+    this.gameState.currentPlayer = (this.gameState.currentPlayer + 1) % 2;
+    this.gameState.waitingPlayer = (this.gameState.waitingPlayer + 1) % 2;
 
     // Hide board
-    this.isHideBoard = true;
+    this.gameState.isHideBoard = true;
 
     // Close end of turn modal
     this.closeModal('end-of-turn-modal');
@@ -287,40 +243,40 @@ export class AppComponent implements OnInit {
   }
 
   onPartnerTileHintClicked($event) {
-    this.isShowPartnerHints = !this.isShowPartnerHints;
+    this.gameState.isShowPartnerHints = !this.gameState.isShowPartnerHints;
   }
 
   onPlayerTileHintClicked($event) {
-    this.isShowPlayerHints = !this.isShowPlayerHints;
+    this.gameState.isShowPlayerHints = !this.gameState.isShowPlayerHints;
   }
 
   onPartnerTileClicked($event) {
-    this.isPartnerTilesChosen = true;
+    this.gameState.isPartnerTilesChosen = true;
 
     // Clear chosen tile & hint
-    this.chosenTile = null;
-    this.playerTileHintChosen = TileHint.noHint();
+    this.gameState.chosenTile = null;
+    this.gameState.playerTileHintChosen = TileHint.noHint();
 
     // Determine available colour hints
-    this.partnerHintColourOptions = this.hands.getPartnerHintColourOptions();
+    this.partnerHintColourOptions = this.gameState.hands.getPartnerHintColourOptions();
 
     // Determine available number hints
-    this.partnerHintNumberOptions = this.hands.getPartnerHintNumberOptions();
+    this.partnerHintNumberOptions = this.gameState.hands.getPartnerHintNumberOptions();
 
     this.openModal('partner-tile-modal');
   }
 
   onColourHintButtonClicked(colour: string) {
     // Apply colour hint
-    this.partnerTileHintChosen = TileHint.colourHint(colour);
-    this.hands.applyPartnerHint(this.partnerTileHintChosen);
+    this.gameState.partnerTileHintChosen = TileHint.colourHint(colour);
+    this.gameState.hands.applyPartnerHint(this.gameState.partnerTileHintChosen);
 
     // Remove info token
-    this.infoTokens--;
+    this.gameState.infoTokens--;
 
     // Update turn info
-    this.turnInfo = TurnInfo.hint(TileHint.colourHint(colour));
-    this.turnInfoText = '';
+    this.gameState.turnInfo = TurnInfo.hint(TileHint.colourHint(colour));
+    this.gameState.turnInfoText = '';
 
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
@@ -331,15 +287,15 @@ export class AppComponent implements OnInit {
 
   onNumberHintButtonClicked(chosenNumber: number) {
     // Apply number hint
-    this.partnerTileHintChosen = TileHint.numberHint(chosenNumber);
-    this.hands.applyPartnerHint(this.partnerTileHintChosen);
+    this.gameState.partnerTileHintChosen = TileHint.numberHint(chosenNumber);
+    this.gameState.hands.applyPartnerHint(this.gameState.partnerTileHintChosen);
 
     // Remove info token
-    this.infoTokens--;
+    this.gameState.infoTokens--;
 
     // Update turn info
-    this.turnInfo = TurnInfo.hint(TileHint.numberHint(chosenNumber));
-    this.turnInfoText = '';
+    this.gameState.turnInfo = TurnInfo.hint(TileHint.numberHint(chosenNumber));
+    this.gameState.turnInfoText = '';
 
     // Close partner tile modal
     this.closeModal('partner-tile-modal');
@@ -350,75 +306,75 @@ export class AppComponent implements OnInit {
 
   onPartnerTileModalCancelled() {
     // Unset partner chosen tiles
-    this.isPartnerTilesChosen = false;
+    this.gameState.isPartnerTilesChosen = false;
   }
 
   onPlayerTileClicked($event) {
-    this.chosenTile = $event;
+    this.gameState.chosenTile = $event;
 
     // Clear chosen hint
-    this.playerTileHintChosen = TileHint.noHint();
+    this.gameState.playerTileHintChosen = TileHint.noHint();
 
     this.openModal('player-tile-modal');
   }
 
   onPlayTileButtonClicked() {
     // Remove chosen tile from player tiles
-    this.hands.removePlayerTile(this.chosenTile);
+    this.gameState.hands.removePlayerTile(this.gameState.chosenTile);
 
     // Update turn info
-    this.turnInfo = TurnInfo.played(this.chosenTile);
-    this.turnInfoText = '';
+    this.gameState.turnInfo = TurnInfo.played(this.gameState.chosenTile);
+    this.gameState.turnInfoText = '';
 
     // Tile is playable?
-    if (this.isTilePlayable(this.chosenTile)) {
+    if (this.isTilePlayable(this.gameState.chosenTile)) {
       // - Add chosen tile to played tiles
-      this.playedTiles = this.playedTiles.concat(this.chosenTile);
+      this.gameState.playedTiles = this.gameState.playedTiles.concat(this.gameState.chosenTile);
       // - Is five played?
-      if (this.chosenTile.number === 5) {
+      if (this.gameState.chosenTile.number === 5) {
         // - Is game won
         if (this.areAllPlayedStacksComplete()) {
           // Game won
-          this.isGameOver = true;
-          this.isGameWon = true;
-          this.gameOverHeading = 'GAME WON!';
-          this.turnInfoText = 'All stacks complete';
+          this.gameState.isGameOver = true;
+          this.gameState.isGameWon = true;
+          this.gameState.gameOverHeading = 'GAME WON!';
+          this.gameState.turnInfoText = 'All stacks complete';
         } else {
           // Add info token
-          if (this.infoTokens < 8) {
-            this.infoTokens++;
-            this.turnInfo = TurnInfo.playedAndEarnedInfoToken(this.chosenTile);
+          if (this.gameState.infoTokens < 8) {
+            this.gameState.infoTokens++;
+            this.gameState.turnInfo = TurnInfo.playedAndEarnedInfoToken(this.gameState.chosenTile);
           }
         }
       }
     } else {
       // Tile is not playable?
       // - Add chosen tile to discarded tiles
-      this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
+      this.gameState.discardedTiles = this.gameState.discardedTiles.concat(this.gameState.chosenTile);
       // - Remove fuse token
-      this.fuseTokens--;
-      this.turnInfo = TurnInfo.playedAndLostFuseToken(this.chosenTile);
+      this.gameState.fuseTokens--;
+      this.gameState.turnInfo = TurnInfo.playedAndLostFuseToken(this.gameState.chosenTile);
       // - Is game over due to no more fuse tokens?
-      if (this.fuseTokens === 0) {
+      if (this.gameState.fuseTokens === 0) {
         // - Game Over
-        this.isGameOver = true;
-        this.gameOverHeading = 'GAME OVER';
+        this.gameState.isGameOver = true;
+        this.gameState.gameOverHeading = 'GAME OVER';
         // - Update turn info
-        this.turnInfoText = 'All fuse tokens lost';
+        this.gameState.turnInfoText = 'All fuse tokens lost';
       // Is game over due to all matching tiles discarded?
-      } else if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
-        this.isGameOver = true;
-        this.gameOverHeading = 'GAME OVER';
+      } else if (this.areAllMatchingTilesDiscarded(this.gameState.chosenTile)) {
+        this.gameState.isGameOver = true;
+        this.gameState.gameOverHeading = 'GAME OVER';
         // Update turn info
-        this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ` +
-                            `${this.chosenTile.colour} ${this.chosenTile.number}`;
+        this.gameState.turnInfoText = `${this.playerNames[this.gameState.currentPlayer]} discarded the last ` +
+                            `${this.gameState.chosenTile.colour} ${this.gameState.chosenTile.number}`;
       }
     }
 
     // Add new tile to player tiles from remainingTiles
-    if (this.remainingTiles.length > 0) {
-      const newTile: Tile = this.remainingTiles.splice(0, 1)[0];
-      this.hands.addPlayerTile(newTile);
+    if (this.gameState.remainingTiles.length > 0) {
+      const newTile: Tile = this.gameState.remainingTiles.splice(0, 1)[0];
+      this.gameState.hands.addPlayerTile(newTile);
     }
 
     // Close player tile modal
@@ -430,35 +386,36 @@ export class AppComponent implements OnInit {
 
   onPlayerTileModalCancelled() {
     // Unset chosen tile
-    this.chosenTile = null;
+    this.gameState.chosenTile = null;
   }
 
   onDiscardTileButtonClicked() {
     // Remove chosen tile from player tiles
-    this.hands.removePlayerTile(this.chosenTile);
+    this.gameState.hands.removePlayerTile(this.gameState.chosenTile);
 
     // Add info token
-    this.infoTokens++;
+    this.gameState.infoTokens++;
 
     // Update turn info
-    this.turnInfo = TurnInfo.discarded(this.chosenTile);
-    this.turnInfoText = '';
+    this.gameState.turnInfo = TurnInfo.discarded(this.gameState.chosenTile);
+    this.gameState.turnInfoText = '';
 
     // Add chosen tile to discarded tiles
-    this.discardedTiles = this.discardedTiles.concat(this.chosenTile);
+    this.gameState.discardedTiles = this.gameState.discardedTiles.concat(this.gameState.chosenTile);
 
     // Is game over?
-    if (this.areAllMatchingTilesDiscarded(this.chosenTile)) {
-      this.isGameOver = true;
-      this.gameOverHeading = 'GAME OVER';
+    if (this.areAllMatchingTilesDiscarded(this.gameState.chosenTile)) {
+      this.gameState.isGameOver = true;
+      this.gameState.gameOverHeading = 'GAME OVER';
       // Update turn info
-      this.turnInfoText = `${this.playerNames[this.currentPlayer]} discarded the last ${this.chosenTile.colour} ${this.chosenTile.number}`;
+      this.gameState.turnInfoText = `${this.playerNames[this.gameState.currentPlayer]}` +
+                                    `discarded the last ${this.gameState.chosenTile.colour} ${this.gameState.chosenTile.number}`;
     }
 
     // Add new tile to player tiles from remainingTiles
-    if (this.remainingTiles.length > 0) {
-      const newTile: Tile = this.remainingTiles.splice(0, 1)[0];
-      this.hands.addPlayerTile(newTile);
+    if (this.gameState.remainingTiles.length > 0) {
+      const newTile: Tile = this.gameState.remainingTiles.splice(0, 1)[0];
+      this.gameState.hands.addPlayerTile(newTile);
     }
 
     // Close player tile modal
@@ -475,7 +432,7 @@ export class AppComponent implements OnInit {
   onQuitGameYesButtonClicked() {
     this.closeModal('quit-game-modal');
 
-    this.newGame();
+    this.initGame(null);
   }
 
   onQuitGameNoButtonClicked() {

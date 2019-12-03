@@ -13,7 +13,6 @@ import { SerializableHand } from './serializable-hand';
 export class SerializableGameState {
 
   constructor(
-    @JsonProperty() public isOnInitAlreadyCalled = false,
     @JsonProperty() public currentPlayer: number,
     @JsonProperty() public waitingPlayer: number,
     @JsonProperty() public turnInfoText: string,
@@ -50,7 +49,6 @@ export class SerializableGameState {
     const playerTileHintChosen: SerializableTileHint = SerializableTileHint.fromTileHint(gameState.playerTileHintChosen);
 
     return new SerializableGameState(
-      gameState.isOnInitAlreadyCalled,
       gameState.currentPlayer,
       gameState.waitingPlayer,
       gameState.turnInfoText,
@@ -87,7 +85,6 @@ export class SerializableGameState {
     const playerTileHintChosen: TileHint = SerializableTileHint.toTileHint(serializableGameState.playerTileHintChosen);
 
     return new GameState(
-      serializableGameState.isOnInitAlreadyCalled,
       serializableGameState.currentPlayer,
       serializableGameState.waitingPlayer,
       serializableGameState.turnInfoText,

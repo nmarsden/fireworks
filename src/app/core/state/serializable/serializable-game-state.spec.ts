@@ -96,8 +96,7 @@ describe('SerializableGameState', () => {
         turnInfo: { e: true, f: false, i: false, d: {}, p: {}, h: {} },
         turnInfoText: 'Starting a new game',
         waitingPlayer: 1,
-        currentPlayer: 0,
-        isOnInitAlreadyCalled: false
+        currentPlayer: 0
       }));
     });
   });
@@ -123,7 +122,7 @@ describe('SerializableGameState', () => {
       const serializableGameState1 = SerializableGameState.fromGameState(gameState1);
       const serializedGameState = serializableGameState1.serialize();
 
-      expect(serializedGameState.length).toEqual(1572);
+      expect(serializedGameState.length).toEqual(1532);
     });
   });
 });

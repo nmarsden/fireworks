@@ -6,7 +6,6 @@ import { Hands } from './hands';
 export class GameState {
 
   constructor(
-    public isOnInitAlreadyCalled = false,
     public currentPlayer: number,
     public waitingPlayer: number,
     public turnInfoText: string,
@@ -37,7 +36,6 @@ export class GameState {
     const hands = new Hands(playerTiles, partnerTiles);
 
     return new GameState(
-      false, // isOnInitAlreadyCalled
       0, // currentPlayer: number,
       1, // waitingPlayer: number,
       'Starting a new game', // turnInfoText: string,
@@ -76,7 +74,6 @@ export class GameState {
 
   isSame(gameState: GameState): boolean {
     return (
-      gameState.isOnInitAlreadyCalled === this.isOnInitAlreadyCalled &&
       gameState.currentPlayer === this.currentPlayer &&
       gameState.waitingPlayer === this.waitingPlayer &&
       gameState.turnInfoText === this.turnInfoText &&
