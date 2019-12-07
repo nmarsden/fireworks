@@ -13,6 +13,10 @@ export class StartOfTurnModalPO {
     return element(by.css('#start-of-turn-modal app-turn-info .info-token.is-available')).isPresent() as Promise<boolean>;
   }
 
+  isFuseTokenShown(): Promise<boolean> {
+    return element(by.css('#start-of-turn-modal app-turn-info .fuse-token')).isPresent() as Promise<boolean>;
+  }
+
   isPlayedTileShown(): Promise<boolean> {
     return element(by.css('#start-of-turn-modal app-turn-info .tile.tile-played')).isPresent() as Promise<boolean>;
   }
