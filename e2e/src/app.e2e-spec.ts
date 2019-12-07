@@ -691,6 +691,113 @@ describe('Fireworks App', () => {
         });
       });
     });
+
+    describe('Game State: 1 card away from winning', () => {
+      beforeAll(() => {
+        // tslint:disable-next-line:max-line-length
+        // http://localhost:4200?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7Im4iOjQsImMiOiJ5In0sImZ1c2VUb2tlbnMiOjEsImluZm9Ub2tlbnMiOjgsImRpc2NhcmRlZFRpbGVzIjpbImc0IiwiYjQiLCJiMyIsInczIiwieTMiLCJ5NCIsIngxIiwidzIiLCJyMyIsIngxIiwidzEiLCJiMSIsIncxIiwieDIiLCJyMSIsIngzIiwicjEiLCJiMiIsInkyIl0sInBsYXllZFRpbGVzIjpbInk0IiwieTMiLCJnNSIsImc0IiwiYjUiLCJiNCIsInkyIiwieTEiLCJnMyIsImIzIiwidzUiLCJ3NCIsImcyIiwidzMiLCJ3MiIsInI1IiwiYjIiLCJyNCIsInIzIiwicjIiLCJ4NSIsIng0IiwieDMiLCJiMSIsInIxIiwidzEiLCJ4MiIsIngxIiwiZzEiXSwiaGFuZHMiOlt7ImYiOlt7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fV0sInQiOlsiYjEiLCJ5MSIsImczIiwieDQiLCJ5NSJdfSx7ImYiOlt7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fV0sInQiOlsiZzEiLCJnMSIsImcyIiwicjIiLCJ3NCJdfV0sInJlbWFpbmluZ1RpbGVzIjpbInkxIiwicjQiXSwidHVybkluZm8iOnsiZSI6ZmFsc2UsImYiOnRydWUsImkiOmZhbHNlLCJkIjp7fSwicCI6eyJuIjo0LCJjIjoieSJ9LCJoIjp7fX0sInR1cm5JbmZvVGV4dCI6IiIsIndhaXRpbmdQbGF5ZXIiOjEsImN1cnJlbnRQbGF5ZXIiOjB9
+
+        // tslint:disable
+        const data = {
+          gameOverHeading: "",
+          isHideBoard: false,
+          isGameWon: false,
+          isGameOver: false,
+          playerTileHintChosen: {},
+          partnerTileHintChosen: {},
+          isPartnerTilesChosen: false,
+          isShowPlayerHints: false,
+          isShowPartnerHints: false,
+          chosenTile: { n: 4, c: 'y' },
+          fuseTokens: 1,
+          infoTokens: 8,
+          discardedTiles: ['g4', 'b4', 'b3', 'w3', 'y3', 'y4', 'x1', 'w2', 'r3', 'x1', 'w1', 'b1', 'w1', 'x2', 'r1', 'x3', 'r1', 'b2', 'y2'],
+          playedTiles: ['y4', 'y3', 'g5', 'g4', 'b5', 'b4', 'y2', 'y1', 'g3', 'b3', 'w5', 'w4', 'g2', 'w3', 'w2', 'r5', 'b2', 'r4', 'r3', 'r2', 'x5', 'x4', 'x3', 'b1', 'r1', 'w1', 'x2', 'x1', 'g1'],
+          hands: [{
+            f: [{ pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
+              { pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
+              { pn: '12345', pc: 'wrygbx', h: {} }],
+            t: ['b1', 'y1', 'g3', 'x4', 'y5']
+          },
+            {
+              f: [{ pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
+                { pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
+                { pn: '12345', pc: 'wrygbx', h: {} }],
+              t: ['g1', 'g1', 'g2', 'r2', 'w4']
+            }],
+          remainingTiles: ['y1', 'r4'],
+          turnInfo: { e: false, f: true, i: false, d: {}, p: { n: 4, c: 'y' }, h: {} },
+          turnInfoText: "",
+          waitingPlayer: 1,
+          currentPlayer: 0
+        };
+        // tslint:enable
+
+        const serializedGameState = Buffer.from(JSON.stringify(data), 'binary').toString('base64');
+
+        appPO.navigateTo(serializedGameState);
+      });
+
+      it('should have player tiles: BLUE 1, YELLOW 1, GREEN 3, RAINBOW 4, YELLOW 5', () => {
+        expect(boardPO.getPlayerTiles()).toEqual([
+          'colour:blue, number:1',
+          'colour:yellow, number:1',
+          'colour:green, number:3',
+          'colour:rainbow, number:4',
+          'colour:yellow, number:5',
+        ]);
+      });
+
+      describe('Click player tile which is playable: YELLOW 5', () => {
+        beforeAll(() => {
+          boardPO.clickPlayerTile(4); // YELLOW 5
+        });
+
+        it('should show player tile modal', () => {
+          expect(playerTileModalPO.isOpen()).toBeTruthy();
+        });
+
+        describe('Play tile: YELLOW 5', () => {
+          beforeAll(() => {
+            playerTileModalPO.clickPlay();
+          });
+
+          it('should add tile to played tiles: YELLOW 5', () => {
+            expect(boardPO.getPlayedTiles()).toEqual([
+              'colour:white, number:5',
+              'colour:red, number:5',
+              'colour:yellow, number:5',
+              'colour:green, number:5',
+              'colour:blue, number:5',
+              'colour:rainbow, number:5'
+            ]);
+          });
+
+          it('should show "end of turn" modal with played tile YELLOW 5', () => {
+            expect(endOfTurnModalPO.isOpen()).toBeTruthy();
+            expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
+          });
+
+          describe('End Turn', () => {
+            beforeAll(() => {
+              endOfTurnModalPO.clickDoneButton();
+            });
+
+            it('should show player ready modal', () => {
+              expect(playerReadyModalPO.isOpen()).toBeTruthy();
+            });
+
+            it('should show heading: GAME WON!', () => {
+              expect(playerReadyModalPO.getHeadingText()).toEqual('GAME WON!');
+            });
+
+            it('should show turn info: All stacks complete', () => {
+              expect(playerReadyModalPO.getTurnInfoText()).toEqual('All stacks complete');
+            });
+          });
+        });
+      });
+    });
   });
 
   afterEach(async () => {
