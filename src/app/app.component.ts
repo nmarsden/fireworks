@@ -111,7 +111,8 @@ export class AppComponent implements OnInit {
       const serializableGameState = SerializableGameState.deserialize(serializedGameState);
       this.gameState = SerializableGameState.toGameState(serializableGameState);
 
-      this.logSerializedGameState();
+      this.logGameStateSerialized();
+      this.logGameStateJson();
     } else {
       // Initialize new game
       this.gameState = GameState.newGame(this.shuffle(this.allTiles()));
@@ -122,12 +123,18 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Note: To call this method in the browser console: ng.probe($0).componentInstance.logSerializedGameState()
-  logSerializedGameState() {
-    // TODO log serialized game state
-    console.log('--- serialized gameState START ---');
+  // Note: To call this method in the browser console: ng.probe($0).componentInstance.logGameStateSerialized()
+  logGameStateSerialized() {
+    console.log('--- gameState serialized START ---');
     console.log(SerializableGameState.fromGameState(this.gameState).serialize());
-    console.log('--- serialized gameState END ---');
+    console.log('--- gameState serialized END ---');
+  }
+
+  // Note: To call this method in the browser console: ng.probe($0).componentInstance.logGameStateJson()
+  logGameStateJson() {
+    console.log('--- gameState JSON START ---');
+    console.log(JSON.stringify(SerializableGameState.fromGameState(this.gameState).toJson()));
+    console.log('--- gameState JSON END ---');
   }
 
   highestPlayedTiles = (playedTiles): Tile[] => {

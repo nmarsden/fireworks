@@ -18,9 +18,6 @@ exports.config = {
       server: 'WARNING',
       browser: 'WARNING'
     },
-    chromeOptions: {
-      args: [ '--headless', '--window-size=1920,1080' ]
-    },
     browserName: 'chrome'
   },
   directConnect: true,

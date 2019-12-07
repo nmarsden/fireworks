@@ -9,6 +9,10 @@ export class PlayerReadyModalPO {
     return element(by.css('#player-ready-modal .modal-heading')).getAttribute('innerText') as Promise<string>;
   }
 
+  getTurnInfoText(): Promise<string> {
+    return element(by.css('#player-ready-modal .turn-info')).getAttribute('innerText') as Promise<string>;
+  }
+
   getReadyButton(): WebElementPromise {
     return element(by.css('#player-ready-modal .button')).getWebElement();
   }
