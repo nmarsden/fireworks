@@ -6,7 +6,6 @@ import { TurnInfo } from './turn-info';
 import { HttpParams } from '@angular/common/http';
 import { GameState } from './game-state';
 import { SerializableGameState } from './core/state/serializable/serializable-game-state';
-import { Hands } from './hands';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,6 @@ import { Hands } from './hands';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  title = 'fireworks';
   playerNames: string[] = ['P1', 'P2'];
   standardColours = ['white', 'red', 'yellow', 'green', 'blue'];
   rainbowColour = 'rainbow';
@@ -26,7 +24,7 @@ export class AppComponent implements OnInit {
 
   constructor(private modalService: ModalService) { }
 
-  allTiles = () => {
+  allTiles() {
     let tiles = [];
     for (let i = 1; i <= 5; i++) {
       tiles = tiles.concat(this.colours.map(colour => new Tile(colour, i)));
@@ -40,7 +38,7 @@ export class AppComponent implements OnInit {
     return tiles;
   }
 
-  shuffle = (array) => {
+  shuffle(array) {
     let currentIndex = array.length;
     let temporaryValue;
     let randomIndex;
@@ -61,11 +59,7 @@ export class AppComponent implements OnInit {
     return array;
   }
 
-  isRandomTrue = () => {
-    return Math.random() > 0.5;
-  }
-
-  generatePossibleHints = (tiles: Tile[]): TileHint[] => {
+  generatePossibleHints(tiles: Tile[]): TileHint[] {
       const colours = new Set(tiles.map(t => t.colour));
       const numbers = new Set(tiles.map(t => t.number));
       let hints: TileHint[] = [];
@@ -78,7 +72,7 @@ export class AppComponent implements OnInit {
       return hints;
   }
 
-  getParamValueQueryString = ( paramName ) => {
+  getParamValueQueryString( paramName ) {
     const url = window.location.href;
     let paramValue;
     if (url.includes('?')) {
@@ -137,7 +131,7 @@ export class AppComponent implements OnInit {
     console.log('--- gameState JSON END ---');
   }
 
-  highestPlayedTiles = (playedTiles): Tile[] => {
+  highestPlayedTiles(playedTiles): Tile[] {
     const highestColourNumber = {};
     this.colours.forEach(c => highestColourNumber[c] = null);
     playedTiles.forEach(t => {
@@ -249,15 +243,15 @@ export class AppComponent implements OnInit {
     this.onEndOfTurnButtonClicked();
   }
 
-  onPartnerTileHintClicked($event) {
+  onPartnerTileHintClicked() {
     this.gameState.isShowPartnerHints = !this.gameState.isShowPartnerHints;
   }
 
-  onPlayerTileHintClicked($event) {
+  onPlayerTileHintClicked() {
     this.gameState.isShowPlayerHints = !this.gameState.isShowPlayerHints;
   }
 
-  onPartnerTileClicked($event) {
+  onPartnerTileClicked() {
     this.gameState.isPartnerTilesChosen = true;
 
     // Clear chosen tile & hint
