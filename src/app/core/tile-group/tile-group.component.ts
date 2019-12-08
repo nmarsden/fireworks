@@ -18,6 +18,7 @@ export class TileGroupComponent implements OnInit, OnChanges {
   @Input() chosenNumber: number;
   @Input() displayMode: string;
   @Input() isShowHints = true;
+  @Input() playerName: string;
   @Output() tileHintClicked = new EventEmitter();
   @Output() tileClicked = new EventEmitter<Tile>();
 

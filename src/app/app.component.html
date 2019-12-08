@@ -11,6 +11,8 @@
            [fuseTokens]="gameState.fuseTokens"
            [isShowPartnerHints]="gameState.isShowPartnerHints"
            [isShowPlayerHints]="gameState.isShowPlayerHints"
+           [partnerName]="playerNames[gameState.waitingPlayer]"
+           [playerName]="playerNames[gameState.currentPlayer]"
            (partnerTileHintClicked)="onPartnerTileHintClicked($event)"
            (playerTileHintClicked)="onPlayerTileHintClicked($event)"
            (partnerTileClicked)="onPartnerTileClicked($event)"
@@ -28,7 +30,7 @@
 </app-modal>
 <app-modal id="player-ready-modal" [isFullScreen]="false">
   <div class="modal-body no-background">
-    <div *ngIf="!gameState.isGameOver" class="modal-heading">{{ playerNames[gameState.currentPlayer] }}'s Turn</div>
+    <div *ngIf="!gameState.isGameOver" class="modal-heading">{{ playerNames[gameState.currentPlayer] }}</div>
     <div *ngIf="!gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
     <div *ngIf="gameState.isGameOver" class="modal-heading">{{ gameState.gameOverHeading }}</div>
     <div *ngIf="gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>

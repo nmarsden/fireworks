@@ -1,5 +1,6 @@
 <div class="page" [ngClass]="{ 'is-show-page': !isHidden }">
   <app-tile-group [displayMode]="'partner'"
+                  [playerName]="partnerName"
                   [hand]="hands.partnerHand"
                   [isGroupChosen]="isPartnerTilesChosen"
                   [chosenColour]="partnerTileHintChosen.colour"
@@ -25,6 +26,7 @@
   </div>
 
   <app-tile-group [displayMode]="'player'"
+                  [playerName]="playerName"
                   [hand]="hands.playerHand"
                   [chosenTile]="chosenTile"
                   [chosenColour]="playerTileHintChosen.colour"

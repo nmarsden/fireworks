@@ -13,7 +13,7 @@ import { SerializableGameState } from './core/state/serializable/serializable-ga
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  playerNames: string[] = ['P1', 'P2'];
+  playerNames: string[] = ['PLAYER ONE', 'PLAYER TWO'];
   standardColours = ['white', 'red', 'yellow', 'green', 'blue'];
   rainbowColour = 'rainbow';
   colours = [...this.standardColours, this.rainbowColour];
@@ -169,7 +169,6 @@ export class AppComponent implements OnInit {
   }
 
   openModal(id: string) {
-    console.log('openModal called!', id);
     this.modalService.open(id);
   }
 
@@ -367,8 +366,7 @@ export class AppComponent implements OnInit {
         this.gameState.isGameOver = true;
         this.gameState.gameOverHeading = 'GAME OVER';
         // Update turn info
-        this.gameState.turnInfoText = `${this.playerNames[this.gameState.currentPlayer]} discarded the last ` +
-                            `${this.gameState.chosenTile.colour} ${this.gameState.chosenTile.number}`;
+        this.gameState.turnInfoText = `Last ${this.gameState.chosenTile.colour} ${this.gameState.chosenTile.number} discarded`;
       }
     }
 
@@ -409,8 +407,7 @@ export class AppComponent implements OnInit {
       this.gameState.isGameOver = true;
       this.gameState.gameOverHeading = 'GAME OVER';
       // Update turn info
-      this.gameState.turnInfoText = `${this.playerNames[this.gameState.currentPlayer]}` +
-                                    `discarded the last ${this.gameState.chosenTile.colour} ${this.gameState.chosenTile.number}`;
+      this.gameState.turnInfoText = `Last ${this.gameState.chosenTile.colour} ${this.gameState.chosenTile.number} discarded`;
     }
 
     // Add new tile to player tiles from remainingTiles

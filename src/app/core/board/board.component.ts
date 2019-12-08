@@ -22,6 +22,8 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() isShowPartnerHints = true;
   @Input() isShowPlayerHints = true;
   @Input() isHidden = false;
+  @Input() partnerName: string;
+  @Input() playerName: string;
   @Output() partnerTileHintClicked = new EventEmitter();
   @Output() playerTileHintClicked = new EventEmitter();
   @Output() partnerTileClicked = new EventEmitter<Tile>();

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CoreModule } from '../app/core/core.module';
 import { TileHint } from '../app/tile-hint';
 import { TurnInfo } from '../app/turn-info';
-import { withKnobs, boolean } from '@storybook/addon-knobs'
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { ModalService } from '../app/modal.service';
 
 storiesOf('Modal', module)
@@ -37,11 +37,11 @@ storiesOf('Modal', module)
   })
   .add('player ready', () => {
     return {
-      template: `<app-modal id="player-ready-modal" 
+      template: `<app-modal id="player-ready-modal"
                             [isFullScreen]="false"
                             [isOpen]="true">
                    <div class="modal-body no-background">
-                     <div class="modal-heading">P1's Turn</div>
+                     <div class="modal-heading">PLAYER ONE</div>
                      <div class="button">Ready</div>
                    </div>
                    <app-background></app-background>
@@ -53,7 +53,7 @@ storiesOf('Modal', module)
       template: `<app-background [isSparkling]="false"></app-background>
                  <app-modal id="start-of-turn-modal" [isOpen]="true">
                    <div class="modal-body">
-                     <div class="modal-heading">P1</div>
+                     <div class="modal-heading">PLAYER ONE</div>
                      <app-turn-info [turnInfo]="turnInfo"></app-turn-info>
                    </div>
                  </app-modal>`,
@@ -84,7 +84,7 @@ storiesOf('Modal', module)
                    </div>
                  </app-modal>`,
       props: {
-        partnerHintColourOptions: ["white", "red", "yellow", "green", "blue"],
+        partnerHintColourOptions: ['white', 'red', 'yellow', 'green', 'blue'],
         partnerHintNumberOptions: [1, 3, 5]
       }
     };

@@ -51,8 +51,8 @@ describe('Fireworks App', () => {
         expect(playerReadyModalPO.isOpen()).toBeTruthy();
       });
 
-      it('should show P1 heading', () => {
-        expect(playerReadyModalPO.getHeadingText()).toEqual('P1\'s Turn');
+      it('should show PLAYER ONE heading', () => {
+        expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER ONE');
       });
 
       it('should display ready button', () => {
@@ -198,7 +198,7 @@ describe('Fireworks App', () => {
             expect(endOfTurnModalPO.isInfoTokenShown()).toBeTruthy();
           });
 
-          describe('End Turn for P1', () => {
+          describe('End Turn for PLAYER ONE', () => {
             beforeAll(() => {
               endOfTurnModalPO.clickDoneButton();
             });
@@ -207,11 +207,11 @@ describe('Fireworks App', () => {
               expect(playerReadyModalPO.isOpen()).toBeTruthy();
             });
 
-            it('should show P2 heading', () => {
-              expect(playerReadyModalPO.getHeadingText()).toEqual('P2\'s Turn');
+            it('should show PLAYER TWO heading', () => {
+              expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER TWO');
             });
 
-            describe('Begin Turn for P2', () => {
+            describe('Begin Turn for PLAYER TWO', () => {
               beforeAll(() => {
                 playerReadyModalPO.getReadyButton().click();
               });
@@ -310,7 +310,7 @@ describe('Fireworks App', () => {
                       expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
                     });
 
-                    describe('End Turn for P2', () => {
+                    describe('End Turn for PLAYER TWO', () => {
                       beforeAll(() => {
                         endOfTurnModalPO.clickDoneButton();
                       });
@@ -319,11 +319,11 @@ describe('Fireworks App', () => {
                         expect(playerReadyModalPO.isOpen()).toBeTruthy();
                       });
 
-                      it('should show P1 heading', () => {
-                        expect(playerReadyModalPO.getHeadingText()).toEqual('P1\'s Turn');
+                      it('should show PLAYER ONE heading', () => {
+                        expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER ONE');
                       });
 
-                      describe('Begin Turn for P1', () => {
+                      describe('Begin Turn for PLAYER ONE', () => {
                         beforeAll(() => {
                           playerReadyModalPO.getReadyButton().click();
                         });
@@ -422,7 +422,7 @@ describe('Fireworks App', () => {
                                 expect(endOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
                               });
 
-                              describe('End Turn for P1', () => {
+                              describe('End Turn for PLAYER ONE', () => {
                                 beforeAll(() => {
                                   endOfTurnModalPO.clickDoneButton();
                                 });
@@ -431,11 +431,11 @@ describe('Fireworks App', () => {
                                   expect(playerReadyModalPO.isOpen()).toBeTruthy();
                                 });
 
-                                it('should show P2 heading', () => {
-                                  expect(playerReadyModalPO.getHeadingText()).toEqual('P2\'s Turn');
+                                it('should show PLAYER TWO heading', () => {
+                                  expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER TWO');
                                 });
 
-                                describe('Begin Turn for P2', () => {
+                                describe('Begin Turn for PLAYER TWO', () => {
                                   beforeAll(() => {
                                     playerReadyModalPO.getReadyButton().click();
                                   });
@@ -547,8 +547,8 @@ describe('Fireworks App', () => {
                                             expect(playerReadyModalPO.getHeadingText()).toEqual('GAME OVER');
                                           });
 
-                                          it('should show turn info: P2 discarded the last yellow 5', () => {
-                                            expect(playerReadyModalPO.getTurnInfoText()).toEqual('P2 discarded the last yellow 5');
+                                          it('should show turn info: Last yellow 5 discarded', () => {
+                                            expect(playerReadyModalPO.getTurnInfoText()).toEqual('Last yellow 5 discarded');
                                           });
                                         });
                                       });

@@ -17,6 +17,7 @@
                     'is-hints-shown' : isShowHints,
                     'is-hints-at-bottom': displayMode === 'partner'
                   }">
+    <div class="player-name">{{ playerName }}</div>
     <div class="tile-hint-handle"
          [ngClass]="{ 'is-handle-at-bottom': displayMode === 'partner'}"
          (click)="onTileHintClicked($event)">

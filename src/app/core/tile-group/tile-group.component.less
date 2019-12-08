@@ -34,6 +34,17 @@
         transform: translateY(0);
       }
 
+      .player-name {
+        color: white;
+        line-height: calc(var(--tile-handle-height-factor) * var(--main-tile-width));
+        font-size: calc(0.5 * var(--tile-handle-height-factor) * var(--main-tile-width));
+        position: absolute;
+        align-self: flex-start;
+        opacity: 0.5;
+        text-transform: uppercase;
+        padding-left: calc(0.25 * var(--tile-handle-height-factor) * var(--main-tile-width));
+      }
+
       .tile-hint-handle {
         height: calc(var(--tile-handle-height-factor) * var(--main-tile-width));
         width: calc(2 * var(--main-tile-width));
