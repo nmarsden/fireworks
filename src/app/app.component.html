@@ -13,9 +13,9 @@
            [isShowPlayerHints]="gameState.isShowPlayerHints"
            [partnerName]="playerNames[gameState.waitingPlayer]"
            [playerName]="playerNames[gameState.currentPlayer]"
-           (partnerTileHintClicked)="onPartnerTileHintClicked($event)"
-           (playerTileHintClicked)="onPlayerTileHintClicked($event)"
-           (partnerTileClicked)="onPartnerTileClicked($event)"
+           (partnerTileHintClicked)="onPartnerTileHintClicked()"
+           (playerTileHintClicked)="onPlayerTileHintClicked()"
+           (partnerTileClicked)="onPartnerTileClicked()"
            (playerTileClicked)="onPlayerTileClicked($event)"
            (deckClicked)="onDeckClicked()">
 </app-board>
