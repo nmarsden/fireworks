@@ -6,6 +6,8 @@ import { TurnInfo } from './turn-info';
 import { HttpParams } from '@angular/common/http';
 import { GameState } from './game-state';
 import { SerializableGameState } from './core/state/serializable/serializable-game-state';
+import * as screenfull from 'screenfull';
+import { Screenfull } from 'screenfull';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,7 @@ export class AppComponent implements OnInit {
   partnerHintNumberOptions;
   partnerHintColourOptions;
   gameState: GameState;
+  sf: Screenfull = screenfull as Screenfull;
 
   constructor(private modalService: ModalService) { }
 
@@ -82,7 +85,20 @@ export class AppComponent implements OnInit {
     return paramValue;
   }
 
+  toggleFullScreen() {
+    this.sf.toggle();
+  }
+
+  initAndroidBrowserFullscreenHacks() {
+    window.addEventListener('load', () => { window.scrollTo(0, 0); });
+
+    // use this with care, only if you don't have overflow content to be scrolled.
+    document.addEventListener('touchmove', e => { e.preventDefault(); });
+  }
+
   ngOnInit() {
+    this.initAndroidBrowserFullscreenHacks();
+
     this.setVhAccordingToWindowInnerHeight();
 
     // check if there is a serialized game state
