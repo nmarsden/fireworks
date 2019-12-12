@@ -1,0 +1,80 @@
+.keyboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(var(--vh, 1vh) * 100);
+
+  background-color: rgba(18, 10, 36, 0.9);
+  z-index: 3000;
+
+  .input-field {
+    font-size: var(--keyboard-key-width);
+    line-height: var(--keyboard-key-width);
+    min-height: calc(1.1 * var(--keyboard-key-width));
+    min-width: 70vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    border: 2px solid white;
+    margin-bottom: calc(0.5 * var(--keyboard-key-width));
+
+    .input-field-cursor {
+      display: inline-block;
+      min-height: calc(0.7 * var(--keyboard-key-width));
+      width: 2px;
+      background-color: white;
+      animation: cursor-flash 800ms infinite alternate-reverse;
+      margin-left: 2px;
+    }
+
+    @keyframes cursor-flash {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  }
+
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .key-row {
+      display: flex;
+
+      .key {
+        font-size: calc(0.8 * var(--keyboard-key-width));
+        line-height: calc(1.4 * var(--keyboard-key-width));
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+
+        padding-left: calc(0.25 * var(--keyboard-key-width));
+        padding-right: calc(0.25 * var(--keyboard-key-width));
+        margin: calc(0.05 * var(--keyboard-key-width));
+
+        min-width: calc(0.8 * var(--keyboard-key-width));
+
+        border: 1px solid rgba(255, 255, 255, 0.5);
+
+        &.backspace {
+          font-size: calc(0.6 * var(--keyboard-key-width));
+        }
+
+        &.enter {
+          min-width: calc(1.6 * var(--keyboard-key-width));
+        }
+
+        &.space {
+          font-size: calc(0.6 * var(--keyboard-key-width));
+        }
+      }
+    }
+  }
+}

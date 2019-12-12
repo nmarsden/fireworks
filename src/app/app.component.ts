@@ -6,8 +6,6 @@ import { TurnInfo } from './turn-info';
 import { HttpParams } from '@angular/common/http';
 import { GameState } from './game-state';
 import { SerializableGameState } from './core/state/serializable/serializable-game-state';
-import * as screenfull from 'screenfull';
-import { Screenfull } from 'screenfull';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +21,6 @@ export class AppComponent implements OnInit {
   partnerHintNumberOptions;
   partnerHintColourOptions;
   gameState: GameState;
-  sf: Screenfull = screenfull as Screenfull;
 
   constructor(private modalService: ModalService) { }
 
@@ -83,10 +80,6 @@ export class AppComponent implements OnInit {
       paramValue = httpParams.get(paramName);
     }
     return paramValue;
-  }
-
-  toggleFullScreen() {
-    this.sf.toggle();
   }
 
   initAndroidBrowserFullscreenHacks() {
@@ -192,9 +185,8 @@ export class AppComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  onStartButtonClicked() {
-    // Close main menu modal
-    this.closeModal('main-menu-modal');
+  onStartButtonClicked($event) {
+    this.playerNames = $event;
 
     // Show player ready modal
     this.openModal('player-ready-modal');

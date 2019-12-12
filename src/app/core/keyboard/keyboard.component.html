@@ -1,0 +1,11 @@
+<div class="keyboard-container" (click)="onClickKeyboardContainer()">
+  <div class="input-field">{{ inputValue }}<span class="input-field-cursor"></span></div>
+  <div class="keyboard">
+    <div class="key-row" *ngFor="let keyRow of keyRows">
+      <div *ngFor="let key of keyRow"
+           class="key"
+           [ngClass]="{ 'backspace' : isBackspace(key), 'enter': isEnter(key), 'space' : isSpace(key) }"
+           (click)="onClickKey($event, key)">{{ key }}</div>
+    </div>
+  </div>
+</div>

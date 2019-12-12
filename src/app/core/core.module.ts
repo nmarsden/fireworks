@@ -11,6 +11,9 @@ import { InfoTokensComponent } from './info-tokens/info-tokens.component';
 import { FuseTokensComponent } from './fuse-tokens/fuse-tokens.component';
 import { DeckComponent } from './deck/deck.component';
 import { TurnInfoComponent } from './turn-info/turn-info.component';
+import { KeyboardComponent } from './keyboard/keyboard.component';
+import { MainMenuModalComponent } from './main-menu-modal/main-menu-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,10 +27,13 @@ import { TurnInfoComponent } from './turn-info/turn-info.component';
     InfoTokensComponent,
     FuseTokensComponent,
     DeckComponent,
-    TurnInfoComponent
+    TurnInfoComponent,
+    KeyboardComponent,
+    MainMenuModalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     BackgroundComponent,
@@ -40,7 +46,9 @@ import { TurnInfoComponent } from './turn-info/turn-info.component';
     InfoTokensComponent,
     FuseTokensComponent,
     DeckComponent,
-    TurnInfoComponent
+    TurnInfoComponent,
+    KeyboardComponent,
+    MainMenuModalComponent
   ]
 })
 export class CoreModule { }
