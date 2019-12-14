@@ -53,6 +53,8 @@ export class MainMenuModalComponent implements OnInit {
   }
 
   onStartButtonClicked() {
+    this.isShowPlayerOneKeyboard = false;
+    this.isShowPlayerTwoKeyboard = false;
     this.closeModal();
     this.startButtonClicked.emit([this.playerNameOne.toUpperCase(), this.playerNameTwo.toUpperCase()]);
   }

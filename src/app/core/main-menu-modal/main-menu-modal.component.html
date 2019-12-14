@@ -9,10 +9,10 @@
        (click)="toggleFullScreen()"></div>
   <div class="main-menu-container">
     <div class="fireworks-rainbow-text">FIREWORKS</div>
-    <div class="player-names-container" *ngIf="!isShowPlayerOneKeyboard && !isShowPlayerTwoKeyboard">
-      <input class="player-name" maxlength="10" [(ngModel)]="playerNameOne" (click)="onPlayerOneClicked($event)">
+    <div class="player-names-container">
+      <div class="player-name" (click)="onPlayerOneClicked($event)">{{ playerNameOne }}</div>
       <div class="versus">&</div>
-      <input class="player-name" maxlength="10" [(ngModel)]="playerNameTwo" (click)="onPlayerTwoClicked($event)">
+      <div class="player-name" (click)="onPlayerTwoClicked($event)">{{ playerNameTwo }}</div>
     </div>
     <div class="button" (click)="onStartButtonClicked()">Start</div>
   </div>
