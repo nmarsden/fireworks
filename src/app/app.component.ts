@@ -246,6 +246,11 @@ export class AppComponent implements OnInit {
     this.closeModal('start-of-turn-modal');
   }
 
+  onStartOfTurnButtonClicked() {
+    // Prepare to start turn
+    this.closeModal('start-of-turn-modal');
+  }
+
   onEndOfTurnModalCancelled() {
     this.onEndOfTurnButtonClicked();
   }

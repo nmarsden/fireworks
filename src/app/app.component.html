@@ -36,6 +36,7 @@
   <div class="modal-body">
     <div class="modal-heading">{{ playerNames[gameState.waitingPlayer] }}</div>
     <app-turn-info [turnInfo]="gameState.turnInfo"></app-turn-info>
+    <div class="button" (click)="onStartOfTurnButtonClicked()">Ok</div>
   </div>
 </app-modal>
 <app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
