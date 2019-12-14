@@ -94,7 +94,7 @@
   .tile {
     height: calc(0.7 * var(--main-tile-width));
     width: calc(1 * var(--main-tile-width));
-    padding: calc(0.05 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
+    padding: calc(0.05 * var(--main-tile-width)) calc(0.2 * var(--main-tile-width));
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -239,6 +239,7 @@
       z-index: 100;
       background-color: rgba(100, 100, 100, 0.2);
       border: 2px solid rgb(0, 0, 0);
+      transform: rotate(20deg);
 
       &.explosion-middle {
         grid-column-start: 2;
