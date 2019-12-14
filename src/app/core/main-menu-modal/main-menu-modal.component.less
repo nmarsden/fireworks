@@ -1,12 +1,19 @@
+.main-menu-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .fireworks-rainbow-text {
-  width: 100%;
   font-size: calc(1/8 * 100vw);
   line-height: calc(1/8 * 100vw);
   font-weight: bold;
   text-align: center;
-  position: absolute;
-  top: 20vh;
-  left: 0;
 
   background-image: linear-gradient(to right, var(--colour-red), var(--colour-yellow), var(--colour-green), var(--colour-blue));
   -webkit-background-clip: text;
@@ -92,13 +99,7 @@
   flex-direction: var(--discarded-tiles-flex-direction);
   justify-content: center;
   align-items: center;
-  padding: var(--player-names-container-padding);
-
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100);
 
   pointer-events: none;
 

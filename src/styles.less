@@ -195,21 +195,6 @@ body {
 
   }
 
-  .button-container {
-    display: flex;
-
-    .button+.button {
-      margin-left: calc(0.1 * var(--main-tile-width));
-    }
-  }
-
-  .button {
-    border: 1px solid rgb(255, 255, 255);
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: calc(0.1 * var(--main-tile-width));
-    cursor: pointer;
-  }
-
   .turn-info {
     color: rgba(255, 255, 255, 0.6);
     font-size: calc(0.4 * var(--main-tile-width));
@@ -217,4 +202,22 @@ body {
     margin-top: calc(0.3 * var(--main-tile-width));
     text-align: center;
   }
+}
+
+.button-container {
+  display: flex;
+
+  .button+.button {
+    margin-left: calc(0.1 * var(--main-tile-width));
+  }
+}
+
+.button {
+  font-size: calc(0.5 * var(--main-tile-width));
+  line-height: calc(0.5 * var(--main-tile-width));
+
+  border: 1px solid rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: calc(0.1 * var(--main-tile-width));
+  cursor: pointer;
 }
