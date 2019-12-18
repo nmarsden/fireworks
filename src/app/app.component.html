@@ -24,10 +24,15 @@
                      (startButtonClicked)="onStartButtonClicked($event)"></app-main-menu-modal>
 <app-modal id="player-ready-modal" [isFullScreen]="false">
   <div class="modal-body no-background">
+    <div *ngIf="!gameState.isGameOver && gameState.turnInfo.isNotEmpty()" class="swap-player">
+      <div class="circle"></div>
+      <div class="arrow-heads"></div>
+      <div class="player"></div>
+    </div>
     <div *ngIf="!gameState.isGameOver" class="modal-heading">{{ playerNames[gameState.currentPlayer] }}</div>
     <div *ngIf="!gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
     <div *ngIf="gameState.isGameOver" class="modal-heading">{{ gameState.gameOverHeading }}</div>
-    <div *ngIf="gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">New Game</div>
+    <div *ngIf="gameState.isGameOver" class="button" (click)="onNewGameButtonClicked()">New Game</div>
     <div *ngIf="gameState.turnInfoText !== ''" class="turn-info">{{ gameState.turnInfoText }}</div>
   </div>
   <app-background [theme]="gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"></app-background>

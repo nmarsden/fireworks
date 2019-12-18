@@ -41,6 +41,11 @@ storiesOf('Modal', module)
                             [isFullScreen]="false"
                             [isOpen]="true">
                    <div class="modal-body no-background">
+                     <div class="swap-player">
+                        <div class="circle"></div>
+                        <div class="arrow-heads"></div>
+                        <div class="player"></div>
+                     </div>
                      <div class="modal-heading">PLAYER ONE</div>
                      <div class="button">Ready</div>
                    </div>

@@ -23,6 +23,7 @@ body {
   --colour-tile-handle: rgb(68, 79, 120);
   --colour-button: rgb(28, 86, 172);
   --colour-modal: rgb(28, 86, 172);
+  --colour-swap-player: rgb(28, 86, 172);
 
   --colour-white: rgba(255, 255, 255);
   --colour-red: rgb(255, 119, 116);
@@ -231,4 +232,90 @@ body {
   background-color: var(--colour-button);
   padding: calc(0.1 * var(--main-tile-width));
   cursor: pointer;
+}
+
+.swap-player {
+  position: relative;
+  width: calc(2 * var(--main-tile-width));
+  height: calc(2.4 * var(--main-tile-width));
+
+  .circle {
+    position: absolute;
+    top: 0;
+
+    width: calc(2 * var(--main-tile-width));
+    height: calc(2 * var(--main-tile-width));
+    border-radius: 50%;
+    border: calc(0.1 * var(--main-tile-width)) solid var(--colour-swap-player);
+  }
+  .arrow-heads {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(2 * var(--main-tile-width));
+    height: calc(2 * var(--main-tile-width));
+
+    animation: spin linear 3s infinite;
+
+    &::before {
+      content: "";
+      position: absolute;
+
+      border: calc(0.3 * var(--main-tile-width)) solid var(--colour-swap-player);
+      top: calc(0.2 * var(--main-tile-width));
+      right: calc(0.17 * var(--main-tile-width));
+
+      border-top-width: 0;
+      border-right-width: 0;
+      border-left-color: transparent;
+
+      box-shadow: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width)) black;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+
+      border: calc(0.3 * var(--main-tile-width)) solid var(--colour-swap-player);
+      bottom: calc(0.26 * var(--main-tile-width));
+      left: calc(0.13 * var(--main-tile-width));
+
+      border-bottom-width: 0;
+      border-left-width: 0;
+      border-right-color: transparent;
+
+      box-shadow: calc(-0.1 * var(--main-tile-width)) calc(-0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width)) black;
+    }
+
+  }
+  .player {
+    position: absolute;
+    top: calc(0.4 * var(--main-tile-width));
+    left: calc(0.7 * var(--main-tile-width));
+
+    width: calc(0.6 * var(--main-tile-width));
+    height: calc(0.6 * var(--main-tile-width));
+    border-radius: 50%;
+    background-color: var(--colour-swap-player);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc(0.7 * var(--main-tile-width));
+      left: calc(-0.3 * var(--main-tile-width));
+
+      width: calc(1.2 * var(--main-tile-width));
+      height: calc(0.3 * var(--main-tile-width));
+      background-color: var(--colour-swap-player);
+      border-top-left-radius: calc(0.3 * var(--main-tile-width));
+      border-top-right-radius: calc(0.3 * var(--main-tile-width));
+    }
+  }
+
+  @keyframes spin-arrows {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
 }

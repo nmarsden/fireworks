@@ -213,16 +213,18 @@ export class AppComponent implements OnInit {
     // Close player ready modal
     this.closeModal('player-ready-modal');
 
-    // Is game over?
-    if (this.gameState.isGameOver) {
-      // Start new game
-      this.initGame(null);
-    } else {
-      this.gameState.isHideBoard = false;
-      if (this.gameState.turnInfo.isNotEmpty()) {
-        this.openModal('start-of-turn-modal');
-      }
+    this.gameState.isHideBoard = false;
+    if (this.gameState.turnInfo.isNotEmpty()) {
+      this.openModal('start-of-turn-modal');
     }
+  }
+
+  onNewGameButtonClicked() {
+    // Close player ready modal
+    this.closeModal('player-ready-modal');
+
+    // Start new game
+    this.initGame(null);
   }
 
   onEndOfTurnButtonClicked() {
