@@ -56,7 +56,7 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      border: 2px solid var(--background-colour);
+      border: thin solid var(--background-colour);
 
       height: calc(0.7 * var(--main-tile-width));
       width: calc(2 * var(--main-tile-width));
@@ -100,13 +100,13 @@
     grid-template-rows: repeat(3, 1fr);
     grid-auto-flow: column;
     opacity: 1;
-    border: 4px solid var(--background-colour);
+    border: thin solid var(--background-colour);
     border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
     position: relative;
     overflow: hidden;
 
     &.is-overlay-shown {
-      border: 4px solid white;
+      border: thin solid white;
     }
 
     &.is-overlay-shown:after {
@@ -157,7 +157,7 @@
       padding: 0;
       display: block;
       background-color: rgba(255, 255, 255, 0.2);
-      border: 4px solid var(--background-colour);
+      border: thin solid var(--background-colour);
 
       &.is-overlay-shown {
         animation: border-pulsate-white 1.6s infinite;
@@ -268,7 +268,7 @@
       margin: 5%;
       z-index: 100;
       background-color: rgba(100, 100, 100, 0.2);
-      border: 2px solid rgb(0, 0, 0);
+      border: thin solid rgb(0, 0, 0);
       transform: rotate(20deg);
 
       &.explosion-middle {

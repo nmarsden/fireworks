@@ -5,9 +5,9 @@
     width: var(--main-tile-width);
     display: flex;
     flex-direction: column;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    outline: 1px solid var(--background-colour);
+    border-right: medium solid transparent;
+    border-left: medium solid transparent;
+    outline: thin solid var(--background-colour);
 
     &.colours-on-bottom {
       flex-direction: column-reverse;
@@ -19,7 +19,7 @@
       .tile-hint-colour {
         height: calc(1/6 * var(--main-tile-width));
         width: 100%;
-        border: 3px solid var(--background-colour);
+        border: thin solid var(--background-colour);
         border-radius: 50%;
 
         &.colour-white {
@@ -103,7 +103,7 @@
         line-height: calc(0.17 * var(--main-tile-width));
         text-align: center;
         opacity: 0.2;
-        border: 3px solid var(--background-colour);
+        border: thin solid var(--background-colour);
         border-radius: 50%;
 
         &.is-chosen {
