@@ -14,6 +14,7 @@ import { TurnInfoComponent } from './turn-info/turn-info.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { MainMenuModalComponent } from './main-menu-modal/main-menu-modal.component';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   exports: [
     BackgroundComponent,

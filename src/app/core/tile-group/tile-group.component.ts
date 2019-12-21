@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Tile } from '../../tile';
 import { Hand } from '../../hand';
 import { TileFact } from '../../tile-fact';
@@ -60,4 +61,7 @@ export class TileGroupComponent implements OnInit, OnChanges {
     this.tileClicked.emit($event);
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tiles, event.previousIndex, event.currentIndex);
+  }
 }
