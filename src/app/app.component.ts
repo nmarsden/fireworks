@@ -6,6 +6,7 @@ import { TurnInfo } from './turn-info';
 import { HttpParams } from '@angular/common/http';
 import { GameState } from './game-state';
 import { SerializableGameState } from './core/state/serializable/serializable-game-state';
+import { TileMark } from './tile-mark';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,12 @@ export class AppComponent implements OnInit {
   partnerHintNumberOptions;
   partnerHintColourOptions;
   gameState: GameState;
+
+  TileMark = TileMark;
+
+  tileMarkModalData = {
+    chosenTileMark: TileMark.None
+  };
 
   constructor(private modalService: ModalService) { }
 
@@ -82,6 +89,10 @@ export class AppComponent implements OnInit {
     return paramValue;
   }
 
+  disableContextMenu() {
+    window.oncontextmenu = () => false;
+  }
+
   initAndroidBrowserFullscreenHacks() {
     window.addEventListener('load', () => { window.scrollTo(0, 0); });
 
@@ -90,6 +101,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.disableContextMenu();
+
     this.initAndroidBrowserFullscreenHacks();
 
     this.setVhAccordingToWindowInnerHeight();
@@ -333,6 +346,16 @@ export class AppComponent implements OnInit {
     this.openModal('player-tile-modal');
   }
 
+  onPlayerTileLongPressed($event) {
+    this.gameState.chosenTile = $event;
+    this.tileMarkModalData.chosenTileMark = this.gameState.hands.playerHand.getTileMark(this.gameState.chosenTile.id);
+
+    // Clear chosen hint
+    this.gameState.playerTileHintChosen = TileHint.noHint();
+
+    this.openModal('player-tile-mark-modal');
+  }
+
   onPlayTileButtonClicked() {
     // Remove chosen tile from player tiles
     this.gameState.hands.removePlayerTile(this.gameState.chosenTile);
@@ -399,6 +422,15 @@ export class AppComponent implements OnInit {
   }
 
   onPlayerTileModalCancelled() {
+    // Unset chosen tile
+    this.gameState.chosenTile = null;
+  }
+
+  onPlayTileMarkButtonClicked(mark: TileMark) {
+    this.gameState.hands.applyPlayerTileMark(this.gameState.chosenTile, mark);
+  }
+
+  onPlayerTileMarkModalCancelled() {
     // Unset chosen tile
     this.gameState.chosenTile = null;
   }

@@ -7,6 +7,7 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { TileFact } from '../app/tile-fact';
 import { TileHints } from '../app/tile-hints';
 import { Hand } from '../app/hand';
+import { TileMark } from '../app/tile-mark';
 
 const standardColours = ['red', 'white', 'green', 'yellow', 'blue'];
 const rainbowColour = 'rainbow';
@@ -129,6 +130,38 @@ storiesOf('Tile', module)
       props: {
         playerTiles: playerHand.tiles,
         playerTileFacts: playerHand.tileFacts
+      }
+    };
+  })
+  .add('player marked save', () => {
+    return {
+      template: `<div style="display:flex; flex-wrap: wrap">
+                    <app-tile style="--main-tile-width:120px;"
+                              [displayMode]="'player'" *ngFor="let tile of playerTiles"
+                              [tile]="tile"
+                              [tileFact]="playerTileFacts.get(tile.id)"
+                              [tileMark]="tileMark"></app-tile>
+                 </div>`,
+      props: {
+        playerTiles: playerHand.tiles,
+        playerTileFacts: playerHand.tileFacts,
+        tileMark: TileMark.Save
+      }
+    };
+  })
+  .add('player marked play', () => {
+    return {
+      template: `<div style="display:flex; flex-wrap: wrap">
+                    <app-tile style="--main-tile-width:120px;"
+                              [displayMode]="'player'" *ngFor="let tile of playerTiles"
+                              [tile]="tile"
+                              [tileFact]="playerTileFacts.get(tile.id)"
+                              [tileMark]="tileMark"></app-tile>
+                 </div>`,
+      props: {
+        playerTiles: playerHand.tiles,
+        playerTileFacts: playerHand.tileFacts,
+        tileMark: TileMark.Play
       }
     };
   })

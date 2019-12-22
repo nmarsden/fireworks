@@ -22,8 +22,10 @@ export class TileGroupComponent implements OnInit, OnChanges {
   @Input() playerName: string;
   @Output() tileHintClicked = new EventEmitter();
   @Output() tileClicked = new EventEmitter<Tile>();
+  @Output() tileLongPressed = new EventEmitter<Tile>();
 
   tileFacts;
+  tileMarks;
 
   constructor() { }
 
@@ -40,6 +42,7 @@ export class TileGroupComponent implements OnInit, OnChanges {
       // Use tiles & tileFacts from hand
       this.tiles = this.hand.tiles;
       this.tileFacts = this.hand.tileFacts;
+      this.tileMarks = this.hand.tileMarks;
     } else {
       // Use tileFacts initialized from tiles
       this.tileFacts = new Map();
@@ -49,6 +52,7 @@ export class TileGroupComponent implements OnInit, OnChanges {
       this.tiles.forEach(t => {
         this.tileFacts.set(t.id, new TileFact(t.colour, t.number, new TileHints()));
       });
+      this.tileMarks = new Map();
     }
   }
 
@@ -59,6 +63,10 @@ export class TileGroupComponent implements OnInit, OnChanges {
 
   onTileClicked($event) {
     this.tileClicked.emit($event);
+  }
+
+  onTileLongPressed($event) {
+    this.tileLongPressed.emit($event);
   }
 
   drop(event: CdkDragDrop<string[]>) {

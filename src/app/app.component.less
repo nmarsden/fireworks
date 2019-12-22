@@ -1,0 +1,29 @@
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  font-size: calc(0.3 * var(--main-tile-width));
+  padding: calc(0.1 * var(--main-tile-width));
+  cursor: pointer;
+  display: inline-block;
+  color: var(--colour-button-text-unchecked);
+  background: var(--colour-button-bg-unchecked);
+}
+
+input[type=radio]:checked + label{
+  color: white;
+  background: var(--colour-button);
+}
+
+label + input[type=radio] + label {
+  border-left: solid thin white;
+}
+.radio-group {
+  border: solid thin white;
+  display: inline-block;
+  border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
+  overflow: hidden;
+}

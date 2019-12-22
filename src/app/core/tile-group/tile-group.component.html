@@ -10,13 +10,15 @@
             [displayMode]="displayMode"
             [tile]="tile"
             [tileFact]="tileFacts.get(tile.id)"
+            [tileMark]="tileMarks.get(tile.id)"
             [isChosen]="isGroupChosen || (chosenTile && chosenTile.id === tile.id)"
             [chosenColour]="chosenColour"
             [chosenNumber]="chosenNumber"
             [isClickable]="displayMode === 'partner' || displayMode === 'player'"
             [isShowHints]="isShowHints"
             (tileHintClicked)="onTileHintClicked($event)"
-            (tileClicked)="onTileClicked($event)"></app-tile>
+            (tileClicked)="onTileClicked($event)"
+            (tileLongPressed)="onTileLongPressed($event)"></app-tile>
   <div class="tile-hint-handle-container"
        *ngIf="displayMode === 'partner' || displayMode === 'player'"
        [ngClass]="{

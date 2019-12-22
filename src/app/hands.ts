@@ -1,6 +1,7 @@
 import { Hand } from './hand';
 import { Tile } from './tile';
 import { TileHint } from './tile-hint';
+import { TileMark } from './tile-mark';
 
 export class Hands {
   playerHand: Hand;
@@ -34,6 +35,10 @@ export class Hands {
 
   applyPartnerHint(hint: TileHint) {
     this.partnerHand.applyHint(hint);
+  }
+
+  applyPlayerTileMark(tile: Tile, mark: TileMark) {
+    this.playerHand.applyMark(tile, mark);
   }
 
   getPartnerHintColourOptions() {

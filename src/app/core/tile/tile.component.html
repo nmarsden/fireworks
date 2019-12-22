@@ -21,7 +21,10 @@
                    [excludedNumbers]="tileFact.hints.excludedNumbers"></app-tile-hint>
   </div>
   <div class="tile-container" >
-    <div class='tile' (click)="onTileClicked()"
+    <div class='tile'
+        (press)="onPress()"
+        (pressUp)="onPressUp()"
+        (click)="onTileClicked()"
         [ngClass]="{
         'is-overlay-shown':    isChosen,
         'is-clickable':        isClickable,
@@ -65,6 +68,12 @@
       <div *ngIf='(displayMode !== "player" || tileFact.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-middle"></div>
       <div *ngIf='(displayMode !== "player" || tileFact.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-left"></div>
       <div *ngIf='(displayMode !== "player" || tileFact.possibleNumbers.length === 1) && displayMode !== "discarded" && tile.number === 5' class="explosion explosion-bottom-right"></div>
+      <div *ngIf='tileMark && tileMark !== TileMark.None'
+           class="tile-mark"
+           [ngClass]="{
+                        'is-save': tileMark === TileMark.Save,
+                        'is-play': tileMark === TileMark.Play
+                      }"></div>
     </div>
   </div>
 </div>

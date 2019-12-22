@@ -33,7 +33,8 @@
                   [chosenNumber]="playerTileHintChosen.number"
                   [isShowHints]="isShowPlayerHints"
                   (tileHintClicked)="onPlayerTileHintClicked($event)"
-                  (tileClicked)="onPlayerTileClicked($event)"></app-tile-group>
+                  (tileClicked)="onPlayerTileClicked($event)"
+                  (tileLongPressed)="onPlayerTileLongPressed($event)"></app-tile-group>
 
   <app-background [isSparkling]="false"
                   [isSmallStars]="true"></app-background>

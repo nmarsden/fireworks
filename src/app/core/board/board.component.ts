@@ -28,6 +28,7 @@ export class BoardComponent implements OnInit, OnChanges {
   @Output() playerTileHintClicked = new EventEmitter();
   @Output() partnerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileClicked = new EventEmitter<Tile>();
+  @Output() playerTileLongPressed = new EventEmitter<Tile>();
   @Output() deckClicked = new EventEmitter<string>();
 
   displayedPlayedTiles: Tile[];
@@ -69,6 +70,10 @@ export class BoardComponent implements OnInit, OnChanges {
 
   onPlayerTileClicked($event) {
     this.playerTileClicked.emit($event);
+  }
+
+  onPlayerTileLongPressed($event) {
+    this.playerTileLongPressed.emit($event);
   }
 
   onPartnerTileClicked($event) {
