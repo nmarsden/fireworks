@@ -43,11 +43,11 @@ export class Hand {
     this.tiles = this.tiles.reverse();
   }
 
-  getTileFact(tileId: Guid) {
+  getTileFact(tileId: Guid): TileFact {
     return this.tileFacts.get(tileId);
   }
 
-  getTileMark(tileId: Guid) {
+  getTileMark(tileId: Guid): TileMark {
     return this.tileMarks.get(tileId);
   }
 

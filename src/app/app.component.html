@@ -83,18 +83,8 @@
     </div>
   </div>
 </app-modal>
-<app-modal id="player-tile-mark-modal"
-           [position]="'bottom'"
-           (cancelled)="onPlayerTileMarkModalCancelled()">
-  <div class="modal-body">
-    <div class="modal-heading">Marking</div>
-    <div class="radio-group">
-      <input type="radio" id="option-1" name="selector" [(ngModel)]="tileMarkModalData.chosenTileMark" [value]="TileMark.None"><label for="option-1" (click)="onPlayTileMarkButtonClicked(TileMark.None)">None</label>
-      <input type="radio" id="option-2" name="selector" [(ngModel)]="tileMarkModalData.chosenTileMark" [value]="TileMark.Save"><label for="option-2" (click)="onPlayTileMarkButtonClicked(TileMark.Save)">Save</label>
-      <input type="radio" id="option-3" name="selector" [(ngModel)]="tileMarkModalData.chosenTileMark" [value]="TileMark.Play"><label for="option-3" (click)="onPlayTileMarkButtonClicked(TileMark.Play)">Play</label>
-    </div>
-  </div>
-</app-modal>
+<app-marking-modal [tileMarkModalData]="tileMarkModalData"
+                   (tileMarkSelected)="onPlayTileMarkButtonClicked($event)"></app-marking-modal>
 <app-modal id="quit-game-modal">
   <div class="modal-body">
     <div class="modal-heading">Quit?</div>

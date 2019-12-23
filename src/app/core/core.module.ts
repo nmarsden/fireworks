@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackgroundComponent } from './background/background.component';
 import { TileComponent } from './tile/tile.component';
@@ -13,8 +13,14 @@ import { DeckComponent } from './deck/deck.component';
 import { TurnInfoComponent } from './turn-info/turn-info.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { MainMenuModalComponent } from './main-menu-modal/main-menu-modal.component';
+import { MarkingModalComponent } from './marking-modal/marking-modal.component';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
+/**
+ * Hammerjs must be imported for gestures
+ */
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -30,7 +36,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DeckComponent,
     TurnInfoComponent,
     KeyboardComponent,
-    MainMenuModalComponent
+    MainMenuModalComponent,
+    MarkingModalComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +57,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DeckComponent,
     TurnInfoComponent,
     KeyboardComponent,
-    MainMenuModalComponent
+    MainMenuModalComponent,
+    MarkingModalComponent
   ]
 })
 export class CoreModule { }

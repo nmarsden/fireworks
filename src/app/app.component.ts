@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   TileMark = TileMark;
 
   tileMarkModalData = {
-    chosenTileMark: TileMark.None
+    chosenTileMark: undefined
   };
 
   constructor(private modalService: ModalService) { }
@@ -348,12 +348,13 @@ export class AppComponent implements OnInit {
 
   onPlayerTileLongPressed($event) {
     this.gameState.chosenTile = $event;
-    this.tileMarkModalData.chosenTileMark = this.gameState.hands.playerHand.getTileMark(this.gameState.chosenTile.id);
+
+    this.tileMarkModalData = { chosenTileMark : this.gameState.hands.playerHand.getTileMark(this.gameState.chosenTile.id) };
 
     // Clear chosen hint
     this.gameState.playerTileHintChosen = TileHint.noHint();
 
-    this.openModal('player-tile-mark-modal');
+    this.openModal('marking-modal');
   }
 
   onPlayTileButtonClicked() {
