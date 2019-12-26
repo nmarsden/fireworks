@@ -95,9 +95,6 @@ export class AppComponent implements OnInit {
 
   initAndroidBrowserFullscreenHacks() {
     window.addEventListener('load', () => { window.scrollTo(0, 0); });
-
-    // use this with care, only if you don't have overflow content to be scrolled.
-    document.addEventListener('touchmove', e => { e.preventDefault(); });
   }
 
   ngOnInit() {

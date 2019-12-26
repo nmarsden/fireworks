@@ -26,8 +26,12 @@ export class BoardPO {
     $$('app-tile-group').last().$$('app-tile').get(tileIndex).click();
   }
 
+  getPlayerTile(tileIndex: number): WebElementPromise {
+    return $$('app-tile-group').last().$$('app-tile').get(tileIndex).getWebElement();
+  }
+
   clickAndHoldPlayerTile(tileIndex: number) {
-    const tile: WebElementPromise = $$('app-tile-group').last().$$('app-tile').get(tileIndex).getWebElement();
+    const tile: WebElementPromise = this.getPlayerTile(tileIndex);
     browser.actions().mouseDown(tile).perform();
     browser.sleep(1000);
     browser.actions().mouseUp().perform();
@@ -38,10 +42,34 @@ export class BoardPO {
   // then move to final destination, then release and it works.
   // Source: https://github.com/SeleniumHQ/selenium-google-code-issue-archive/issues/3604#issuecomment-192002227
   dragAndDropPlayerTile(sourceTileIndex: number, destinationTileIndex: number) {
-    const sourceTile: WebElementPromise = $$('app-tile-group').last().$$('app-tile').get(sourceTileIndex).getWebElement();
-    const destinationTile: WebElementPromise = $$('app-tile-group').last().$$('app-tile').get(destinationTileIndex).getWebElement();
+    const sourceTile: WebElementPromise = this.getPlayerTile(sourceTileIndex);
+    const destinationTile: WebElementPromise = this.getPlayerTile(destinationTileIndex);
 
-    browser.actions().mouseDown(sourceTile).mouseMove({x: 20, y: 0}).perform();
+    browser.actions().mouseDown(sourceTile).mouseMove({x: 120, y: 0}).perform();
+    browser.actions().mouseMove(destinationTile).mouseUp().perform();
+  }
+
+  clickAndSlowDragAndDropPlayerTile(sourceTileIndex: number, destinationTileIndex: number) {
+    const sourceTile: WebElementPromise = this.getPlayerTile(sourceTileIndex);
+    const destinationTile: WebElementPromise = this.getPlayerTile(destinationTileIndex);
+
+    // Mouse down and small move
+    browser.actions().mouseDown(sourceTile).mouseMove({x: 120, y: 0}).perform();
+    // Hold
+    browser.sleep(1000);
+    // Move and drop
+    browser.actions().mouseMove(destinationTile).mouseUp().perform();
+  }
+
+  clickAndHoldAndDragAndDropPlayerTile(sourceTileIndex: number, destinationTileIndex: number) {
+    const sourceTile: WebElementPromise = this.getPlayerTile(sourceTileIndex);
+    const destinationTile: WebElementPromise = this.getPlayerTile(destinationTileIndex);
+
+    // Click and hold
+    browser.actions().mouseDown(sourceTile).perform();
+    browser.sleep(1000);
+    // Drag and drop (see notes above regarding this drag and drop workaround)
+    browser.actions().mouseMove({x: 120, y: 0}).perform();
     browser.actions().mouseMove(destinationTile).mouseUp().perform();
   }
 

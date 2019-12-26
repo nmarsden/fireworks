@@ -20,12 +20,15 @@ export class TileGroupComponent implements OnInit, OnChanges {
   @Input() displayMode: string;
   @Input() isShowHints = true;
   @Input() playerName: string;
+  @Input() isDraggingEnabled: boolean;
   @Output() tileHintClicked = new EventEmitter();
   @Output() tileClicked = new EventEmitter<Tile>();
   @Output() tileLongPressed = new EventEmitter<Tile>();
 
   tileFacts;
   tileMarks;
+  isDraggingTile = false;
+  isDraggingCancelledByLongPress = false;
 
   constructor() { }
 
@@ -66,10 +69,26 @@ export class TileGroupComponent implements OnInit, OnChanges {
   }
 
   onTileLongPressed($event) {
+    if (this.isDraggingTile) {
+      return; // ignore long press while dragging in-progress
+    }
+    this.isDraggingCancelledByLongPress = true;
     this.tileLongPressed.emit($event);
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    if (this.isDraggingCancelledByLongPress) {
+      this.isDraggingCancelledByLongPress = false;
+      return; // ignore drop when dragging is cancelled by long press
+    }
     moveItemInArray(this.tiles, event.previousIndex, event.currentIndex);
+  }
+
+  dragStarted() {
+    this.isDraggingTile = true;
+  }
+
+  dragEnded() {
+    this.isDraggingTile = false;
   }
 }

@@ -1,12 +1,14 @@
 <div class="tile-group"
      cdkDropList
      cdkDropListOrientation="horizontal"
-     [cdkDropListDisabled]="displayMode !== 'player'"
+     [cdkDropListDisabled]="!isDraggingEnabled"
      (cdkDropListDropped)="drop($event)"
      [ngClass]='{"is-played-tiles": displayMode === "played"}'>
   <app-tile *ngFor="let tile of tiles"
             cdkDrag
             cdkDragLockAxis="x"
+            (cdkDragStarted)="dragStarted()"
+            (cdkDragEnded)="dragEnded()"
             [displayMode]="displayMode"
             [tile]="tile"
             [tileFact]="tileFacts.get(tile.id)"
