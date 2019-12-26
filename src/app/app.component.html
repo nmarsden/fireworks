@@ -84,7 +84,8 @@
   </div>
 </app-modal>
 <app-marking-modal [tileMarkModalData]="tileMarkModalData"
-                   (tileMarkSelected)="onPlayTileMarkButtonClicked($event)"></app-marking-modal>
+                   (tileMarkSelected)="onPlayTileMarkButtonClicked($event)"
+                   (modalClosed)="onPlayerTileMarkModalCancelled()"></app-marking-modal>
 <app-modal id="quit-game-modal">
   <div class="modal-body">
     <div class="modal-heading">Quit?</div>

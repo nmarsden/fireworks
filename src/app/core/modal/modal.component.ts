@@ -90,4 +90,8 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
 
     this.close();
   }
+
+  isModalOpen(): boolean {
+    return this.element.classList.contains('app-modal-open');
+  }
 }

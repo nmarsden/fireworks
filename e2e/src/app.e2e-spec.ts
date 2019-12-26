@@ -5,8 +5,10 @@ import { PartnerTileModalPO } from './partnerTileModal.po';
 import { PlayerTileModalPO } from './playerTileModal.po';
 import { StartOfTurnModalPO } from './startOfTurnModal.po';
 import { EndOfTurnModalPO } from './endOfTurnModal.po';
+import { MarkingModalPO } from './markingModal.po';
 import { BoardPO } from './board.po';
 import { browser, logging } from 'protractor';
+import { TileMark } from '../../src/app/tile-mark';
 
 describe('Fireworks App', () => {
   let appPO: AppPO;
@@ -16,6 +18,7 @@ describe('Fireworks App', () => {
   let playerTileModalPO: PlayerTileModalPO;
   let startOfTurnModalPO: StartOfTurnModalPO;
   let endOfTurnModalPO: EndOfTurnModalPO;
+  let markingModalPO: MarkingModalPO;
   let boardPO: BoardPO;
 
   beforeAll(() => {
@@ -26,6 +29,7 @@ describe('Fireworks App', () => {
     playerTileModalPO = new PlayerTileModalPO();
     startOfTurnModalPO = new StartOfTurnModalPO();
     endOfTurnModalPO = new EndOfTurnModalPO();
+    markingModalPO = new MarkingModalPO();
     boardPO = new BoardPO();
   });
 
@@ -259,133 +263,108 @@ describe('Fireworks App', () => {
                   expect(startOfTurnModalPO.isOpen()).toBeFalsy();
                 });
 
-                describe('Click player tile which is playable: RAINBOW 1', () => {
+                describe('Click and hold player tile which is playable: RAINBOW 1', () => {
                   beforeAll(() => {
-                    boardPO.clickPlayerTile(3); // RAINBOW 1
+                    boardPO.clickAndHoldPlayerTile(3); // RAINBOW 1
                   });
 
-                  it('should show player tile modal', () => {
-                    expect(playerTileModalPO.isOpen()).toBeTruthy();
+                  it('should show marking modal', () => {
+                    expect(markingModalPO.isOpen()).toBeTruthy();
                   });
 
-                  describe('Play tile: RAINBOW 1', () => {
+                  describe('Click the PLAY marking option', () => {
                     beforeAll(() => {
-                      playerTileModalPO.clickPlay();
+                      markingModalPO.clickMarkOption(TileMark.Play);
                     });
 
-                    it('should add tile to played tiles: RAINBOW 1', () => {
-                      expect(boardPO.getPlayedTiles()).toContain('colour:rainbow, number:1');
+                    it('should give tile the PLAY marking: RAINBOW 1', () => {
+                      expect(boardPO.getPlayerTileMarks()).toEqual([ 'none', 'none', 'none', 'play', 'none' ]);
                     });
 
-                    it('should have partner tiles: RAINBOW 4, GREEN 1, GREEN 5, BLUE 4, BLUE 2', () => {
-                      expect(boardPO.getPartnerTiles()).toEqual([
-                        'colour:rainbow, number:4',
-                        'colour:green, number:1',
-                        'colour:green, number:5',
-                        'colour:blue, number:4',
-                        'colour:blue, number:2'
-                      ]);
-                    });
-
-                    it('should update player tiles: YELLOW 2, WHITE 4, YELLOW 5, GREEN 4, GREEN 4', () => {
-                      expect(boardPO.getPlayerTiles()).toEqual([
-                        'colour:yellow, number:2',
-                        'colour:white, number:4',
-                        'colour:yellow, number:5',
-                        'colour:green, number:4',
-                        'colour:green, number:4'
-                      ]);
-                    });
-
-                    it('should keep available info tokens as 7', () => {
-                      expect(boardPO.getAvailableInfoTokens()).toEqual(7);
-                    });
-
-                    it('should have all available fuse tokens', () => {
-                      expect(boardPO.getAvailableFuseTokens()).toEqual(3);
-                    });
-
-                    it('should show "end of turn" modal with played tile: RAINBOW 1', () => {
-                      expect(endOfTurnModalPO.isOpen()).toBeTruthy();
-                      expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
-                    });
-
-                    describe('End Turn for PLAYER TWO', () => {
+                    describe('Click outside the marking modal', () => {
                       beforeAll(() => {
-                        endOfTurnModalPO.clickDoneButton();
+                        markingModalPO.clickOutside();
                       });
 
-                      it('should show player ready modal', () => {
-                        expect(playerReadyModalPO.isOpen()).toBeTruthy();
+                      it('should close the marking modal', () => {
+                        expect(markingModalPO.isOpen()).toBeFalsy();
                       });
 
-                      it('should show PLAYER ONE heading', () => {
-                        expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER ONE');
-                      });
-
-                      describe('Begin Turn for PLAYER ONE', () => {
+                      describe('Click player tile which is playable: RAINBOW 1', () => {
                         beforeAll(() => {
-                          playerReadyModalPO.getReadyButton().click();
+                          boardPO.clickPlayerTile(3); // RAINBOW 1
                         });
 
-                        it('should close player ready modal', () => {
-                          expect(playerReadyModalPO.isOpen()).toBeFalsy();
+                        it('should show player tile modal', () => {
+                          expect(playerTileModalPO.isOpen()).toBeTruthy();
                         });
 
-                        it('should display board', () => {
-                          expect(boardPO.isDisplayed).toBeTruthy();
-                        });
-
-                        it('should have partner tiles: GREEN 4, GREEN 4, YELLOW 5, WHITE 4, YELLOW 2', () => {
-                          expect(boardPO.getPartnerTiles()).toEqual([
-                            'colour:green, number:4',
-                            'colour:green, number:4',
-                            'colour:yellow, number:5',
-                            'colour:white, number:4',
-                            'colour:yellow, number:2'
-                          ]);
-                        });
-
-                        it('should have player tiles: BLUE 2, BLUE 4, GREEN 5, GREEN 1, RAINBOW 4', () => {
-                          expect(boardPO.getPlayerTiles()).toEqual([
-                            'colour:blue, number:2',
-                            'colour:blue, number:4',
-                            'colour:green, number:5',
-                            'colour:green, number:1',
-                            'colour:rainbow, number:4'
-                          ]);
-                        });
-
-                        it('should show "start of turn" modal with played tile: RAINBOW 1', () => {
-                          expect(startOfTurnModalPO.isOpen()).toBeTruthy();
-                          expect(startOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
-                        });
-
-                        describe('Click outside "start of turn" modal', () => {
+                        describe('Play tile: RAINBOW 1', () => {
                           beforeAll(() => {
-                            startOfTurnModalPO.clickOutside();
+                            playerTileModalPO.clickPlay();
                           });
 
-                          it('should close "start of turn" modal', () => {
-                            expect(startOfTurnModalPO.isOpen()).toBeFalsy();
+                          it('should add tile to played tiles: RAINBOW 1', () => {
+                            expect(boardPO.getPlayedTiles()).toContain('colour:rainbow, number:1');
                           });
 
-                          describe('Click player tile which is NOT playable: BLUE 2', () => {
+                          it('should have partner tiles: RAINBOW 4, GREEN 1, GREEN 5, BLUE 4, BLUE 2', () => {
+                            expect(boardPO.getPartnerTiles()).toEqual([
+                              'colour:rainbow, number:4',
+                              'colour:green, number:1',
+                              'colour:green, number:5',
+                              'colour:blue, number:4',
+                              'colour:blue, number:2'
+                            ]);
+                          });
+
+                          it('should update player tiles: YELLOW 2, WHITE 4, YELLOW 5, GREEN 4, GREEN 4', () => {
+                            expect(boardPO.getPlayerTiles()).toEqual([
+                              'colour:yellow, number:2',
+                              'colour:white, number:4',
+                              'colour:yellow, number:5',
+                              'colour:green, number:4',
+                              'colour:green, number:4'
+                            ]);
+                          });
+
+                          it('should keep available info tokens as 7', () => {
+                            expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                          });
+
+                          it('should have all available fuse tokens', () => {
+                            expect(boardPO.getAvailableFuseTokens()).toEqual(3);
+                          });
+
+                          it('should show "end of turn" modal with played tile: RAINBOW 1', () => {
+                            expect(endOfTurnModalPO.isOpen()).toBeTruthy();
+                            expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
+                          });
+
+                          describe('End Turn for PLAYER TWO', () => {
                             beforeAll(() => {
-                              boardPO.clickPlayerTile(0); // BLUE 2
+                              endOfTurnModalPO.clickDoneButton();
                             });
 
-                            it('should show player tile modal', () => {
-                              expect(playerTileModalPO.isOpen()).toBeTruthy();
+                            it('should show player ready modal', () => {
+                              expect(playerReadyModalPO.isOpen()).toBeTruthy();
                             });
 
-                            describe('Play tile: BLUE 2', () => {
+                            it('should show PLAYER ONE heading', () => {
+                              expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER ONE');
+                            });
+
+                            describe('Begin Turn for PLAYER ONE', () => {
                               beforeAll(() => {
-                                playerTileModalPO.clickPlay();
+                                playerReadyModalPO.getReadyButton().click();
                               });
 
-                              it('should add tile to discarded tiles: BLUE 2', () => {
-                                expect(boardPO.getDiscardedTiles()).toEqual(['colour:blue, number:2']);
+                              it('should close player ready modal', () => {
+                                expect(playerReadyModalPO.isOpen()).toBeFalsy();
+                              });
+
+                              it('should display board', () => {
+                                expect(boardPO.isDisplayed).toBeTruthy();
                               });
 
                               it('should have partner tiles: GREEN 4, GREEN 4, YELLOW 5, WHITE 4, YELLOW 2', () => {
@@ -398,106 +377,102 @@ describe('Fireworks App', () => {
                                 ]);
                               });
 
-                              it('should update player tiles: BLUE 4, GREEN 5, GREEN 1, RAINBOW 4, RAINBOW 3', () => {
+                              it('should have player tiles: BLUE 2, BLUE 4, GREEN 5, GREEN 1, RAINBOW 4', () => {
                                 expect(boardPO.getPlayerTiles()).toEqual([
+                                  'colour:blue, number:2',
                                   'colour:blue, number:4',
                                   'colour:green, number:5',
                                   'colour:green, number:1',
-                                  'colour:rainbow, number:4',
-                                  'colour:rainbow, number:3'
+                                  'colour:rainbow, number:4'
                                 ]);
                               });
 
-                              it('should keep available info tokens at 7', () => {
-                                expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                              it('should show "start of turn" modal with played tile: RAINBOW 1', () => {
+                                expect(startOfTurnModalPO.isOpen()).toBeTruthy();
+                                expect(startOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
                               });
 
-                              it('should reduce available fuse tokens to 2', () => {
-                                expect(boardPO.getAvailableFuseTokens()).toEqual(2);
-                              });
-
-                              it('should show "end of turn" modal with played tile BLUE 2 and fuse token', () => {
-                                expect(endOfTurnModalPO.isOpen()).toBeTruthy();
-                                expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
-                                expect(endOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
-                              });
-
-                              describe('End Turn for PLAYER ONE', () => {
+                              describe('Click outside "start of turn" modal', () => {
                                 beforeAll(() => {
-                                  endOfTurnModalPO.clickDoneButton();
+                                  startOfTurnModalPO.clickOutside();
                                 });
 
-                                it('should show player ready modal', () => {
-                                  expect(playerReadyModalPO.isOpen()).toBeTruthy();
+                                it('should close "start of turn" modal', () => {
+                                  expect(startOfTurnModalPO.isOpen()).toBeFalsy();
                                 });
 
-                                it('should show PLAYER TWO heading', () => {
-                                  expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER TWO');
-                                });
-
-                                describe('Begin Turn for PLAYER TWO', () => {
+                                describe('Click player tile which is NOT playable: BLUE 2', () => {
                                   beforeAll(() => {
-                                    playerReadyModalPO.getReadyButton().click();
+                                    boardPO.clickPlayerTile(0); // BLUE 2
                                   });
 
-                                  it('should close player ready modal', () => {
-                                    expect(playerReadyModalPO.isOpen()).toBeFalsy();
+                                  it('should show player tile modal', () => {
+                                    expect(playerTileModalPO.isOpen()).toBeTruthy();
                                   });
 
-                                  it('should have partner tiles: RAINBOW 3, RAINBOW 4, GREEN 1, GREEN 5, BLUE 4', () => {
-                                    expect(boardPO.getPartnerTiles()).toEqual([
-                                      'colour:rainbow, number:3',
-                                      'colour:rainbow, number:4',
-                                      'colour:green, number:1',
-                                      'colour:green, number:5',
-                                      'colour:blue, number:4'
-                                    ]);
-                                  });
-
-                                  it('should have partner tiles: YELLOW 2, WHITE 4, YELLOW 5, GREEN 4, GREEN 4', () => {
-                                    expect(boardPO.getPlayerTiles()).toEqual([
-                                      'colour:yellow, number:2',
-                                      'colour:white, number:4',
-                                      'colour:yellow, number:5',
-                                      'colour:green, number:4',
-                                      'colour:green, number:4'
-                                    ]);
-                                  });
-
-                                  it('should show "start of turn" modal with played tile BLUE 2 and fuse token', () => {
-                                    expect(startOfTurnModalPO.isOpen()).toBeTruthy();
-                                    expect(startOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
-                                    expect(startOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
-                                  });
-
-                                  describe('Click outside "start of turn" modal', () => {
+                                  describe('Play tile: BLUE 2', () => {
                                     beforeAll(() => {
-                                      startOfTurnModalPO.clickOutside();
+                                      playerTileModalPO.clickPlay();
                                     });
 
-                                    it('should close "start of turn" modal', () => {
-                                      expect(startOfTurnModalPO.isOpen()).toBeFalsy();
+                                    it('should add tile to discarded tiles: BLUE 2', () => {
+                                      expect(boardPO.getDiscardedTiles()).toEqual(['colour:blue, number:2']);
                                     });
 
-                                    describe('Click player tile which is NOT playable: YELLOW 5', () => {
+                                    it('should have partner tiles: GREEN 4, GREEN 4, YELLOW 5, WHITE 4, YELLOW 2', () => {
+                                      expect(boardPO.getPartnerTiles()).toEqual([
+                                        'colour:green, number:4',
+                                        'colour:green, number:4',
+                                        'colour:yellow, number:5',
+                                        'colour:white, number:4',
+                                        'colour:yellow, number:2'
+                                      ]);
+                                    });
+
+                                    it('should update player tiles: BLUE 4, GREEN 5, GREEN 1, RAINBOW 4, RAINBOW 3', () => {
+                                      expect(boardPO.getPlayerTiles()).toEqual([
+                                        'colour:blue, number:4',
+                                        'colour:green, number:5',
+                                        'colour:green, number:1',
+                                        'colour:rainbow, number:4',
+                                        'colour:rainbow, number:3'
+                                      ]);
+                                    });
+
+                                    it('should keep available info tokens at 7', () => {
+                                      expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                                    });
+
+                                    it('should reduce available fuse tokens to 2', () => {
+                                      expect(boardPO.getAvailableFuseTokens()).toEqual(2);
+                                    });
+
+                                    it('should show "end of turn" modal with played tile BLUE 2 and fuse token', () => {
+                                      expect(endOfTurnModalPO.isOpen()).toBeTruthy();
+                                      expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
+                                      expect(endOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
+                                    });
+
+                                    describe('End Turn for PLAYER ONE', () => {
                                       beforeAll(() => {
-                                        boardPO.clickPlayerTile(2); // YELLOW 5
+                                        endOfTurnModalPO.clickDoneButton();
                                       });
 
-                                      it('should show player tile modal', () => {
-                                        expect(playerTileModalPO.isOpen()).toBeTruthy();
+                                      it('should show player ready modal', () => {
+                                        expect(playerReadyModalPO.isOpen()).toBeTruthy();
                                       });
 
-                                      describe('Play tile: YELLOW 5', () => {
+                                      it('should show PLAYER TWO heading', () => {
+                                        expect(playerReadyModalPO.getHeadingText()).toEqual('PLAYER TWO');
+                                      });
+
+                                      describe('Begin Turn for PLAYER TWO', () => {
                                         beforeAll(() => {
-                                          playerTileModalPO.clickPlay();
+                                          playerReadyModalPO.getReadyButton().click();
                                         });
 
-                                        it('should add tile to discarded tiles: YELLOW 5', () => {
-                                          expect(boardPO.getDiscardedTiles()).toEqual([
-                                            'colour:yellow, number:5',
-                                            'colour:blue, number:2'
-                                          ]);
+                                        it('should close player ready modal', () => {
+                                          expect(playerReadyModalPO.isOpen()).toBeFalsy();
                                         });
 
                                         it('should have partner tiles: RAINBOW 3, RAINBOW 4, GREEN 1, GREEN 5, BLUE 4', () => {
@@ -510,45 +485,104 @@ describe('Fireworks App', () => {
                                           ]);
                                         });
 
-                                        it('should update player tiles: YELLOW 2, WHITE 4, GREEN 4, GREEN 4, WHITE 3', () => {
+                                        it('should have partner tiles: YELLOW 2, WHITE 4, YELLOW 5, GREEN 4, GREEN 4', () => {
                                           expect(boardPO.getPlayerTiles()).toEqual([
                                             'colour:yellow, number:2',
                                             'colour:white, number:4',
+                                            'colour:yellow, number:5',
                                             'colour:green, number:4',
-                                            'colour:green, number:4',
-                                            'colour:white, number:3'
+                                            'colour:green, number:4'
                                           ]);
                                         });
 
-                                        it('should keep available info tokens at 7', () => {
-                                          expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                                        it('should show "start of turn" modal with played tile BLUE 2 and fuse token', () => {
+                                          expect(startOfTurnModalPO.isOpen()).toBeTruthy();
+                                          expect(startOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
+                                          expect(startOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
                                         });
 
-                                        it('should reduce available fuse tokens to 1', () => {
-                                          expect(boardPO.getAvailableFuseTokens()).toEqual(1);
-                                        });
-
-                                        it('should show "end of turn" modal', () => {
-                                          expect(endOfTurnModalPO.isOpen()).toBeTruthy();
-                                          expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
-                                          expect(endOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
-                                        });
-
-                                        describe('End Turn', () => {
+                                        describe('Click outside "start of turn" modal', () => {
                                           beforeAll(() => {
-                                            endOfTurnModalPO.clickDoneButton();
+                                            startOfTurnModalPO.clickOutside();
                                           });
 
-                                          it('should show player ready modal', () => {
-                                            expect(playerReadyModalPO.isOpen()).toBeTruthy();
+                                          it('should close "start of turn" modal', () => {
+                                            expect(startOfTurnModalPO.isOpen()).toBeFalsy();
                                           });
 
-                                          it('should show heading: GAME OVER', () => {
-                                            expect(playerReadyModalPO.getHeadingText()).toEqual('GAME OVER');
-                                          });
+                                          describe('Click player tile which is NOT playable: YELLOW 5', () => {
+                                            beforeAll(() => {
+                                              boardPO.clickPlayerTile(2); // YELLOW 5
+                                            });
 
-                                          it('should show turn info: Last yellow 5 discarded', () => {
-                                            expect(playerReadyModalPO.getTurnInfoText()).toEqual('Last yellow 5 discarded');
+                                            it('should show player tile modal', () => {
+                                              expect(playerTileModalPO.isOpen()).toBeTruthy();
+                                            });
+
+                                            describe('Play tile: YELLOW 5', () => {
+                                              beforeAll(() => {
+                                                playerTileModalPO.clickPlay();
+                                              });
+
+                                              it('should add tile to discarded tiles: YELLOW 5', () => {
+                                                expect(boardPO.getDiscardedTiles()).toEqual([
+                                                  'colour:yellow, number:5',
+                                                  'colour:blue, number:2'
+                                                ]);
+                                              });
+
+                                              it('should have partner tiles: RAINBOW 3, RAINBOW 4, GREEN 1, GREEN 5, BLUE 4', () => {
+                                                expect(boardPO.getPartnerTiles()).toEqual([
+                                                  'colour:rainbow, number:3',
+                                                  'colour:rainbow, number:4',
+                                                  'colour:green, number:1',
+                                                  'colour:green, number:5',
+                                                  'colour:blue, number:4'
+                                                ]);
+                                              });
+
+                                              it('should update player tiles: YELLOW 2, WHITE 4, GREEN 4, GREEN 4, WHITE 3', () => {
+                                                expect(boardPO.getPlayerTiles()).toEqual([
+                                                  'colour:yellow, number:2',
+                                                  'colour:white, number:4',
+                                                  'colour:green, number:4',
+                                                  'colour:green, number:4',
+                                                  'colour:white, number:3'
+                                                ]);
+                                              });
+
+                                              it('should keep available info tokens at 7', () => {
+                                                expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                                              });
+
+                                              it('should reduce available fuse tokens to 1', () => {
+                                                expect(boardPO.getAvailableFuseTokens()).toEqual(1);
+                                              });
+
+                                              it('should show "end of turn" modal', () => {
+                                                expect(endOfTurnModalPO.isOpen()).toBeTruthy();
+                                                expect(endOfTurnModalPO.isPlayedTileShown()).toBeTruthy();
+                                                expect(endOfTurnModalPO.isFuseTokenShown()).toBeTruthy();
+                                              });
+
+                                              describe('End Turn', () => {
+                                                beforeAll(() => {
+                                                  endOfTurnModalPO.clickDoneButton();
+                                                });
+
+                                                it('should show player ready modal', () => {
+                                                  expect(playerReadyModalPO.isOpen()).toBeTruthy();
+                                                });
+
+                                                it('should show heading: GAME OVER', () => {
+                                                  expect(playerReadyModalPO.getHeadingText()).toEqual('GAME OVER');
+                                                });
+
+                                                it('should show turn info: Last yellow 5 discarded', () => {
+                                                  expect(playerReadyModalPO.getTurnInfoText()).toEqual('Last yellow 5 discarded');
+                                                });
+                                              });
+                                            });
                                           });
                                         });
                                       });

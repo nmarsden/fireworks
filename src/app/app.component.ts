@@ -198,6 +198,10 @@ export class AppComponent implements OnInit {
     this.modalService.close(id);
   }
 
+  isModalOpen(id: string) {
+    return this.modalService.isOpen(id);
+  }
+
   onStartButtonClicked($event) {
     this.playerNames = $event;
 
@@ -338,6 +342,11 @@ export class AppComponent implements OnInit {
   }
 
   onPlayerTileClicked($event) {
+    // Do nothing if the marking-modal is open
+    if (this.isModalOpen('marking-modal')) {
+      return;
+    }
+
     this.gameState.chosenTile = $event;
 
     // Clear chosen hint
@@ -347,6 +356,11 @@ export class AppComponent implements OnInit {
   }
 
   onPlayerTileLongPressed($event) {
+    // Do nothing if the player-tile-modal is open
+    if (this.isModalOpen('player-tile-modal')) {
+      return;
+    }
+
     this.gameState.chosenTile = $event;
 
     this.tileMarkModalData = { chosenTileMark : this.gameState.hands.playerHand.getTileMark(this.gameState.chosenTile.id) };

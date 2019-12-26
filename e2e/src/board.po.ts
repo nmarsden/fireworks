@@ -1,4 +1,5 @@
-import { $$, by, element } from 'protractor';
+import { $$, by, element, browser } from 'protractor';
+import { WebElementPromise } from 'selenium-webdriver';
 
 export class BoardPO {
   isDisplayed(): Promise<boolean> {
@@ -17,8 +18,19 @@ export class BoardPO {
     return $$('app-tile-group').last().$$('app-tile').map(item => item.getAttribute('ng-reflect-tile')) as Promise<string[]>;
   }
 
+  getPlayerTileMarks(): Promise<string[]> {
+    return $$('app-tile-group').last().$$('app-tile').map(item => item.getAttribute('ng-reflect-tile-mark')) as Promise<string[]>;
+  }
+
   clickPlayerTile(tileIndex: number) {
     $$('app-tile-group').last().$$('app-tile').get(tileIndex).click();
+  }
+
+  clickAndHoldPlayerTile(tileIndex: number) {
+    const tile: WebElementPromise = $$('app-tile-group').last().$$('app-tile').get(tileIndex).getWebElement();
+    browser.actions().mouseDown(tile).perform();
+    browser.sleep(1000);
+    browser.actions().mouseUp().perform();
   }
 
   getPlayedTiles(): Promise<string[]> {
