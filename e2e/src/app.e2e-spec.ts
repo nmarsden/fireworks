@@ -79,7 +79,7 @@ describe('Fireworks App', () => {
 
     beforeAll(() => {
       // tslint:disable-next-line:max-line-length
-      // http://localhost:4200?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7fSwiZnVzZVRva2VucyI6MywiaW5mb1Rva2VucyI6OCwiZGlzY2FyZGVkVGlsZXMiOltdLCJwbGF5ZWRUaWxlcyI6W10sImhhbmRzIjpbeyJmIjpbeyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX1dLCJ0IjpbImIyIiwiYjQiLCJnNSIsImcxIiwieDQiXX0seyJmIjpbeyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX1dLCJ0IjpbImc0IiwieDEiLCJ5NSIsInc0IiwieTIiXX1dLCJyZW1haW5pbmdUaWxlcyI6WyJnNCIsIngzIiwidzMiLCJ4MiIsIncxIiwiYjQiLCJ4NSIsInI0IiwicjIiLCJyMSIsInIxIiwieDMiLCJyMSIsInIzIiwieTIiLCJ3MSIsIngyIiwidzMiLCJiMSIsImIyIiwidzEiLCJiMSIsInk0IiwieDEiLCJyNSIsInkzIiwicjMiLCJ3NSIsIncyIiwidzIiLCJiNSIsImcyIiwieDEiLCJ5NCIsInkzIiwiYjMiLCJnMyIsImIzIiwieTEiLCJ5MSIsImczIiwieDQiLCJnMSIsImcxIiwiZzIiLCJyMiIsInc0IiwiYjEiLCJ5MSIsInI0Il0sInR1cm5JbmZvIjp7ImUiOnRydWUsImYiOmZhbHNlLCJpIjpmYWxzZSwiZCI6e30sInAiOnt9LCJoIjp7fX0sInR1cm5JbmZvVGV4dCI6IlN0YXJ0aW5nIGEgbmV3IGdhbWUiLCJ3YWl0aW5nUGxheWVyIjoxLCJjdXJyZW50UGxheWVyIjowfQ==
+      // http://localhost:4200/?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7fSwiZnVzZVRva2VucyI6MywiaW5mb1Rva2VucyI6OCwiZGlzY2FyZGVkVGlsZXMiOltdLCJwbGF5ZWRUaWxlcyI6W10sImhhbmRzIjpbeyJmIjpbeyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX1dLCJ0IjpbImIyIiwiYjQiLCJnNSIsImcxIiwieDQiXSwibSI6Im5ubm5uIn0seyJmIjpbeyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX0seyJwbiI6IjEyMzQ1IiwicGMiOiJ3cnlnYngiLCJoIjp7fX1dLCJ0IjpbImc0IiwieDEiLCJ5NSIsInc0IiwieTIiXSwibSI6Im5ubm5uIn1dLCJyZW1haW5pbmdUaWxlcyI6WyJnNCIsIngzIiwidzMiLCJ4MiIsIncxIiwiYjQiLCJ4NSIsInI0IiwicjIiLCJyMSIsInIxIiwieDMiLCJyMSIsInIzIiwieTIiLCJ3MSIsIngyIiwidzMiLCJiMSIsImIyIiwidzEiLCJiMSIsInk0IiwieDEiLCJyNSIsInkzIiwicjMiLCJ3NSIsIncyIiwidzIiLCJiNSIsImcyIiwieDEiLCJ5NCIsInkzIiwiYjMiLCJnMyIsImIzIiwieTEiLCJ5MSIsImczIiwieDQiLCJnMSIsImcxIiwiZzIiLCJyMiIsInc0IiwiYjEiLCJ5MSIsInI0Il0sInR1cm5JbmZvIjp7ImUiOnRydWUsImYiOmZhbHNlLCJpIjpmYWxzZSwiZCI6e30sInAiOnt9LCJoIjp7fX0sInR1cm5JbmZvVGV4dCI6IlN0YXJ0aW5nIGEgbmV3IGdhbWUiLCJ3YWl0aW5nUGxheWVyIjoxLCJjdXJyZW50UGxheWVyIjowfQ%3D%3D
 
       // tslint:disable
       const data = {
@@ -105,7 +105,8 @@ describe('Fireworks App', () => {
               { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} }],
-            t: ['b2', 'b4', 'g5', 'g1', 'x4']
+            t: ['b2', 'b4', 'g5', 'g1', 'x4'],
+            m: 'nnnnn'
           },
           {
             f: [
@@ -114,7 +115,8 @@ describe('Fireworks App', () => {
               { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} }],
-            t: ['g4', 'x1', 'y5', 'w4', 'y2']
+            t: ['g4', 'x1', 'y5', 'w4', 'y2'],
+            m: 'nnnnn'
           }],
         remainingTiles: ['g4', 'x3', 'w3', 'x2', 'w1', 'b4', 'x5', 'r4', 'r2', 'r1', 'r1', 'x3', 'r1', 'r3', 'y2', 'w1', 'x2', 'w3', 'b1', 'b2', 'w1', 'b1', 'y4', 'x1', 'r5', 'y3', 'r3', 'w5', 'w2', 'w2', 'b5', 'g2', 'x1', 'y4', 'y3', 'b3', 'g3', 'b3', 'y1', 'y1', 'g3', 'x4', 'g1', 'g1', 'g2', 'r2', 'w4', 'b1', 'y1', 'r4'],
         turnInfo: { e: true, f: false, i: false, d: {}, p: {}, h: {} },
@@ -608,7 +610,7 @@ describe('Fireworks App', () => {
   describe('Game State: Only 1 fuse token left', () => {
     beforeAll(() => {
       // tslint:disable-next-line:max-line-length
-      // http://localhost:4200?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7Im4iOjIsImMiOiJ5In0sImZ1c2VUb2tlbnMiOjEsImluZm9Ub2tlbnMiOjgsImRpc2NhcmRlZFRpbGVzIjpbImIyIiwieTIiXSwicGxheWVkVGlsZXMiOltdLCJoYW5kcyI6W3siZiI6W3sicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319XSwidCI6WyJiNCIsImc1IiwiZzEiLCJ4NCIsImc0Il19LHsiZiI6W3sicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319XSwidCI6WyJ4MyIsImc0IiwieDEiLCJ5NSIsInc0Il19XSwicmVtYWluaW5nVGlsZXMiOlsidzMiLCJ4MiIsIncxIiwiYjQiLCJ4NSIsInI0IiwicjIiLCJyMSIsInIxIiwieDMiLCJyMSIsInIzIiwieTIiLCJ3MSIsIngyIiwidzMiLCJiMSIsImIyIiwidzEiLCJiMSIsInk0IiwieDEiLCJyNSIsInkzIiwicjMiLCJ3NSIsIncyIiwidzIiLCJiNSIsImcyIiwieDEiLCJ5NCIsInkzIiwiYjMiLCJnMyIsImIzIiwieTEiLCJ5MSIsImczIiwieDQiLCJnMSIsImcxIiwiZzIiLCJyMiIsInc0IiwiYjEiLCJ5MSIsInI0Il0sInR1cm5JbmZvIjp7ImUiOmZhbHNlLCJmIjp0cnVlLCJpIjpmYWxzZSwiZCI6e30sInAiOnsibiI6MiwiYyI6InkifSwiaCI6e319LCJ0dXJuSW5mb1RleHQiOiIiLCJ3YWl0aW5nUGxheWVyIjoxLCJjdXJyZW50UGxheWVyIjowfQ==
+      // http://localhost:4200/?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7Im4iOjIsImMiOiJ5In0sImZ1c2VUb2tlbnMiOjEsImluZm9Ub2tlbnMiOjgsImRpc2NhcmRlZFRpbGVzIjpbImIyIiwieTIiXSwicGxheWVkVGlsZXMiOltdLCJoYW5kcyI6W3siZiI6W3sicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319XSwidCI6WyJiNCIsImc1IiwiZzEiLCJ4NCIsImc0Il0sIm0iOiJubm5ubiJ9LHsiZiI6W3sicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319LHsicG4iOiIxMjM0NSIsInBjIjoid3J5Z2J4IiwiaCI6e319XSwidCI6WyJ4MyIsImc0IiwieDEiLCJ5NSIsInc0Il0sIm0iOiJubm5ubiJ9XSwicmVtYWluaW5nVGlsZXMiOlsidzMiLCJ4MiIsIncxIiwiYjQiLCJ4NSIsInI0IiwicjIiLCJyMSIsInIxIiwieDMiLCJyMSIsInIzIiwieTIiLCJ3MSIsIngyIiwidzMiLCJiMSIsImIyIiwidzEiLCJiMSIsInk0IiwieDEiLCJyNSIsInkzIiwicjMiLCJ3NSIsIncyIiwidzIiLCJiNSIsImcyIiwieDEiLCJ5NCIsInkzIiwiYjMiLCJnMyIsImIzIiwieTEiLCJ5MSIsImczIiwieDQiLCJnMSIsImcxIiwiZzIiLCJyMiIsInc0IiwiYjEiLCJ5MSIsInI0Il0sInR1cm5JbmZvIjp7ImUiOmZhbHNlLCJmIjp0cnVlLCJpIjpmYWxzZSwiZCI6e30sInAiOnsibiI6MiwiYyI6InkifSwiaCI6e319LCJ0dXJuSW5mb1RleHQiOiIiLCJ3YWl0aW5nUGxheWVyIjoxLCJjdXJyZW50UGxheWVyIjowfQ%3D%3D
 
       // tslint:disable
       const data = {
@@ -630,13 +632,15 @@ describe('Fireworks App', () => {
           f: [{ pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
             { pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
             { pn: '12345', pc: 'wrygbx', h: {} }],
-          t: ['b4', 'g5', 'g1', 'x4', 'g4']
+          t: ['b4', 'g5', 'g1', 'x4', 'g4'],
+          m: 'nnnnn'
         },
           {
             f: [{ pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} }],
-            t: ['x3', 'g4', 'x1', 'y5', 'w4']
+            t: ['x3', 'g4', 'x1', 'y5', 'w4'],
+            m: 'nnnnn'
           }],
         remainingTiles: ['w3', 'x2', 'w1', 'b4', 'x5', 'r4', 'r2', 'r1', 'r1', 'x3', 'r1', 'r3', 'y2', 'w1', 'x2', 'w3', 'b1', 'b2', 'w1', 'b1', 'y4', 'x1', 'r5', 'y3', 'r3', 'w5', 'w2', 'w2', 'b5', 'g2', 'x1', 'y4', 'y3', 'b3', 'g3', 'b3', 'y1', 'y1', 'g3', 'x4', 'g1', 'g1', 'g2', 'r2', 'w4', 'b1', 'y1', 'r4'],
         turnInfo: { e: false, f: true, i: false, d: {}, p: { n: 2, c: 'y' }, h: {} },
@@ -729,7 +733,7 @@ describe('Fireworks App', () => {
     describe('Game State: 1 tile away from winning', () => {
       beforeAll(() => {
         // tslint:disable-next-line:max-line-length
-        // http://localhost:4200?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7Im4iOjQsImMiOiJ5In0sImZ1c2VUb2tlbnMiOjEsImluZm9Ub2tlbnMiOjgsImRpc2NhcmRlZFRpbGVzIjpbImc0IiwiYjQiLCJiMyIsInczIiwieTMiLCJ5NCIsIngxIiwidzIiLCJyMyIsIngxIiwidzEiLCJiMSIsIncxIiwieDIiLCJyMSIsIngzIiwicjEiLCJiMiIsInkyIl0sInBsYXllZFRpbGVzIjpbInk0IiwieTMiLCJnNSIsImc0IiwiYjUiLCJiNCIsInkyIiwieTEiLCJnMyIsImIzIiwidzUiLCJ3NCIsImcyIiwidzMiLCJ3MiIsInI1IiwiYjIiLCJyNCIsInIzIiwicjIiLCJ4NSIsIng0IiwieDMiLCJiMSIsInIxIiwidzEiLCJ4MiIsIngxIiwiZzEiXSwiaGFuZHMiOlt7ImYiOlt7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fV0sInQiOlsiYjEiLCJ5MSIsImczIiwieDQiLCJ5NSJdfSx7ImYiOlt7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fV0sInQiOlsiZzEiLCJnMSIsImcyIiwicjIiLCJ3NCJdfV0sInJlbWFpbmluZ1RpbGVzIjpbInkxIiwicjQiXSwidHVybkluZm8iOnsiZSI6ZmFsc2UsImYiOnRydWUsImkiOmZhbHNlLCJkIjp7fSwicCI6eyJuIjo0LCJjIjoieSJ9LCJoIjp7fX0sInR1cm5JbmZvVGV4dCI6IiIsIndhaXRpbmdQbGF5ZXIiOjEsImN1cnJlbnRQbGF5ZXIiOjB9
+        // http://localhost:4200/?s=eyJnYW1lT3ZlckhlYWRpbmciOiIiLCJpc0hpZGVCb2FyZCI6ZmFsc2UsImlzR2FtZVdvbiI6ZmFsc2UsImlzR2FtZU92ZXIiOmZhbHNlLCJwbGF5ZXJUaWxlSGludENob3NlbiI6e30sInBhcnRuZXJUaWxlSGludENob3NlbiI6e30sImlzUGFydG5lclRpbGVzQ2hvc2VuIjpmYWxzZSwiaXNTaG93UGxheWVySGludHMiOmZhbHNlLCJpc1Nob3dQYXJ0bmVySGludHMiOmZhbHNlLCJjaG9zZW5UaWxlIjp7Im4iOjQsImMiOiJ5In0sImZ1c2VUb2tlbnMiOjEsImluZm9Ub2tlbnMiOjgsImRpc2NhcmRlZFRpbGVzIjpbImc0IiwiYjQiLCJiMyIsInczIiwieTMiLCJ5NCIsIngxIiwidzIiLCJyMyIsIngxIiwidzEiLCJiMSIsIncxIiwieDIiLCJyMSIsIngzIiwicjEiLCJiMiIsInkyIl0sInBsYXllZFRpbGVzIjpbInk0IiwieTMiLCJnNSIsImc0IiwiYjUiLCJiNCIsInkyIiwieTEiLCJnMyIsImIzIiwidzUiLCJ3NCIsImcyIiwidzMiLCJ3MiIsInI1IiwiYjIiLCJyNCIsInIzIiwicjIiLCJ4NSIsIng0IiwieDMiLCJiMSIsInIxIiwidzEiLCJ4MiIsIngxIiwiZzEiXSwiaGFuZHMiOlt7ImYiOlt7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fV0sInQiOlsiYjEiLCJ5MSIsImczIiwieDQiLCJ5NSJdLCJtIjoibm5ubm4ifSx7ImYiOlt7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fSx7InBuIjoiMTIzNDUiLCJwYyI6IndyeWdieCIsImgiOnt9fV0sInQiOlsiZzEiLCJnMSIsImcyIiwicjIiLCJ3NCJdLCJtIjoibm5ubm4ifV0sInJlbWFpbmluZ1RpbGVzIjpbInkxIiwicjQiXSwidHVybkluZm8iOnsiZSI6ZmFsc2UsImYiOnRydWUsImkiOmZhbHNlLCJkIjp7fSwicCI6eyJuIjo0LCJjIjoieSJ9LCJoIjp7fX0sInR1cm5JbmZvVGV4dCI6IiIsIndhaXRpbmdQbGF5ZXIiOjEsImN1cnJlbnRQbGF5ZXIiOjB9
 
         // tslint:disable
         const data = {
@@ -751,13 +755,15 @@ describe('Fireworks App', () => {
             f: [{ pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
               { pn: '12345', pc: 'wrygbx', h: {} }],
-            t: ['b1', 'y1', 'g3', 'x4', 'y5']
+            t: ['b1', 'y1', 'g3', 'x4', 'y5'],
+            m: 'nnnnn'
           },
             {
               f: [{ pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
                 { pn: '12345', pc: 'wrygbx', h: {} }, { pn: '12345', pc: 'wrygbx', h: {} },
                 { pn: '12345', pc: 'wrygbx', h: {} }],
-              t: ['g1', 'g1', 'g2', 'r2', 'w4']
+              t: ['g1', 'g1', 'g2', 'r2', 'w4'],
+              m: 'nnnnn'
             }],
           remainingTiles: ['y1', 'r4'],
           turnInfo: { e: false, f: true, i: false, d: {}, p: { n: 4, c: 'y' }, h: {} },

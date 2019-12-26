@@ -78,7 +78,8 @@ describe('SerializableGameState', () => {
             { pn: '12345', pc: 'wrygbx', h: {} },
             { pn: '12345', pc: 'wrygbx', h: {} },
             { pn: '12345', pc: 'wrygbx', h: {} }
-          ]
+          ],
+          m: 'nnnnn'
         }, {
           t: ['x1', 'w1', 'r1', 'y1', 'g1'],
           f: [
@@ -87,7 +88,8 @@ describe('SerializableGameState', () => {
             { pn: '12345', pc: 'wrygbx', h: {} },
             { pn: '12345', pc: 'wrygbx', h: {} },
             { pn: '12345', pc: 'wrygbx', h: {} }
-          ]
+          ],
+          m: 'nnnnn'
         }],
         remainingTiles: [
           'b1', 'x1', 'w1', 'r1', 'y1', 'g1', 'b1', 'x1', 'w2', 'r2', 'y2', 'g2', 'b2', 'x2', 'w2', 'r2', 'y2',
@@ -122,7 +124,7 @@ describe('SerializableGameState', () => {
       const serializableGameState1 = SerializableGameState.fromGameState(gameState1);
       const serializedGameState = serializableGameState1.serialize();
 
-      expect(serializedGameState.length).toEqual(1532);
+      expect(serializedGameState.length).toEqual(1564);
     });
   });
 });

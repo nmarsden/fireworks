@@ -2,6 +2,7 @@ import { Hand } from '../../../hand';
 import { SerializableHand } from './serializable-hand';
 import { Tile } from '../../../tile';
 import { TileHint } from '../../../tile-hint';
+import { TileMark } from '../../../tile-mark';
 
 describe('SerializableHand', () => {
 
@@ -49,6 +50,18 @@ describe('SerializableHand', () => {
       expect(hand2.isSame(hand1)).toBeTruthy();
     });
 
+    it('with tile and mark', () => {
+      const hand1 = new Hand();
+      const tile = new Tile('white', 2);
+      hand1.addTile(tile);
+      hand1.applyMark(tile, TileMark.Save);
+      const serializableHand = SerializableHand.fromHand(hand1);
+
+      const hand2 = SerializableHand.toHand(serializableHand);
+
+      expect(hand2.isSame(hand1)).toBeTruthy();
+    });
+
   });
 
   describe('toJson', () => {
@@ -59,7 +72,8 @@ describe('SerializableHand', () => {
 
       expect(serializableHand.toJson()).toEqual(Object({
         t: [],
-        f: []
+        f: [],
+        m: ''
       }));
     });
 
@@ -70,7 +84,8 @@ describe('SerializableHand', () => {
 
       expect(serializableHand.toJson()).toEqual(Object({
         t: ['w2'],
-        f: [{ h: {}, pc: 'wrygbx', pn: '12345' }]
+        f: [{ h: {}, pc: 'wrygbx', pn: '12345' }],
+        m: 'n'
       }));
     });
 
@@ -85,7 +100,8 @@ describe('SerializableHand', () => {
         f: [
           { h: {}, pc: 'wrygbx', pn: '12345' },
           { h: {}, pc: 'wrygbx', pn: '12345' }
-        ]
+        ],
+        m: 'nn'
       }));
     });
 
@@ -98,7 +114,22 @@ describe('SerializableHand', () => {
 
       expect(serializableHand.toJson()).toEqual(Object({
         t: ['w2'],
-        f: [{ h: { ec: 'r', en: '3' }, pc: 'wygb', pn: '1245' }]
+        f: [{ h: { ec: 'r', en: '3' }, pc: 'wygb', pn: '1245' }],
+        m: 'n'
+      }));
+    });
+
+    it('with tile and mark', () => {
+      const hand = new Hand();
+      const tile = new Tile('white', 2);
+      hand.addTile(tile);
+      hand.applyMark(tile, TileMark.Save);
+      const serializableHand = SerializableHand.fromHand(hand);
+
+      expect(serializableHand.toJson()).toEqual(Object({
+        t: ['w2'],
+        f: [{ h: {}, pc: 'wrygbx', pn: '12345' }],
+        m: 's'
       }));
     });
   });
