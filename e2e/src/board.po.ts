@@ -33,6 +33,18 @@ export class BoardPO {
     browser.actions().mouseUp().perform();
   }
 
+  // Known 'drag and drop' issue with selenium: https://www.protractortest.org/#/faq#how-can-i-drag-and-drop-elements-
+  // Workaround: The mouse just needs to move twice - for example once you click and hold, move to any position on screen,
+  // then move to final destination, then release and it works.
+  // Source: https://github.com/SeleniumHQ/selenium-google-code-issue-archive/issues/3604#issuecomment-192002227
+  dragAndDropPlayerTile(sourceTileIndex: number, destinationTileIndex: number) {
+    const sourceTile: WebElementPromise = $$('app-tile-group').last().$$('app-tile').get(sourceTileIndex).getWebElement();
+    const destinationTile: WebElementPromise = $$('app-tile-group').last().$$('app-tile').get(destinationTileIndex).getWebElement();
+
+    browser.actions().mouseDown(sourceTile).mouseMove({x: 20, y: 0}).perform();
+    browser.actions().mouseMove(destinationTile).mouseUp().perform();
+  }
+
   getPlayedTiles(): Promise<string[]> {
     return $$('app-tile-group').get(1).$$('app-tile').map(item => item.getAttribute('ng-reflect-tile')) as Promise<string[]>;
   }
