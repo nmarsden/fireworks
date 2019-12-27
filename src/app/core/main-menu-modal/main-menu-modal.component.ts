@@ -9,6 +9,7 @@ import { Screenfull } from 'screenfull';
   styleUrls: ['./main-menu-modal.component.less']
 })
 export class MainMenuModalComponent implements OnInit {
+  @Input() isOpen = false;
   @Input() playerNameOne: string;
   @Input() playerNameTwo: string;
   @Output() startButtonClicked = new EventEmitter<string[]>();
