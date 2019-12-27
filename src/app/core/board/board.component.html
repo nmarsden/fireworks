@@ -21,8 +21,11 @@
       <app-discarded-tiles [tiles]="discardedTiles"
                            [chosenTile]="chosenTile"></app-discarded-tiles>
     </div>
-    <app-deck [remainingTiles]="remainingTiles"
-              (clicked)="onDeckClicked($event)"></app-deck>
+    <div class="menu-and-deck-container">
+      <app-menu-button></app-menu-button>
+      <app-deck [remainingTiles]="remainingTiles"
+                (clicked)="onDeckClicked($event)"></app-deck>
+    </div>
   </div>
 
   <app-tile-group [displayMode]="'player'"

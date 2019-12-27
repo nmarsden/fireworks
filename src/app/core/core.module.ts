@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RocketComponent } from './rocket/rocket.component';
 import { LogoComponent } from './logo/logo.component';
+import { MenuButtonComponent } from './menu-button/menu-button.component';
 
 /**
  * Hammerjs must be imported for gestures
@@ -41,7 +42,8 @@ import 'hammerjs';
     MainMenuModalComponent,
     MarkingModalComponent,
     RocketComponent,
-    LogoComponent
+    LogoComponent,
+    MenuButtonComponent
   ],
   imports: [
     CommonModule,

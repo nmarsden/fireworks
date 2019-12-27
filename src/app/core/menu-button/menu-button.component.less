@@ -1,0 +1,19 @@
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: var(--played-tile-width);
+  height: var(--played-tile-width);
+
+  .menu-icon-item {
+    width: 60%;
+    height: 10%;
+    background-color: var(--colour-white);
+    border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
+  }
+
+  .menu-icon-item + .menu-icon-item {
+    margin-top: 10%;
+  }
+}
