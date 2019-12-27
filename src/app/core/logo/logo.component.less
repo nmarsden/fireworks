@@ -3,6 +3,7 @@
   --rocket-colour-base-shadow: rgb(177, 37, 28);
   --rocket-colour-stripe-main: rgb(255, 255, 255);
   --rocket-colour-stripe-shadow: rgb(164, 164, 164);
+  --rocket-shadow-percentage: 10%;
 }
 
 .rocket-container {
@@ -34,7 +35,7 @@
         width: calc(0.5 * var(--played-tile-width));
         height: calc(0.5 * var(--played-tile-width));
 
-        background-image: linear-gradient(135deg, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
+        background-image: linear-gradient(135deg, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
 
         transform: rotate(-45deg);
       }
@@ -65,14 +66,14 @@
       width: calc(0.6 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 50%;
-      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
+      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
       flex-shrink: 0;
     }
 
     .rocket-body-main {
       width: calc(0.6 * var(--played-tile-width));
       height: var(--played-tile-width);
-      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
+      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
       flex-shrink: 0;
     }
 
@@ -100,39 +101,41 @@
       .rocket-body-stripe {
         display: flex;
         flex-direction: column;
-        height: calc(0.32 * var(--played-tile-width));
+        height: calc(0.3 * var(--played-tile-width));
         overflow: hidden;
 
         position: relative;
         top: calc(0.02 * var(--played-tile-width));
 
+        transform: rotate(10deg);
+
         .rocket-body-stripe-top {
           position: relative;
-          width: calc(0.6 * var(--played-tile-width));
-          height: calc(0.1 * var(--played-tile-width));
+          width: calc(0.65 * var(--played-tile-width));
+          height: calc(0.2 * var(--played-tile-width));
           border-radius: 50%;
-          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) 10%, var(--rocket-colour-stripe-main));
+          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-stripe-main));
           flex-shrink: 0;
         }
 
         .rocket-body-stripe-main {
           position: relative;
-          top: calc(-0.05 * var(--played-tile-width));;
+          top: calc(-0.1 * var(--played-tile-width));;
           left: 0;
-          width: calc(0.6 * var(--played-tile-width));
-          height: calc(0.16 * var(--played-tile-width));
-          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) 10%, var(--rocket-colour-stripe-main));
+          width: calc(0.65 * var(--played-tile-width));
+          height: calc(0.15 * var(--played-tile-width));
+          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-stripe-main));
           flex-shrink: 0;
         }
 
         .rocket-body-stripe-base {
           position: relative;
-          top: calc(-0.1 * var(--played-tile-width));;
+          top: calc(-0.2 * var(--played-tile-width));;
           left: 0;
-          width: calc(0.6 * var(--played-tile-width));
-          height: calc(0.1 * var(--played-tile-width));
+          width: calc(0.65 * var(--played-tile-width));
+          height: calc(0.2 * var(--played-tile-width));
           border-radius: 50%;
-          background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
+          background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
           flex-shrink: 0;
         }
       }
