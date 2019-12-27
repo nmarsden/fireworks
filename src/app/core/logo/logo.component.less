@@ -1,0 +1,75 @@
+.cracker-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .cracker-cone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: calc(0.15 * var(--played-tile-width));
+
+    .cracker-cone-main {
+      position: relative;
+      top: 0;
+      left: 0;
+      z-index: -10;
+      width: calc(0.7 * var(--played-tile-width));
+      height: calc(0.35 * var(--played-tile-width));
+      overflow: hidden;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: calc(0.11 * var(--played-tile-width));;
+        left: calc(0.1 * var(--played-tile-width));
+        width: calc(0.5 * var(--played-tile-width));
+        height: calc(0.5 * var(--played-tile-width));
+
+        background-image: linear-gradient(135deg, rgb(77, 77, 77), rgb(77, 77, 77) 10%, rgb(255, 255, 255));
+
+        transform: rotate(-45deg);
+      }
+    }
+
+    .cracker-cone-base {
+      position: relative;
+      top: calc(-0.027 * var(--played-tile-width));
+      z-index: -2;
+      background-color: rgb(77,77,77);
+      width: calc(0.7 * var(--played-tile-width));
+      height: calc(0.1 * var(--played-tile-width));
+      border-radius: 40%;
+    }
+  }
+
+  .cracker-body {
+    display: flex;
+    flex-direction: column;
+
+    .cracker-body-top {
+      position: relative;
+      top: calc(0.05 * var(--played-tile-width));
+      width: calc(0.6 * var(--played-tile-width));
+      height: calc(0.1 * var(--played-tile-width));
+      border-radius: 50%;
+      background-image: linear-gradient(to right, rgb(77, 77, 77), rgb(77, 77, 77) 10%, rgb(255, 255, 255));
+    }
+
+    .cracker-body-main {
+      width: calc(0.6 * var(--played-tile-width));
+      height: var(--played-tile-width);
+      background-image: linear-gradient(to right, rgb(77, 77, 77), rgb(77, 77, 77) 10%, rgb(255, 255, 255));
+    }
+
+    .cracker-body-base {
+      position: relative;
+      top: calc(-0.05 * var(--played-tile-width));
+      background-color: rgb(77,77,77);
+      width: calc(0.6 * var(--played-tile-width));
+      height: calc(0.1 * var(--played-tile-width));
+      border-radius: 50%;
+    }
+  }
+}

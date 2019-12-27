@@ -16,6 +16,7 @@ import { MainMenuModalComponent } from './main-menu-modal/main-menu-modal.compon
 import { MarkingModalComponent } from './marking-modal/marking-modal.component';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LogoComponent } from './logo/logo.component';
 
 /**
  * Hammerjs must be imported for gestures
@@ -37,7 +38,8 @@ import 'hammerjs';
     TurnInfoComponent,
     KeyboardComponent,
     MainMenuModalComponent,
-    MarkingModalComponent
+    MarkingModalComponent,
+    LogoComponent
   ],
   imports: [
     CommonModule,
