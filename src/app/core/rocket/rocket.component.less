@@ -1,0 +1,200 @@
+:host {
+  --rocket-colour-base-main: rgb(255, 123, 96);
+  --rocket-colour-base-shadow: rgb(177, 37, 28);
+  --rocket-colour-stripe-main: rgb(255, 255, 255);
+  --rocket-colour-stripe-shadow: rgb(164, 164, 164);
+  --rocket-colour-stick-main: rgb(194, 181, 93);
+  --rocket-colour-stick-shadow: rgb(194, 147, 11);
+  --rocket-colour-fuse-main: rgb(255, 255, 255);
+  --rocket-colour-fuse-shadow: rgb(164, 164, 164);
+  --rocket-shadow-percentage: 10%;
+}
+
+.rocket-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(1.95 * var(--played-tile-width));
+
+  &.is-red {
+    --rocket-colour-base-main: rgb(255, 123, 96);
+    --rocket-colour-base-shadow: rgb(177, 37, 28);
+  }
+
+  &.is-blue {
+    --rocket-colour-base-main: rgb(93, 193, 255);
+    --rocket-colour-base-shadow: rgb(18, 77, 177);
+  }
+
+  &.is-green {
+    --rocket-colour-base-main: rgb(148, 255, 108);
+    --rocket-colour-base-shadow: rgb(14, 146, 7);
+  }
+
+  .rocket-cone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .rocket-cone-main {
+      position: relative;
+      top: 0;
+      left: 0;
+      z-index: -10;
+      width: calc(0.7 * var(--played-tile-width));
+      height: calc(0.35 * var(--played-tile-width));
+      overflow: hidden;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: calc(0.11 * var(--played-tile-width));
+        left: calc(0.1 * var(--played-tile-width));
+        width: calc(0.5 * var(--played-tile-width));
+        height: calc(0.5 * var(--played-tile-width));
+
+        background-image: linear-gradient(135deg, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
+
+        transform: rotate(-45deg);
+      }
+    }
+
+    .rocket-cone-base {
+      position: relative;
+      top: calc(-0.027 * var(--played-tile-width));
+      z-index: -2;
+      background-color: var(--rocket-colour-base-shadow);
+      width: calc(0.7 * var(--played-tile-width));
+      height: calc(0.1 * var(--played-tile-width));
+      border-radius: 40%;
+    }
+  }
+
+  .rocket-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(1.1 * var(--played-tile-width));
+    position: relative;
+    top: calc(-0.15 * var(--played-tile-width));
+
+    .rocket-body-top {
+      position: relative;
+      top: calc(0.05 * var(--played-tile-width));
+      width: calc(0.6 * var(--played-tile-width));
+      height: calc(0.1 * var(--played-tile-width));
+      border-radius: 50%;
+      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
+      flex-shrink: 0;
+    }
+
+    .rocket-body-main {
+      width: calc(0.6 * var(--played-tile-width));
+      height: var(--played-tile-width);
+      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
+      flex-shrink: 0;
+    }
+
+    .rocket-body-base {
+      position: relative;
+      top: calc(-0.05 * var(--played-tile-width));
+      background-color: var(--rocket-colour-base-shadow);
+      width: calc(0.6 * var(--played-tile-width));
+      height: calc(0.1 * var(--played-tile-width));
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .rocket-body-stripe-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      top: calc(-1.09 * var(--played-tile-width));
+      left: 0;
+      overflow: hidden;
+      flex-shrink: 0;
+      width: calc(0.6 * var(--played-tile-width));
+
+      .rocket-body-stripe {
+        display: flex;
+        flex-direction: column;
+        height: calc(0.3 * var(--played-tile-width));
+        overflow: hidden;
+
+        position: relative;
+        top: calc(0.02 * var(--played-tile-width));
+
+        transform: rotate(10deg);
+
+        .rocket-body-stripe-top {
+          position: relative;
+          width: calc(0.65 * var(--played-tile-width));
+          height: calc(0.2 * var(--played-tile-width));
+          border-radius: 50%;
+          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-stripe-main));
+          flex-shrink: 0;
+        }
+
+        .rocket-body-stripe-main {
+          position: relative;
+          top: calc(-0.1 * var(--played-tile-width));
+          left: 0;
+          width: calc(0.65 * var(--played-tile-width));
+          height: calc(0.15 * var(--played-tile-width));
+          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-stripe-main));
+          flex-shrink: 0;
+        }
+
+        .rocket-body-stripe-base {
+          position: relative;
+          top: calc(-0.2 * var(--played-tile-width));
+          left: 0;
+          width: calc(0.65 * var(--played-tile-width));
+          height: calc(0.2 * var(--played-tile-width));
+          border-radius: 50%;
+          background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-base-main));
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+
+  .rocket-stick {
+    position: relative;
+    top: calc(-0.1 * var(--played-tile-width));
+    width: calc(0.1 * var(--played-tile-width));
+    height: calc(0.5 * var(--played-tile-width));
+    flex-shrink: 0;
+    background-image: linear-gradient(to right, var(--rocket-colour-stick-shadow), var(--rocket-colour-stick-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-stick-main));
+    z-index: -10;
+  }
+
+  .rocket-fuse-container {
+    position: relative;
+    top: calc(-0.63 * var(--played-tile-width));
+    left: calc(0.25 * var(--played-tile-width));
+    width: calc(0.25 * var(--played-tile-width));
+    height: calc(0.25 * var(--played-tile-width));
+    flex-shrink: 0;
+    overflow: hidden;
+
+    .rocket-fuse {
+      position: relative;
+      top: calc(-0.25 * var(--played-tile-width));
+      width: calc(0.5 * var(--played-tile-width));
+      height: calc(0.5 * var(--played-tile-width));
+      flex-shrink: 0;
+
+      background: radial-gradient(
+        transparent 0,
+        transparent 50%,
+        var(--rocket-colour-fuse-main) 52%,
+        var(--rocket-colour-fuse-shadow) 65%,
+      );
+
+      border-radius: 50%;
+    }
+  }
+}

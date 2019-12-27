@@ -1,0 +1,37 @@
+<div class="rocket-container"
+     [ngClass]="{
+       'is-red': rocketType === 'red',
+       'is-blue': rocketType === 'blue',
+       'is-green': rocketType === 'green'
+       }">
+  <div class="rocket-cone">
+    <div class="rocket-cone-main"></div>
+    <div class="rocket-cone-base"></div>
+  </div>
+  <div class="rocket-body">
+    <div class="rocket-body-top"></div>
+    <div class="rocket-body-main"></div>
+    <div class="rocket-body-base"></div>
+    <div class="rocket-body-stripe-container">
+      <div class="rocket-body-stripe">
+        <div class="rocket-body-stripe-top"></div>
+        <div class="rocket-body-stripe-main"></div>
+        <div class="rocket-body-stripe-base"></div>
+      </div>
+      <div class="rocket-body-stripe">
+        <div class="rocket-body-stripe-top"></div>
+        <div class="rocket-body-stripe-main"></div>
+        <div class="rocket-body-stripe-base"></div>
+      </div>
+      <div class="rocket-body-stripe">
+        <div class="rocket-body-stripe-top"></div>
+        <div class="rocket-body-stripe-main"></div>
+        <div class="rocket-body-stripe-base"></div>
+      </div>
+    </div>
+  </div>
+  <div class="rocket-stick"></div>
+  <div class="rocket-fuse-container">
+    <div class="rocket-fuse"></div>
+  </div>
+</div>

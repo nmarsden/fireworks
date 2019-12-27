@@ -38,8 +38,8 @@ describe('Fireworks App', () => {
       appPO.navigateTo();
     });
 
-    it('should display FIREWORKS title', () => {
-      expect(mainMenuModalPO.getMainMenuTitle()).toEqual('FIREWORKS');
+    it('should display logo', () => {
+      expect(mainMenuModalPO.getLogo().isDisplayed()).toBeTruthy();
     });
 
     it('should display start button', () => {

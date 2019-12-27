@@ -16,6 +16,7 @@ import { MainMenuModalComponent } from './main-menu-modal/main-menu-modal.compon
 import { MarkingModalComponent } from './marking-modal/marking-modal.component';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { RocketComponent } from './rocket/rocket.component';
 import { LogoComponent } from './logo/logo.component';
 
 /**
@@ -39,6 +40,7 @@ import 'hammerjs';
     KeyboardComponent,
     MainMenuModalComponent,
     MarkingModalComponent,
+    RocketComponent,
     LogoComponent
   ],
   imports: [
@@ -60,7 +62,9 @@ import 'hammerjs';
     TurnInfoComponent,
     KeyboardComponent,
     MainMenuModalComponent,
-    MarkingModalComponent
+    MarkingModalComponent,
+    RocketComponent,
+    LogoComponent
   ]
 })
 export class CoreModule { }
