@@ -3,6 +3,10 @@
   --rocket-colour-base-shadow: rgb(177, 37, 28);
   --rocket-colour-stripe-main: rgb(255, 255, 255);
   --rocket-colour-stripe-shadow: rgb(164, 164, 164);
+  --rocket-colour-stick-main: rgb(194, 181, 93);
+  --rocket-colour-stick-shadow: rgb(194, 147, 11);
+  --rocket-colour-fuse-main: rgb(255, 255, 255);
+  --rocket-colour-fuse-shadow: rgb(164, 164, 164);
   --rocket-shadow-percentage: 10%;
 }
 
@@ -10,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(1.45 * var(--played-tile-width));
+  height: calc(1.95 * var(--played-tile-width));
 
   .rocket-cone {
     display: flex;
@@ -30,7 +34,7 @@
       &:after {
         content: '';
         position: absolute;
-        top: calc(0.11 * var(--played-tile-width));;
+        top: calc(0.11 * var(--played-tile-width));
         left: calc(0.1 * var(--played-tile-width));
         width: calc(0.5 * var(--played-tile-width));
         height: calc(0.5 * var(--played-tile-width));
@@ -120,7 +124,7 @@
 
         .rocket-body-stripe-main {
           position: relative;
-          top: calc(-0.1 * var(--played-tile-width));;
+          top: calc(-0.1 * var(--played-tile-width));
           left: 0;
           width: calc(0.65 * var(--played-tile-width));
           height: calc(0.15 * var(--played-tile-width));
@@ -130,7 +134,7 @@
 
         .rocket-body-stripe-base {
           position: relative;
-          top: calc(-0.2 * var(--played-tile-width));;
+          top: calc(-0.2 * var(--played-tile-width));
           left: 0;
           width: calc(0.65 * var(--played-tile-width));
           height: calc(0.2 * var(--played-tile-width));
@@ -139,6 +143,43 @@
           flex-shrink: 0;
         }
       }
+    }
+  }
+
+  .rocket-stick {
+    position: relative;
+    top: calc(-0.1 * var(--played-tile-width));
+    width: calc(0.1 * var(--played-tile-width));
+    height: calc(0.5 * var(--played-tile-width));
+    flex-shrink: 0;
+    background-image: linear-gradient(to right, var(--rocket-colour-stick-shadow), var(--rocket-colour-stick-shadow) var(--rocket-shadow-percentage), var(--rocket-colour-stick-main));
+    z-index: -10;
+  }
+
+  .rocket-fuse-container {
+    position: relative;
+    top: calc(-0.63 * var(--played-tile-width));
+    left: calc(0.25 * var(--played-tile-width));
+    width: calc(0.25 * var(--played-tile-width));
+    height: calc(0.25 * var(--played-tile-width));
+    flex-shrink: 0;
+    overflow: hidden;
+
+    .rocket-fuse {
+      position: relative;
+      top: calc(-0.25 * var(--played-tile-width));
+      width: calc(0.5 * var(--played-tile-width));
+      height: calc(0.5 * var(--played-tile-width));
+      flex-shrink: 0;
+
+      background: radial-gradient(
+        transparent 0,
+        transparent 50%,
+        var(--rocket-colour-fuse-main) 52%,
+        var(--rocket-colour-fuse-shadow) 65%,
+      );
+
+      border-radius: 50%;
     }
   }
 }
