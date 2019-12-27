@@ -1,14 +1,21 @@
+:host {
+  --cracker-colour-base-main: rgb(255, 123, 96);
+  --cracker-colour-base-shadow: rgb(177, 37, 28);
+  --cracker-colour-stripe-main: rgb(255, 255, 255);
+  --cracker-colour-stripe-shadow: rgb(164, 164, 164);
+}
+
 .cracker-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: calc(1.45 * var(--played-tile-width));
 
   .cracker-cone {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    top: calc(0.15 * var(--played-tile-width));
 
     .cracker-cone-main {
       position: relative;
@@ -27,7 +34,7 @@
         width: calc(0.5 * var(--played-tile-width));
         height: calc(0.5 * var(--played-tile-width));
 
-        background-image: linear-gradient(135deg, rgb(77, 77, 77), rgb(77, 77, 77) 10%, rgb(255, 255, 255));
+        background-image: linear-gradient(135deg, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
 
         transform: rotate(-45deg);
       }
@@ -37,7 +44,7 @@
       position: relative;
       top: calc(-0.027 * var(--played-tile-width));
       z-index: -2;
-      background-color: rgb(77,77,77);
+      background-color: var(--cracker-colour-base-shadow);
       width: calc(0.7 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 40%;
@@ -47,6 +54,10 @@
   .cracker-body {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    height: calc(1.1 * var(--played-tile-width));
+    position: relative;
+    top: calc(-0.15 * var(--played-tile-width));
 
     .cracker-body-top {
       position: relative;
@@ -54,22 +65,72 @@
       width: calc(0.6 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 50%;
-      background-image: linear-gradient(to right, rgb(77, 77, 77), rgb(77, 77, 77) 10%, rgb(255, 255, 255));
+      background-image: linear-gradient(to right, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+      flex-shrink: 0;
     }
 
     .cracker-body-main {
       width: calc(0.6 * var(--played-tile-width));
       height: var(--played-tile-width);
-      background-image: linear-gradient(to right, rgb(77, 77, 77), rgb(77, 77, 77) 10%, rgb(255, 255, 255));
+      background-image: linear-gradient(to right, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+      flex-shrink: 0;
     }
 
     .cracker-body-base {
       position: relative;
       top: calc(-0.05 * var(--played-tile-width));
-      background-color: rgb(77,77,77);
+      background-color: var(--cracker-colour-base-shadow);
       width: calc(0.6 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cracker-body-stripe-container {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: calc(-1.09 * var(--played-tile-width));
+      left: 0;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      .cracker-body-stripe {
+        display: flex;
+        flex-direction: column;
+        height: calc(0.32 * var(--played-tile-width));
+        overflow: hidden;
+
+        .cracker-body-stripe-top {
+          position: relative;
+          width: calc(0.6 * var(--played-tile-width));
+          height: calc(0.1 * var(--played-tile-width));
+          border-radius: 50%;
+          background-image: linear-gradient(to right, var(--cracker-colour-stripe-shadow), var(--cracker-colour-stripe-shadow) 10%, var(--cracker-colour-stripe-main));
+          flex-shrink: 0;
+        }
+
+        .cracker-body-stripe-main {
+          position: relative;
+          top: calc(-0.05 * var(--played-tile-width));;
+          left: 0;
+          width: calc(0.6 * var(--played-tile-width));
+          height: calc(0.16 * var(--played-tile-width));
+          background-image: linear-gradient(to right, var(--cracker-colour-stripe-shadow), var(--cracker-colour-stripe-shadow) 10%, var(--cracker-colour-stripe-main));
+          flex-shrink: 0;
+        }
+
+        .cracker-body-stripe-base {
+          position: relative;
+          top: calc(-0.1 * var(--played-tile-width));;
+          left: 0;
+          width: calc(0.6 * var(--played-tile-width));
+          height: calc(0.1 * var(--played-tile-width));
+          border-radius: 50%;
+          background-image: linear-gradient(to right, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+          flex-shrink: 0;
+        }
+      }
     }
   }
 }
