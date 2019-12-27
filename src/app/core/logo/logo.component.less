@@ -1,23 +1,23 @@
 :host {
-  --cracker-colour-base-main: rgb(255, 123, 96);
-  --cracker-colour-base-shadow: rgb(177, 37, 28);
-  --cracker-colour-stripe-main: rgb(255, 255, 255);
-  --cracker-colour-stripe-shadow: rgb(164, 164, 164);
+  --rocket-colour-base-main: rgb(255, 123, 96);
+  --rocket-colour-base-shadow: rgb(177, 37, 28);
+  --rocket-colour-stripe-main: rgb(255, 255, 255);
+  --rocket-colour-stripe-shadow: rgb(164, 164, 164);
 }
 
-.cracker-container {
+.rocket-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: calc(1.45 * var(--played-tile-width));
 
-  .cracker-cone {
+  .rocket-cone {
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
 
-    .cracker-cone-main {
+    .rocket-cone-main {
       position: relative;
       top: 0;
       left: 0;
@@ -34,24 +34,24 @@
         width: calc(0.5 * var(--played-tile-width));
         height: calc(0.5 * var(--played-tile-width));
 
-        background-image: linear-gradient(135deg, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+        background-image: linear-gradient(135deg, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
 
         transform: rotate(-45deg);
       }
     }
 
-    .cracker-cone-base {
+    .rocket-cone-base {
       position: relative;
       top: calc(-0.027 * var(--played-tile-width));
       z-index: -2;
-      background-color: var(--cracker-colour-base-shadow);
+      background-color: var(--rocket-colour-base-shadow);
       width: calc(0.7 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 40%;
     }
   }
 
-  .cracker-body {
+  .rocket-body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,75 +59,80 @@
     position: relative;
     top: calc(-0.15 * var(--played-tile-width));
 
-    .cracker-body-top {
+    .rocket-body-top {
       position: relative;
       top: calc(0.05 * var(--played-tile-width));
       width: calc(0.6 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 50%;
-      background-image: linear-gradient(to right, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
       flex-shrink: 0;
     }
 
-    .cracker-body-main {
+    .rocket-body-main {
       width: calc(0.6 * var(--played-tile-width));
       height: var(--played-tile-width);
-      background-image: linear-gradient(to right, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+      background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
       flex-shrink: 0;
     }
 
-    .cracker-body-base {
+    .rocket-body-base {
       position: relative;
       top: calc(-0.05 * var(--played-tile-width));
-      background-color: var(--cracker-colour-base-shadow);
+      background-color: var(--rocket-colour-base-shadow);
       width: calc(0.6 * var(--played-tile-width));
       height: calc(0.1 * var(--played-tile-width));
       border-radius: 50%;
       flex-shrink: 0;
     }
 
-    .cracker-body-stripe-container {
+    .rocket-body-stripe-container {
       display: flex;
       flex-direction: column;
+      align-items: center;
       position: relative;
       top: calc(-1.09 * var(--played-tile-width));
       left: 0;
       overflow: hidden;
       flex-shrink: 0;
+      width: calc(0.6 * var(--played-tile-width));
 
-      .cracker-body-stripe {
+      .rocket-body-stripe {
         display: flex;
         flex-direction: column;
         height: calc(0.32 * var(--played-tile-width));
         overflow: hidden;
 
-        .cracker-body-stripe-top {
+        position: relative;
+        top: calc(0.02 * var(--played-tile-width));
+
+        .rocket-body-stripe-top {
           position: relative;
           width: calc(0.6 * var(--played-tile-width));
           height: calc(0.1 * var(--played-tile-width));
           border-radius: 50%;
-          background-image: linear-gradient(to right, var(--cracker-colour-stripe-shadow), var(--cracker-colour-stripe-shadow) 10%, var(--cracker-colour-stripe-main));
+          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) 10%, var(--rocket-colour-stripe-main));
           flex-shrink: 0;
         }
 
-        .cracker-body-stripe-main {
+        .rocket-body-stripe-main {
           position: relative;
           top: calc(-0.05 * var(--played-tile-width));;
           left: 0;
           width: calc(0.6 * var(--played-tile-width));
           height: calc(0.16 * var(--played-tile-width));
-          background-image: linear-gradient(to right, var(--cracker-colour-stripe-shadow), var(--cracker-colour-stripe-shadow) 10%, var(--cracker-colour-stripe-main));
+          background-image: linear-gradient(to right, var(--rocket-colour-stripe-shadow), var(--rocket-colour-stripe-shadow) 10%, var(--rocket-colour-stripe-main));
           flex-shrink: 0;
         }
 
-        .cracker-body-stripe-base {
+        .rocket-body-stripe-base {
           position: relative;
           top: calc(-0.1 * var(--played-tile-width));;
           left: 0;
           width: calc(0.6 * var(--played-tile-width));
           height: calc(0.1 * var(--played-tile-width));
           border-radius: 50%;
-          background-image: linear-gradient(to right, var(--cracker-colour-base-shadow), var(--cracker-colour-base-shadow) 10%, var(--cracker-colour-base-main));
+          background-image: linear-gradient(to right, var(--rocket-colour-base-shadow), var(--rocket-colour-base-shadow) 10%, var(--rocket-colour-base-main));
           flex-shrink: 0;
         }
       }
