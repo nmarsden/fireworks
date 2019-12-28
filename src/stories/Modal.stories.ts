@@ -62,14 +62,12 @@ storiesOf('Modal', module)
                    <div class="modal-body top-margin">
                      <div class="modal-heading">Give Hint</div>
                      <div class="options-container">
-                       <div class="colour-options">
-                         <div class="colour-option"
-                              *ngFor="let colour of partnerHintColourOptions"
-                              [ngClass]="colour"></div>
+                       <div class="button-container">
+                         <app-button *ngFor="let colour of partnerHintColourOptions"
+                                     [colour]="colour"></app-button>
                        </div>
-                       <div class="number-options">
-                         <div class="number-option"
-                              *ngFor="let number of partnerHintNumberOptions">{{number}}</div>
+                       <div class="button-container">
+                         <app-button *ngFor="let number of partnerHintNumberOptions">{{number}}</app-button>
                        </div>
                      </div>
                    </div>

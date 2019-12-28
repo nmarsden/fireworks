@@ -1,7 +1,11 @@
 .button {
   font-size: calc(0.5 * var(--main-tile-width));
   line-height: calc(0.5 * var(--main-tile-width));
+  text-align: center;
   color: var(--colour-button-text);
+
+  min-width: calc(0.7 * var(--main-tile-width));
+  min-height: calc(0.7 * var(--main-tile-width));
 
   border: thin solid rgb(255, 255, 255);
   border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
@@ -11,6 +15,28 @@
 
   &.no-padding {
     padding: 0;
+    min-width: calc(0.5 * var(--main-tile-width));
+    min-height: calc(0.5 * var(--main-tile-width));
+  }
+
+  &.red {
+    background-color: var(--colour-red);
+  }
+
+  &.yellow {
+    background-color: var(--colour-yellow);
+  }
+
+  &.green {
+    background-color: var(--colour-green);
+  }
+
+  &.blue {
+    background-color: var(--colour-blue);
+  }
+
+  &.white {
+    background-color: var(--colour-white);
   }
 
   &:active {

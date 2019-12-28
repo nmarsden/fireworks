@@ -6,7 +6,7 @@ export class PartnerTileModalPO {
   }
 
   clickHintNumber(aNumber: number) {
-    $$('#partner-tile-modal .options-container .number-options .number-option').then(e => {
+    $$('#partner-tile-modal .button-container').last().$$('.button').then(e => {
       e.filter(item => item.getText().then(text => text === aNumber.toString(10)))[0].click();
     });
   }
