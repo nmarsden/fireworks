@@ -18,11 +18,13 @@
            (partnerTileClicked)="onPartnerTileClicked()"
            (playerTileClicked)="onPlayerTileClicked($event)"
            (playerTileLongPressed)="onPlayerTileLongPressed($event)"
-           (deckClicked)="onDeckClicked()">
+           (menuButtonClicked)="onMenuButtonClicked()">
 </app-board>
+
 <app-main-menu-modal [playerNameOne]="playerNames[0]"
                      [playerNameTwo]="playerNames[1]"
                      (startButtonClicked)="onStartButtonClicked($event)"></app-main-menu-modal>
+
 <app-modal id="player-ready-modal" [isFullScreen]="false">
   <div class="modal-body no-background">
     <div *ngIf="!gameState.isGameOver && gameState.turnInfo.isNotEmpty()" class="swap-player">
@@ -38,6 +40,7 @@
   </div>
   <app-background [theme]="gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"></app-background>
 </app-modal>
+
 <app-modal id="start-of-turn-modal" (cancelled)="onStartOfTurnModalCancelled()">
   <div class="modal-body">
     <div class="modal-heading">{{ playerNames[gameState.waitingPlayer] }}</div>
@@ -45,12 +48,14 @@
     <div class="button" (click)="onStartOfTurnButtonClicked()">Ok</div>
   </div>
 </app-modal>
+
 <app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
   <div class="modal-body">
     <app-turn-info [turnInfo]="gameState.turnInfo"></app-turn-info>
     <div class="button" (click)="onEndOfTurnButtonClicked()">Done</div>
   </div>
 </app-modal>
+
 <app-modal id="partner-tile-modal"
            [position]="'top'"
            (cancelled)="onPartnerTileModalCancelled()">
@@ -72,6 +77,7 @@
     </div>
   </div>
 </app-modal>
+
 <app-modal id="player-tile-modal"
            [position]="'bottom'"
            (cancelled)="onPlayerTileModalCancelled()">
@@ -83,15 +89,19 @@
     </div>
   </div>
 </app-modal>
+
 <app-marking-modal [tileMarkModalData]="tileMarkModalData"
                    (tileMarkSelected)="onPlayTileMarkButtonClicked($event)"
                    (modalClosed)="onPlayerTileMarkModalCancelled()"></app-marking-modal>
+
+<app-in-game-menu-modal (quitButtonClicked)="onQuitButtonClicked()"></app-in-game-menu-modal>
+
 <app-modal id="quit-game-modal">
   <div class="modal-body">
     <div class="modal-heading">Quit?</div>
     <div class="button-container">
-      <div class="button" (click)="onQuitGameYesButtonClicked()">Yes</div>
-      <div class="button" (click)="onQuitGameNoButtonClicked()">No</div>
+      <div class="button" data-automation-id="yesButton" (click)="onQuitGameYesButtonClicked()">Yes</div>
+      <div class="button" data-automation-id="noButton" (click)="onQuitGameNoButtonClicked()">No</div>
     </div>
   </div>
 </app-modal>

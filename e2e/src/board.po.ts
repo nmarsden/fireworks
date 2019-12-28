@@ -92,4 +92,8 @@ export class BoardPO {
     return $$('.token-container app-fuse-tokens .fuse-token.is-available').count();
   }
 
+  clickMenuButton() {
+    return element(by.css('app-menu-button .button')).getWebElement().click();
+  }
+
 }

@@ -1,11 +1,16 @@
-import { by, element, WebElementPromise } from 'protractor';
+import { $, WebElementPromise } from 'protractor';
 
 export class MainMenuModalPO {
+
+  isOpen(): Promise<boolean> {
+    return $('#main-menu-modal.app-modal-open').isPresent() as Promise<boolean>;
+  }
+
   getLogo(): WebElementPromise {
-    return element(by.css('#main-menu-modal app-logo')).getWebElement();
+    return $('#main-menu-modal app-logo').getWebElement();
   }
 
   getStartButton(): WebElementPromise {
-    return element(by.css('#main-menu-modal .button')).getWebElement();
+    return $('#main-menu-modal .button').getWebElement();
   }
 }

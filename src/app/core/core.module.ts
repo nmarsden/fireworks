@@ -19,6 +19,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RocketComponent } from './rocket/rocket.component';
 import { LogoComponent } from './logo/logo.component';
 import { MenuButtonComponent } from './menu-button/menu-button.component';
+import { InGameMenuModalComponent } from './in-game-menu-modal/in-game-menu-modal.component';
 
 /**
  * Hammerjs must be imported for gestures
@@ -43,7 +44,8 @@ import 'hammerjs';
     MarkingModalComponent,
     RocketComponent,
     LogoComponent,
-    MenuButtonComponent
+    MenuButtonComponent,
+    InGameMenuModalComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,9 @@ import 'hammerjs';
     MainMenuModalComponent,
     MarkingModalComponent,
     RocketComponent,
-    LogoComponent
+    LogoComponent,
+    MenuButtonComponent,
+    InGameMenuModalComponent
   ]
 })
 export class CoreModule { }

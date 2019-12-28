@@ -1,0 +1,10 @@
+<app-modal id="in-game-menu-modal"
+           [isOpen]="isOpen"
+           [isFullScreen]="false">
+  <div class="modal-body">
+    <div class="in-game-menu-container">
+      <div class="button" data-automation-id="quitButton" (click)="onQuitButtonClicked()">Quit</div>
+      <div class="button" data-automation-id="continueButton" (click)="onContinueButtonClicked()">Continue</div>
+    </div>
+  </div>
+</app-modal>

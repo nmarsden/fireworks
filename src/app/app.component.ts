@@ -482,7 +482,11 @@ export class AppComponent implements OnInit {
     this.showEndOfTurnModal();
   }
 
-  onDeckClicked() {
+  onMenuButtonClicked() {
+    this.openModal('in-game-menu-modal');
+  }
+
+  onQuitButtonClicked() {
     this.openModal('quit-game-modal');
   }
 
