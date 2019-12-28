@@ -33,9 +33,9 @@
       <div class="player"></div>
     </div>
     <div *ngIf="!gameState.isGameOver" class="modal-heading">{{ playerNames[gameState.currentPlayer] }}</div>
-    <div *ngIf="!gameState.isGameOver" class="button" (click)="onPlayerReadyButtonClicked()">Ready</div>
+    <app-button *ngIf="!gameState.isGameOver" (buttonClicked)="onPlayerReadyButtonClicked()">Ready</app-button>
     <div *ngIf="gameState.isGameOver" class="modal-heading">{{ gameState.gameOverHeading }}</div>
-    <div *ngIf="gameState.isGameOver" class="button" (click)="onNewGameButtonClicked()">New Game</div>
+    <app-button *ngIf="gameState.isGameOver" (buttonClicked)="onNewGameButtonClicked()">New Game</app-button>
     <div *ngIf="gameState.turnInfoText !== ''" class="turn-info">{{ gameState.turnInfoText }}</div>
   </div>
   <app-background [theme]="gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"></app-background>
@@ -45,14 +45,14 @@
   <div class="modal-body">
     <div class="modal-heading">{{ playerNames[gameState.waitingPlayer] }}</div>
     <app-turn-info [turnInfo]="gameState.turnInfo"></app-turn-info>
-    <div class="button" (click)="onStartOfTurnButtonClicked()">Ok</div>
+    <app-button (buttonClicked)="onStartOfTurnButtonClicked()">Ok</app-button>
   </div>
 </app-modal>
 
 <app-modal id="end-of-turn-modal" (cancelled)="onEndOfTurnModalCancelled()">
   <div class="modal-body">
     <app-turn-info [turnInfo]="gameState.turnInfo"></app-turn-info>
-    <div class="button" (click)="onEndOfTurnButtonClicked()">Done</div>
+    <app-button (buttonClicked)="onEndOfTurnButtonClicked()">Done</app-button>
   </div>
 </app-modal>
 
@@ -82,10 +82,10 @@
            [position]="'bottom'"
            (cancelled)="onPlayerTileModalCancelled()">
   <div class="modal-body">
-    <div *ngIf="gameState.infoTokens === 8" class="button" (click)="onPlayTileButtonClicked()">Play</div>
+    <app-button *ngIf="gameState.infoTokens === 8" (buttonClicked)="onPlayTileButtonClicked()">Play</app-button>
     <div class="button-container" *ngIf="gameState.infoTokens !== 8">
-      <div class="button" (click)="onPlayTileButtonClicked()">Play</div>
-      <div class="button" (click)="onDiscardTileButtonClicked()">Discard</div>
+      <app-button (buttonClicked)="onPlayTileButtonClicked()">Play</app-button>
+      <app-button (buttonClicked)="onDiscardTileButtonClicked()">Discard</app-button>
     </div>
   </div>
 </app-modal>
@@ -100,8 +100,8 @@
   <div class="modal-body">
     <div class="modal-heading">Quit?</div>
     <div class="button-container">
-      <div class="button" data-automation-id="yesButton" (click)="onQuitGameYesButtonClicked()">Yes</div>
-      <div class="button" data-automation-id="noButton" (click)="onQuitGameNoButtonClicked()">No</div>
+      <app-button data-automation-id="yesButton" (buttonClicked)="onQuitGameYesButtonClicked()">Yes</app-button>
+      <app-button data-automation-id="noButton" (buttonClicked)="onQuitGameNoButtonClicked()">No</app-button>
     </div>
   </div>
 </app-modal>

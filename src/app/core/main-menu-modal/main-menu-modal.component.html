@@ -15,7 +15,7 @@
       <div class="versus">&</div>
       <div class="player-name" (click)="onPlayerTwoClicked($event)">{{ playerNameTwo }}</div>
     </div>
-    <div class="button" (click)="onStartButtonClicked()">Start</div>
+    <app-button (buttonClicked)="onStartButtonClicked()">Start</app-button>
   </div>
   <app-background></app-background>
 </app-modal>

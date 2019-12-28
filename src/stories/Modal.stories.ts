@@ -21,20 +21,6 @@ storiesOf('Modal', module)
       ]
     })
   )
-  .add('main menu', () => {
-    return {
-      template: `<app-modal id="main-menu-modal"
-                            [position]="'rock-bottom'"
-                            [isFullScreen]="false"
-                            [isOpen]="true">
-                   <div class="fireworks-rainbow-text">FIREWORKS</div>
-                   <div class="modal-body no-background">
-                     <div class="button">Start</div>
-                   </div>
-                   <app-background></app-background>
-                </app-modal>`
-    };
-  })
   .add('player ready', () => {
     return {
       template: `<app-modal id="player-ready-modal"
@@ -47,7 +33,7 @@ storiesOf('Modal', module)
                         <div class="player"></div>
                      </div>
                      <div class="modal-heading">PLAYER ONE</div>
-                     <div class="button">Ready</div>
+                     <app-button>Ready</app-button>
                    </div>
                    <app-background></app-background>
                  </app-modal>`
@@ -102,8 +88,8 @@ storiesOf('Modal', module)
                             [isOpen]="true">
                    <div class="modal-body">
                      <div class="button-container">
-                       <div class="button">Play</div>
-                       <div class="button">Discard</div>
+                       <app-button>Play</app-button>
+                       <app-button>Discard</app-button>
                      </div>
                    </div>
                  </app-modal>`
@@ -116,8 +102,8 @@ storiesOf('Modal', module)
                    <div class="modal-body">
                      <div class="modal-heading">Quit?</div>
                      <div class="button-container">
-                       <div class="button">Yes</div>
-                       <div class="button">No</div>
+                       <app-button>Yes</app-button>
+                       <app-button>No</app-button>
                      </div>
                    </div>
                  </app-modal>`
@@ -130,7 +116,7 @@ storiesOf('Modal', module)
                    <div class="modal-body">
                      <div class="modal-heading">Hello World</div>
                      <div class="button-container">
-                       <div class="button">OK</div>
+                       <app-button>OK</app-button>
                      </div>
                    </div>
                  </app-modal>`,

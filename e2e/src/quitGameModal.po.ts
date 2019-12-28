@@ -12,11 +12,11 @@ export class QuitGameModalPO {
 
   getYesButton(): WebElementPromise {
     browser.sleep(1000); // Required for chrome headless
-    return $('#quit-game-modal .button[data-automation-id=yesButton]').getWebElement();
+    return $('#quit-game-modal app-button[data-automation-id=yesButton]').getWebElement();
   }
 
   getNoButton(): WebElementPromise {
     browser.sleep(1000); // Required for chrome headless
-    return $('#quit-game-modal .button[data-automation-id=noButton]').getWebElement();
+    return $('#quit-game-modal app-button[data-automation-id=noButton]').getWebElement();
   }
 }

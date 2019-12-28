@@ -8,11 +8,11 @@ export class InGameMenuModalPO {
 
   getQuitButton(): WebElementPromise {
     browser.sleep(1000); // Required for chrome headless
-    return $('#in-game-menu-modal .button[data-automation-id=quitButton]').getWebElement();
+    return $('#in-game-menu-modal app-button[data-automation-id=quitButton]').getWebElement();
   }
 
   getContinueButton(): WebElementPromise {
     browser.sleep(1000); // Required for chrome headless
-    return $('#in-game-menu-modal .button[data-automation-id=continueButton]').getWebElement();
+    return $('#in-game-menu-modal app-button[data-automation-id=continueButton]').getWebElement();
   }
 }

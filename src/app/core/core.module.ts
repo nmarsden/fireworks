@@ -1,4 +1,4 @@
-import { Injector, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BackgroundComponent } from './background/background.component';
 import { TileComponent } from './tile/tile.component';
@@ -20,6 +20,7 @@ import { RocketComponent } from './rocket/rocket.component';
 import { LogoComponent } from './logo/logo.component';
 import { MenuButtonComponent } from './menu-button/menu-button.component';
 import { InGameMenuModalComponent } from './in-game-menu-modal/in-game-menu-modal.component';
+import { ButtonComponent } from './button/button.component';
 
 /**
  * Hammerjs must be imported for gestures
@@ -45,7 +46,8 @@ import 'hammerjs';
     RocketComponent,
     LogoComponent,
     MenuButtonComponent,
-    InGameMenuModalComponent
+    InGameMenuModalComponent,
+    ButtonComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import 'hammerjs';
     RocketComponent,
     LogoComponent,
     MenuButtonComponent,
-    InGameMenuModalComponent
+    InGameMenuModalComponent,
+    ButtonComponent
   ]
 })
 export class CoreModule { }

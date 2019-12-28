@@ -1,13 +1,11 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { MenuButtonComponent } from '../app/core/menu-button/menu-button.component';
+import { CoreModule } from '../app/core/core.module';
 
 storiesOf('Menu Button', module)
   .addDecorator(
     moduleMetadata({
-      declarations: [
-        MenuButtonComponent
-      ],
-      imports: []
+      declarations: [],
+      imports: [ CoreModule ]
     })
   )
   .add('default', () => {

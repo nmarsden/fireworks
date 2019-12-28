@@ -23,7 +23,8 @@ body {
   --background-colour: rgb(5, 6, 24);
 
   --colour-tile-handle: rgb(68, 79, 120);
-  --colour-button: rgb(28, 86, 172);
+  --colour-button-text: rgb(255, 255, 255);
+  --colour-button-bg: rgb(28, 86, 172);
   --colour-button-text-unchecked: rgba(255, 255, 255, 0.8);
   --colour-button-bg-unchecked: rgba(65, 174, 174, 0.6);
   --colour-modal: rgb(63, 112, 184);
@@ -222,23 +223,9 @@ body {
 .button-container {
   display: flex;
 
-  .button+.button {
+  .button + .button,
+  app-button + app-button {
     margin-left: calc(0.1 * var(--main-tile-width));
-  }
-}
-
-.button {
-  font-size: calc(0.5 * var(--main-tile-width));
-  line-height: calc(0.5 * var(--main-tile-width));
-
-  border: thin solid rgb(255, 255, 255);
-  border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
-  background-color: var(--colour-button);
-  padding: calc(0.1 * var(--main-tile-width));
-  cursor: pointer;
-
-  &.no-padding {
-    padding: 0;
   }
 }
 

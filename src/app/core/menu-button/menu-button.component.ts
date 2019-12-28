@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-button',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-button.component.less']
 })
 export class MenuButtonComponent implements OnInit {
+  @Output() buttonClicked = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onButtonClicked() {
+    this.buttonClicked.emit();
+  }
 }
