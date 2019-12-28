@@ -32,6 +32,7 @@ export class MarkingModalComponent implements OnInit {
   }
 
   onSelection(tileMark: TileMark) {
+    this.tileMarkModalData = { chosenTileMark: tileMark };
     this.tileMarkSelected.emit(tileMark);
   }
 

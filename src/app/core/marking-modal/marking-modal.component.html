@@ -7,7 +7,8 @@
     <div class="radio-group">
       <label *ngFor="let tileMark of [TileMark.None, TileMark.Save, TileMark.Play]"
              for="option-{{ tileMark }}"
-             [ngClass]="{ 'is-selected' : isSelected(tileMark) }">
+             [ngClass]="{ 'is-selected' : isSelected(tileMark) }"
+             (press)="onSelection(tileMark)">
         {{ tileMark }}
         <input
           type="radio"
