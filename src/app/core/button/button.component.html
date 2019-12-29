@@ -1,6 +1,11 @@
-<div class="button" [ngClass]="{ 'no-padding': noPadding }"
+<div class="button" [ngClass]="{ 'no-padding': noPadding,
+                                 'is-colour': colour !== '' }"
                     [class]="colour"
                     (click)="onButtonClick()"
                     (press)="onButtonPress()">
   <ng-content></ng-content>
+  <div class="button-anim top"></div>
+  <div class="button-anim right"></div>
+  <div class="button-anim bottom"></div>
+  <div class="button-anim left"></div>
 </div>

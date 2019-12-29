@@ -12,6 +12,10 @@
   background-color: var(--colour-button-bg);
   padding: calc(0.1 * var(--main-tile-width));
   cursor: pointer;
+  box-shadow: 0 0 calc(0.3 * var(--main-tile-width)) calc(-0.05 * var(--main-tile-width)) rgba(0,0,0,0.5);
+
+  position: relative;
+  overflow: hidden;
 
   &.no-padding {
     padding: 0;
@@ -19,23 +23,34 @@
     min-height: calc(0.5 * var(--main-tile-width));
   }
 
-  &.red {
+  &.is-colour:after {
+    content: '';
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    border-radius: 50%;
+    border: thin solid black;
+  }
+
+  &.is-colour.red:after {
     background-color: var(--colour-red);
   }
 
-  &.yellow {
+  &.is-colour.yellow:after {
     background-color: var(--colour-yellow);
   }
 
-  &.green {
+  &.is-colour.green:after {
     background-color: var(--colour-green);
   }
 
-  &.blue {
+  &.is-colour.blue:after {
     background-color: var(--colour-blue);
   }
 
-  &.white {
+  &.is-colour.white:after {
     background-color: var(--colour-white);
   }
 
@@ -45,4 +60,78 @@
       0 0 calc(0.1 * var(--main-tile-width)) #fff,
       0 0 calc(0.2 * var(--main-tile-width)) #fff;
   }
+}
+
+// -- Button animation: travelling border --
+// Only show the button animation when the button is inside an open modal
+// This is also intended to reset the animation to prevent multiple button animations being out of sync
+:host-context(.app-modal-open) .button-anim {
+  display: block;
+}
+
+.button-anim {
+  --button-anim-time: 3s;
+  --button-anim-width: calc(0.05 * var(--main-tile-width));
+  --button-anim-colour-start: transparent;
+  --button-anim-colour-end: rgb(99, 178, 255);
+
+  position: absolute;
+  display: none;
+  will-change: transform;
+
+  &.top {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: var(--button-anim-width);
+    background: linear-gradient(90deg, var(--button-anim-colour-start), var(--button-anim-colour-end));
+    animation: slide-right var(--button-anim-time) infinite;
+  }
+  &.right {
+    top: -100%;
+    right: 0;
+    width: var(--button-anim-width);
+    height: 100%;
+    background: linear-gradient(180deg, var(--button-anim-colour-start), var(--button-anim-colour-end));
+    animation: slide-down var(--button-anim-time) infinite;
+    animation-delay: calc(0.25 * var(--button-anim-time));
+  }
+  &.bottom {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: var(--button-anim-width);
+    background: linear-gradient(270deg, var(--button-anim-colour-start), var(--button-anim-colour-end));
+    animation: slide-left var(--button-anim-time) infinite;
+    animation-delay: calc(0.5 * var(--button-anim-time));
+  }
+  &.left {
+    bottom: -100%;
+    left: 0;
+    width: var(--button-anim-width);
+    height: 100%;
+    background: linear-gradient(360deg, var(--button-anim-colour-start), var(--button-anim-colour-end));
+    animation: slide-up var(--button-anim-time) infinite;
+    animation-delay: calc(0.75 * var(--button-anim-time));
+  }
+}
+
+@keyframes slide-right {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes slide-down {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(200%); }
+}
+
+@keyframes slide-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-200%); }
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-200%); }
 }
