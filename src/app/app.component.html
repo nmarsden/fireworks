@@ -29,7 +29,7 @@
                      [playerNameTwo]="playerNames[1]"
                      (startButtonClicked)="onStartButtonClicked($event)"></app-main-menu-modal>
 
-<app-modal id="player-ready-modal">
+<app-modal id="player-ready-modal" [isCancelOnOutsideClick]="false">
   <div class="modal-body no-background">
     <div *ngIf="!gameState.isGameOver && gameState.turnInfo.isNotEmpty()" class="swap-player">
       <div class="circle"></div>

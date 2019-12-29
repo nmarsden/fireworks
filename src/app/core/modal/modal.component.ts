@@ -21,8 +21,8 @@ import { ModalService } from '../../modal.service';
 export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
   @Input() isOpen = false;
-  @Input() isFullScreen = false;
   @Input() position: string;
+  @Input() isCancelOnOutsideClick = true;
   @Output() cancelled = new EventEmitter<string>();
 
   private element: any;
@@ -42,12 +42,14 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
     // move element to bottom of page (just before </body>) so it can be displayed above everything else
     document.body.appendChild(this.element);
 
-    // cancel modal on background click
-    this.element.addEventListener('click', el => {
-      if (el.target.classList.contains('app-modal')) {
-        this.cancel();
-      }
-    });
+    if (this.isCancelOnOutsideClick) {
+      // cancel modal on background click
+      this.element.addEventListener('click', el => {
+        if (el.target.classList.contains('app-modal')) {
+          this.cancel();
+        }
+      });
+    }
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
