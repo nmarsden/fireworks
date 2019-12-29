@@ -1,0 +1,21 @@
+<div class="radio-group">
+  <label *ngFor="let state of states"
+         for="option-{{ state }}"
+         [ngClass]="{ 'is-selected' : isSelected(state) }"
+         (press)="onSelection(state)">
+    {{ state }}
+    <input
+      type="radio"
+      name="selector"
+      id="option-{{ state }}"
+      [(ngModel)]="modelData.chosenState"
+      [value]="state"
+      (click)="onSelection(state)">
+  </label>
+  <div class="radio-group-overlay">
+    <span class="button-anim top"></span>
+    <span class="button-anim right"></span>
+    <span class="button-anim bottom"></span>
+    <span class="button-anim left"></span>
+  </div>
+</div>

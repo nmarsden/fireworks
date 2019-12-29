@@ -4,20 +4,8 @@
            (cancelled)="onCancelled()">
   <div class="modal-body">
     <div class="modal-heading">Marking</div>
-    <div class="radio-group">
-      <label *ngFor="let tileMark of [TileMark.None, TileMark.Save, TileMark.Play]"
-             for="option-{{ tileMark }}"
-             [ngClass]="{ 'is-selected' : isSelected(tileMark) }"
-             (press)="onSelection(tileMark)">
-        {{ tileMark }}
-        <input
-          type="radio"
-          name="selector"
-          id="option-{{ tileMark }}"
-          [(ngModel)]="tileMarkModalData.chosenTileMark"
-          [value]="tileMark"
-          (click)="onSelection(tileMark)">
-      </label>
-    </div>
+    <app-multi-state-button [states]="[TileMark.None, TileMark.Save, TileMark.Play]"
+                            [modelData]="multiStateModel"
+                            (stateSelected)="onSelection($event)"></app-multi-state-button>
   </div>
 </app-modal>
