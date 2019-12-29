@@ -24,7 +24,6 @@ storiesOf('Modal', module)
   .add('player ready', () => {
     return {
       template: `<app-modal id="player-ready-modal"
-                            [isFullScreen]="false"
                             [isOpen]="true">
                    <div class="modal-body no-background">
                      <div class="swap-player">
@@ -35,8 +34,8 @@ storiesOf('Modal', module)
                      <div class="modal-heading">PLAYER ONE</div>
                      <app-button>Ready</app-button>
                    </div>
-                   <app-background></app-background>
-                 </app-modal>`
+                 </app-modal>
+                 <app-background></app-background>`
     };
   })
   .add('start of turn', () => {

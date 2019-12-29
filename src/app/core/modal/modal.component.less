@@ -85,4 +85,13 @@ app-modal {
 .app-modal-open {
   opacity: 1;
   pointer-events: auto;
+
+  .app-modal {
+    animation: grow 0.3s forwards;
+  }
+}
+
+@keyframes grow {
+  0%   { transform: scale(0.8) }
+  100% { transform: scale(1)   }
 }

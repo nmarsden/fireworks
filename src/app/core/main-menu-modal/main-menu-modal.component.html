@@ -1,7 +1,5 @@
 <app-modal id="main-menu-modal"
-           [isOpen]="isOpen"
-           [position]="'rock-bottom'"
-           [isFullScreen]="false">
+           [isOpen]="isOpen">
   <div *ngIf="sf.isEnabled"
        [ngClass]="{
                   'full-screen-button':      !sf.isFullscreen,
@@ -17,7 +15,6 @@
     </div>
     <app-button (buttonClicked)="onStartButtonClicked()">Start</app-button>
   </div>
-  <app-background></app-background>
 </app-modal>
 <app-keyboard *ngIf="isShowPlayerOneKeyboard"
               [inputValue]="playerNameOne"

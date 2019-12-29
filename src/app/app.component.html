@@ -1,3 +1,7 @@
+<app-background [theme]="gameState.isHideBoard && gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"
+                [isSparkling]="gameState.isHideBoard"
+                [isSmallStars]="!gameState.isHideBoard"></app-background>
+
 <app-board [isHidden]="gameState.isHideBoard"
            [hands]="gameState.hands"
            [playedTiles]="gameState.playedTiles"
@@ -25,7 +29,7 @@
                      [playerNameTwo]="playerNames[1]"
                      (startButtonClicked)="onStartButtonClicked($event)"></app-main-menu-modal>
 
-<app-modal id="player-ready-modal" [isFullScreen]="false">
+<app-modal id="player-ready-modal">
   <div class="modal-body no-background">
     <div *ngIf="!gameState.isGameOver && gameState.turnInfo.isNotEmpty()" class="swap-player">
       <div class="circle"></div>
@@ -38,7 +42,6 @@
     <app-button *ngIf="gameState.isGameOver" (buttonClicked)="onNewGameButtonClicked()">New Game</app-button>
     <div *ngIf="gameState.turnInfoText !== ''" class="turn-info">{{ gameState.turnInfoText }}</div>
   </div>
-  <app-background [theme]="gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"></app-background>
 </app-modal>
 
 <app-modal id="start-of-turn-modal" (cancelled)="onStartOfTurnModalCancelled()">
