@@ -11,8 +11,15 @@
   &.is-show-page {
     opacity: 1;
     transition: opacity ease 0.4s;
+    animation: grow-board 0.3s forwards;
   }
 }
+
+@keyframes grow-board {
+  0%   { transform: scale(0.8) }
+  100% { transform: scale(1)   }
+}
+
 .middle-container {
   height: 100%;
   width: 100%;
