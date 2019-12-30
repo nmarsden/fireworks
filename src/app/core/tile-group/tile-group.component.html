@@ -29,12 +29,13 @@
                   }">
     <div class="player-name">{{ playerName }}</div>
     <div class="tile-hint-handle"
-         [ngClass]="{ 'is-handle-at-bottom': displayMode === 'partner'}"
+         [ngClass]="{ 'is-handle-at-bottom': displayMode === 'partner',
+                      'is-open' : isShowHints
+                    }"
          (click)="onTileHintClicked($event)">
-      <div class="handle-icon is-red"></div>
-      <div class="handle-icon is-yellow"></div>
-      <div class="handle-icon is-green"></div>
-      <div class="handle-icon is-blue"></div>
+      <div class="handle-chevron-container">
+        <div class="handle-chevron"></div>
+      </div>
     </div>
   </div>
 </div>
