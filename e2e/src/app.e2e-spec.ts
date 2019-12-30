@@ -214,11 +214,11 @@ describe('Fireworks App', () => {
       });
 
       it('should have all available info tokens', () => {
-        expect(boardPO.getAvailableInfoTokens()).toEqual(8);
+        expect(boardPO.getAvailableInfoTokens()).toEqual('8');
       });
 
       it('should have all available fuse tokens', () => {
-        expect(boardPO.getAvailableFuseTokens()).toEqual(3);
+        expect(boardPO.getAvailableFuseTokens()).toEqual('3');
       });
 
       describe('Click partner tiles', () => {
@@ -236,11 +236,11 @@ describe('Fireworks App', () => {
           });
 
           it('should reduce available info tokens to 7', () => {
-            expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+            expect(boardPO.getAvailableInfoTokens()).toEqual('7');
           });
 
           it('should have all available fuse tokens', () => {
-            expect(boardPO.getAvailableFuseTokens()).toEqual(3);
+            expect(boardPO.getAvailableFuseTokens()).toEqual('3');
           });
 
           it('should show "end of turn" modal with hint number 1 and info token', () => {
@@ -376,11 +376,11 @@ describe('Fireworks App', () => {
                           });
 
                           it('should keep available info tokens as 7', () => {
-                            expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                            expect(boardPO.getAvailableInfoTokens()).toEqual('7');
                           });
 
                           it('should have all available fuse tokens', () => {
-                            expect(boardPO.getAvailableFuseTokens()).toEqual(3);
+                            expect(boardPO.getAvailableFuseTokens()).toEqual('3');
                           });
 
                           it('should show "end of turn" modal with played tile: RAINBOW 1', () => {
@@ -487,11 +487,11 @@ describe('Fireworks App', () => {
                                     });
 
                                     it('should keep available info tokens at 7', () => {
-                                      expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                                      expect(boardPO.getAvailableInfoTokens()).toEqual('7');
                                     });
 
                                     it('should reduce available fuse tokens to 2', () => {
-                                      expect(boardPO.getAvailableFuseTokens()).toEqual(2);
+                                      expect(boardPO.getAvailableFuseTokens()).toEqual('2');
                                     });
 
                                     it('should show "end of turn" modal with played tile BLUE 2 and fuse token', () => {
@@ -599,11 +599,11 @@ describe('Fireworks App', () => {
                                               });
 
                                               it('should keep available info tokens at 7', () => {
-                                                expect(boardPO.getAvailableInfoTokens()).toEqual(7);
+                                                expect(boardPO.getAvailableInfoTokens()).toEqual('7');
                                               });
 
                                               it('should reduce available fuse tokens to 1', () => {
-                                                expect(boardPO.getAvailableFuseTokens()).toEqual(1);
+                                                expect(boardPO.getAvailableFuseTokens()).toEqual('1');
                                               });
 
                                               it('should show "end of turn" modal', () => {
@@ -711,7 +711,7 @@ describe('Fireworks App', () => {
     });
 
     it('should have 1 available fuse token', () => {
-      expect(boardPO.getAvailableFuseTokens()).toEqual(1);
+      expect(boardPO.getAvailableFuseTokens()).toEqual('1');
     });
 
     describe('Click player tile which is NOT playable: BLUE 4', () => {
@@ -747,7 +747,7 @@ describe('Fireworks App', () => {
         });
 
         it('should reduce available fuse tokens to 0', () => {
-          expect(boardPO.getAvailableFuseTokens()).toEqual(0);
+          expect(boardPO.getAvailableFuseTokens()).toEqual('0');
         });
 
         it('should show "end of turn" modal with played tile BLUE 4 and fuse token', () => {

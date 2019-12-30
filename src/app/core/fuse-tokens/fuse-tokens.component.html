@@ -1,14 +1,7 @@
-<div *ngIf="!isShowSingleToken" class="fuse-tokens">
-  <div class="fuse-token"
-       *ngFor="let num of [1, 2, 3]"
-       [ngClass]="{
-                    'is-available': (num <= tokensRemaining)
-                  }" >
-    <div class="bomb"></div>
+<div class="fuse-token" >
+  <div class="bomb">
+    <div class="fuse"></div>
+    <div class="flame">★</div>
   </div>
-</div>
-<div *ngIf="isShowSingleToken" class="fuse-tokens">
-  <div class="fuse-token is-single" >
-    <div class="bomb"></div>
-  </div>
+  <div class="remaining-number">{{ tokensRemaining }}</div>
 </div>

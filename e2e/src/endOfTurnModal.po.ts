@@ -10,7 +10,7 @@ export class EndOfTurnModalPO {
   }
 
   isInfoTokenShown(): Promise<boolean> {
-    return element(by.css('#end-of-turn-modal app-turn-info .info-token.is-available')).isPresent() as Promise<boolean>;
+    return element(by.css('#end-of-turn-modal app-turn-info .info-token')).isPresent() as Promise<boolean>;
   }
 
   isFuseTokenShown(): Promise<boolean> {

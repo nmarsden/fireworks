@@ -1,4 +1,4 @@
-import { $$, by, element, browser } from 'protractor';
+import { $$, by, element, browser, $ } from 'protractor';
 import { WebElementPromise } from 'selenium-webdriver';
 
 export class BoardPO {
@@ -85,11 +85,11 @@ export class BoardPO {
   }
 
   getAvailableInfoTokens() {
-    return $$('.token-container app-info-tokens .info-token.is-available').count();
+    return $('.token-container app-info-tokens .info-token .remaining-number').getText();
   }
 
   getAvailableFuseTokens() {
-    return $$('.token-container app-fuse-tokens .fuse-token.is-available').count();
+    return $('.token-container app-fuse-tokens .fuse-token .remaining-number').getText();
   }
 
   clickMenuButton() {

@@ -22,10 +22,11 @@
   background-color: var(--background-colour);
 
   &.layer-number {
-    font-size: calc(0.3 * var(--played-tile-width));
+    font-size: calc(0.5 * var(--played-tile-width));
     line-height: calc(var(--played-tile-width));
     text-align: center;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 calc(0.05 * var(--played-tile-width)) rgba(0,0,0,1);
     background-image: radial-gradient(var(--colour-orange-dark), var(--colour-orange-light));
     overflow: hidden;
 
