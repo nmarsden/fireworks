@@ -10,6 +10,17 @@
   --rocket-shadow-percentage: 10%;
 }
 
+:host-context(.app-modal-open) .rocket-container {
+  animation: bounce-rockets 2s forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes bounce-rockets {
+  0%   { transform: scale(1)   }
+  25%  { transform: scale(1.4) }
+  100% { transform: scale(1)   }
+}
+
 .rocket-container {
   display: flex;
   flex-direction: column;
