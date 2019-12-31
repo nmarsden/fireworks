@@ -13,6 +13,7 @@ export class MainMenuModalComponent implements OnInit {
   @Input() playerNameOne: string;
   @Input() playerNameTwo: string;
   @Output() startButtonClicked = new EventEmitter<string[]>();
+  @Output() rocketsPressed = new EventEmitter();
 
   sf: Screenfull = screenfull as Screenfull;
   isShowPlayerOneKeyboard = false;
@@ -60,4 +61,7 @@ export class MainMenuModalComponent implements OnInit {
     this.startButtonClicked.emit([this.playerNameOne.toUpperCase(), this.playerNameTwo.toUpperCase()]);
   }
 
+  onRocketsPressed() {
+    this.rocketsPressed.emit();
+  }
 }

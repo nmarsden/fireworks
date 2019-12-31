@@ -1,0 +1,21 @@
+<div class="pyrotechnics" [ngClass]="{ 'is-show' : !isHidden }">
+  <div *ngFor="let burst of bursts" class="burst">
+    <div *ngFor="let i of [].constructor(burst.numParticles); index as j;"
+         class="particle-container"
+         [ngStyle]="setTransform(j, burst.position, burst.rotateFraction)">
+      <div class="particle" [ngStyle]="{
+                                         'background-color': burst.colour,
+                                         'animation-delay': burst.animationDelay + 's'
+                                       }"></div>
+    </div>
+  </div>
+  <div class="menu-button-container">
+    <app-menu-button (buttonClicked)="onMenuClicked()"></app-menu-button>
+  </div>
+</div>
+<app-modal id="pyrotechnics-menu-modal">
+  <div class="modal-body">
+    <div class="modal-heading">Pyrotechnics</div>
+    <app-button (buttonClicked)="onExitClicked()">Exit</app-button>
+  </div>
+</app-modal>

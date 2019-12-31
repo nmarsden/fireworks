@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   tileMarkModalData = {
     chosenTileMark: undefined
   };
+  isShowPyrotechnics = false;
 
   constructor(private modalService: ModalService) { }
 
@@ -204,6 +205,22 @@ export class AppComponent implements OnInit {
 
     // Show player ready modal
     this.openModal('player-ready-modal');
+  }
+
+  onRocketsPressed() {
+    // Close main menu modal
+    this.closeModal('main-menu-modal');
+
+    // Show Pyrotechnics
+    this.isShowPyrotechnics = true;
+  }
+
+  onPyrotechnicsExited() {
+    // Hide Pyrotechnics
+    this.isShowPyrotechnics = false;
+
+    // Open main menu modal
+    this.openModal('main-menu-modal');
   }
 
   showEndOfTurnModal() {

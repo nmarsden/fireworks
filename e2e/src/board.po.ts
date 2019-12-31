@@ -93,7 +93,7 @@ export class BoardPO {
   }
 
   clickMenuButton() {
-    return element(by.css('app-menu-button .button')).getWebElement().click();
+    return element(by.css('app-board app-menu-button .button')).getWebElement().click();
   }
 
 }

@@ -1,4 +1,5 @@
-<app-background [theme]="gameState.isHideBoard && gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"
+<app-background *ngIf="!isShowPyrotechnics"
+                [theme]="gameState.isHideBoard && gameState.isGameOver && !gameState.isGameWon ? 'lost':'standard'"
                 [isSparkling]="gameState.isHideBoard"
                 [isSmallStars]="!gameState.isHideBoard"></app-background>
 
@@ -27,7 +28,8 @@
 
 <app-main-menu-modal [playerNameOne]="playerNames[0]"
                      [playerNameTwo]="playerNames[1]"
-                     (startButtonClicked)="onStartButtonClicked($event)"></app-main-menu-modal>
+                     (startButtonClicked)="onStartButtonClicked($event)"
+                     (rocketsPressed)="onRocketsPressed()"></app-main-menu-modal>
 
 <app-modal id="player-ready-modal" [isCancelOnOutsideClick]="false">
   <div class="modal-body no-background">
@@ -106,3 +108,6 @@
     </div>
   </div>
 </app-modal>
+
+<app-pyrotechnics [isHidden]="!isShowPyrotechnics"
+                  (exited)="onPyrotechnicsExited()"></app-pyrotechnics>

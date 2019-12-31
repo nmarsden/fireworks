@@ -7,7 +7,7 @@
                 }"
        (click)="toggleFullScreen()"></div>
   <div class="main-menu-container">
-    <app-logo></app-logo>
+    <app-logo (rocketsPressed)="onRocketsPressed()"></app-logo>
     <div class="player-names-container">
       <div class="player-name" (click)="onPlayerOneClicked($event)">{{ playerNameOne }}</div>
       <div class="versus">&</div>

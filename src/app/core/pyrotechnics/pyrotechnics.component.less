@@ -1,0 +1,61 @@
+.pyrotechnics {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  opacity: 0;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+
+  &.is-show {
+    display: flex;
+    opacity: 1;
+    transition: opacity ease 0.4s;
+    animation: grow-pyrotechnics 0.3s forwards;
+  }
+
+  .menu-button-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .burst {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .particle-container {
+
+      .particle {
+        position: absolute;
+        width: calc(0.3 * var(--played-tile-width));
+        height: calc(0.3 * var(--played-tile-width));
+        border-radius: 50%;
+        animation: move-particle ease-out 10s forwards;
+        opacity: 0;
+      }
+
+      @keyframes move-particle {
+        0%   {
+          opacity: 1;
+          transform: scale(1/6);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(calc(3 * var(--played-tile-width))) scale(1);
+        }
+      }
+    }
+  }
+}
+
+@keyframes grow-pyrotechnics {
+  0%   { transform: scale(0.8) }
+  100% { transform: scale(1)   }
+}
