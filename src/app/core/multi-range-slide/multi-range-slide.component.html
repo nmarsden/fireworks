@@ -1,0 +1,31 @@
+<div slider>
+  <div>
+    <div inverse-left [ngStyle]="{ width: modelData.inverseLeft.width }"></div>
+    <div inverse-right [ngStyle]="{ width: modelData.inverseRight.width }"></div>
+    <div range [ngStyle]="{ left: modelData.range.left, right: modelData.range.right }"></div>
+    <span thumb [ngStyle]="{ left: modelData.thumbLeft.left }"></span>
+    <span thumb [ngStyle]="{ left: modelData.thumbRight.left }"></span>
+    <div sign [ngStyle]="{ left: modelData.signLeft.left }">
+      <span>{{ modelData.lowerValue }}</span>
+    </div>
+    <div sign [ngStyle]="{ left: modelData.signRight.left }">
+      <span>{{ modelData.upperValue }}</span>
+    </div>
+  </div>
+  <input type="range"
+         tabindex="0"
+         [value]="modelData.lowerValue"
+         max="{{ modelData.max }}"
+         min="{{ modelData.min }}"
+         step="1"
+         [(ngModel)]="modelData.lowerValue"
+         (input)="valueChanged1($event)"/>
+  <input type="range"
+         tabindex="0"
+         [value]="modelData.upperValue"
+         max="{{ modelData.max }}"
+         min="{{ modelData.min }}"
+         step="1"
+         [(ngModel)]="modelData.upperValue"
+         (input)="valueChanged2($event)"/>
+</div>
