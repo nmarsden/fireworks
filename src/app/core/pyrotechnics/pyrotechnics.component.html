@@ -18,8 +18,8 @@
     <div class="modal-heading">Pyrotechnics</div>
     <div class="form-field">
       <div class="form-field-label">Particles [{{ particleRange.lowerBound}} - {{ particleRange.upperBound}}]</div>
-      <app-multi-range-slide (valuesChanged)="particleRangeChanged($event)"
-                             [values]="{ lowerValue: particleRange.lowerBound, upperValue: particleRange.upperBound }"></app-multi-range-slide>
+      <app-range-slider (valuesChanged)="particleRangeChanged($event)"
+                        [values]="{ lowerValue: particleRange.lowerBound, upperValue: particleRange.upperBound }"></app-range-slider>
     </div>
     <div class="form-field">
       <app-button (buttonClicked)="onExitClicked()">Exit</app-button>

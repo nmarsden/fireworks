@@ -6,11 +6,11 @@ export interface MultiRangeValues {
 }
 
 @Component({
-  selector: 'app-multi-range-slide',
-  templateUrl: './multi-range-slide.component.html',
-  styleUrls: ['./multi-range-slide.component.less']
+  selector: 'app-range-slider',
+  templateUrl: './range-slider.component.html',
+  styleUrls: ['./range-slider.component.less']
 })
-export class MultiRangeSlideComponent implements OnInit, OnChanges {
+export class RangeSliderComponent implements OnInit, OnChanges {
   @Input() values: MultiRangeValues = { lowerValue: 30, upperValue: 60 };
   @Output() valuesChanged = new EventEmitter<MultiRangeValues>();
 

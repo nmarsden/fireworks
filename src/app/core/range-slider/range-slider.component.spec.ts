@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MultiRangeSlideComponent } from './multi-range-slide.component';
+import { RangeSliderComponent } from './range-slider.component';
 import { CoreModule } from '../core.module';
 
-describe('MultiRangeSlideComponent', () => {
-  let component: MultiRangeSlideComponent;
-  let fixture: ComponentFixture<MultiRangeSlideComponent>;
+describe('RangeSliderComponent', () => {
+  let component: RangeSliderComponent;
+  let fixture: ComponentFixture<RangeSliderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,7 +15,7 @@ describe('MultiRangeSlideComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MultiRangeSlideComponent);
+    fixture = TestBed.createComponent(RangeSliderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

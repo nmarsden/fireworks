@@ -23,7 +23,7 @@ import { InGameMenuModalComponent } from './in-game-menu-modal/in-game-menu-moda
 import { ButtonComponent } from './button/button.component';
 import { MultiStateButtonComponent } from './multi-state-button/multi-state-button.component';
 import { PyrotechnicsComponent } from './pyrotechnics/pyrotechnics.component';
-import { MultiRangeSlideComponent } from './multi-range-slide/multi-range-slide.component';
+import { RangeSliderComponent } from './range-slider/range-slider.component';
 
 /**
  * Hammerjs must be imported for gestures
@@ -53,7 +53,7 @@ import 'hammerjs';
     ButtonComponent,
     MultiStateButtonComponent,
     PyrotechnicsComponent,
-    MultiRangeSlideComponent
+    RangeSliderComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +82,7 @@ import 'hammerjs';
     ButtonComponent,
     MultiStateButtonComponent,
     PyrotechnicsComponent,
-    MultiRangeSlideComponent
+    RangeSliderComponent
   ]
 })
 export class CoreModule { }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ModalService } from '../../modal.service';
-import { MultiRangeValues } from '../multi-range-slide/multi-range-slide.component';
+import { MultiRangeValues } from '../range-slider/range-slider.component';
 
 interface Position {
   x: number;
