@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ModalService } from '../../modal.service';
+import { MultiRangeValues } from '../multi-range-slide/multi-range-slide.component';
 
 interface Position {
   x: number;
@@ -13,6 +14,10 @@ interface Burst {
   animationDelay: number;
 }
 
+interface Range {
+  lowerBound: number;
+  upperBound: number;
+}
 @Component({
   selector: 'app-pyrotechnics',
   templateUrl: './pyrotechnics.component.html',
@@ -25,6 +30,8 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
   colours: string[] = [];
   bursts: Burst[] = [];
   timeoutId;
+
+  particleRange: Range = { lowerBound: 10, upperBound: 30 };
 
   constructor(private modalService: ModalService) { }
 
@@ -86,6 +93,11 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
 
   onMenuClicked() {
     this.modalService.open('pyrotechnics-menu-modal');
+  }
+
+  particleRangeChanged(event: MultiRangeValues) {
+    this.particleRange.lowerBound = event.lowerValue;
+    this.particleRange.upperBound = event.upperValue;
   }
 
   onExitClicked() {

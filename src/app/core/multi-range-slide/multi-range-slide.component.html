@@ -1,31 +1,32 @@
-<div slider>
-  <div>
-    <div inverse-left [ngStyle]="{ width: modelData.inverseLeft.width }"></div>
-    <div inverse-right [ngStyle]="{ width: modelData.inverseRight.width }"></div>
-    <div range [ngStyle]="{ left: modelData.range.left, right: modelData.range.right }"></div>
-    <span thumb [ngStyle]="{ left: modelData.thumbLeft.left }"></span>
-    <span thumb [ngStyle]="{ left: modelData.thumbRight.left }"></span>
-    <div sign [ngStyle]="{ left: modelData.signLeft.left }">
-      <span>{{ modelData.lowerValue }}</span>
+<div class="slider-container">
+  <div class="slider">
+    <div class="inverse-left" [ngStyle]="{ width: modelData.inverseLeft.width }"></div>
+    <div class="inverse-right" [ngStyle]="{ width: modelData.inverseRight.width }"></div>
+    <div class="range" [ngStyle]="{
+                                    left: modelData.range.left,
+                                    right: modelData.range.right
+                                  }"></div>
+    <span class="thumb" [ngStyle]="{ left: modelData.thumbLeft.left }"></span>
+    <span class="thumb" [ngStyle]="{ left: modelData.thumbRight.left }"></span>
+    <div class="sign" [ngStyle]="{ left: modelData.signLeft.left }">
+      <div class="sign-text">{{ modelData.lowerValue }}</div>
     </div>
-    <div sign [ngStyle]="{ left: modelData.signRight.left }">
-      <span>{{ modelData.upperValue }}</span>
+    <div class="sign" [ngStyle]="{ left: modelData.signRight.left }">
+      <div class="sign-text">{{ modelData.upperValue }}</div>
     </div>
   </div>
   <input type="range"
          tabindex="0"
-         [value]="modelData.lowerValue"
-         max="{{ modelData.max }}"
          min="{{ modelData.min }}"
+         max="{{ modelData.max }}"
          step="1"
          [(ngModel)]="modelData.lowerValue"
-         (input)="valueChanged1($event)"/>
+         (input)="onLowerValueChanged($event)"/>
   <input type="range"
          tabindex="0"
-         [value]="modelData.upperValue"
-         max="{{ modelData.max }}"
          min="{{ modelData.min }}"
+         max="{{ modelData.max }}"
          step="1"
          [(ngModel)]="modelData.upperValue"
-         (input)="valueChanged2($event)"/>
+         (input)="onUpperValueChanged($event)"/>
 </div>

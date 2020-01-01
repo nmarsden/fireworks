@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+
+export interface MultiRangeValues {
+  lowerValue: number;
+  upperValue: number;
+}
 
 @Component({
   selector: 'app-multi-range-slide',
   templateUrl: './multi-range-slide.component.html',
   styleUrls: ['./multi-range-slide.component.less']
 })
-export class MultiRangeSlideComponent implements OnInit {
+export class MultiRangeSlideComponent implements OnInit, OnChanges {
+  @Input() values: MultiRangeValues = { lowerValue: 30, upperValue: 60 };
+  @Output() valuesChanged = new EventEmitter<MultiRangeValues>();
 
   modelData = {
     min: 0,
@@ -26,31 +33,50 @@ export class MultiRangeSlideComponent implements OnInit {
   ngOnInit() {
   }
 
-  valueChanged1(event) {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.updateModelDataWithNewLowerValue(this.values.lowerValue);
+    this.updateModelDataWithNewUpperValue(this.values.upperValue);
+  }
+
+  onLowerValueChanged(event) {
     const target = event.target;
+    const newLowerValue = Math.min(target.value, this.modelData.upperValue - 1);
+    target.value = newLowerValue;
 
-    target.value = Math.min(target.value, this.modelData.upperValue - 1);
+    this.updateModelDataWithNewLowerValue(newLowerValue);
+    this.emitValuesChanged();
+  }
 
-    const value = (100 / (parseInt(target.max, 10) - parseInt(target.min, 10))) * parseInt(target.value, 10) -
-                  (100 / (parseInt(target.max, 10) - parseInt(target.min, 10))) * parseInt(target.min, 10);
+  onUpperValueChanged(event) {
+    const target = event.target;
+    const newUpperValue = Math.max(target.value, this.modelData.lowerValue - (-1));
+    target.value = newUpperValue;
 
+    this.updateModelDataWithNewUpperValue(newUpperValue);
+    this.emitValuesChanged();
+  }
+
+  updateModelDataWithNewLowerValue(newLowerValue: number) {
+    this.modelData.lowerValue = newLowerValue;
+    const value = (100 / (this.modelData.max - this.modelData.min)) * newLowerValue -
+                  (100 / (this.modelData.max - this.modelData.min)) * this.modelData.min;
     this.modelData.inverseLeft.width = value + '%';
     this.modelData.range.left = value + '%';
     this.modelData.thumbLeft.left = value + '%';
     this.modelData.signLeft.left = value + '%';
   }
 
-  valueChanged2(event) {
-    const target = event.target;
-
-    target.value = Math.max(target.value, this.modelData.lowerValue - (-1));
-
-    const value = (100 / (parseInt(target.max, 10) - parseInt(target.min, 10))) * parseInt(target.value, 10) -
-                  (100 / (parseInt(target.max, 10) - parseInt(target.min, 10))) * parseInt(target.min, 10);
-
+  updateModelDataWithNewUpperValue(newUpperValue: number) {
+    this.modelData.upperValue = newUpperValue;
+    const value = (100 / (this.modelData.max - this.modelData.min)) * newUpperValue -
+                  (100 / (this.modelData.max - this.modelData.min)) * this.modelData.min;
     this.modelData.inverseRight.width = (100 - value) + '%';
     this.modelData.range.right = (100 - value) + '%';
     this.modelData.thumbRight.left = value + '%';
     this.modelData.signRight.left = value + '%';
+  }
+
+  emitValuesChanged() {
+    this.valuesChanged.emit({ lowerValue: this.modelData.lowerValue, upperValue: this.modelData.upperValue });
   }
 }

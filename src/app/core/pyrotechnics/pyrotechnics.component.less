@@ -55,6 +55,20 @@
   }
 }
 
+.form-field {
+  width: 100%;
+
+  .form-field-label {
+    font-size: calc(0.3 * var(--played-tile-width));
+    line-height: calc(0.3 * var(--played-tile-width));
+    text-align: center;
+  }
+}
+
+.form-field + .form-field {
+  margin-top: calc(0.3 * var(--played-tile-width));
+}
+
 @keyframes grow-pyrotechnics {
   0%   { transform: scale(0.8) }
   100% { transform: scale(1)   }
