@@ -11,6 +11,8 @@ export interface MultiRangeValues {
   styleUrls: ['./range-slider.component.less']
 })
 export class RangeSliderComponent implements OnInit, OnChanges {
+  @Input() min = 0;
+  @Input() max = 100;
   @Input() values: MultiRangeValues = { lowerValue: 30, upperValue: 60 };
   @Output() valuesChanged = new EventEmitter<MultiRangeValues>();
 
@@ -34,6 +36,15 @@ export class RangeSliderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.values.lowerValue < this.min) {
+      throw new Error(`lower value (${this.values.lowerValue}) is less than min (${this.min})`);
+    }
+    if (this.values.upperValue > this.max) {
+      throw new Error(`upper value (${this.values.upperValue}) is greater than max (${this.max})`);
+    }
+
+    this.modelData.min = this.min;
+    this.modelData.max = this.max;
     this.updateModelDataWithNewLowerValue(this.values.lowerValue);
     this.updateModelDataWithNewUpperValue(this.values.upperValue);
   }

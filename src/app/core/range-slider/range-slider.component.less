@@ -1,5 +1,13 @@
 :host {
-  --slider-px: calc(0.01 * var(--main-tile-width));
+  --slider-px: calc(0.008 * var(--main-tile-width));
+  --slider-inverse-bg-colour: rgb(131, 136, 156);
+  --slider-inverse-border-colour: rgb(100, 100, 100);
+  --slider-range-bg-colour: var(--colour-button-bg);
+  --slider-range-border-colour: rgb(100, 100, 100);
+  --slider-thumb-colour: var(--colour-button-bg);
+  --slider-sign-bg-colour: rgb(40, 44, 159);
+  --slider-sign-text-colour: white;
+
   width: 100%;
 }
 
@@ -21,6 +29,7 @@
     left: calc(13 * var(--slider-px));
     right: calc(15 * var(--slider-px));
     height: calc(14 * var(--slider-px));
+    box-shadow: 0 0 calc(0.3 * var(--main-tile-width)) calc(-0.05 * var(--main-tile-width)) rgba(0,0,0,0.5);
 
     .inverse-left {
       position: absolute;
@@ -28,7 +37,8 @@
       height: calc(14 * var(--slider-px));
       border-top-left-radius: calc(10 * var(--slider-px));
       border-bottom-left-radius: calc(10 * var(--slider-px));
-      background-color: var(--colour-button-bg-unchecked);
+      background-color: var(--slider-inverse-bg-colour);
+      border: thin solid var(--slider-inverse-border-colour);
     }
 
     .inverse-right {
@@ -37,49 +47,52 @@
       height: calc(14 * var(--slider-px));
       border-top-right-radius: calc(10 * var(--slider-px));
       border-bottom-right-radius: calc(10 * var(--slider-px));
-      background-color: var(--colour-button-bg-unchecked);
+      background-color: var(--slider-inverse-bg-colour);
+      border: thin solid var(--slider-inverse-border-colour);
     }
 
     .range {
       position: absolute;
       left: 0;
       height: calc(14 * var(--slider-px));
-      background-color: var(--colour-button-bg);
+      background-color: var(--slider-range-bg-colour);
+      border: thin solid var(--slider-range-border-colour);
     }
 
     .thumb {
       position: absolute;
-      top: calc(-7 * var(--slider-px));
+      top: calc(-11 * var(--slider-px));
       z-index: 2;
-      height: calc(28 * var(--slider-px));
-      width: calc(28 * var(--slider-px));
+      height: calc(36 * var(--slider-px));
+      width: calc(36 * var(--slider-px));
       text-align: left;
-      margin-left: calc(-12.5 * var(--slider-px));
+      margin-left: calc(-16.5 * var(--slider-px));
       cursor: pointer;
-      box-shadow: 0 calc(3 * var(--slider-px)) calc(8 * var(--slider-px)) rgba(0, 0, 0, 0.4);
-      background-color: var(--colour-button-bg);
-      border-radius: 50%;
-      outline: none;
+      box-shadow: 0 0 calc(0.3 * var(--main-tile-width)) calc(-0.05 * var(--main-tile-width)) rgba(0,0,0,0.5);
+      background-color: var(--slider-thumb-colour);
+      border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
+      border: thin solid white;
     }
 
     .sign {
       opacity: 0;
       position: absolute;
       z-index:3;
-      background-color: #1ABC9C;
-      color: #fff;
+      background-color: var(--slider-sign-bg-colour);
+      color: var(--slider-sign-text-colour);
       margin-left: calc(-26 * var(--slider-px));
       top: calc(-74 * var(--slider-px));
       width: calc(56 * var(--slider-px));
       height: calc(56 * var(--slider-px));
       border-radius: calc(56 * var(--slider-px));
+      display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
 
       .sign-text {
         font-size: calc(24 * var(--slider-px));
-        line-height: calc(56 * var(--slider-px));
+        line-height: calc(24 * var(--slider-px));
       }
     }
 
@@ -93,7 +106,7 @@
       border-right: calc(28 * var(--slider-px)) solid transparent;
       border-top-width: calc(32 * var(--slider-px));
       border-top-style: solid;
-      border-top-color: #1ABC9C;
+      border-top-color: var(--slider-sign-bg-colour);
     }
   }
 
