@@ -72,6 +72,7 @@
       background-color: var(--slider-thumb-colour);
       border-radius: calc(0.1 * var(--main-tile-width)) calc(0.1 * var(--main-tile-width));
       border: thin solid white;
+      overflow: hidden;
     }
 
     .sign {
@@ -186,3 +187,76 @@
   }
 }
 
+// -- Thumb animation: travelling border --
+// Only show the thumb animation when the thumb is inside an open modal
+// This is also intended to reset the animation to prevent multiple thumb animations being out of sync
+:host-context(.app-modal-open) .thumb-anim {
+  display: block;
+}
+
+.thumb-anim {
+  --thumb-anim-time: 3s;
+  --thumb-anim-width: calc(0.05 * var(--main-tile-width));
+  --thumb-anim-colour-start: transparent;
+  --thumb-anim-colour-end: rgb(99, 178, 255);
+
+  position: absolute;
+  display: none;
+  will-change: transform;
+
+  &.top {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: var(--thumb-anim-width);
+    background: linear-gradient(90deg, var(--thumb-anim-colour-start), var(--thumb-anim-colour-end));
+    animation: thumb-anim-right var(--thumb-anim-time) infinite;
+  }
+  &.right {
+    top: -100%;
+    right: 0;
+    width: var(--thumb-anim-width);
+    height: 100%;
+    background: linear-gradient(180deg, var(--thumb-anim-colour-start), var(--thumb-anim-colour-end));
+    animation: thumb-anim-down var(--thumb-anim-time) infinite;
+    animation-delay: calc(0.25 * var(--thumb-anim-time));
+  }
+  &.bottom {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: var(--thumb-anim-width);
+    background: linear-gradient(270deg, var(--thumb-anim-colour-start), var(--thumb-anim-colour-end));
+    animation: thumb-anim-left var(--thumb-anim-time) infinite;
+    animation-delay: calc(0.5 * var(--thumb-anim-time));
+  }
+  &.left {
+    bottom: -100%;
+    left: 0;
+    width: var(--thumb-anim-width);
+    height: 100%;
+    background: linear-gradient(360deg, var(--thumb-anim-colour-start), var(--thumb-anim-colour-end));
+    animation: thumb-anim-up var(--thumb-anim-time) infinite;
+    animation-delay: calc(0.75 * var(--thumb-anim-time));
+  }
+}
+
+@keyframes thumb-anim-right {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes thumb-anim-down {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(200%); }
+}
+
+@keyframes thumb-anim-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-200%); }
+}
+
+@keyframes thumb-anim-up {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-200%); }
+}

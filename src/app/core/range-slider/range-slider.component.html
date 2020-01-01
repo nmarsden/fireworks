@@ -6,8 +6,18 @@
                                     left: modelData.range.left,
                                     right: modelData.range.right
                                   }"></div>
-    <span class="thumb" [ngStyle]="{ left: modelData.thumbLeft.left }"></span>
-    <span class="thumb" [ngStyle]="{ left: modelData.thumbRight.left }"></span>
+    <div class="thumb" [ngStyle]="{ left: modelData.thumbLeft.left }">
+      <div class="thumb-anim top"></div>
+      <div class="thumb-anim right"></div>
+      <div class="thumb-anim bottom"></div>
+      <div class="thumb-anim left"></div>
+    </div>
+    <div class="thumb" [ngStyle]="{ left: modelData.thumbRight.left }">
+      <div class="thumb-anim top"></div>
+      <div class="thumb-anim right"></div>
+      <div class="thumb-anim bottom"></div>
+      <div class="thumb-anim left"></div>
+    </div>
     <div class="sign" [ngStyle]="{ left: modelData.signLeft.left }">
       <div class="sign-text">{{ modelData.lowerValue }}</div>
     </div>
