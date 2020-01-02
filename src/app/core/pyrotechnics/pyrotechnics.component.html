@@ -23,6 +23,10 @@
   <div class="modal-body">
     <div class="modal-heading">Pyrotechnics</div>
     <div class="form-field">
+      <div class="form-field-label">Colours</div>
+      <app-multi-select-colour [selectedColours]="burstOptions.colours" (coloursSelected)="onColoursSelected($event)"></app-multi-select-colour>
+    </div>
+    <div class="form-field">
       <div class="form-field-label">Bursts [{{ burstOptions.numBursts.lowerBound}} - {{ burstOptions.numBursts.upperBound}}]</div>
       <app-range-slider (valuesChanged)="burstRangeChanged($event)"
                         [min]="1" [max]="50"

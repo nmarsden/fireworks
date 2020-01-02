@@ -20,6 +20,7 @@ interface Range {
 }
 
 interface BurstOptions {
+  colours: string[];
   numBursts: Range;
   numParticles: Range;
   delayInTenthsOfSecs: Range;
@@ -34,11 +35,11 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
   @Input() isHidden = true;
   @Output() exited = new EventEmitter();
 
-  colours: string[] = [];
   bursts: Burst[] = [];
   timeoutId;
 
   burstOptions: BurstOptions = {
+    colours: [ 'white', 'red', 'yellow', 'green', 'blue' ],
     numBursts: { lowerBound: 3, upperBound: 7 },
     numParticles: { lowerBound: 10, upperBound: 30 },
     delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 }
@@ -47,7 +48,6 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
   constructor(private modalService: ModalService) { }
 
   ngOnInit() {
-    this.colours = [ 'blue', 'red', 'white', 'yellow', 'green' ];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -87,7 +87,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
       const xPos = Math.floor(Math.random() * 300) - 150;
       const yPos = Math.floor(Math.random() * 300) - 150;
       const delay = this.randomNumberInRange(o.delayInTenthsOfSecs);
-      const colour = this.colours[Math.floor(Math.random() * this.colours.length)];
+      const colour = o.colours[Math.floor(Math.random() * o.colours.length)];
       bursts.push({
         position: { x: xPos, y: yPos },
         numParticles,
@@ -103,6 +103,10 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     return {
       transform: `translate(${position.x}px, ${position.y}px) rotate(${i * rotateFraction}deg)`
     };
+  }
+
+  onColoursSelected(colours: string[]) {
+    this.burstOptions.colours = colours;
   }
 
   burstRangeChanged(event: MultiRangeValues) {

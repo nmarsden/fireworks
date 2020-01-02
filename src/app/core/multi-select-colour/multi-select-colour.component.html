@@ -1,0 +1,11 @@
+<div class="button-container">
+  <app-button *ngFor="let colourOption of modelData.colourOptions"
+              [colour]="colourOption.value"
+              (click)="onButtonClicked(colourOption.value)">
+    <div class="checkbox"
+         [ngClass]="{
+                      'checked': colourOption.checked,
+                      'unchecked': !colourOption.checked
+                    }"></div>
+  </app-button>
+</div>
