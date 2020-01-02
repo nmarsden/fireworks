@@ -47,8 +47,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
   constructor(private modalService: ModalService) { }
 
   ngOnInit() {
-    this.colours = this.getCssVariableValues('--colour-red', '--colour-white', '--colour-yellow',
-                                             '--colour-green', '--colour-orange', '--colour-blue');
+    this.colours = [ 'blue', 'red', 'white', 'yellow', 'green' ];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -98,11 +97,6 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
       });
     }
     return bursts;
-  }
-
-  getCssVariableValues(...cssVariableNames: string[]): string[] {
-    const computedStyle = getComputedStyle(document.documentElement);
-    return cssVariableNames.map(cssVarName => computedStyle.getPropertyValue(cssVarName));
   }
 
   setTransform(i: number, position: Position, rotateFraction: number) {
