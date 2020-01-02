@@ -25,6 +25,7 @@ import { MultiStateButtonComponent } from './multi-state-button/multi-state-butt
 import { PyrotechnicsComponent } from './pyrotechnics/pyrotechnics.component';
 import { RangeSliderComponent } from './range-slider/range-slider.component';
 import { MultiSelectColourComponent } from './multi-select-colour/multi-select-colour.component';
+import { BackButtonComponent } from './back-button/back-button.component';
 
 /**
  * Hammerjs must be imported for gestures
@@ -55,7 +56,8 @@ import 'hammerjs';
     MultiStateButtonComponent,
     PyrotechnicsComponent,
     RangeSliderComponent,
-    MultiSelectColourComponent
+    MultiSelectColourComponent,
+    BackButtonComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +87,8 @@ import 'hammerjs';
     MultiStateButtonComponent,
     PyrotechnicsComponent,
     RangeSliderComponent,
-    MultiSelectColourComponent
+    MultiSelectColourComponent,
+    BackButtonComponent
   ]
 })
 export class CoreModule { }

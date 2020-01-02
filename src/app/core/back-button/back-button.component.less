@@ -1,0 +1,29 @@
+.back-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: var(--played-tile-width);
+  height: var(--played-tile-width);
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    left: 40%;
+    width: 10%;
+    height: 40%;
+    background-color: white;
+    border-radius: calc(0.2 * var(--played-tile-width));
+  }
+
+  &:before {
+    top: 40%;
+    transform: rotate(-45deg);
+  }
+
+  &:after {
+    top: 18%;
+    transform: rotate(45deg);
+  }
+}

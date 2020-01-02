@@ -125,7 +125,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     return value / 10;
   }
 
-  onMenuClicked() {
+  onMenuButtonClicked() {
     this.tearDownRepeatingRandomBursts();
     this.modalService.open('pyrotechnics-menu-modal');
   }
@@ -134,7 +134,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     this.setupRepeatingRandomBursts();
   }
 
-  onExitClicked() {
+  onBackButtonClicked() {
     this.modalService.close('pyrotechnics-menu-modal');
     this.exited.emit();
   }
