@@ -26,8 +26,8 @@
 
   .slider {
     position: absolute;
-    left: calc(13 * var(--slider-px));
-    right: calc(15 * var(--slider-px));
+    left: calc(17 * var(--slider-px));
+    right: calc(17 * var(--slider-px));
     height: calc(14 * var(--slider-px));
     box-shadow: 0 0 calc(0.3 * var(--main-tile-width)) calc(-0.05 * var(--main-tile-width)) rgba(0,0,0,0.5);
 
@@ -90,6 +90,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      pointer-events: none;
 
       .sign-text {
         font-size: calc(24 * var(--slider-px));
@@ -109,6 +110,15 @@
       border-top-style: solid;
       border-top-color: var(--slider-sign-bg-colour);
     }
+  }
+
+  .thumb-mixin() {
+    pointer-events: all;
+    width: calc(36 * var(--slider-px));
+    height: calc(36 * var(--slider-px));
+    border-radius: 0;
+    border: 0 none;
+    background: red;
   }
 
   input[type=range] {
@@ -144,30 +154,13 @@
     }
 
     &::-ms-thumb {
-      pointer-events: all;
-      width: calc(28 * var(--slider-px));
-      height: calc(28 * var(--slider-px));
-      border-radius: 0;
-      border: 0 none;
-      background: red;
+      .thumb-mixin();
     }
-
     &::-moz-range-thumb {
-      pointer-events: all;
-      width: calc(28 * var(--slider-px));
-      height: calc(28 * var(--slider-px));
-      border-radius: 0;
-      border: 0 none;
-      background: red;
+      .thumb-mixin();
     }
-
     &::-webkit-slider-thumb {
-      pointer-events: all;
-      width: calc(28 * var(--slider-px));
-      height: calc(28 * var(--slider-px));
-      border-radius: 0;
-      border: 0 none;
-      background: red;
+      .thumb-mixin();
       -webkit-appearance: none;
     }
 

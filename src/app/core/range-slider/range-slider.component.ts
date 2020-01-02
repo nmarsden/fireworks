@@ -5,6 +5,8 @@ export interface MultiRangeValues {
   upperValue: number;
 }
 
+const defaultValueDisplayFn = (value) => value;
+
 @Component({
   selector: 'app-range-slider',
   templateUrl: './range-slider.component.html',
@@ -14,6 +16,7 @@ export class RangeSliderComponent implements OnInit, OnChanges {
   @Input() min = 0;
   @Input() max = 100;
   @Input() values: MultiRangeValues = { lowerValue: 30, upperValue: 60 };
+  @Input() valueDisplayFn = defaultValueDisplayFn;
   @Output() valuesChanged = new EventEmitter<MultiRangeValues>();
 
   modelData = {
@@ -27,7 +30,8 @@ export class RangeSliderComponent implements OnInit, OnChanges {
     thumbLeft: { left: '30%' },
     thumbRight: { left: '60%' },
     signLeft: { left: '30%' },
-    signRight: { left: '60%' }
+    signRight: { left: '60%' },
+    valueDisplayFn: defaultValueDisplayFn
   };
 
   constructor() { }
@@ -45,6 +49,7 @@ export class RangeSliderComponent implements OnInit, OnChanges {
 
     this.modelData.min = this.min;
     this.modelData.max = this.max;
+    this.modelData.valueDisplayFn = this.valueDisplayFn;
     this.updateModelDataWithNewLowerValue(this.values.lowerValue);
     this.updateModelDataWithNewUpperValue(this.values.upperValue);
   }

@@ -5,7 +5,7 @@
          [ngStyle]="setTransform(j, burst.position, burst.rotateFraction)">
       <div class="particle" [ngStyle]="{
                                          'background-color': burst.colour,
-                                         'animation-delay': burst.animationDelay + 's'
+                                         'animation-delay': (burst.animationDelay / 10) + 's'
                                        }"></div>
     </div>
   </div>
@@ -13,13 +13,27 @@
     <app-menu-button (buttonClicked)="onMenuClicked()"></app-menu-button>
   </div>
 </div>
-<app-modal id="pyrotechnics-menu-modal">
+<app-modal id="pyrotechnics-menu-modal" (cancelled)="onMenuModalClosed()">
   <div class="modal-body">
     <div class="modal-heading">Pyrotechnics</div>
     <div class="form-field">
-      <div class="form-field-label">Particles [{{ particleRange.lowerBound}} - {{ particleRange.upperBound}}]</div>
+      <div class="form-field-label">Bursts [{{ burstOptions.numBursts.lowerBound}} - {{ burstOptions.numBursts.upperBound}}]</div>
+      <app-range-slider (valuesChanged)="burstRangeChanged($event)"
+                        [min]="1" [max]="50"
+                        [values]="{ lowerValue: burstOptions.numBursts.lowerBound, upperValue: burstOptions.numBursts.upperBound }"></app-range-slider>
+    </div>
+    <div class="form-field">
+      <div class="form-field-label">Particles [{{ burstOptions.numParticles.lowerBound}} - {{ burstOptions.numParticles.upperBound}}]</div>
       <app-range-slider (valuesChanged)="particleRangeChanged($event)"
-                        [values]="{ lowerValue: particleRange.lowerBound, upperValue: particleRange.upperBound }"></app-range-slider>
+                        [min]="1" [max]="50"
+                        [values]="{ lowerValue: burstOptions.numParticles.lowerBound, upperValue: burstOptions.numParticles.upperBound }"></app-range-slider>
+    </div>
+    <div class="form-field">
+      <div class="form-field-label">Delay (Secs) [{{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.lowerBound) }} - {{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.upperBound) }}]</div>
+      <app-range-slider (valuesChanged)="delayRangeChanged($event)"
+                        [min]="0" [max]="100"
+                        [valueDisplayFn]="delayValueDisplayFn"
+                        [values]="{ lowerValue: burstOptions.delayInTenthsOfSecs.lowerBound, upperValue: burstOptions.delayInTenthsOfSecs.upperBound }"></app-range-slider>
     </div>
     <div class="form-field">
       <app-button (buttonClicked)="onExitClicked()">Exit</app-button>
