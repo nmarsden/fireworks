@@ -2,7 +2,7 @@
   <div *ngFor="let burst of bursts" class="burst">
     <div *ngFor="let i of [].constructor(burst.numParticles); index as j;"
          class="particle-container"
-         [ngStyle]="getParticleContainerTransform(j, burst.position, burst.rotateFraction)">
+         [ngStyle]="getParticleContainerTransform(burst, j)">
       <div class="particle" [ngClass]="{
                                          'blue':   burst.colour === 'blue',
                                          'red':    burst.colour === 'red',

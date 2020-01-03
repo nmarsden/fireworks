@@ -26,6 +26,8 @@ interface BurstOptions {
   numParticles: Range;
   delayInTenthsOfSecs: Range;
   particleStaggeredDelayInHundredthOfSecs: Range;
+  centerOffsetX: Range;
+  centerOffsetY: Range;
 }
 
 @Component({
@@ -46,7 +48,9 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     numParticles: { lowerBound: 10, upperBound: 30 },
     delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 },
     particleStaggeredDelayInHundredthOfSecs: { lowerBound: -2, upperBound: 2 },
-  };
+    centerOffsetX: { lowerBound: -10, upperBound: 10 },
+    centerOffsetY: { lowerBound: -10, upperBound: 10 }
+};
 
   constructor(private modalService: ModalService) { }
 
@@ -87,8 +91,8 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     const numBursts = this.randomNumberInRange(o.numBursts);
     for (let i = 0; i < numBursts; i++) {
       const numParticles = this.randomNumberInRange(o.numParticles);
-      const xPos = Math.floor(Math.random() * 300) - 150;
-      const yPos = Math.floor(Math.random() * 300) - 150;
+      const xPos = this.randomNumberInRange(o.centerOffsetX);
+      const yPos = this.randomNumberInRange(o.centerOffsetY);
       const delay = this.randomNumberInRange(o.delayInTenthsOfSecs);
       const colour = o.colours[Math.floor(Math.random() * o.colours.length)];
       bursts.push({
@@ -103,9 +107,9 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     return bursts;
   }
 
-  getParticleContainerTransform(i: number, position: Position, rotateFraction: number) {
+  getParticleContainerTransform(burst: Burst, particleIndex: number) {
     return {
-      transform: `translate(${position.x}px, ${position.y}px) rotate(${i * rotateFraction}deg)`
+      transform: `translate(${burst.position.x}vw, ${burst.position.y}vh) rotate(${particleIndex * burst.rotateFraction}deg)`
     };
   }
 
