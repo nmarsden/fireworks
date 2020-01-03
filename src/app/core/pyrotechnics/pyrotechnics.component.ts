@@ -11,7 +11,8 @@ interface Burst {
   numParticles: number;
   colour: string;
   rotateFraction: number;
-  animationDelay: number;
+  burstDelayInTenthsOfSecs: number;
+  particleStaggeredDelayInHundredthOfSecs: number;
 }
 
 interface Range {
@@ -24,6 +25,7 @@ interface BurstOptions {
   numBursts: Range;
   numParticles: Range;
   delayInTenthsOfSecs: Range;
+  particleStaggeredDelayInHundredthOfSecs: Range;
 }
 
 @Component({
@@ -42,7 +44,8 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     colours: [ 'white', 'red', 'yellow', 'green', 'blue' ],
     numBursts: { lowerBound: 3, upperBound: 7 },
     numParticles: { lowerBound: 10, upperBound: 30 },
-    delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 }
+    delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 },
+    particleStaggeredDelayInHundredthOfSecs: { lowerBound: -2, upperBound: 2 },
   };
 
   constructor(private modalService: ModalService) { }
@@ -60,9 +63,9 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
 
   setupRepeatingRandomBursts() {
     this.bursts = this.generateRandomBursts();
-    const maxDelay = Math.max(...this.bursts.map(b => b.animationDelay));
+    const maxBurstDelayInTenthsOfSecs = Math.max(...this.bursts.map(b => b.burstDelayInTenthsOfSecs));
 
-    this.timeoutId = setTimeout(() => { this.setupRepeatingRandomBursts(); }, (10000 + (maxDelay * 100)));
+    this.timeoutId = setTimeout(() => { this.setupRepeatingRandomBursts(); }, (10000 + (maxBurstDelayInTenthsOfSecs * 100)));
   }
 
   tearDownRepeatingRandomBursts() {
@@ -93,15 +96,22 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
         numParticles,
         colour,
         rotateFraction: 360 / numParticles,
-        animationDelay: delay
+        burstDelayInTenthsOfSecs: delay,
+        particleStaggeredDelayInHundredthOfSecs:  this.randomNumberInRange(o.particleStaggeredDelayInHundredthOfSecs)
       });
     }
     return bursts;
   }
 
-  setTransform(i: number, position: Position, rotateFraction: number) {
+  getParticleContainerTransform(i: number, position: Position, rotateFraction: number) {
     return {
       transform: `translate(${position.x}px, ${position.y}px) rotate(${i * rotateFraction}deg)`
+    };
+  }
+
+  getParticleAnimationDelay(burst: Burst, particleIndex: number) {
+    return {
+      'animation-delay': `${(burst.burstDelayInTenthsOfSecs / 10) + (particleIndex * burst.particleStaggeredDelayInHundredthOfSecs / 100)}s`
     };
   }
 

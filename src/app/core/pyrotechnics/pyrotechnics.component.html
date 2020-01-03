@@ -2,7 +2,7 @@
   <div *ngFor="let burst of bursts" class="burst">
     <div *ngFor="let i of [].constructor(burst.numParticles); index as j;"
          class="particle-container"
-         [ngStyle]="setTransform(j, burst.position, burst.rotateFraction)">
+         [ngStyle]="getParticleContainerTransform(j, burst.position, burst.rotateFraction)">
       <div class="particle" [ngClass]="{
                                          'blue':   burst.colour === 'blue',
                                          'red':    burst.colour === 'red',
@@ -10,9 +10,7 @@
                                          'green':  burst.colour === 'green',
                                          'yellow': burst.colour === 'yellow'
                                        }"
-                            [ngStyle]="{
-                                         'animation-delay': (burst.animationDelay / 10) + 's'
-                                       }"></div>
+                            [ngStyle]="getParticleAnimationDelay(burst, j)"></div>
     </div>
   </div>
   <div class="back-button-container">

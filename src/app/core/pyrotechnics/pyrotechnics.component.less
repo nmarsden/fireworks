@@ -73,14 +73,14 @@
       @keyframes move-particle {
         0%   {
           opacity: 1;
-          transform: scale(1);
+          transform: scaleX(1);
         }
         30% {
           opacity: 0.2;
         }
         100% {
           opacity: 0;
-          transform: translateX(calc(3 * var(--played-tile-width))) scale(6);
+          transform: translateX(calc(1 * var(--played-tile-width))) scaleX(10);
         }
       }
     }
