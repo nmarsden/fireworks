@@ -31,19 +31,19 @@
     </div>
     <div class="form-field">
       <div class="form-field-label">Bursts [{{ burstOptions.numBursts.lowerBound}} - {{ burstOptions.numBursts.upperBound}}]</div>
-      <app-range-slider (valuesChanged)="burstRangeChanged($event)"
+      <app-range-slider (valuesChanged)="onBurstRangeChanged($event)"
                         [min]="1" [max]="50"
                         [values]="{ lowerValue: burstOptions.numBursts.lowerBound, upperValue: burstOptions.numBursts.upperBound }"></app-range-slider>
     </div>
     <div class="form-field">
       <div class="form-field-label">Particles [{{ burstOptions.numParticles.lowerBound}} - {{ burstOptions.numParticles.upperBound}}]</div>
-      <app-range-slider (valuesChanged)="particleRangeChanged($event)"
+      <app-range-slider (valuesChanged)="onParticleRangeChanged($event)"
                         [min]="1" [max]="50"
                         [values]="{ lowerValue: burstOptions.numParticles.lowerBound, upperValue: burstOptions.numParticles.upperBound }"></app-range-slider>
     </div>
     <div class="form-field">
       <div class="form-field-label">Delay (Secs) [{{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.lowerBound) }} - {{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.upperBound) }}]</div>
-      <app-range-slider (valuesChanged)="delayRangeChanged($event)"
+      <app-range-slider (valuesChanged)="onDelayRangeChanged($event)"
                         [min]="0" [max]="100"
                         [valueDisplayFn]="delayValueDisplayFn"
                         [values]="{ lowerValue: burstOptions.delayInTenthsOfSecs.lowerBound, upperValue: burstOptions.delayInTenthsOfSecs.upperBound }"></app-range-slider>
