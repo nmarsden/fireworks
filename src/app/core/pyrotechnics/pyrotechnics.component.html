@@ -41,11 +41,29 @@
                           [values]="{ lowerValue: burstOptions.numParticles.lowerBound, upperValue: burstOptions.numParticles.upperBound }"></app-range-slider>
       </div>
       <div class="form-field">
-        <div class="form-field-label">Delay (Secs) [{{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.lowerBound) }} - {{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.upperBound) }}]</div>
+        <div class="form-field-label">Burst Delay (Secs) [{{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.lowerBound) }} - {{ delayValueDisplayFn(burstOptions.delayInTenthsOfSecs.upperBound) }}]</div>
         <app-range-slider (valuesChanged)="onDelayRangeChanged($event)"
                           [min]="0" [max]="100"
                           [valueDisplayFn]="delayValueDisplayFn"
                           [values]="{ lowerValue: burstOptions.delayInTenthsOfSecs.lowerBound, upperValue: burstOptions.delayInTenthsOfSecs.upperBound }"></app-range-slider>
+      </div>
+      <div class="form-field">
+        <div class="form-field-label">Center X Offset (%) [{{ burstOptions.centerOffsetX.lowerBound }} - {{ burstOptions.centerOffsetX.upperBound }}]</div>
+        <app-range-slider (valuesChanged)="onCenterOffsetXRangeChanged($event)"
+                          [min]="-50" [max]="50"
+                          [values]="{ lowerValue: burstOptions.centerOffsetX.lowerBound, upperValue: burstOptions.centerOffsetX.upperBound }"></app-range-slider>
+      </div>
+      <div class="form-field">
+        <div class="form-field-label">Center Y Offset (%) [{{ burstOptions.centerOffsetY.lowerBound }} - {{ burstOptions.centerOffsetY.upperBound }}]</div>
+        <app-range-slider (valuesChanged)="onCenterOffsetYRangeChanged($event)"
+                          [min]="-50" [max]="50"
+                          [values]="{ lowerValue: burstOptions.centerOffsetY.lowerBound, upperValue: burstOptions.centerOffsetY.upperBound }"></app-range-slider>
+      </div>
+      <div class="form-field">
+        <div class="form-field-label">Particle Delay (MSecs) [{{ burstOptions.particleStaggeredDelayInMSecs.lowerBound }} - {{ burstOptions.particleStaggeredDelayInMSecs.upperBound }}]</div>
+        <app-range-slider (valuesChanged)="onParticleDelayRangeChanged($event)"
+                          [min]="-50" [max]="50"
+                          [values]="{ lowerValue: burstOptions.particleStaggeredDelayInMSecs.lowerBound, upperValue: burstOptions.particleStaggeredDelayInMSecs.upperBound }"></app-range-slider>
       </div>
     </div>
   </div>

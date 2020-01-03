@@ -12,7 +12,7 @@ interface Burst {
   colour: string;
   rotateFraction: number;
   burstDelayInTenthsOfSecs: number;
-  particleStaggeredDelayInHundredthOfSecs: number;
+  particleStaggeredDelayInMSecs: number;
 }
 
 interface Range {
@@ -25,7 +25,7 @@ interface BurstOptions {
   numBursts: Range;
   numParticles: Range;
   delayInTenthsOfSecs: Range;
-  particleStaggeredDelayInHundredthOfSecs: Range;
+  particleStaggeredDelayInMSecs: Range;
   centerOffsetX: Range;
   centerOffsetY: Range;
 }
@@ -47,7 +47,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     numBursts: { lowerBound: 3, upperBound: 7 },
     numParticles: { lowerBound: 10, upperBound: 30 },
     delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 },
-    particleStaggeredDelayInHundredthOfSecs: { lowerBound: -2, upperBound: 2 },
+    particleStaggeredDelayInMSecs: { lowerBound: -20, upperBound: 20 },
     centerOffsetX: { lowerBound: -10, upperBound: 10 },
     centerOffsetY: { lowerBound: -10, upperBound: 10 }
 };
@@ -101,7 +101,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
         colour,
         rotateFraction: 360 / numParticles,
         burstDelayInTenthsOfSecs: delay,
-        particleStaggeredDelayInHundredthOfSecs:  this.randomNumberInRange(o.particleStaggeredDelayInHundredthOfSecs)
+        particleStaggeredDelayInMSecs:  this.randomNumberInRange(o.particleStaggeredDelayInMSecs)
       });
     }
     return bursts;
@@ -115,7 +115,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
 
   getParticleAnimationDelay(burst: Burst, particleIndex: number) {
     return {
-      'animation-delay': `${(burst.burstDelayInTenthsOfSecs / 10) + (particleIndex * burst.particleStaggeredDelayInHundredthOfSecs / 100)}s`
+      'animation-delay': `${(burst.burstDelayInTenthsOfSecs / 10) + (particleIndex * burst.particleStaggeredDelayInMSecs / 1000)}s`
     };
   }
 
@@ -133,6 +133,18 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
 
   onDelayRangeChanged(event: MultiRangeValues) {
     this.burstOptions.delayInTenthsOfSecs = { lowerBound: event.lowerValue, upperBound: event.upperValue };
+  }
+
+  onCenterOffsetXRangeChanged(event: MultiRangeValues) {
+    this.burstOptions.centerOffsetX = { lowerBound: event.lowerValue, upperBound: event.upperValue };
+  }
+
+  onCenterOffsetYRangeChanged(event: MultiRangeValues) {
+    this.burstOptions.centerOffsetY = { lowerBound: event.lowerValue, upperBound: event.upperValue };
+  }
+
+  onParticleDelayRangeChanged(event: MultiRangeValues) {
+    this.burstOptions.particleStaggeredDelayInMSecs = { lowerBound: event.lowerValue, upperBound: event.upperValue };
   }
 
   delayValueDisplayFn(value) {
