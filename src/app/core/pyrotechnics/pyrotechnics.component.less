@@ -87,20 +87,43 @@
   }
 }
 
-.form-field {
-  width: 100%;
+.form-container {
+  --scrollbar-track-bg-colour: rgb(207, 217, 220);
+  --scrollbar-thumb-bg-colour: var(--colour-button-bg);
 
-  .form-field-label {
-    font-size: calc(0.2 * var(--played-tile-width));
-    line-height: calc(0.2 * var(--played-tile-width));
-    text-align: center;
-    margin-bottom: calc(0.1 * var(--played-tile-width));
+  height: 45vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: calc(0.25 * var(--played-tile-width));
+  scrollbar-color: var(--scrollbar-thumb-bg-colour) var(--scrollbar-track-bg-colour);
+
+  &::-webkit-scrollbar {
+    width: calc(0.25 * var(--played-tile-width));
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-bg-colour);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-bg-colour) ;
+    border: thin solid var(--scrollbar-track-bg-colour);
+  }
+
+  .form-field {
+    width: 100%;
+
+    .form-field-label {
+      font-size: calc(0.2 * var(--played-tile-width));
+      line-height: calc(0.2 * var(--played-tile-width));
+      text-align: center;
+      margin-bottom: calc(0.1 * var(--played-tile-width));
+    }
+  }
+
+  .form-field + .form-field {
+    margin-top: calc(0.3 * var(--played-tile-width));
   }
 }
 
-.form-field + .form-field {
-  margin-top: calc(0.3 * var(--played-tile-width));
-}
 
 @keyframes grow-pyrotechnics {
   0%   { transform: scale(0.8) }
