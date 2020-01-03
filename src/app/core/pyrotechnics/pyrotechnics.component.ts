@@ -71,7 +71,7 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
   }
 
   rangeDifference(range: Range) {
-    return (range.upperBound - range.lowerBound);
+    return (range.upperBound - range.lowerBound) + 1;
   }
 
   randomNumberInRange(range: Range) {
@@ -109,15 +109,15 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
     this.burstOptions.colours = colours;
   }
 
-  burstRangeChanged(event: MultiRangeValues) {
+  onBurstRangeChanged(event: MultiRangeValues) {
     this.burstOptions.numBursts = { lowerBound: event.lowerValue, upperBound: event.upperValue };
   }
 
-  particleRangeChanged(event: MultiRangeValues) {
+  onParticleRangeChanged(event: MultiRangeValues) {
     this.burstOptions.numParticles = { lowerBound: event.lowerValue, upperBound: event.upperValue };
   }
 
-  delayRangeChanged(event: MultiRangeValues) {
+  onDelayRangeChanged(event: MultiRangeValues) {
     this.burstOptions.delayInTenthsOfSecs = { lowerBound: event.lowerValue, upperBound: event.upperValue };
   }
 
