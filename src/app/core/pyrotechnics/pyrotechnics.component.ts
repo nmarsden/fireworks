@@ -30,6 +30,16 @@ interface BurstOptions {
   centerOffsetY: Range;
 }
 
+const DEFAULT_OPTIONS: BurstOptions = {
+  colours: [ 'white', 'red', 'yellow', 'green', 'blue' ],
+  numBursts: { lowerBound: 3, upperBound: 7 },
+  numParticles: { lowerBound: 10, upperBound: 30 },
+  delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 },
+  particleStaggeredDelayInMSecs: { lowerBound: -20, upperBound: 20 },
+  centerOffsetX: { lowerBound: -10, upperBound: 10 },
+  centerOffsetY: { lowerBound: -10, upperBound: 10 }
+};
+
 @Component({
   selector: 'app-pyrotechnics',
   templateUrl: './pyrotechnics.component.html',
@@ -37,20 +47,12 @@ interface BurstOptions {
 })
 export class PyrotechnicsComponent implements OnInit, OnChanges {
   @Input() isHidden = true;
+  @Input() options: BurstOptions = DEFAULT_OPTIONS;
   @Output() exited = new EventEmitter();
 
   bursts: Burst[] = [];
   timeoutId;
-
-  burstOptions: BurstOptions = {
-    colours: [ 'white', 'red', 'yellow', 'green', 'blue' ],
-    numBursts: { lowerBound: 3, upperBound: 7 },
-    numParticles: { lowerBound: 10, upperBound: 30 },
-    delayInTenthsOfSecs: { lowerBound: 0, upperBound: 50 },
-    particleStaggeredDelayInMSecs: { lowerBound: -20, upperBound: 20 },
-    centerOffsetX: { lowerBound: -10, upperBound: 10 },
-    centerOffsetY: { lowerBound: -10, upperBound: 10 }
-};
+  burstOptions: BurstOptions = DEFAULT_OPTIONS;
 
   constructor(private modalService: ModalService) { }
 
@@ -58,6 +60,8 @@ export class PyrotechnicsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.burstOptions = this.options;
+
     if (this.isHidden) {
       this.tearDownRepeatingRandomBursts();
     } else {
