@@ -37,29 +37,28 @@
     }
 
     .flame {
-      position: absolute;
-      font-size: calc(0.5 * var(--played-tile-width));
-      line-height: calc(0.5 * var(--played-tile-width));
-      top: -50%;
-      left: 27%;
-      color: rgba(255, 253, 0, 0.8);
-      animation: move-flame linear 3s infinite;
+      background: rgba(255, 253, 0, 0.8);
+      top: calc(-0.3 * var(--played-tile-width));
+      left: calc(0.39 * var(--played-tile-width));
+      width: calc(0.2 * var(--played-tile-width));
+      height: calc(0.2 * var(--played-tile-width));
+      position: relative;
+      animation: rotate-flame linear 3s infinite;
 
       &:before {
-        content: '★';
+        content: "";
         position: absolute;
-        height: 100%;
-        width: 100%;
         top: 0;
         left: 0;
-        transform: rotate(30deg);
+        height: 100%;
+        width: 100%;
+        background: rgba(255, 253, 0, 0.8);
+        transform: rotate(45deg);
       }
     }
 
-    @keyframes move-flame {
-      0%   { transform: rotate(0deg)   scale(0.6); }
-      50%  { transform: rotate(180deg) scale(0.7); }
-      100% { transform: rotate(360deg) scale(0.6); }
+    @keyframes rotate-flame {
+      100% { transform: rotate(360deg); }
     }
   }
 
