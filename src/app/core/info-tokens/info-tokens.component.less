@@ -6,28 +6,41 @@
   background-color: rgba(80, 180, 250, 0.4);
   position: relative;
 
-  .lightning {
+  .lightning-container {
     --lightning-colour: #fffd00;
 
     position: absolute;
     height: 100%;
     width: 100%;
-    top: 0;
-    left: 0;
-    background-image: linear-gradient(to top left, var(--lightning-colour) 43%, transparent 44%),
-    linear-gradient(to bottom left, var(--lightning-colour) 43%, transparent 44%),
-    linear-gradient(to top right, var(--lightning-colour) 43%, transparent 44%),
-    linear-gradient(to bottom right, var(--lightning-colour) 43%, transparent 44%);
-    background-size: 22% 42%,
-    22% 22%,
-    22% 22%,
-    22% 42%;
-    background-position: 32% 5%,
-    32% 57%,
-    60% 47%,
-    60% 100%;
-    background-repeat: no-repeat;
-    transform: rotate(20deg) scale(1.5);
+    top: calc(0.1 * var(--played-tile-width));
+    left: calc(0.02 * var(--played-tile-width));
+    transform: rotate(20deg);
+
+    .lightning {
+      position: relative;
+      top: calc(-0.25 * var(--played-tile-width));
+
+      height: calc(0.84 * var(--played-tile-width));
+      width: calc(0.5 * var(--played-tile-width));
+      overflow: hidden;
+
+      &.opposite {
+        top: calc(-0.6 * var(--played-tile-width));
+        left: calc(0.4 * var(--played-tile-width));
+        transform: scaleX(-1) scaleY(-1);
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: calc(-0.15 * var(--played-tile-width));
+        left: calc(0.38 * var(--played-tile-width));
+        height: calc(1 * var(--played-tile-width));
+        width: calc(0.5 * var(--played-tile-width));
+        background-color: var(--lightning-colour);
+        transform: rotate(20deg);
+      }
+    }
   }
 
   .remaining-number {
