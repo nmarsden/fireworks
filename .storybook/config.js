@@ -1,5 +1,6 @@
 import { configure, addParameters } from '@storybook/angular';
 import { themes } from '@storybook/theming';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 addParameters({
   options: {
@@ -7,6 +8,9 @@ addParameters({
     showPanel: false,
     panelPosition: 'bottom'
   },
+  viewport: {
+    viewports: { ...INITIAL_VIEWPORTS }
+  }
 });
 
 // automatically import all files ending in *.stories.ts

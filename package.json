@@ -39,6 +39,7 @@
     "@angular/language-service": "~8.2.11",
     "@babel/core": "^7.6.4",
     "@storybook/addon-knobs": "^5.2.5",
+    "@storybook/addon-viewport": "^5.2.8",
     "@storybook/addons": "^5.2.5",
     "@storybook/angular": "^5.2.5",
     "@storybook/theming": "^5.2.5",
