@@ -2,7 +2,6 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../app/core/core.module';
 import { Tile } from '../app/tile';
-import { withKnobs } from '@storybook/addon-knobs';
 
 const tiles: Tile[] = [];
 tiles.push(new Tile('yellow', 1));
@@ -15,7 +14,6 @@ const chosenTile = tiles[3];
 const playerName = 'Player one';
 
 storiesOf('Tile Group', module)
-  .addDecorator(withKnobs)
   .addDecorator(
     moduleMetadata({
       declarations: [

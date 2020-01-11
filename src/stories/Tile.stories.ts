@@ -206,6 +206,8 @@ storiesOf('Tile', module)
         chosenNumber: 3
       }
     };
+  }, {
+    options: { showPanel: true }
   })
   .add('hide hints', () => {
     return {
@@ -229,4 +231,6 @@ storiesOf('Tile', module)
         isShowHints: boolean('isShowHints', false),
       }
     };
+  }, {
+    options: { showPanel: true }
   });

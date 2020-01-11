@@ -121,4 +121,6 @@ storiesOf('Modal', module)
         isOpen: boolean('isOpen', false)
       }
     };
+  }, {
+    options: { showPanel: true }
   });

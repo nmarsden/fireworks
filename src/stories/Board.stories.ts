@@ -127,4 +127,6 @@ storiesOf('Board', module)
         noTiles: []
       }
     };
+  }, {
+    options: { showPanel: true }
   });

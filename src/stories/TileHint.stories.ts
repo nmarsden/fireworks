@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { TileHintComponent } from '../app/core/tile-hint/tile-hint.component';
-import { optionsKnob as options, withKnobs, boolean } from '@storybook/addon-knobs'
+import { optionsKnob as options, withKnobs, boolean } from '@storybook/addon-knobs';
 import { OptionsKnobOptions } from '@storybook/addon-knobs/dist/components/types';
 
 
@@ -37,7 +37,8 @@ storiesOf('Tile Hint', module)
     const groupId = 'GROUP-ID1';
 
     return {
-      template: `<div style="display:flex; flex-direction:column; width:100%; height:100vh; justify-content: space-around; align-items: center;">
+      template: `<div style="display:flex; flex-direction:column;
+                             width:100%; height:100vh; justify-content: space-around; align-items: center;">
                    <app-tile-hint style="--main-tile-width:200px;"
                                   [chosenColour]="chosenColour"
                                   [chosenNumber]="chosenNumber"
@@ -48,7 +49,7 @@ storiesOf('Tile Hint', module)
                    <app-tile-hint style="--main-tile-width:200px;"
                                   [chosenColour]="chosenColour"
                                   [chosenNumber]="chosenNumber"
-                                  [isColoursOnBottom]="true"  
+                                  [isColoursOnBottom]="true"
                                   [includedColours]="includedColours"
                                   [excludedColours]="excludedColours"
                                   [includedNumbers]="includedNumbers"
@@ -64,4 +65,6 @@ storiesOf('Tile Hint', module)
         isStoryMode: boolean('isStoryMode', true, groupId)
       }
     };
+  }, {
+    options: { showPanel: true }
   });
