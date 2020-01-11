@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CoreModule } from '../app/core/core.module';
 
-storiesOf('Back Button', module)
+storiesOf('Input/Back Button', module)
   .addDecorator(
     moduleMetadata({
       declarations: [],

@@ -6,7 +6,7 @@ import { TurnInfo } from '../app/turn-info';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { ModalService } from '../app/modal.service';
 
-storiesOf('Modal', module)
+storiesOf('Modal/Modal', module)
   .addDecorator(withKnobs)
   .addDecorator(
     moduleMetadata({

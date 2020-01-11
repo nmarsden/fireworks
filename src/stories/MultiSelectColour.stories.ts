@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CoreModule } from '../app/core/core.module';
 
-storiesOf('Multi Select Colour', module)
+storiesOf('Input/Multi Select Colour', module)
   .addDecorator(
     moduleMetadata({
       declarations: [],

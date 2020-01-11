@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalService } from '../app/modal.service';
 import { CoreModule } from '../app/core/core.module';
 
-storiesOf('In Game Menu Modal', module)
+storiesOf('Modal/In Game Menu Modal', module)
   .addDecorator(
     moduleMetadata({
       declarations: [

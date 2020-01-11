@@ -2,7 +2,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { InfoTokensComponent } from '../app/core/info-tokens/info-tokens.component';
 
-storiesOf('Info Tokens', module)
+storiesOf('Tokens/Info Tokens', module)
   .addDecorator(
     moduleMetadata({
       declarations: [

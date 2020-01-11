@@ -87,7 +87,7 @@ const standardTileFacts = initStandardTileFacts();
 const discardedTiles = initDiscardedTiles();
 const playerHand = initPlayerHand();
 
-storiesOf('Tile', module)
+storiesOf('Tile/Tile', module)
   .addDecorator(withKnobs)
   .addDecorator(
     moduleMetadata({

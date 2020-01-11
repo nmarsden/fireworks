@@ -5,7 +5,7 @@ import { optionsKnob as options, withKnobs, boolean } from '@storybook/addon-kno
 import { OptionsKnobOptions } from '@storybook/addon-knobs/dist/components/types';
 
 
-storiesOf('Tile Hint', module)
+storiesOf('Tile/Tile Hint', module)
   .addDecorator(withKnobs)
   .addDecorator(
     moduleMetadata({

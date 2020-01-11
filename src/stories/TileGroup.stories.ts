@@ -13,7 +13,7 @@ tiles.push(new Tile('rainbow', 5));
 const chosenTile = tiles[3];
 const playerName = 'Player one';
 
-storiesOf('Tile Group', module)
+storiesOf('Tile/Tile Group', module)
   .addDecorator(
     moduleMetadata({
       declarations: [

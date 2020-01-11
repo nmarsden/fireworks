@@ -4,7 +4,7 @@ import { CoreModule } from '../app/core/core.module';
 import { ModalService } from '../app/modal.service';
 import { TileMark } from '../app/tile-mark';
 
-storiesOf('Marking Modal', module)
+storiesOf('Modal/Marking Modal', module)
   .addDecorator(
     moduleMetadata({
       declarations: [

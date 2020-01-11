@@ -15,7 +15,7 @@ for (let i=1; i<=5; i++) {
   }
 }
 
-storiesOf('Discarded Tiles', module)
+storiesOf('Tile/Discarded Tiles', module)
   .addDecorator(
     moduleMetadata({
       declarations: [

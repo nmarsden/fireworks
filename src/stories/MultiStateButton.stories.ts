@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { CoreModule } from '../app/core/core.module';
 
-storiesOf('Multi-State Button', module)
+storiesOf('Input/Multi-State Button', module)
   .addDecorator(
     moduleMetadata({
       declarations: [],
