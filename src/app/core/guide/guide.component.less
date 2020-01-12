@@ -12,18 +12,17 @@
   color: white;
   font-size: calc(1.5 * var(--played-tile-width));
   opacity: 0;
+  transition: opacity ease 0.4s;
   pointer-events: none;
 
   &.is-shown {
     opacity: 1;
     pointer-events: auto;
-    transition: opacity ease 0.4s;
     animation: grow-guide 0.3s forwards;
 
     .guide-menu-container {
       display: block;
     }
-
   }
 
   @keyframes grow-guide {
@@ -54,14 +53,15 @@
   .guide-menu-container {
     position: fixed;
     display: none;
-    transform: translateX(200%);
+    width: calc(2.5 * var(--played-tile-width));
+    transform: translateX(-200%);
     animation: slide-menu 0.3s forwards;
     animation-delay: 0.3s;
 
     .guide-ribbon {
       position: absolute;
       top: calc(0.2 * var(--played-tile-width));
-      left: calc(-0.8 * var(--played-tile-width));
+      right: calc(-0.8 * var(--played-tile-width));
       height: calc(1 * var(--played-tile-width));
       width: calc(1 * var(--played-tile-width));
       overflow: hidden;
@@ -69,39 +69,85 @@
       .ribbon-top {
         position: absolute;
         top: 0;
-        left: 0;
+        right: 0;
         background-color: rgb(52, 93, 153);
         border: none;
         height: calc(0.8 * var(--played-tile-width));
         width: calc(0.7 * var(--played-tile-width));
-        transform-origin: left top;
-        transform: rotate(-45deg);
+        transform-origin: right top;
+        transform: rotate(45deg);
 
         &:after {
           content: '';
           position: absolute;
           top: calc(-0.5 * var(--played-tile-width));
-          left: calc(-0.7 * var(--played-tile-width));
+          right: calc(-0.7 * var(--played-tile-width));
           background-color: rgb(52, 93, 153);
           border: none;
           height: calc(1.2 * var(--played-tile-width));
           width: calc(0.7 * var(--played-tile-width));
-          transform-origin: left bottom;
-          transform: rotate(90deg);
+          transform-origin: right bottom;
+          transform: rotate(-90deg);
         }
       }
       .ribbon-back {
         position: absolute;
         bottom: 0;
-        right: 0;
+        left: 0;
         background-color: rgb(40, 71, 117);
         border: none;
         height: calc(0.2 * var(--played-tile-width));
         width: calc(0.3 * var(--played-tile-width));
-        transform-origin: right bottom;
-        transform: rotate(45deg);
+        transform-origin: left bottom;
+        transform: rotate(-45deg);
       }
     }
+
+    // TODO ribbon on left end
+    //.guide-ribbon {
+    //  position: absolute;
+    //  top: calc(0.2 * var(--played-tile-width));
+    //  left: calc(-0.8 * var(--played-tile-width));
+    //  height: calc(1 * var(--played-tile-width));
+    //  width: calc(1 * var(--played-tile-width));
+    //  overflow: hidden;
+    //
+    //  .ribbon-top {
+    //    position: absolute;
+    //    top: 0;
+    //    left: 0;
+    //    background-color: rgb(52, 93, 153);
+    //    border: none;
+    //    height: calc(0.8 * var(--played-tile-width));
+    //    width: calc(0.7 * var(--played-tile-width));
+    //    transform-origin: left top;
+    //    transform: rotate(-45deg);
+    //
+    //    &:after {
+    //      content: '';
+    //      position: absolute;
+    //      top: calc(-0.5 * var(--played-tile-width));
+    //      left: calc(-0.7 * var(--played-tile-width));
+    //      background-color: rgb(52, 93, 153);
+    //      border: none;
+    //      height: calc(1.2 * var(--played-tile-width));
+    //      width: calc(0.7 * var(--played-tile-width));
+    //      transform-origin: left bottom;
+    //      transform: rotate(90deg);
+    //    }
+    //  }
+    //  .ribbon-back {
+    //    position: absolute;
+    //    bottom: 0;
+    //    right: 0;
+    //    background-color: rgb(40, 71, 117);
+    //    border: none;
+    //    height: calc(0.2 * var(--played-tile-width));
+    //    width: calc(0.3 * var(--played-tile-width));
+    //    transform-origin: right bottom;
+    //    transform: rotate(45deg);
+    //  }
+    //}
 
     .guide-menu {
       position: absolute;
@@ -122,7 +168,7 @@
   }
 
   @keyframes slide-menu {
-    0%   { transform: translateX(200%) }
+    0%   { transform: translateX(-200%) }
     100% { transform: translateX(0)   }
   }
 

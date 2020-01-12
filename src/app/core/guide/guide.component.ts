@@ -96,18 +96,18 @@ export class GuideComponent implements OnInit, OnChanges {
     return elements;
   }
 
-  populateGuideMenu(menu: GuideMenuOptions, elementGuidePaddingPx: number): GuideMenu {
+  populateGuideMenu(menu: GuideMenuOptions, menuHeightPx: number, elementGuidePaddingPx: number): GuideMenu {
     if (menu.elementSelector === null) {
       return DEFAULT_GUIDE_MENU;
     }
     const targetElement = document.documentElement.querySelector(menu.elementSelector);
     const rect = targetElement.getBoundingClientRect();
-    // Position the menu below the target element
+    // Position the menu above the target element
     return {
       position: {
-        top: Math.floor( rect.bottom ) + (2 * elementGuidePaddingPx),
-        left: Math.floor( rect.left ),
-        right: 0,
+        top: Math.floor( rect.top ) - (menuHeightPx + (2 * elementGuidePaddingPx)),
+        left: 0,
+        right: null,
         height: null
       }
     };
@@ -116,10 +116,11 @@ export class GuideComponent implements OnInit, OnChanges {
   @HostListener('window:resize', [])
   updateGuide() {
     const clientWidth = document.documentElement.clientWidth;
-    const elementGuidePaddingPx = this.calcFractionOfPlayedTileWidthInPx(0.1, clientWidth);
+    const elementGuidePaddingPx = this.calcFractionOfPlayedTileWidthInPx(0.15, clientWidth);
+    const menuHeightPx = this.calcFractionOfPlayedTileWidthInPx(1, clientWidth);
 
     this.guideElements = this.populateGuideElements(this.guideOptions.elementGuides, clientWidth, elementGuidePaddingPx);
-    this.guideMenu = this.populateGuideMenu(this.guideOptions.menu, elementGuidePaddingPx);
+    this.guideMenu = this.populateGuideMenu(this.guideOptions.menu, menuHeightPx, elementGuidePaddingPx);
   }
 
   onCancelButtonClick() {

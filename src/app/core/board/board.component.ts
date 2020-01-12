@@ -29,7 +29,7 @@ const BASIC_GUIDE_OPTIONS: GuideOptions = {
                     guideText: 'Menu & Deck'
                   }],
   menu: {
-    elementSelector: '.menu-and-deck-container'
+    elementSelector: '.token-container'
   }
 };
 
