@@ -129,4 +129,20 @@ storiesOf('Board', module)
     };
   }, {
     options: { showPanel: true }
+  })
+  .add('guide', () => {
+    return {
+      template: `<app-board [hands]="hands"
+                            [playedTiles]="noTiles"
+                            [discardedTiles]="noTiles"
+                            [remainingTiles]="50"
+                            [infoTokens]="8"
+                            [fuseTokens]="3"
+                            [guideShown]="'basic'"
+                            [isAnimOnShow]="false"></app-board>`,
+      props: {
+        hands,
+        noTiles: []
+      }
+    };
   });

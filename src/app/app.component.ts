@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     chosenTileMark: undefined
   };
   isShowPyrotechnics = false;
+  guideShown = 'none';
 
   constructor(private modalService: ModalService) { }
 
@@ -501,6 +502,14 @@ export class AppComponent implements OnInit {
 
   onMenuButtonClicked() {
     this.openModal('in-game-menu-modal');
+  }
+
+  onGuideButtonClicked() {
+    this.guideShown = 'basic';
+  }
+
+  onGuideCancelButtonClicked() {
+    this.guideShown = 'none';
   }
 
   onQuitButtonClicked() {

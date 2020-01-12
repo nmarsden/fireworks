@@ -8,6 +8,7 @@ import { ModalService } from '../../modal.service';
 })
 export class InGameMenuModalComponent implements OnInit {
   @Input() isOpen = false;
+  @Output() guideButtonClicked = new EventEmitter();
   @Output() quitButtonClicked = new EventEmitter();
 
   constructor(private modalService: ModalService) { }
@@ -19,12 +20,17 @@ export class InGameMenuModalComponent implements OnInit {
     this.modalService.close('in-game-menu-modal');
   }
 
-  onContinueButtonClicked() {
+  onGuideButtonClicked() {
     this.closeModal();
+    this.guideButtonClicked.emit();
   }
 
   onQuitButtonClicked() {
     this.closeModal();
     this.quitButtonClicked.emit();
+  }
+
+  onContinueButtonClicked() {
+    this.closeModal();
   }
 }

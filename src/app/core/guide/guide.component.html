@@ -1,0 +1,25 @@
+<div class="guide-overlay" [ngClass]="{ 'is-shown': guideElements.length > 0 }">
+  <div *ngFor="let guideElement of guideElements"
+       class="guide-element-container"
+       [style.top.px]="guideElement.position.top"
+       [style.left.px]="guideElement.position.left"
+       [style.right.px]="guideElement.position.right"
+       [style.height.px]="guideElement.position.height">
+    <div class="guide-element">{{ guideElement.text }}</div>
+  </div>
+  <div class="guide-menu-container"
+       [style.top.px]="guideMenu.position.top"
+       [style.left.px]="guideMenu.position.left"
+       [style.right.px]="guideMenu.position.right">
+    <div class="guide-ribbon">
+      <div class="ribbon-top"></div>
+      <div class="ribbon-back"></div>
+    </div>
+    <div class="guide-menu">
+      <div class="guide-heading">Guide</div>
+    </div>
+  </div>
+  <div class="guide-cancel-button" (click)="onCancelButtonClick()">
+    <div class="cancel-icon"></div>
+  </div>
+</div>

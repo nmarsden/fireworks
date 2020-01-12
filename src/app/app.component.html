@@ -16,6 +16,7 @@
            [fuseTokens]="gameState.fuseTokens"
            [isShowPartnerHints]="gameState.isShowPartnerHints"
            [isShowPlayerHints]="gameState.isShowPlayerHints"
+           [guideShown]="guideShown"
            [partnerName]="playerNames[gameState.waitingPlayer]"
            [playerName]="playerNames[gameState.currentPlayer]"
            (partnerTileHintClicked)="onPartnerTileHintClicked()"
@@ -23,7 +24,8 @@
            (partnerTileClicked)="onPartnerTileClicked()"
            (playerTileClicked)="onPlayerTileClicked($event)"
            (playerTileLongPressed)="onPlayerTileLongPressed($event)"
-           (menuButtonClicked)="onMenuButtonClicked()">
+           (menuButtonClicked)="onMenuButtonClicked()"
+           (guideCancelButtonClicked)="onGuideCancelButtonClicked()">
 </app-board>
 
 <app-main-menu-modal [playerNameOne]="playerNames[0]"
@@ -97,7 +99,8 @@
                    (tileMarkSelected)="onPlayTileMarkButtonClicked($event)"
                    (modalClosed)="onPlayerTileMarkModalCancelled()"></app-marking-modal>
 
-<app-in-game-menu-modal (quitButtonClicked)="onQuitButtonClicked()"></app-in-game-menu-modal>
+<app-in-game-menu-modal (guideButtonClicked)="onGuideButtonClicked()"
+                        (quitButtonClicked)="onQuitButtonClicked()"></app-in-game-menu-modal>
 
 <app-modal id="quit-game-modal">
   <div class="modal-body">

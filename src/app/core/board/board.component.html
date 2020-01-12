@@ -1,5 +1,9 @@
-<div class="page" [ngClass]="{ 'is-show-page': !isHidden }">
-  <app-tile-group [displayMode]="'partner'"
+<div class="page" [ngClass]="{
+                               'is-show-page': !isHidden,
+                               'is-anim-on-show': isAnimOnShow
+                             }">
+  <app-tile-group id="partner-tile-group"
+                  [displayMode]="'partner'"
                   [playerName]="partnerName"
                   [hand]="hands.partnerHand"
                   [isGroupChosen]="isPartnerTilesChosen"
@@ -27,7 +31,8 @@
     </div>
   </div>
 
-  <app-tile-group [displayMode]="'player'"
+  <app-tile-group id="player-tile-group"
+                  [displayMode]="'player'"
                   [playerName]="playerName"
                   [hand]="hands.playerHand"
                   [chosenTile]="chosenTile"
@@ -41,3 +46,6 @@
 
 </div>
 <div class='board-hidden-overlay' [ngClass]="{ 'is-show-hidden-overlay': isHidden }"></div>
+
+<app-guide [guideOptions]="guideOptions"
+           (cancelButtonClicked)="onGuideCancelButtonClicked()"></app-guide>

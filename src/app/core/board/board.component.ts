@@ -2,6 +2,36 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Tile } from '../../tile';
 import { TileHint } from '../../tile-hint';
 import { Hands } from '../../hands';
+import { GuideOptions } from '../guide/guide.component';
+
+const EMPTY_GUIDE_OPTIONS: GuideOptions = {
+  elementGuides: [],
+  menu: {
+    elementSelector: '.menu-and-deck-container'
+  }
+};
+
+const BASIC_GUIDE_OPTIONS: GuideOptions = {
+  elementGuides: [{
+                    elementSelector: '#partner-tile-group',
+                    guideText: 'Partner\'s cards'
+                  }, {
+                    elementSelector: '#player-tile-group',
+                    guideText: 'Your cards'
+                  }, {
+                    elementSelector: '.token-container',
+                    guideText: 'Tokens'
+                  }, {
+                    elementSelector: '.middle-tiles',
+                    guideText: 'Played & Discarded cards'
+                  }, {
+                    elementSelector: '.menu-and-deck-container',
+                    guideText: 'Menu & Deck'
+                  }],
+  menu: {
+    elementSelector: '.menu-and-deck-container'
+  }
+};
 
 @Component({
   selector: 'app-board',
@@ -24,14 +54,18 @@ export class BoardComponent implements OnInit, OnChanges {
   @Input() isHidden = false;
   @Input() partnerName: string;
   @Input() playerName: string;
+  @Input() guideShown = 'none';
+  @Input() isAnimOnShow = true;
   @Output() partnerTileHintClicked = new EventEmitter();
   @Output() playerTileHintClicked = new EventEmitter();
   @Output() partnerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileClicked = new EventEmitter<Tile>();
   @Output() playerTileLongPressed = new EventEmitter<Tile>();
   @Output() menuButtonClicked = new EventEmitter();
+  @Output() guideCancelButtonClicked = new EventEmitter();
 
   displayedPlayedTiles: Tile[];
+  guideOptions: GuideOptions = EMPTY_GUIDE_OPTIONS;
 
   highestPlayedTiles = (playedTiles): Tile[] => {
     const colours: string[] = ['white', 'red', 'yellow', 'green', 'blue', 'rainbow'];
@@ -58,6 +92,14 @@ export class BoardComponent implements OnInit, OnChanges {
     if (typeof changes.playedTiles !== 'undefined' && changes.playedTiles.currentValue && !changes.playedTiles.firstChange) {
       this.displayedPlayedTiles = this.highestPlayedTiles(this.playedTiles);
     }
+
+    if (this.guideShown === 'basic') {
+      // Show guide after allowing the board to be rendered
+      setTimeout(() => this.guideOptions = BASIC_GUIDE_OPTIONS, 50);
+    }
+    if (this.guideShown === 'none') {
+      this.guideOptions = EMPTY_GUIDE_OPTIONS;
+    }
   }
 
   onPlayerTileHintClicked($event) {
@@ -82,5 +124,9 @@ export class BoardComponent implements OnInit, OnChanges {
 
   onMenuButtonClicked() {
     this.menuButtonClicked.emit();
+  }
+
+  onGuideCancelButtonClicked() {
+    this.guideCancelButtonClicked.emit();
   }
 }
